@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Aula 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Exercícios Aula 2</h1>
+
+        <!-- Exercicio 6.e -->
+        <div class="exercicio">
+            <h2>6.e) Calcular valor da prestação em atraso</h2>
+            <label>Valor R$:<input id="valorPrestacao" type="number" step="0.01"></label>
+            <label>Taxa %:<input id="taxaPrestacao" type="number" step="0.01"></label>
+            <label>Tempo (meses):<input id="tempoPrestacao" type="number"></label>
+            <button onclick="prestacaoAtraso()">Calcular Prestação</button>
+            <p id="resultadoPrestacao"></p>
+        </div>
+
+        <!-- Exercicio 6.f -->
+        <div class="exercicio">
+            <h2>6.f) Troca de valores</h2>
+            <label>Valor A:<input id="valorA" type="number"></label>
+            <label>Valor B:<input id="valorB" type="number"></label>
+            <button onclick="trocaValores()">Trocar Valores</button>
+            <p id="resultadoTroca"></p>
+        </div>
+
+        <!-- Exercicio 6.g -->
+        <div class="exercicio">
+            <h2>6.g) Operações com quatro números</h2>
+            <label>A:<input id="valorG_A" type="number"></label>
+            <label>B:<input id="valorG_B" type="number"></label>
+            <label>C:<input id="valorG_C" type="number"></label>
+            <label>D:<input id="valorG_D" type="number"></label>
+            <button onclick="calcularOperacoes()">Calcular Operações</button>
+            <p id="resultadoOperacoes"></p>
+        </div>
+
+        <!-- Exercicio 6.h -->
+        <div class="exercicio">
+            <h2>6.h) Calcular o volume de uma caixa retangular</h2>
+            <label>Comprimento:<input id="comprimento" type="number"></label>
+            <label>Largura:<input id="largura" type="number"></label>
+            <label>Altura:<input id="altura" type="number"></label>
+            <button onclick="volumeCaixa()">Calcular Volume</button>
+            <p id="resultadoVolume"></p>
+        </div>
+
+        <!-- Exercicio 6.i -->
+        <div class="exercicio">
+            <h2>6.i) Calcular o quadrado de um número</h2>
+            <label>Número:<input id="numeroQuadrado" type="number"></label>
+            <button onclick="quadradoNumero()">Calcular Quadrado</button>
+            <p id="resultadoQuadrado"></p>
+        </div>
+
+        <!-- Exercicio 6.j -->
+        <div class="exercicio">
+            <h2>6.j) Calcular o quadrado da diferença</h2>
+            <label>Valor A:<input id="valorA_6j" type="number"></label>
+            <label>Valor B:<input id="valorB_6j" type="number"></label>
+            <button onclick="quadradoDiferenca()">Calcular Quadrado da Diferença</button>
+            <p id="resultadoDiferenca"></p>
+        </div>
+
+        <!-- Exercicio 6.k -->
+        <div class="exercicio">
+            <h2>6.k) Conversão de dólar para real</h2>
+            <label>Valor em dólar:<input id="valorDolar" type="number" step="0.01"></label>
+            <label>Taxa de conversão (1 USD = X BRL):<input id="taxaDolar" type="number" step="0.01"></label>
+            <button onclick="dolarReal()">Converter</button>
+            <p id="resultadoDolarReal"></p>
+        </div>
+
+        <!-- Exercicio 6.l -->
+        <div class="exercicio">
+            <h2>6.l) Conversão de real para dólar</h2>
+            <label>Valor em reais:<input id="valorReal" type="number" step="0.01"></label>
+            <label>Taxa de conversão (1 USD = X BRL):<input id="taxaReal" type="number" step="0.01"></label>
+            <button onclick="realDolar()">Converter</button>
+            <p id="resultadoRealDolar"></p>
+        </div>
+
+        <!-- Exercicio 6.m -->
+        <div class="exercicio">
+            <h2>6.m) Calcular a soma dos quadrados de três números</h2>
+            <label>Número 1:<input id="numeroM1" type="number"></label>
+            <label>Número 2:<input id="numeroM2" type="number"></label>
+            <label>Número 3:<input id="numeroM3" type="number"></label>
+            <button onclick="somaQuadrados()">Calcular Soma dos Quadrados</button>
+            <p id="resultadoSomaQuadrados"></p>
+        </div>
+
+        <!-- Exercicio 6.n -->
+        <div class="exercicio">
+            <h2>6.n) Calcular o quadrado da soma de três números</h2>
+            <label>Número 1:<input id="numeroN1" type="number"></label>
+            <label>Número 2:<input id="numeroN2" type="number"></label>
+            <label>Número 3:<input id="numeroN3" type="number"></label>
+            <button onclick="quadradoSoma()">Calcular Quadrado da Soma</button>
+            <p id="resultadoQuadradoSoma"></p>
+        </div>
+    </div>
+
+    <script src="exercicios.js"></script>
+</body>
+</html>

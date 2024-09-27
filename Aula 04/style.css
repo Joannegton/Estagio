@@ -1,0 +1,47 @@
+
+.container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px ;
+}
+
+.exercicio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.384);
+    width: 80%;
+    height: 300px;
+    margin: 0 5px;
+}
+
+.exercicio h2, h1{
+    background-color: aqua;
+    width: 100%;
+    text-align: center;
+}
+
+.exercicio input, .exercicio label{
+    width: 80%;
+    margin-bottom: 3px;
+}
+
+.exercicio button{
+    margin-top: 10px;
+}
+
+.exercicio div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+}
+
+.exercicio select{
+    width: 80%; 
+    margin-bottom: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+}
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../geral.css">
+</head>
+<body>
+    <div class="controleEstoque">
+        <div class="header">
+            <p></p>
+            <h2>Produtos Eletronicos</h2>
+            <button class="finalizar" onclick="finalizarInsercao()">Finalizar Cadastro</button>
+        </div>
+
+        <label for="produto">Tipo de Produto</label>
+        <select name="produto" id="produto">
+            <option value="C">Celular</option>
+            <option value="T">Televisão</option>
+            <option value="N">Notebook</option>
+        </select>
+        <label for="quantidade">Quantidade</label>
+        <input type="number" name="quantidade" id="quantidade">
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Celular</td>
+                    <td id="totalCelular">0</td>
+                    <td id="percCelular">0%</td>
+                </tr>
+                <tr>
+                    <td>Televisão</td>
+                    <td id="totalTelevisao">0</td>
+                    <td id="percTelevisao">0%</td>
+                </tr>
+                <tr>
+                    <td>Notebook</td>
+                    <td id="totalNotebook">0</td>
+                    <td id="percNotebook">0%</td>
+                </tr>
+
+                <tr>
+                    <td>Total de Produtos</td>
+                    <td id="totalProdutos">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Estoque de Frutas</title>
+    <link rel="stylesheet" href="../geral.css">
+</head>
+<body>
+    <div class="controleEstoque">
+        <div class="header">
+            <h2>Adicionar Fruta</h2>
+            <button class="finalizar" onclick="finalizarInsercao()">Finalizar Cadastro</button>
+        </div>
+        <label for="fruta">Fruta</label>
+        <select id="fruta" name="fruta">
+            <option value="M">Maçã</option>
+            <option value="B">Banana</option>
+            <option value="L">Laranja</option>
+        </select>
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" name="quantidade">
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Fruta</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Fruta</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maçã</td>
+                    <td id="totalMaca">0</td>
+                    <td id="percMaca">0%</td>
+                </tr>
+                <tr>
+                    <td>Banana</td>
+                    <td id="totalBanana">0</td>
+                    <td id="percBanana">0%</td>
+                </tr>
+                <tr>
+                    <td>Laranja</td>
+                    <td id="totalLaranja">0</td>
+                    <td id="percLaranja">0%</td>
+                </tr>
+                <tr>
+                    <td>Total de Frutas</td>
+                    <td id="totalFrutas">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

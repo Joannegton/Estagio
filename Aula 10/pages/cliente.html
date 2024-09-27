@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Cliente</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="formulario">
+        <h1>Cadastro cliente</h1>
+        <div class="container">
+          <label for="nomeCliente">Nome</label>
+          <input type="text" name="nomeCliente" id="nomeCliente" />
+          <label for="dataNasc">Data Nascimento</label>
+          <input type="date" name="dataNasc" id="dataNasc" />
+          <label for="cpf">CPF</label>
+          <input type="text" name="cpf" id="cpf" />
+          <label for="origem">Origem</label>
+          <div class="containerOrigem">
+            <div class="containeLoja">
+              <label for="origemLoja">Loja</label>
+              <input type="checkbox" name="origem" id="origemLoja" value="Loja" />
+            </div>
+            <div class="containeSite">
+              <label for="origemSite">Site</label>
+              <input type="checkbox" name="origem" id="origemSite" value="Site" />
+            </div>
+          </div>
+          <label for="score">Score</label>
+          <input type="number" name="score" id="score" />
+        </div>
+        <button onclick="salvarCliente()">Enviar</button>
+      </div>
+
+      <script type="module" src="../js/script.js" defer></script>
+</body>
+</html>

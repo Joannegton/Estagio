@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Vagas de Estacionamento</title>
+    <link rel="stylesheet" href="../geral.css">
+</head>
+<body>
+    <div class="controleEstoque">
+        <div class="header">
+            <p></p>
+            <h2>Vagas de Estacionamento</h2>
+            <button class="finalizar" onclick="finalizarInsercao()">Finalizar Cadastro</button>
+        </div>
+
+        <label for="veiculo">Tipo de Veículo</label>
+        <select name="veiculo" id="veiculo">
+            <option value="C">Carro</option>
+            <option value="M">Moto</option>
+            <option value="B">Bicicleta</option>
+        </select>
+        <label for="quantidade">Quantidade</label>
+        <input type="number" name="quantidade" id="quantidade">
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Veículo</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Veículo</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Carro</td>
+                    <td id="totalCarros">0</td>
+                    <td id="percCarros">0%</td>
+                </tr>
+                <tr>
+                    <td>Moto</td>
+                    <td id="totalMotos">0</td>
+                    <td id="percMotos">0%</td>
+                </tr>
+                <tr>
+                    <td>Bicicleta</td>
+                    <td id="totalBicicletas">0</td>
+                    <td id="percBicicletas">0%</td>
+                </tr>
+                <tr>
+                    <td>Total de Vagas Ocupadas</td>
+                    <td id="totalVagas">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

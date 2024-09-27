@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    width: 60%;
+    margin: auto;
+}
+
+.controleEstoque {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.finalizar {
+    padding: 10px 15px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.finalizar:hover {
+    background-color: #c82333;
+}
+
+.controleEstoque label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.controleEstoque input, .controleEstoque select {
+    width: 100%;
+    padding: 8px 0;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.controleEstoque button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.controleEstoque button:hover {
+    background-color: #218838;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-item:last-child {
+    margin-right: 0;
+}
+
+.tabelas {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 48%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}

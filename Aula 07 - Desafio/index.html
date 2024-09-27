@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Controle de Estoque</title>
+</head>
+<body>
+    <div class="enviarVinho">
+        <h2>Adicionar Vinho</h2>
+        <label for="entradaVinho">Vinho</label>
+        <input type="text" id="entradaVinho" name="entradaVinho">
+        <div class="input-group">
+            <div class="input-item">
+                <label for="tipo">Tipo</label>
+                <select name="tipo" id="tipo">
+                    <option value="Tinto">Tinto</option>
+                    <option value="Branco">Branco</option>
+                    <option value="Rosé">Rosé</option>
+                    <option value="F">Finalizar</option>
+                </select>
+            </div>
+            <div class="input-item">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quantidade">
+            </div>
+            <div class="input-item">
+                <label for="valor">Valor</label>
+                <input type="number" name="valor" id="valor">
+            </div>
+        </div>
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Tipo de Vinho</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tintos</td>
+                    <td id="totalTintos">0</td>
+                    <td id="percTintos">0%</td>
+                </tr>
+                <tr>
+                    <td>Brancos</td>
+                    <td id="totalBrancos">0</td>
+                    <td id="percBrancos">0%</td>
+                </tr>
+                <tr>
+                    <td>Rosés</td>
+                    <td id="totalRoses">0</td>
+                    <td id="percRoses">0%</td>
+                </tr>
+                <tr>
+                    <td>Total de Vinhos</td>
+                    <td id="totalVinhos">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

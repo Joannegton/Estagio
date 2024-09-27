@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    width: 60%;
+    margin: auto;
+}
+
+.enviarVinho {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    
+}
+
+.enviarVinho h2 {
+    text-align: center;
+}
+
+.enviarVinho label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.enviarVinho input, .enviarVinho select {
+    width: 100%;
+    padding: 8px 0;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.enviarVinho button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.enviarVinho button:hover {
+    background-color: #218838;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-item:last-child {
+    margin-right: 0;
+}
+
+.tabelas {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 48%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}

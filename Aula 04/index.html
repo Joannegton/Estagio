@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 04</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="exercicio1 exercicio">
+            <h2>Exercicio 1</h2>
+            <label for="ex1num1">Numero1</label>
+            <input type="number" name="ex1num1" id="ex1num1">
+            <label for="ex1num2">Numero2</label>
+            <input type="number" name="ex1num2" id="ex1num2">
+            <label for="ex1num3">Numero3</label>
+            <input type="number" name="ex1num3" id="ex1num3">
+            <button onclick="somaMenor()">Verificar</button>
+            <p id="ex1Result"></p>
+        </div>
+    
+        <div class="exercicio2 exercicio">
+            <h2>Exercicio 2</h2>
+            <label for="ex2nome">nome</label>
+            <input type="text" id="ex2nome">
+            <label for="ex2sexo">Sexo (M/F):</label>
+            <select id="ex2sexo" >
+                <option value="">Selecione o sexo</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+            <label for="ex2estadoCivil">Estado Civil:</label>
+            <select id="ex2estadoCivil" >
+                <option value="">Selecione o estado civil</option>
+                <option value="Solteira">Solteira</option>
+                <option value="Casada">Casada</option>
+                <option value="Divorciada">Divorciada</option>
+                <option value="Viúva">Viúva</option>
+            </select>
+            <button onclick="estadoCivil()">Verificar</button>
+            <p id="ex2estadoCivilResult"></p>
+        </div>
+    
+    
+        <div class="exercicio3 exercicio">
+            <h2>Exercicio 3</h2>
+            <label for="ex3num">Insira um Número</label>
+            <input type="number" name="ex3num" id="ex3num">
+            <button onclick="parImpar()">Verificar</button>
+            <p id="ex3Result"></p>
+        </div>
+    
+    
+        <div class="exercicio4 exercicio">
+            <h2>Exercicio 4</h2>
+            <label for="ex4num1">Numero 1</label>
+            <input type="number" name="ex4num1" id="ex4num1">
+            <label for="ex4num2">Numero 2</label>
+            <input type="number" name="ex4num2" id="ex4num2">
+            <button onclick="somaProduto()">Calcular</button>
+            <p id="ex4Result"></p>
+        </div>
+    
+    
+        <div class="exercicio5 exercicio">
+            <h2>Exercicio 5</h2>
+            <label for="ex5num">Insira um numeor</label>
+            <input type="number" name="ex5num" id="ex5num">
+            <button onclick="produtosNumero()">Calcular</button>
+            <p id="ex5Result"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="exercicio6 exercicio">
+            <h2>Exercicio 6</h2>
+            <div>
+                <label for="valor1">Valor 1:</label>
+                <input type="checkbox" id="valor1">
+            </div>
+            <div>
+                <label for="valor2">Valor 2:</label>
+                <input type="checkbox" id="valor2">
+            </div>
+            <button onclick="verificarBooleano()">Verificar</button>
+            <p id="ex6Result"></p>
+        </div>
+    
+    
+        <div class="exercicio7 exercicio">
+            <h2>Exercicio 7</h2>
+            <label for="ex7num">Insira um numero</label>
+            <input type="number" name="ex7num" id="ex7num">
+            <button onclick="somaNumero()">Calcular</button>
+            <p id="ex7Result"></p>
+        </div>
+    
+    
+        <div class="exercicio8 exercicio">
+            <h2>Exercicio 8</h2>
+            <label for="ex8num1">1° Numero:</label>
+            <input type="number" name="ex8num1" id="ex8num1">
+            <label for="ex8num2">2° Numero:</label>
+            <input type="number" name="ex8num2" id="ex8num2">
+            <label for="ex8num3">3° Numero:</label>
+            <input type="number" name="ex8num3" id="ex8num3">
+            <button onclick="ordemDecrescente()">Organizar</button>
+            <p id="ex8Result"></p>
+        </div>
+    
+    
+        <div class="exercicio9 exercicio">
+            <h2>Exercicio 9</h2>
+            <label for="sexo">Sexo M - masculino F - Feminino</label>
+            <input type="text" id="sexo">
+            <label for="altura">Altura</label>
+            <input type="text" id="altura">
+            <button onclick="calcularPeso()">Calcular</button>
+            <p id="resultado"></p>
+        </div>
+    
+        <div class="exercicio10 exercicio">
+            <h2>Exercicio 10</h2>
+            <label for="peso">Peso:</label>
+            <input type="number" name="peso" id="peso" step="0.1">
+            <label for="ex10altura">Altura:</label>
+            <input type="number" name="ex10altura" id="ex10altura" step="0.01">
+            <button onclick="imc()">Calcular</button>
+            <p id="ex10Result"></p>
+        </div>
+    </div>
+
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Participação em Eventos</title>
+    <link rel="stylesheet" href="../geral.css">
+</head>
+<body>
+    <div class="controleEstoque">
+        <div class="header">
+            <p></p>
+            <h2>Adicionar Evento</h2>
+            <button class="finalizar" onclick="finalizarInsercao()">Finalizar Cadastro</button>
+        </div>
+        <label for="evento">Tipo de Evento</label>
+        <select id="evento" name="evento">
+            <option value="S">Seminário</option>
+            <option value="W">Workshop</option>
+            <option value="C">Conferência</option>
+        </select>
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" name="quantidade">
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Seminário</td>
+                    <td id="totalSeminario">0</td>
+                    <td id="percSeminario">0%</td>
+                </tr>
+                <tr>
+                    <td>Workshop</td>
+                    <td id="totalWorkshop">0</td>
+                    <td id="percWorkshop">0%</td>
+                </tr>
+                <tr>
+                    <td>Conferência</td>
+                    <td id="totalConferencia">0</td>
+                    <td id="percConferencia">0%</td>
+                </tr>
+                <tr>
+                    <td>Total de Eventos</td>
+                    <td id="totalEventos">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

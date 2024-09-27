@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Estoque de Livros</title>
+    <link rel="stylesheet" href="../geral.css">
+</head>
+<body>
+    <div class="controleEstoque">
+        <div class="header">
+            <p></p>
+            <h2>Adicionar Livro</h2>
+            <button class="finalizar" onclick="finalizarInsercao()">Finalizar Cadastro</button>
+        </div>
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo">
+        <div class="input-group">
+            <div class="input-item">
+                <label for="genero">Gênero</label>
+                <select name="genero" id="genero">
+                    <option value="Ficcao">Ficção</option>
+                    <option value="Nao-Ficcao">Não-Ficção</option>
+                    <option value="Tecnico">Técnico</option>
+                </select>
+            </div>
+            <div class="input-item">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quantidade">
+            </div>
+        </div>
+        <button type="submit" onclick="inserir()">Enviar</button>
+    </div>
+    <div class="tabelas">
+        <table id="tabelaLista">
+            <thead>
+                <tr>
+                    <th>Gênero</th>
+                    <th>Título</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaLista">
+            </tbody>
+        </table>
+
+        <table id="tabelaTotais">
+            <thead>
+                <tr>
+                    <th>Gênero</th>
+                    <th>Total</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ficção</td>
+                    <td id="totalFiccao">0</td>
+                    <td id="percFiccao">0%</td>
+                </tr>
+                <tr>
+                    <td>Não-Ficção</td>
+                    <td id="totalNaoFiccao">0</td>
+                    <td id="percNaoFiccao">0%</td>
+                </tr>
+                <tr>
+                    <td>Técnico</td>
+                    <td id="totalTecnico">0</td>
+                    <td id="percTecnico">0%</td>
+                </tr>
+                <tr>
+                    <td>Total de Livros</td>
+                    <td id="totalLivros">0</td>
+                    <td id="percTotal">100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
