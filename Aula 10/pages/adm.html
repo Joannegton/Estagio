@@ -10,6 +10,7 @@
     <header>
       <nav>
         <ul>
+          <li><a href="#" onclick="mostrarTabelaPedidos()">Pedidos</a></li>
           <li><a href="#" onclick="mostrarCliente()">Listar Clientes</a></li>
           <li>
             <a href="#" onclick="mostrarCategoria()">Cadastrar Categoria</a>
@@ -18,11 +19,16 @@
             <a href="#" onclick="mostrarVendedor()">Cadastrar Vendedor</a>
           </li>
           <li><a href="#" onclick="mostrarProduto()">Cadastrar Produto</a></li>
-          <li><a href="#" onclick="mostrarCadastroCliente()">Cadastrar Cliente</a></li>
-          <li><a href="./loja.html">Realizar Pedido</a></li>
+          <li>
+            <a href="#" onclick="mostrarCadastroCliente()">Cadastrar Cliente</a>
+          </li>
+          <li>
+            <a href="#" onclick="mostrarRealizarPedido()">Realizar Pedido</a>
+          </li>
         </ul>
       </nav>
     </header>
+
     <div class="formulario" id="cadastroCategoria" style="display: none">
       <h1>Cadastro Categoria</h1>
       <div class="container">
@@ -56,7 +62,7 @@
       <button onclick="salvarVendedor()">Enviar</button>
     </div>
 
-    <div class="formulario" id="cadastroCliente" style="display: none;">
+    <div class="formulario" id="cadastroCliente" style="display: none">
       <h1>Cadastro cliente</h1>
       <div class="container">
         <label for="nomeCliente">Nome</label>
@@ -82,7 +88,8 @@
       <button onclick="salvarCliente()">Enviar</button>
     </div>
 
-    <div id="listaClientes" style="display: none">
+    <div id="listaClientes" class="formulario" style="display: none">
+      <h1>Clientes</h1>
       <table>
         <thead>
           <tr>
@@ -99,7 +106,8 @@
       </table>
     </div>
 
-    <div id="listaPedidoCliente" style="display: none">
+    <div id="listaPedidoCliente" class="formulario" style="display: none">
+      <h1 id="nomeClientePedido">Pedidos de </h1>
       <table>
         <thead>
           <tr>
@@ -113,6 +121,39 @@
           </tr>
         </thead>
         <tbody id="tabelaPedidoCliente"></tbody>
+      </table>
+    </div>
+
+    <div class="formulario" id="realizarPedido" style="display: none">
+      <h1>Pedido</h1>
+      <div class="container">
+        <label for="clientePedido">Cliente</label>
+        <select name="clientePedido" id="clientePedido"></select>
+        <label for="vendedorPedido">Vendedor</label>
+        <select name="vendedorPedido" id="vendedorPedido"></select>
+        <label for="produtoPedido">Produto</label>
+        <select name="produtoPedido" id="produtoPedido"></select>
+        <label for="quantidadePedido">Quantidade</label>
+        <input type="number" name="quantidadePedido" id="quantidadePedido" />
+      </div>
+      <button onclick="salvarPedido()">Enviar</button>
+    </div>
+
+    <div class="tabelaPedidos formulario" id="tabelaPedidos">
+      <h1>Pedidos</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="pedidos"></tbody>
       </table>
     </div>
 

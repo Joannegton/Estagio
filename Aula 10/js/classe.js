@@ -1,16 +1,19 @@
-import { dados } from "./data.js"
+import { dados } from "./data.js";
 
-export class Categoria{
-    constructor(nome){
+export class Categoria {
+    static ultimoId = 0 
+
+    constructor(nome) {
+        this.id = ++Categoria.ultimoId
         this.nome = nome
     }
 
-    static criarCategoria(categoria){
-        if (dados.categoria.find(cat => cat.nome == categoria.nome)) {
+    static criarCategoria(categoria) {
+        if (dados.categoria.find(cat => cat.nome === categoria.nome)) {
             alert('Categoria já cadastrada')
             return
         }
-        
+
         dados.categoria.push(categoria)
         Dados.salvarDados()
         Dados.atualizarOpcoes('categoriaProduto', dados.categoria, 'nome')
@@ -19,7 +22,7 @@ export class Categoria{
 
     deletarCategoria() {
         let nome = document.getElementById('nomeCategoria').value
-        let categoria = dados.categoria.find(categoria => categoria.nome == nome)
+        let categoria = dados.categoria.find(categoria => categoria.nome === nome)
         if (categoria) {
             let index = dados.categoria.indexOf(categoria)
             dados.categoria.splice(index, 1)
@@ -29,11 +32,11 @@ export class Categoria{
         }
     }
 
-    atualizarCategoria(){
-        let nome = document.getElementById('nomeCateria').value
-        let novaCategoria = {nome: document.getElementById('novoNomeCategoria').value}
-        let categoria = dados.categoria.find(categoria => categoria.nome = nome)
-        if(categoria){
+    atualizarCategoria() {
+        let nome = document.getElementById('nomeCategoria').value
+        let novaCategoria = { nome: document.getElementById('novoNomeCategoria').value }
+        let categoria = dados.categoria.find(categoria => categoria.nome === nome)
+        if (categoria) {
             let index = dados.categoria.indexOf(categoria)
             dados.categoria[index] = novaCategoria
             Dados.salvarDados()
@@ -42,14 +45,17 @@ export class Categoria{
     }
 }
 
-export class Vendedor{
-    constructor(nome, matricula){
-        this.nome = nome, 
+export class Vendedor {
+    static ultimoId = 0
+
+    constructor(nome, matricula) {
+        this.id = ++Vendedor.ultimoId
+        this.nome = nome
         this.matricula = matricula
     }
 
-    criarVendedor(vendedor){
-        if (dados.vendedor.find(vend => vend.nome == vendedor.nome)){
+    criarVendedor(vendedor) {
+        if (dados.vendedor.find(vend => vend.nome === vendedor.nome)) {
             alert('Vendedor já cadastrado')
             return
         }
@@ -58,10 +64,10 @@ export class Vendedor{
         alert('Vendedor cadastrado com sucesso')
     }
 
-    deletarVendedor(){
+    deletarVendedor() {
         let matricula = document.getElementById('matricula').value
-        let vendedor = dados.vendedor.find(vendedor => vendedor.matricula == matricula)
-        if (vendedor){
+        let vendedor = dados.vendedor.find(vendedor => vendedor.matricula === matricula)
+        if (vendedor) {
             let index = dados.vendedor.indexOf(vendedor)
             dados.vendedor.splice(index, 1)
             Dados.salvarDados()
@@ -70,15 +76,18 @@ export class Vendedor{
     }
 }
 
-export class Produto{
-    constructor(nome, valor, categoria){
-        this.nome = nome,
-        this.valor = valor,
+export class Produto {
+    static ultimoId = 0
+
+    constructor(nome, valor, categoria) {
+        this.id = ++Produto.ultimoId
+        this.nome = nome
+        this.valor = valor
         this.categoria = categoria
     }
 
-    criarProduto(){
-        if(dados.produto.find(prod => prod.nome == this.nome)){
+    criarProduto() {
+        if (dados.produto.find(prod => prod.nome === this.nome)) {
             alert('Produto já cadastrado')
             return
         }
@@ -90,39 +99,34 @@ export class Produto{
     }
 }
 
-
-
-export class Dados{
-    
-    static salvarDados(){
+export class Dados {
+    static salvarDados() {
         localStorage.setItem('dados', JSON.stringify(dados))
     }
 
-    static carregarDados(){
+    static carregarDados() {
         let dadosSalvo = localStorage.getItem('dados')
-        if (dadosSalvo){
+        if (dadosSalvo) {
             Object.assign(dados, JSON.parse(dadosSalvo))
-            const paginaAtual = window.location.pathname
-
-            if(paginaAtual.includes('adm.html')){
-                Dados.atualizarOpcoes('categoriaProduto', dados.categoria, 'nome')
-            } else if(paginaAtual.includes('loja.html')){
-                Dados.atualizarOpcoes('clientePedido', dados.cliente, 'nome')
-                Dados.atualizarOpcoes('vendedorPedido', dados.vendedor, 'nome')
-                Dados.atualizarOpcoes('produtoPedido', dados.produto, 'nome')
-            }
+            Dados.atualizarOpcoes('categoriaProduto', dados.categoria, 'nome')
+            Dados.atualizarOpcoes('clientePedido', dados.cliente, 'nome')
+            Dados.atualizarOpcoes('vendedorPedido', dados.vendedor, 'nome')
+            Dados.atualizarOpcoes('produtoPedido', dados.produto, 'nome')
         }
     }
 
-    static atualizarOpcoes(id, lista, atributo){
+    static atualizarOpcoes(id, lista, atributo) {
         let select = document.getElementById(id)
-        select.innerHTML = ''
-        for (let item of lista){
+        if (!select) {
+            console.error(`Element with id "${id}" not found`)
+            return
+        }
+        select.innerHTML = '';
+        for (let item of lista) {
             let option = document.createElement('option')
             option.value = item[atributo]
             option.innerText = item[atributo]
             select.appendChild(option)
         }
     }
-
 }

@@ -7,7 +7,7 @@ export class Pedido {
     constructor(cliente, vendedor, produto, quantidade) {
         this.id = Pedido.gerarId()
         this.cliente = cliente
-        this.idCliente = dados.cliente.find(cliente => cliente.nome == this.cliente).cpf
+        this.idCliente = dados.cliente.find(cliente => cliente.nome == this.cliente).id
         this.vendedor = vendedor
         this.data = new Date().toLocaleDateString()
         this.produto = produto
@@ -41,7 +41,6 @@ export class Pedido {
     }
 
     static mostrarPedidos() {
-        if (window.location.pathname.includes('loja.html')) {
             let pedidos = dados.pedido
             let corpoTabela = document.getElementById('pedidos')
             corpoTabela.innerHTML = ''
@@ -58,11 +57,18 @@ export class Pedido {
                 `
                 corpoTabela.appendChild(linha)
             }
-        }
     }
 
     static mostrarPedidoCliente(idCliente) {
-        document.getElementById('listaPedidoCliente').style.display = 'block'
+        let listaPedidoCliente = document.getElementById('listaPedidoCliente')
+        listaPedidoCliente.style.display = 'block'
+        document.getElementById('listaClientes').style.display = 'none'
+
+        let nomeCliente = dados.cliente.find(cliente => cliente.id == idCliente).nome
+        if(!document.getElementById('nomeClientePedido').textContent.includes(nomeCliente)){
+            document.getElementById('nomeClientePedido').innerHTML += nomeCliente
+        }
+
         document.getElementById('listaClientes').style.display = 'none'
         let pedidos = dados.pedido
         let corpoTabela = document.getElementById('tabelaPedidoCliente')

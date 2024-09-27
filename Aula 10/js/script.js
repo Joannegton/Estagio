@@ -1,7 +1,4 @@
-import { Vendedor } from "./classe.js"
-import { Categoria } from "./classe.js"
-import { Produto } from "./classe.js"
-import { Dados } from "./classe.js"
+import { Vendedor, Categoria, Produto, Dados } from "./classe.js"
 import { Cliente } from "./cliente.js"
 import { Pedido } from "./pedido.js"
 
@@ -45,7 +42,9 @@ window.mostrarCadastroCliente = function(){
     document.getElementById('cadastroVendedor').style.display = 'none'
     document.getElementById('cadastroCategoria').style.display = 'none'
     document.getElementById('cadastroCliente').style.display = 'block'
-    document.getElementById('realizaPedido').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
 
 }
 
@@ -54,8 +53,10 @@ window.mostrarCliente = function(){
     document.getElementById('cadastroProduto').style.display = 'none'
     document.getElementById('cadastroVendedor').style.display = 'none'
     document.getElementById('cadastroCategoria').style.display = 'none'
-    document.getElementById('mostrarCadastroCliente').style.display = 'none'
-    document.getElementById('realizaPedido').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
 window.deletarCliente = function(id){
@@ -75,8 +76,10 @@ window.mostrarCategoria = function(){
     document.getElementById('listaClientes').style.display = 'none'
     document.getElementById('cadastroProduto').style.display = 'none'
     document.getElementById('cadastroVendedor').style.display = 'none'
-    document.getElementById('mostrarCadastroCliente').style.display = 'none'
-    document.getElementById('realizaPedido').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
 window.salvarProduto = function(){
@@ -103,8 +106,10 @@ window.mostrarProduto = function(){
     document.getElementById('cadastroCategoria').style.display = 'none'
     document.getElementById('listaClientes').style.display = 'none'
     document.getElementById('cadastroVendedor').style.display = 'none'
-    document.getElementById('mostrarCadastroCliente').style.display = 'none'
-    document.getElementById('realizaPedido').style.display = 'none'    
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none' 
+    document.getElementById('tabelaPedidos').style.display = 'none'  
+    document.getElementById('listaPedidoCliente').style.display = 'none' 
 }
 
 window.salvarVendedor = function(){
@@ -123,7 +128,10 @@ window.mostrarVendedor = function(){
     document.getElementById('cadastroCategoria').style.display = 'none'
     document.getElementById('listaClientes').style.display = 'none'
     document.getElementById('cadastroProduto').style.display = 'none'
-    document.getElementById('mostrarCadastroCliente').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
 window.salvarPedido = function(){
@@ -146,17 +154,31 @@ window.mostrarRealizarPedido = function(){
     document.getElementById('listaClientes').style.display = 'none'
     document.getElementById('cadastroProduto').style.display = 'none'
     document.getElementById('cadastroVendedor').style.display = 'none'
-    document.getElementById('mostrarCadastroCliente').style.display = 'none'
-    document.getElementById('realizaPedido').style.display = 'block'
-    
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'block'
+    document.getElementById('tabelaPedidos').style.display = 'block'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
+}
+
+window.mostrarTabelaPedidos = function(){
+    document.getElementById('cadastroCategoria').style.display = 'none'
+    document.getElementById('listaClientes').style.display = 'none'
+    document.getElementById('cadastroProduto').style.display = 'none'
+    document.getElementById('cadastroVendedor').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'block'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
 window.mostrarPedidoCliente = function(id){
     Pedido.mostrarPedidoCliente(id)
 }
+
 window.ocultarMostrarPedidoCliente = function(){
     Pedido.ocultarMostrarPedidoCliente()
 }
+
 window.deletarPedido = function(id){
     Pedido.deletarPedido(id)
 }
