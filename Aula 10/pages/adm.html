@@ -7,155 +7,141 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
-    <header>
       <nav>
+        <img src="../logo.png" alt="logo" >
         <ul>
-          <li><a href="#" onclick="mostrarTabelaPedidos()">Pedidos</a></li>
-          <li><a href="#" onclick="mostrarCliente()">Listar Clientes</a></li>
-          <li>
-            <a href="#" onclick="mostrarCategoria()">Cadastrar Categoria</a>
-          </li>
-          <li>
-            <a href="#" onclick="mostrarVendedor()">Cadastrar Vendedor</a>
-          </li>
-          <li><a href="#" onclick="mostrarProduto()">Cadastrar Produto</a></li>
-          <li>
-            <a href="#" onclick="mostrarCadastroCliente()">Cadastrar Cliente</a>
-          </li>
-          <li>
-            <a href="#" onclick="mostrarRealizarPedido()">Realizar Pedido</a>
-          </li>
+          <li onclick="mostrarTabelaPedidos()"><a href="#">Pedidos</a></li>
+          <li onclick="mostrarRealizarPedido()"><a href="#" >Realizar Pedido</a></li>
+          <li  onclick="mostrarCadastroCliente()"><a href="#">Cadastrar Cliente</a></li>
+          <li  onclick="mostrarCliente()"><a href="#">Listar Clientes</a></li>
+          <li onclick="mostrarCategoria()"><a href="#" >Cadastrar Categoria</a></li>
+          <li  onclick="mostrarVendedor()"><a href="#">Cadastrar Vendedor</a></li>
+          <li onclick="mostrarProduto()"><a href="#" >Cadastrar Produto</a></li>
         </ul>
       </nav>
-    </header>
 
-    <div class="formulario" id="cadastroCategoria" style="display: none">
-      <h1>Cadastro Categoria</h1>
-      <div class="container">
-        <label for="nomeCategoria">Nome</label>
-        <input type="text" name="nomeCategoria" id="nomeCategoria" />
-      </div>
-      <button onclick="salvarCategoria()">Enviar</button>
-    </div>
-
-    <div class="formulario" id="cadastroProduto" style="display: none">
-      <h1>Cadastro Produto</h1>
-      <div class="container">
-        <label for="nomeProduto">Nome</label>
-        <input type="text" name="nomeProduto" id="nomeProduto" />
-        <label for="valorProduto">Valor</label>
-        <input type="number" name="valorProduto" id="valorProduto" />
-        <label for="categoriaProduto">Categoria</label>
-        <select name="categoriaProduto" id="categoriaProduto"></select>
-      </div>
-      <button onclick="salvarProduto()">Enviar</button>
-    </div>
-
-    <div class="formulario" id="cadastroVendedor" style="display: none">
-      <h1>Cadastrar Vendedor</h1>
-      <div class="container">
-        <label for="nomeVendedor">Nome</label>
-        <input type="text" name="nomeVendedor" id="nomeVendedor" />
-        <label for="matriculaVendedor">Matricula</label>
-        <input type="text" name="matriculaVendedor" id="matriculaVendedor" />
-      </div>
-      <button onclick="salvarVendedor()">Enviar</button>
-    </div>
-
-    <div class="formulario" id="cadastroCliente" style="display: none">
-      <h1>Cadastro cliente</h1>
-      <div class="container">
-        <label for="nomeCliente">Nome</label>
-        <input type="text" name="nomeCliente" id="nomeCliente" />
-        <label for="dataNasc">Data Nascimento</label>
-        <input type="date" name="dataNasc" id="dataNasc" />
-        <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf" />
-        <label for="origem">Origem</label>
-        <div class="containerOrigem">
-          <div class="containeLoja">
-            <label for="origemLoja">Loja</label>
-            <input type="checkbox" name="origem" id="origemLoja" value="Loja" />
-          </div>
-          <div class="containeSite">
-            <label for="origemSite">Site</label>
-            <input type="checkbox" name="origem" id="origemSite" value="Site" />
-          </div>
+    <section>
+      <div class="formulario" id="cadastroCategoria" style="display: none">
+        <h1>Cadastro Categoria</h1>
+        <div class="container">
+          <label for="nomeCategoria">Nome</label>
+          <input type="text" name="nomeCategoria" id="nomeCategoria" />
         </div>
-        <label for="score">Score</label>
-        <input type="number" name="score" id="score" />
+        <button onclick="salvarCategoria()">Enviar</button>
       </div>
-      <button onclick="salvarCliente()">Enviar</button>
-    </div>
-
-    <div id="listaClientes" class="formulario" style="display: none">
-      <h1>Clientes</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Nasc</th>
-            <th>CPF</th>
-            <th>Origem</th>
-            <th>Score</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="tabelaClientes"></tbody>
-      </table>
-    </div>
-
-    <div id="listaPedidoCliente" class="formulario" style="display: none">
-      <h1 id="nomeClientePedido">Pedidos de </h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Cliente</th>
-            <th>Data</th>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Total</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="tabelaPedidoCliente"></tbody>
-      </table>
-    </div>
-
-    <div class="formulario" id="realizarPedido" style="display: none">
-      <h1>Pedido</h1>
-      <div class="container">
-        <label for="clientePedido">Cliente</label>
-        <select name="clientePedido" id="clientePedido"></select>
-        <label for="vendedorPedido">Vendedor</label>
-        <select name="vendedorPedido" id="vendedorPedido"></select>
-        <label for="produtoPedido">Produto</label>
-        <select name="produtoPedido" id="produtoPedido"></select>
-        <label for="quantidadePedido">Quantidade</label>
-        <input type="number" name="quantidadePedido" id="quantidadePedido" />
+      <div class="formulario" id="cadastroProduto" style="display: none">
+        <h1>Cadastro Produto</h1>
+        <div class="container">
+          <label for="nomeProduto">Nome</label>
+          <input type="text" name="nomeProduto" id="nomeProduto" />
+          <label for="valorProduto">Valor</label>
+          <input type="number" name="valorProduto" id="valorProduto" />
+          <label for="categoriaProduto">Categoria</label>
+          <select name="categoriaProduto" id="categoriaProduto"></select>
+        </div>
+        <button onclick="salvarProduto()">Enviar</button>
       </div>
-      <button onclick="salvarPedido()">Enviar</button>
-    </div>
-
-    <div class="tabelaPedidos formulario" id="tabelaPedidos">
-      <h1>Pedidos</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Cliente</th>
-            <th>Data</th>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Valor</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="pedidos"></tbody>
-      </table>
-    </div>
+      <div class="formulario" id="cadastroVendedor" style="display: none">
+        <h1>Cadastrar Vendedor</h1>
+        <div class="container">
+          <label for="nomeVendedor">Nome</label>
+          <input type="text" name="nomeVendedor" id="nomeVendedor" />
+          <label for="matriculaVendedor">Matricula</label>
+          <input type="text" name="matriculaVendedor" id="matriculaVendedor" />
+        </div>
+        <button onclick="salvarVendedor()">Enviar</button>
+      </div>
+      <div class="formulario" id="cadastroCliente" style="display: none">
+        <h1>Cadastro cliente</h1>
+        <div class="container">
+          <label for="nomeCliente">Nome</label>
+          <input type="text" name="nomeCliente" id="nomeCliente" />
+          <label for="dataNasc">Data Nascimento</label>
+          <input type="date" name="dataNasc" id="dataNasc" />
+          <label for="cpf">CPF</label>
+          <input type="text" name="cpf" id="cpf" />
+          <label for="origem">Origem</label>
+          <div class="containerOrigem">
+            <div class="containeLoja">
+              <label for="origemLoja">Loja</label>
+              <input type="checkbox" name="origem" id="origemLoja" value="Loja" />
+            </div>
+            <div class="containeSite">
+              <label for="origemSite">Site</label>
+              <input type="checkbox" name="origem" id="origemSite" value="Site" />
+            </div>
+          </div>
+          <label for="score">Score</label>
+          <input type="number" name="score" id="score" />
+        </div>
+        <button onclick="salvarCliente()">Enviar</button>
+      </div>
+      <div id="listaClientes" class="formulario" style="display: none">
+        <h1>Clientes</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Nasc</th>
+              <th>CPF</th>
+              <th>Origem</th>
+              <th>Score</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaClientes"></tbody>
+        </table>
+      </div>
+      <div id="listaPedidoCliente" class="formulario" style="display: none">
+        <h1 id="nomeClientePedido">Pedidos de </h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Cliente</th>
+              <th>Data</th>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaPedidoCliente"></tbody>
+        </table>
+      </div>
+      <div class="formulario" id="realizarPedido" style="display: none">
+        <h1>Pedido</h1>
+        <div class="container">
+          <label for="clientePedido">Cliente</label>
+          <select name="clientePedido" id="clientePedido"></select>
+          <label for="vendedorPedido">Vendedor</label>
+          <select name="vendedorPedido" id="vendedorPedido"></select>
+          <label for="produtoPedido">Produto</label>
+          <select name="produtoPedido" id="produtoPedido"></select>
+          <label for="quantidadePedido">Quantidade</label>
+          <input type="number" name="quantidadePedido" id="quantidadePedido" />
+        </div>
+        <button onclick="salvarPedido()">Enviar</button>
+      </div>
+      <div class="tabelaPedidos formulario" id="tabelaPedidos">
+        <h1>Pedidos</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Cliente</th>
+              <th>Data</th>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Valor</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="pedidos"></tbody>
+        </table>
+      </div>
+    </section>
 
     <script type="module" src="../js/script.js"></script>
   </body>
