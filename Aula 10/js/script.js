@@ -1,7 +1,9 @@
-import { Vendedor, Categoria, Produto, Dados } from "./classe.js"
+import { Dados } from "./dados.js"
+import { Vendedor } from "./vendedor.js"
 import { Cliente } from "./cliente.js"
 import { Pedido } from "./pedido.js"
-
+import { Categoria } from "./categoria.js"
+import { Produto } from "./produto.js"
 
 window.salvarCliente = function(){
     console.log('salvarCliente')
@@ -33,7 +35,8 @@ window.salvarCliente = function(){
     document.getElementById('origemSite').checked = false
 
     Dados.salvarDados()
-    window.location.href = 'adm.html'
+    Dados.carregarDados()
+    mostrarRealizarPedido()
 }
 
 window.mostrarCadastroCliente = function(){
@@ -156,7 +159,7 @@ window.mostrarRealizarPedido = function(){
     document.getElementById('cadastroVendedor').style.display = 'none'
     document.getElementById('cadastroCliente').style.display = 'none'
     document.getElementById('realizarPedido').style.display = 'block'
-    document.getElementById('tabelaPedidos').style.display = 'block'
+    document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 

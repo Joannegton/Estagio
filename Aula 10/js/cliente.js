@@ -1,5 +1,5 @@
 import { dados } from "./data.js"
-import { Dados } from "./classe.js"
+import { Dados } from "./dados.js"
 
 export class Cliente {
     static ultimoId() {
