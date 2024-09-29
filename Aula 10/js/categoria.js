@@ -2,10 +2,13 @@ import { Dados } from "./dados.js";
 import { dados } from "./data.js";
 
 export class Categoria {
-    static ultimoId = 0 
+    static ultimoId(){
+        if(dados.categoria.length === 0) return 0
+        return Math.max(...dados.categoria.map(categoria => categoria.id))
+    }
 
     constructor(nome) {
-        this.id = ++Categoria.ultimoId
+        this.id = Categoria.ultimoId() + 1
         this.nome = nome
     }
 

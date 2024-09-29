@@ -5,6 +5,7 @@ import { Pedido } from "./pedido.js"
 import { Categoria } from "./categoria.js"
 import { Produto } from "./produto.js"
 
+//cliente
 window.salvarCliente = function(){
     console.log('salvarCliente')
     let nome = document.getElementById('nomeCliente').value
@@ -67,6 +68,7 @@ window.deletarCliente = function(id){
     Cliente.listarClientes()
 }
 
+//categoria
 window.salvarCategoria = function () {
     let nomeCategoria = document.getElementById('nomeCategoria').value
     let categoriaObj = new Categoria(nomeCategoria)
@@ -85,6 +87,7 @@ window.mostrarCategoria = function(){
     document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
+//produto
 window.salvarProduto = function(){
     let nome = document.getElementById('nomeProduto').value
     let preco = parseFloat(document.getElementById('valorProduto').value)
@@ -115,6 +118,7 @@ window.mostrarProduto = function(){
     document.getElementById('listaPedidoCliente').style.display = 'none' 
 }
 
+//vendedor
 window.salvarVendedor = function(){
     let nome = document.getElementById('nomeVendedor').value
     let matricula = document.getElementById('matriculaVendedor').value
@@ -137,6 +141,25 @@ window.mostrarVendedor = function(){
     document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
+window.deletarVendedor = function(id){
+    Vendedor.deletarVendedor(id)
+    Vendedor.listarVendedores()
+}
+
+window.mostrarListarVendedores = function(){
+    document.getElementById('tabelaVendedor').style.display = 'block'
+    document.getElementById('cadastroVendedor').style.display = 'none'
+    document.getElementById('cadastroCategoria').style.display = 'none'
+    document.getElementById('listaClientes').style.display = 'none'
+    document.getElementById('cadastroProduto').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
+}
+
+
+//pedido
 window.salvarPedido = function(){
     let cliente = document.getElementById('clientePedido').value
     let vendedor = document.getElementById('vendedorPedido').value
@@ -150,6 +173,10 @@ window.salvarPedido = function(){
 
     let pedido = new Pedido(cliente, vendedor, produto, quantidade)
     pedido.criarPedido(pedido)
+}
+
+window.deletarPedido = function(id){
+    Pedido.deletarPedido(id)
 }
 
 window.mostrarRealizarPedido = function(){
@@ -190,5 +217,6 @@ window.onload = function () {
     Dados.carregarDados()
     Pedido.mostrarPedidos()
     Cliente.listarClientes()
+    Vendedor.listarVendedores()
 }
 

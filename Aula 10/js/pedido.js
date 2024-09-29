@@ -2,10 +2,13 @@ import { dados } from "./data.js"
 import { Dados } from "./dados.js"
 
 export class Pedido {
-    static ultimoId = 0
+    static ultimoId(){
+        if(dados.pedido.length === 0) return 0
+        return Math.max(...dados.cliente.map(pedido => pedido.id))
+    }
 
     constructor(cliente, vendedor, produto, quantidade) {
-        this.id = Pedido.gerarId()
+        this.id = Pedido.ultimoId() + 1
         this.cliente = cliente
         this.idCliente = dados.cliente.find(cliente => cliente.nome == this.cliente).id
         this.vendedor = vendedor
@@ -15,9 +18,6 @@ export class Pedido {
         this.total = 0
     }
 
-    static gerarId() {
-        return ++Pedido.ultimoId
-    }
 
     criarPedido() {
         let valor = dados.produto.find(produto => produto.nome == this.produto).valor
@@ -89,7 +89,6 @@ export class Pedido {
             let linha = document.createElement('tr')
             linha.innerHTML = `
                 <td>${pedido.id}</td>
-                <td>${pedido.cliente}</td>
                 <td>${pedido.data}</td>
                 <td>${pedido.produto}</td>
                 <td>${pedido.quantidade}</td>

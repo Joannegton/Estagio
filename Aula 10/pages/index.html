@@ -16,6 +16,7 @@
         <li  onclick="mostrarCliente()"><a href="#">Listar Clientes</a></li>
         <li onclick="mostrarCategoria()"><a href="#" >Cadastrar Categoria</a></li>
         <li  onclick="mostrarVendedor()"><a href="#">Cadastrar Vendedor</a></li>
+        <li  onclick="mostrarListarVendedores()"><a href="#">Listar Vendedores</a></li>
         <li onclick="mostrarProduto()"><a href="#" >Cadastrar Produto</a></li>
       </ul>
     </nav>
@@ -99,7 +100,6 @@
           <thead>
             <tr>
               <th>Id</th>
-              <th>Cliente</th>
               <th>Data</th>
               <th>Produto</th>
               <th>Quantidade</th>
@@ -139,6 +139,21 @@
             </tr>
           </thead>
           <tbody id="pedidos"></tbody>
+        </table>
+      </div>
+
+      <div id="tabelaVendedor" class="formulario" style="display: none;">
+        <h1>Vendedores</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Matricula</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="vendedores"></tbody>
         </table>
       </div>
     </section>
