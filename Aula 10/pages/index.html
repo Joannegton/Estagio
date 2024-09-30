@@ -15,9 +15,11 @@
         <li  onclick="mostrarCadastroCliente()"><a href="#">Cadastrar Cliente</a></li>
         <li  onclick="mostrarCliente()"><a href="#">Listar Clientes</a></li>
         <li onclick="mostrarCategoria()"><a href="#" >Cadastrar Categoria</a></li>
+        <li onclick="mostrarListarCategoria()"><a href="#" >Listar Categoria</a></li>
         <li  onclick="mostrarVendedor()"><a href="#">Cadastrar Vendedor</a></li>
         <li  onclick="mostrarListarVendedores()"><a href="#">Listar Vendedores</a></li>
         <li onclick="mostrarProduto()"><a href="#" >Cadastrar Produto</a></li>
+        <li onclick="mostrarListarProdutos()"><a href="#" >Listar Produtos</a></li>
       </ul>
     </nav>
 
@@ -154,6 +156,36 @@
             </tr>
           </thead>
           <tbody id="vendedores"></tbody>
+        </table>
+      </div>
+
+      <div id="tabelaCategoria" class="formulario" style="display: none;">
+        <h1>Categorias</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="categorias"></tbody>
+        </table>
+      </div>
+
+      <div id="tabelaProdutos" class="formulario" style="display: none;">
+        <h1>Produtos</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Valor</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="produtos"></tbody>
         </table>
       </div>
     </section>

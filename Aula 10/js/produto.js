@@ -25,4 +25,31 @@ export class Produto {
         Dados.carregarDados()
         alert('Produto cadastrado com sucesso')
     }
+
+    static listarProdutos() {
+        let tabela = document.getElementById('produtos')
+        tabela.innerHTML = ''
+        dados.produto.forEach(produto => {
+            let tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${produto.id}</td>
+                <td>${produto.nome}</td>
+                <td>${produto.valor}</td>
+                <td>${produto.categoria}</td>
+                <td><button onclick="deletarProduto(${produto.id})">Excluir</button></td>
+            `
+            tabela.appendChild(tr)
+        })
+    }
+
+    static deletarProduto(id) {
+        let produto = dados.produto.find(produto => produto.id === id)
+        if (produto) {
+            let index = dados.produto.indexOf(produto)
+            dados.produto.splice(index, 1)
+            Dados.salvarDados()
+            Dados.carregarDados()
+            alert('Produto deletado com sucesso')
+        }
+    }
 }

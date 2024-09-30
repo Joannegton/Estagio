@@ -24,14 +24,26 @@ export class Categoria {
         alert('Categoria cadastrada com sucesso')
     }
 
-    deletarCategoria() {
-        let nome = document.getElementById('nomeCategoria').value
-        let categoria = dados.categoria.find(categoria => categoria.nome === nome)
+    static listarCategorias() {
+        let tabela = document.getElementById('categorias')
+        tabela.innerHTML = ''
+        dados.categoria.forEach(categoria => {
+            let tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${categoria.id}</td>
+                <td>${categoria.nome}</td>
+                <td><button onclick="deletarCategoria(${categoria.id})">Excluir</button></td>
+            `
+            tabela.appendChild(tr)
+        })
+    }
+
+    deletarCategoria(id) {
+        let categoria = dados.categoria.find(categoria => categoria.id === id)
         if (categoria) {
             let index = dados.categoria.indexOf(categoria)
             dados.categoria.splice(index, 1)
             alert('Categoria deletada com sucesso')
-            console.log(dados.categoria)
             Dados.salvarDados()
         }
     }

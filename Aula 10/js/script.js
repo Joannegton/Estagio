@@ -87,6 +87,18 @@ window.mostrarCategoria = function(){
     document.getElementById('listaPedidoCliente').style.display = 'none'
 }
 
+window.mostrarListarCategoria = function(){
+    document.getElementById('tabelaCategoria').style.display = 'block'
+    document.getElementById('cadastroCategoria').style.display = 'none'
+    document.getElementById('listaClientes').style.display = 'none'
+    document.getElementById('cadastroProduto').style.display = 'none'
+    document.getElementById('cadastroVendedor').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
+}
+
 //produto
 window.salvarProduto = function(){
     let nome = document.getElementById('nomeProduto').value
@@ -116,6 +128,22 @@ window.mostrarProduto = function(){
     document.getElementById('realizarPedido').style.display = 'none' 
     document.getElementById('tabelaPedidos').style.display = 'none'  
     document.getElementById('listaPedidoCliente').style.display = 'none' 
+}
+
+window.mostrarListarProdutos = function(){
+    document.getElementById('tabelaProdutos').style.display = 'block'
+    document.getElementById('cadastroProduto').style.display = 'none'
+    document.getElementById('cadastroCategoria').style.display = 'none'
+    document.getElementById('listaClientes').style.display = 'none'
+    document.getElementById('cadastroVendedor').style.display = 'none'
+    document.getElementById('cadastroCliente').style.display = 'none'
+    document.getElementById('realizarPedido').style.display = 'none'
+    document.getElementById('tabelaPedidos').style.display = 'none'
+    document.getElementById('listaPedidoCliente').style.display = 'none'
+}
+
+window.deletarProduto = function(id){
+    Produto.deletarProduto(id)
 }
 
 //vendedor
@@ -218,5 +246,7 @@ window.onload = function () {
     Pedido.mostrarPedidos()
     Cliente.listarClientes()
     Vendedor.listarVendedores()
+    Categoria.listarCategorias()
+    Produto.listarProdutos()
 }
 
