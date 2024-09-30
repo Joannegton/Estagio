@@ -8,130 +8,136 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Oferte e Ganhe</h1>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="mostrarEnvioTaloes()">Envio</a></li>
-                <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
-                <li><a href="#" onclick="mostrarManutencao()">Manutenção</a></li>
-                <li><a href="#" onclick="mostrarPerfil()">Perfil de Acesso</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="main">
+        <header>
+            <img src="logo.png" alt="logo">
+            <h1>Oferte e Ganhe</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="mostrarEnvioTaloes()">Envio</a></li>
+                    <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
+                    <li><a href="#" onclick="mostrarManutencao()">Manutenção</a></li>
+                    <li><a href="#" onclick="mostrarPerfil()">Perfil de Acesso</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <section id="envioTaloes" style="display: none;">
-            <h2>Envio de Talões</h2>
-            <form>
-                <label for="dataHoraEvento">Data/Hora do Evento:</label>
-                <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento"><br>
-                <label for="lojaDestinataria">Loja Destinatária:</label>
-                <input type="text" id="lojaDestinataria" name="lojaDestinataria"><br>
-                <label for="quantidadeTaloes">Quantidade de Talões:</label>
-                <input type="number" id="quantidadeTaloes" name="quantidadeTaloes"><br>
-                <label for="numeroRemessa">Número da Remessa:</label>
-                <input type="text" id="numeroRemessa" name="numeroRemessa"><br>
-                <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio"><br>
-                <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
-                <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista"><br>
-                <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                <input type="text" id="idsFuncionarios" name="idsFuncionarios"><br>
-                <label for="statusProcesso">Status do Processo:</label>
-                <select id="statusProcesso" name="statusProcesso">
-                    <option value="enviado">Enviado</option>
-                    <option value="entregue">Entregue</option>
-                    <option value="recebido">Recebido</option>
-                </select><br>
-                <button type="submit">Registrar Envio</button>
-            </form>
-        </section>
-
-        <section id="estoque" style="display: none;">
-            <h2>Gestão de Estoque</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Loja</th>
-                        <th>Quantidade Recomendada</th>
-                        <th>Quantidade Mínima</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Linhas de exemplo -->
-                    <tr>
-                        <td>Loja 1</td>
-                        <td>100</td>
-                        <td>20</td>
-                        <td><button>Editar</button> <button>Deletar</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <main>
+            <section id="envioTaloes" style="display: none;">
+                <h2>Envio de Talões</h2>
+                <form>
+                    <label for="dataHoraEvento">Data/Hora do Evento:</label>
+                    <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento"><br>
+                    <label for="lojaDestinataria">Loja Destinatária:</label>
+                    <input type="text" id="lojaDestinataria" name="lojaDestinataria"><br>
+                    <label for="quantidadeTaloes">Quantidade de Talões:</label>
+                    <input type="number" id="quantidadeTaloes" name="quantidadeTaloes"><br>
+                    <label for="numeroRemessa">Número da Remessa:</label>
+                    <input type="text" id="numeroRemessa" name="numeroRemessa"><br>
+                    <label for="dataHoraEnvio">Data/Hora do Envio:</label>
+                    <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio"><br>
+                    <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
+                    <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista"><br>
+                    <label for="idsFuncionarios">IDs dos Funcionários:</label>
+                    <input type="text" id="idsFuncionarios" name="idsFuncionarios"><br>
+                    <label for="statusProcesso">Status do Processo:</label>
+                    <select id="statusProcesso" name="statusProcesso">
+                        <option value="enviado">Enviado</option>
+                        <option value="entregue">Entregue</option>
+                        <option value="recebido">Recebido</option>
+                    </select><br>
+                    <button type="submit">Registrar Envio</button>
+                </form>
+            </section>
+            
+            <section id="estoque" style="display: none;">
+                <h2>Gestão de Estoque</h2>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Loja</th>
+                            <th>Quantidade Recomendada</th>
+                            <th>Quantidade Mínima</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas de exemplo -->
+                        <tr>
+                            <td data-label="Loja">Loja 1</td>
+                            <td data-label="Quantidade Recomendada">100</td>
+                            <td data-label="Quantidade Mínima">20</td>
+                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         
-        <section id="manutencao" style="display: none;">
-            <h2>Manutenção de Talões</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data/Hora do Evento</th>
-                        <th>Loja Destinatária</th>
-                        <th>Quantidade de Talões</th>
-                        <th>Remessa</th>
-                        <th>Data/Hora do Envio</th>
-                        <th>Data de Entrega</th>
-                        <th>IDs de Materiais</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Linhas de exemplo -->
-                    <tr>
-                        <td>2024-01-01 10:00</td>
-                        <td>Loja 1</td>
-                        <td>50</td>
-                        <td>12345</td>
-                        <td>2024-01-01 12:00</td>
-                        <td>2024-01-02</td>
-                        <td>1, 2, 3</td>
-                        <td>Enviado</td>
-                        <td><button>Editar</button> <button>Deletar</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="perfil" style="display: none;">
-            <h2>Gestão de Perfis de Acesso</h2>
-            <form id="perfilForm">
-                <label for="nomePerfil">Nome do Perfil:</label>
-                <input type="text" id="nomePerfil" name="nomePerfil"><br>
-                <label for="permissoes">Permissões:</label>
-                <select id="permissoes" name="permissoes" multiple>
-                    <option value="estoque">Acesso ao Estoque</option>
-                    <option value="manutencao">Acesso à Manutenção</option>
-                    <option value="todas">Acesso a Todas as Funcionalidades</option>
-                </select><br>
-                <button type="submit">Salvar Perfil</button>
-            </form>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome do Perfil</th>
-                        <th>Permissões</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="profileTableBody">
-                    <!-- Linhas de exemplo -->
-                </tbody>
-            </table>
-        </section>
-
-    </main>
+            <section id="manutencao" style="display: none;">
+                <h2>Manutenção de Talões</h2>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Data/Hora do Evento</th>
+                            <th>Loja Destinatária</th>
+                            <th>Quantidade de Talões</th>
+                            <th>Remessa</th>
+                            <th>Data/Hora do Envio</th>
+                            <th>Data de Entrega</th>
+                            <th>IDs de Materiais</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas de exemplo -->
+                        <tr>
+                            <td data-label="Data/Hora do Evento">2024-01-01 10:00</td>
+                            <td data-label="Loja Destinatária">Loja 1</td>
+                            <td data-label="Quantidade de Talões">50</td>
+                            <td data-label="Remessa">12345</td>
+                            <td data-label="Data/Hora do Envio">2024-01-01 12:00</td>
+                            <td data-label="Data de Entrega">2024-01-02</td>
+                            <td data-label="IDs de Materiais">1, 2, 3</td>
+                            <td data-label="Status">Enviado</td>
+                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="perfil" style="display: none;">
+                <h2>Gestão de Perfis de Acesso</h2>
+                <form id="perfilForm">
+                    <label for="nomePerfil">Nome do Perfil:</label>
+                    <input type="text" id="nomePerfil" name="nomePerfil"><br>
+                    <label for="permissoes">Permissões:</label>
+                    <select id="permissoes" name="permissoes" multiple>
+                        <option value="estoque">Acesso ao Estoque</option>
+                        <option value="manutencao">Acesso à Manutenção</option>
+                        <option value="todas">Acesso a Todas as Funcionalidades</option>
+                    </select><br>
+                    <button type="submit">Salvar Perfil</button>
+                </form>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Nome do Perfil</th>
+                            <th>Permissões</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profileTableBody">
+                        <!-- Linhas de exemplo -->
+                        <tr>
+                            <td data-label="Nome do Perfil">Administrador</td>
+                            <td data-label="Permissões">Acesso a Todas as Funcionalidades</td>
+                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
     <footer>
         <p>&copy; 2024 Oferte e Ganhe</p>
     </footer>
