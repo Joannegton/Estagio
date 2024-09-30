@@ -1,0 +1,114 @@
+:root {
+    --cor-primaria: #4CAF50;
+    --cor-primaria-hover: #45a049;
+    --cor-secundaria: #333;
+    --cor-terciaria: #f7c600;
+    --cor-branco: #fff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: var(--cor-branco);
+    text-decoration: none;
+}
+
+main {
+    padding: 1em;
+}
+
+section {
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 2em;
+    
+}
+
+form label {
+    display: block;
+    margin: 0.5em 0 0.2em;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+form button {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: var(--cor-primaria-hover);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2em;
+}
+
+table, th, td {
+    border: 1px solid var(--cor-secundaria);
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branco);
+}
+
+button {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--cor-primaria-hover);
+}
+
+footer {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 10px 0;
+}
