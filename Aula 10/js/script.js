@@ -49,6 +49,9 @@ window.mostrarCadastroCliente = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 
 }
 
@@ -61,6 +64,9 @@ window.mostrarCliente = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 window.deletarCliente = function(id){
@@ -85,6 +91,9 @@ window.mostrarCategoria = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 window.mostrarListarCategoria = function(){
@@ -97,6 +106,8 @@ window.mostrarListarCategoria = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 //produto
@@ -128,6 +139,9 @@ window.mostrarProduto = function(){
     document.getElementById('realizarPedido').style.display = 'none' 
     document.getElementById('tabelaPedidos').style.display = 'none'  
     document.getElementById('listaPedidoCliente').style.display = 'none' 
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 window.mostrarListarProdutos = function(){
@@ -140,6 +154,8 @@ window.mostrarListarProdutos = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
 }
 
 window.deletarProduto = function(id){
@@ -159,6 +175,9 @@ window.salvarVendedor = function(){
 }
 
 window.mostrarVendedor = function(){
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
     document.getElementById('cadastroVendedor').style.display = 'block'
     document.getElementById('cadastroCategoria').style.display = 'none'
     document.getElementById('listaClientes').style.display = 'none'
@@ -176,6 +195,9 @@ window.deletarVendedor = function(id){
 
 window.mostrarListarVendedores = function(){
     document.getElementById('tabelaVendedor').style.display = 'block'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
+
     document.getElementById('cadastroVendedor').style.display = 'none'
     document.getElementById('cadastroCategoria').style.display = 'none'
     document.getElementById('listaClientes').style.display = 'none'
@@ -216,6 +238,9 @@ window.mostrarRealizarPedido = function(){
     document.getElementById('realizarPedido').style.display = 'block'
     document.getElementById('tabelaPedidos').style.display = 'none'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 window.mostrarTabelaPedidos = function(){
@@ -227,6 +252,9 @@ window.mostrarTabelaPedidos = function(){
     document.getElementById('realizarPedido').style.display = 'none'
     document.getElementById('tabelaPedidos').style.display = 'block'
     document.getElementById('listaPedidoCliente').style.display = 'none'
+    document.getElementById('tabelaVendedor').style.display = 'none'
+    document.getElementById('tabelaCategoria').style.display = 'none'
+    document.getElementById('tabelaProdutos').style.display = 'none'
 }
 
 window.mostrarPedidoCliente = function(id){
