@@ -26,30 +26,56 @@
             <section id="envioTaloes" style="display: none;">
                 <h2>Envio de Talões</h2>
                 <form>
-                    <label for="dataHoraEvento">Data/Hora do Evento:</label>
-                    <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento"><br>
-                    <label for="lojaDestinataria">Loja Destinatária:</label>
-                    <input type="text" id="lojaDestinataria" name="lojaDestinataria"><br>
-                    <label for="quantidadeTaloes">Quantidade de Talões:</label>
-                    <input type="number" id="quantidadeTaloes" name="quantidadeTaloes"><br>
-                    <label for="numeroRemessa">Número da Remessa:</label>
-                    <input type="text" id="numeroRemessa" name="numeroRemessa"><br>
-                    <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                    <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio"><br>
-                    <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
-                    <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista"><br>
-                    <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                    <input type="text" id="idsFuncionarios" name="idsFuncionarios"><br>
-                    <label for="statusProcesso">Status do Processo:</label>
-                    <select id="statusProcesso" name="statusProcesso">
-                        <option value="enviado">Enviado</option>
-                        <option value="entregue">Entregue</option>
-                        <option value="recebido">Recebido</option>
-                    </select><br>
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="dataHoraEvento">Data/Hora do Evento:</label>
+                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento"><br>
+                        </div>
+                        <div class="container-label">
+                            <label for="lojaDestinataria">Loja Destinatária:</label>
+                            <input type="text" id="lojaDestinataria" name="lojaDestinataria"><br>
+                        </div>
+                        <div class="container-label">
+                            <label for="numeroRemessa">Número da Remessa:</label>
+                            <input type="text" id="numeroRemessa" name="numeroRemessa"><br>
+                        </div>
+                    </div>
+
+
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="quantidadeTaloes">Quantidade de Talões:</label>
+                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes"><br>
+                        </div>
+                        <div class="container-label">
+                            <label for="dataHoraEnvio">Data/Hora do Envio:</label>
+                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio"><br>
+                        </div>
+                        <div class="container-label">
+                            <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
+                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista"><br>
+                        </div>
+                    </div>
+
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="idsFuncionarios">IDs dos Funcionários:</label>
+                            <input type="text" id="idsFuncionarios" name="idsFuncionarios"><br>
+                        </div>
+                        <div class="container-label">
+                            <label for="statusProcesso">Status do Processo:</label>
+                            <select id="statusProcesso" name="statusProcesso">
+                                <option value="enviado">Enviado</option>
+                                <option value="entregue">Entregue</option>
+                                <option value="recebido">Recebido</option>
+                            </select><br>
+                        </div>
+                    </div>
+
                     <button type="submit">Registrar Envio</button>
                 </form>
             </section>
-            
+
             <section id="estoque" style="display: none;">
                 <h2>Gestão de Estoque</h2>
                 <table>
@@ -67,7 +93,7 @@
                             <td data-label="Loja">Loja 1</td>
                             <td data-label="Quantidade Recomendada">100</td>
                             <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,11 +104,11 @@
                 <table>
                     <thead class="headTabela">
                         <tr>
-                            <th>Data/Hora do Evento</th>
-                            <th>Loja Destinatária</th>
-                            <th>Quantidade de Talões</th>
+                            <th>Data do Evento</th>
+                            <th>Loja Destino</th>
+                            <th>Quant. Talões</th>
                             <th>Remessa</th>
-                            <th>Data/Hora do Envio</th>
+                            <th>Data do Envio</th>
                             <th>Data de Entrega</th>
                             <th>IDs de Materiais</th>
                             <th>Status</th>
@@ -92,19 +118,20 @@
                     <tbody>
                         <!-- Linhas de exemplo -->
                         <tr>
-                            <td data-label="Data/Hora do Evento">2024-01-01 10:00</td>
+                            <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
                             <td data-label="Loja Destinatária">Loja 1</td>
                             <td data-label="Quantidade de Talões">50</td>
                             <td data-label="Remessa">12345</td>
-                            <td data-label="Data/Hora do Envio">2024-01-01 12:00</td>
-                            <td data-label="Data de Entrega">2024-01-02</td>
+                            <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
+                            <td data-label="Data de Entrega">02/01/24 10:00</td>
                             <td data-label="IDs de Materiais">1, 2, 3</td>
                             <td data-label="Status">Enviado</td>
-                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
                         </tr>
                     </tbody>
                 </table>
             </section>
+
             <section id="perfil" style="display: none;">
                 <h2>Gestão de Perfis de Acesso</h2>
                 <form id="perfilForm">
@@ -131,7 +158,7 @@
                         <tr>
                             <td data-label="Nome do Perfil">Administrador</td>
                             <td data-label="Permissões">Acesso a Todas as Funcionalidades</td>
-                            <td data-label="Ações"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
                         </tr>
                     </tbody>
                 </table>

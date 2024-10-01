@@ -2,7 +2,7 @@
     --cor-primaria: #4CAF50;
     --cor-primaria-hover: #45a049;
     --cor-secundaria: #333;
-    --cor-terciaria: #f7c600;
+    --cor-terciaria: #fcd848be;
     --cor-branco: #fff;
 }
 
@@ -69,6 +69,18 @@ section {
 
 form {
     margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-label-geral{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container-label{
+    width: 300px;
 }
 
 form label {
@@ -88,6 +100,8 @@ form button {
     border: none;
     padding: 0.5em 1em;
     cursor: pointer;
+    margin: 20px auto 0;
+    font-weight: bold;
 }
 
 form button:hover {
@@ -110,8 +124,15 @@ th, td {
 }
 
 th {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-branco);
+    background-color: var(--cor-terciaria);
+    color: var(--cor-secundaria);
+    text-align: center;
+}
+
+.acoes{
+    display: flex;
+    justify-content: space-around;
+    border: none;
 }
 
 button {
