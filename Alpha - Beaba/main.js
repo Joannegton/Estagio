@@ -1,29 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    window.mostrarMenu = () => {
+        var nav = document.getElementById('menu');
+        if (window.innerWidth <= 768) {
+            if (nav.style.display === 'block') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'block';
+                console.log(nav.style.display)
+            }
+        }
+    }
+
     window.mostrarEnvioTaloes = () => {
         document.getElementById('envioTaloes').style.display = 'block'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        mostrarMenu()
     }
     window.mostrarEstoque = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'block'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        mostrarMenu()
     }
     window.mostrarManutencao = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'block'
         document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        mostrarMenu()
     }
     window.mostrarPerfil = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'block'
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        mostrarMenu()
+    }
+
+    window.mostrarEditarEnvioTaloes = () =>{
+        document.getElementById('editarEnvioTaloes').style.display = 'block'
+        document.getElementById('envioTaloes').style.display = 'none'
+        document.getElementById('estoque').style.display = 'none'
+        document.getElementById('manutencao').style.display = 'none'
+        document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        mostrarMenu()
     }
     
+    window.mostrarEditarPerfil = () =>{
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('envioTaloes').style.display = 'none'
+        document.getElementById('estoque').style.display = 'none'
+        document.getElementById('manutencao').style.display = 'none'
+        document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'block'
+    }
+
+    
+    
+    
+
     /*
     const profileForm = document.getElementById('perfilForm');
     const profileTableBody = document.getElementById('profileTableBody');

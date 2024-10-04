@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oferte e Ganhe</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="main.js"></script>
 </head>
 <body>
     <div class="main">
         <header>
-            <img src="logo.png" alt="logo">
-            <h1>Oferte e Ganhe</h1>
-            <nav>
+            <nav id="menu">
+                <p id="fechar" onclick="mostrarMenu()">x</p>
+                <img src="logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
                 <ul>
                     <li><a href="#" onclick="mostrarEnvioTaloes()">Envio</a></li>
                     <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
@@ -20,6 +22,8 @@
                     <li><a href="#" onclick="mostrarPerfil()">Perfil de Acesso</a></li>
                 </ul>
             </nav>
+            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <h1>Oferte e Ganhe</h1>
         </header>
 
         <main>
@@ -29,38 +33,37 @@
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="dataHoraEvento">Data/Hora do Evento:</label>
-                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento"><br>
+                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento">
                         </div>
                         <div class="container-label">
                             <label for="lojaDestinataria">Loja Destinatária:</label>
-                            <input type="text" id="lojaDestinataria" name="lojaDestinataria"><br>
+                            <input type="text" id="lojaDestinataria" name="lojaDestinataria">
                         </div>
                         <div class="container-label">
                             <label for="numeroRemessa">Número da Remessa:</label>
-                            <input type="text" id="numeroRemessa" name="numeroRemessa"><br>
+                            <input type="text" id="numeroRemessa" name="numeroRemessa">
                         </div>
                     </div>
-
 
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="quantidadeTaloes">Quantidade de Talões:</label>
-                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes"><br>
+                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes">
                         </div>
                         <div class="container-label">
                             <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio"><br>
+                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio">
                         </div>
                         <div class="container-label">
                             <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
-                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista"><br>
+                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista">
                         </div>
                     </div>
 
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                            <input type="text" id="idsFuncionarios" name="idsFuncionarios"><br>
+                            <input type="text" id="idsFuncionarios" name="idsFuncionarios">
                         </div>
                         <div class="container-label">
                             <label for="statusProcesso">Status do Processo:</label>
@@ -68,7 +71,7 @@
                                 <option value="enviado">Enviado</option>
                                 <option value="entregue">Entregue</option>
                                 <option value="recebido">Recebido</option>
-                            </select><br>
+                            </select>
                         </div>
                     </div>
 
@@ -76,7 +79,7 @@
                 </form>
             </section>
 
-            <section id="estoque" style="display: none;">
+            <section id="estoque" >
                 <h2>Gestão de Estoque</h2>
                 <table>
                     <thead class="headTabela">
@@ -93,10 +96,83 @@
                             <td data-label="Loja">Loja 1</td>
                             <td data-label="Quantidade Recomendada">100</td>
                             <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Loja">Loja 1</td>
+                            <td data-label="Quantidade Recomendada">100</td>
+                            <td data-label="Quantidade Mínima">20</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Loja">Loja 1</td>
+                            <td data-label="Quantidade Recomendada">100</td>
+                            <td data-label="Quantidade Mínima">20</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+            </section>
+
+            <section id="editarEnvioTaloes" style="display: none;">
+                <h2>Editar de Envio</h2>
+                <form>
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="dataHoraEvento">Data/Hora do Evento:</label>
+                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento">
+                        </div>
+                        <div class="container-label">
+                            <label for="lojaDestinataria">Loja Destinatária:</label>
+                            <input type="text" id="lojaDestinataria" name="lojaDestinataria">
+                        </div>
+                        <div class="container-label">
+                            <label for="numeroRemessa">Número da Remessa:</label>
+                            <input type="text" id="numeroRemessa" name="numeroRemessa">
+                        </div>
+                    </div>
+
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="quantidadeTaloes">Quantidade de Talões:</label>
+                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes">
+                        </div>
+                        <div class="container-label">
+                            <label for="dataHoraEnvio">Data/Hora do Envio:</label>
+                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio">
+                        </div>
+                        <div class="container-label">
+                            <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
+                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista">
+                        </div>
+                    </div>
+
+                    <div class="container-label-geral">
+                        <div class="container-label">
+                            <label for="idsFuncionarios">IDs dos Funcionários:</label>
+                            <input type="text" id="idsFuncionarios" name="idsFuncionarios">
+                        </div>
+                        <div class="container-label">
+                            <label for="statusProcesso">Status do Processo:</label>
+                            <select id="statusProcesso" name="statusProcesso">
+                                <option value="enviado">Enviado</option>
+                                <option value="entregue">Entregue</option>
+                                <option value="recebido">Recebido</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit">Registrar Envio</button>
+                </form>
             </section>
         
             <section id="manutencao" style="display: none;">
@@ -136,15 +212,16 @@
                 <h2>Gestão de Perfis de Acesso</h2>
                 <form id="perfilForm">
                     <label for="nomePerfil">Nome do Perfil:</label>
-                    <input type="text" id="nomePerfil" name="nomePerfil"><br>
+                    <input type="text" id="nomePerfil" name="nomePerfil">
                     <label for="permissoes">Permissões:</label>
                     <select id="permissoes" name="permissoes" multiple>
                         <option value="estoque">Acesso ao Estoque</option>
                         <option value="manutencao">Acesso à Manutenção</option>
                         <option value="todas">Acesso a Todas as Funcionalidades</option>
-                    </select><br>
+                    </select>
                     <button type="submit">Salvar Perfil</button>
                 </form>
+
                 <table>
                     <thead class="headTabela">
                         <tr>
@@ -158,10 +235,36 @@
                         <tr>
                             <td data-label="Nome do Perfil">Administrador</td>
                             <td data-label="Permissões">Acesso a Todas as Funcionalidades</td>
-                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Nome do Perfil">Joannegton</td>
+                            <td data-label="Permissões">Acesso ao estoque</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+            </section>
+
+            <section id="editarPerfil" style="display: none;">
+                <h2>Editar Perfil</h2>
+                <form id="perfilForm">
+                    <label for="nomePerfil">Nome do Perfil:</label>
+                    <input type="text" id="nomePerfil" name="nomePerfil" value="Joannegton">
+                    <label for="permissoes">Permissões:</label>
+                    <select id="permissoes" name="permissoes" multiple >
+                        <option value="estoque" selected>Acesso ao Estoque</option>
+                        <option value="manutencao">Acesso à Manutenção</option>
+                        <option value="todas">Acesso a Todas as Funcionalidades</option>
+                    </select>
+                    <button type="submit">Salvar Perfil</button>
+                </form>
             </section>
         </main>
     </div>
