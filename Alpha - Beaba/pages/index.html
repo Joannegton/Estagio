@@ -108,8 +108,8 @@
                             <td data-label="Quantidade Recomendada">100</td>
                             <td data-label="Quantidade Mínima">20</td>
                             <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <tr>
@@ -117,8 +117,8 @@
                             <td data-label="Quantidade Recomendada">100</td>
                             <td data-label="Quantidade Mínima">20</td>
                             <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <tr>
@@ -126,8 +126,26 @@
                             <td data-label="Quantidade Recomendada">100</td>
                             <td data-label="Quantidade Mínima">20</td>
                             <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Loja">Loja 1</td>
+                            <td data-label="Quantidade Recomendada">100</td>
+                            <td data-label="Quantidade Mínima">20</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Loja">Loja 1</td>
+                            <td data-label="Quantidade Recomendada">100</td>
+                            <td data-label="Quantidade Mínima">20</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -203,6 +221,7 @@
                         <option value="loja2">Entregue</option>
                     </select>
                 </div>
+
                 <table>
                     <thead class="headTabela">
                         <tr>
@@ -218,7 +237,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Linhas de exemplo -->
                         <tr>
                             <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
                             <td data-label="Loja Destinatária">Loja 1</td>
@@ -229,8 +247,22 @@
                             <td data-label="IDs de Materiais">1, 2, 3</td>
                             <td data-label="Status">Enviado</td>
                             <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
+                            <td data-label="Loja Destinatária">Loja 1</td>
+                            <td data-label="Quantidade de Talões">50</td>
+                            <td data-label="Remessa">12345</td>
+                            <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
+                            <td data-label="Data de Entrega">02/01/24 10:00</td>
+                            <td data-label="IDs de Materiais">1, 2, 3</td>
+                            <td data-label="Status">Enviado</td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -238,69 +270,64 @@
             </section>
 
             <section id="perfil" style="display: none;">
-                <h2>Gestão de Perfis de Acesso</h2>
-                <form id="perfilForm">
-                    <label for="nomePerfil">Nome do Perfil:</label>
-                    <input type="text" id="nomePerfil" name="nomePerfil" required>
-                    <label for="permissoes">Permissões:</label>
-                    <select id="permissoes" name="permissoes" multiple>
-                        <option value="estoque">Acesso ao Estoque</option>
-                        <option value="manutencao">Acesso à Manutenção</option>
-                        <option value="todas">Acesso a Todas as Funcionalidades</option>
-                    </select>
-                    <button type="submit">Salvar Perfil</button>
-                </form>
-
-                <hr>
-
-                <h2>Perfis de Usuario</h2>
-                <div class="filtro">
-                    <label for="filtoUsuario">Nome:</label>
-                    <input type="text" name="filtoUsuario" id="filtoUsuario">
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="perfis" class="opcao ativo">Todos</div>
+                      <div id="cadastroPerfis" class="opcao inativo">Cadastrar</div>
+                      <div class="indicador" id="indicadorPerfis"></div>
+                    </div>
                 </div>
-                <table>
-                    <thead class="headTabela">
-                        <tr>
-                            <th>Nome do Perfil</th>
-                            <th>Permissões</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="profileTableBody">
-                        <!-- Linhas de exemplo -->
-                        <tr>
-                            <td data-label="Nome do Perfil">Administrador</td>
-                            <td data-label="Permissões">Acesso a Todas as Funcionalidades</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Nome do Perfil">Joannegton</td>
-                            <td data-label="Permissões">Acesso ao estoque</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                <article id="seletorCadastro"  style="display: none;">
+                    <h2>Cadatro de Usuário</h2>
+                    <form id="perfilForm">
+                        <label for="nomePerfil">Nome do Perfil:</label>
+                        <input type="text" id="nomePerfil" name="nomePerfil" required>
+                        <label for="permissoes">Permissões:</label>
+                        <select id="permissoes" name="permissoes" multiple>
+                            <option value="estoque">Acesso ao Estoque</option>
+                            <option value="manutencao">Acesso à Manutenção</option>
+                            <option value="todas">Acesso a Todas as Funcionalidades</option>
+                        </select>
+                        <button type="submit">Salvar Perfil</button>
+                    </form>
+                </article>
 
-            <section id="editarPerfil" style="display: none;">
-                <h2>Editar Perfil</h2>
-                <form id="perfilForm">
-                    <label for="nomePerfil">Nome do Perfil:</label>
-                    <input type="text" id="nomePerfil" name="nomePerfil" value="Joannegton">
-                    <label for="permissoes">Permissões:</label>
-                    <select id="permissoes" name="permissoes" multiple >
-                        <option value="estoque" selected>Acesso ao Estoque</option>
-                        <option value="manutencao">Acesso à Manutenção</option>
-                        <option value="todas">Acesso a Todas as Funcionalidades</option>
-                    </select>
-                    <button type="submit">Salvar Perfil</button>
-                </form>
+                <article id="seletorPerfis">
+                    <h2>Perfis de Usuario</h2>
+                    <div class="filtro">
+                        <label for="filtoUsuario">Nome:</label>
+                        <input type="text" name="filtoUsuario" id="filtoUsuario">
+                    </div>
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Nome do Perfil</th>
+                                <th>Permissões</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="profileTableBody">
+                            <!-- Linhas de exemplo -->
+                            <tr id="perfil-linha">
+                                <td data-label="Nome do Perfil" id="perfil-nome">Administrador</td>
+                                <td data-label="Permissões" id="perfil-permissoes">Acesso a Todas as Funcionalidades</td>
+                                <td data-label="Ações" class="acoes" id="acoes">
+                                    <a href="#" class="botaoAcao" id="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Nome do Perfil">Joannegton</td>
+                                <td data-label="Permissões">Acesso ao estoque</td>
+                                <td data-label="Ações" class="acoes" id="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
             </section>
 
             <section id="relatorios">
@@ -309,7 +336,7 @@
                     <div class="seletor">
                       <div id="mostrarTabelas" class="opcao ativo">Geral</div>
                       <div id="mostrarGrafico" class="opcao inativo">Evolução</div>
-                      <div class="indicador"></div>
+                      <div class="indicador" id="indicador"></div>
                     </div>
                 </div>
 
@@ -333,20 +360,51 @@
                                 <tr>
                                     <th>Loja</th>
                                     <th>Quantidade</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td data-label="Loja">Loja 1</td>
                                     <td data-label="Quantidade">2</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td data-label="Loja">Loja 2</td>
                                     <td data-label="Quantidade">7</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td data-label="Loja">Loja 3</td>
                                     <td data-label="Quantidade">12</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Loja">Loja 4</td>
+                                    <td data-label="Quantidade">14</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Loja">Loja 5</td>
+                                    <td data-label="Quantidade">19</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Loja">Loja 6</td>
+                                    <td data-label="Quantidade">20</td>
+                                    <td data-label="Enviar" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

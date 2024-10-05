@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    window.mostrarMenu = () => {
+    mostrarMenu = () => {
         var nav = document.getElementById('menu');
         if (window.innerWidth <= 768) {
             if (nav.style.display === 'block') {
@@ -11,101 +11,128 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    window.mostrarEnvioTaloes = () => {
+    mostrarEnvioTaloes = () => {
         document.getElementById('envioTaloes').style.display = 'block'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-    window.mostrarEstoque = () => {
+    mostrarEstoque = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'block'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-    window.mostrarManutencao = () => {
+    mostrarManutencao = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'block'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-    window.mostrarPerfil = () => {
+    mostrarPerfil = () => {
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'block'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-
-    window.mostrarEditarEnvioTaloes = () => {
+    mostrarEditarEnvioTaloes = () => {
         document.getElementById('editarEnvioTaloes').style.display = 'block'
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-
-    window.mostrarEditarPerfil = () => {
+    mostrarRelatorios = () => {
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'block'
-        document.getElementById('relatorios').style.display = 'none'
-    }
-
-    window.mostrarRelatorios = () => {
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('envioTaloes').style.display = 'none'
-        document.getElementById('estoque').style.display = 'none'
-        document.getElementById('manutencao').style.display = 'none'
-        document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarPerfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'block'
         mostrarMenu()
-        grafico()
+    }
+
+    //Perfis de usuario
+    const perfis = document.getElementById('perfis')
+    const cadastroPerfil = document.getElementById('cadastroPerfis')
+
+    perfis.addEventListener('click', () =>{
+        alternador(perfis, perfis, cadastroPerfil, 'seletorPerfis', 'seletorCadastro', 'indicadorPerfis')
+    })
+
+    cadastroPerfil.addEventListener('click', () =>{
+        alternador(perfis, cadastroPerfil, perfis, 'seletorCadastro', 'seletorPerfis', 'indicadorPerfis')
+    })
+
+    mostrarEditarPerfil = () => {
+    var nome = document.getElementById('perfil-nome');
+    var permissoes = document.getElementById('perfil-permissoes');
+
+    // Get current values
+    var currentNome = nome.innerText;
+
+    // Replace text with input and select elements
+    nome.innerHTML = '<input type="text" id="input-nome" value="' + currentNome + '">';
+    permissoes.innerHTML = `
+        <select id="select-permissoes">
+            <option value="estoque">Acesso ao Estoque</option>
+            <option value="manutencao">Acesso à Manutenção</option>
+            <option value="todas">Acesso a Todas as Funcionalidades</option>
+        </select>
+    `;
+
+    document.getElementById('salvar').style.display = 'block'
+    document.getElementById('edit').style.display = 'none'
+    document.getElementById('delete').style.display = 'none'
+    
+    }
+
+    salvarPerfil = () => {
+        var inputNome = document.getElementById('input-nome')
+        var selectPermissoes = document.getElementById('select-permissoes')
+    
+        var newNome = inputNome.value
+        var newPermissoes = selectPermissoes.options[selectPermissoes.selectedIndex].text
+    
+        // atualizar os valores
+        document.getElementById('perfil-nome').innerText = newNome
+        document.getElementById('perfil-permissoes').innerText = newPermissoes
+    
+        // tira os inputs e select
+        document.getElementById('salvar').style.display = 'none'
+        document.getElementById('edit').style.display = 'block'
+        document.getElementById('delete').style.display = 'block'
+        inputNome.remove()
+        selectPermissoes.remove()
     }
 
 
     // Relatorios
     const geral = document.getElementById('mostrarTabelas')
     const seletorGrafico = document.getElementById('mostrarGrafico')
-    const indicador = document.querySelector('.indicador')
 
     geral.addEventListener('click', () => {
-        alternador(geral, seletorGrafico)
-        document.getElementById('seletorTabela').style.display = 'grid'
-        document.getElementById('enviosChart').style.display = 'none'
+        alternador(geral, geral, seletorGrafico, 'seletorTabela', 'enviosChart', 'indicador')
     })
 
     seletorGrafico.addEventListener('click', () => {
         grafico()
-        alternador(seletorGrafico, geral)
-        document.getElementById('enviosChart').style.display = 'grid'
-        document.getElementById('seletorTabela').style.display = 'none'
+        alternador(geral, seletorGrafico, geral, 'enviosChart', 'seletorTabela', 'indicador')
     })
-
-    alternador(geral, seletorGrafico)
 
     let enviosChart
     function grafico() {
@@ -150,20 +177,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
     // geral
-    function alternador(elementToActivate, elementToDeactivate) {
-        elementToActivate.classList.add('ativo')
-        elementToActivate.classList.remove('inativo')
-        elementToDeactivate.classList.add('inativo')
-        elementToDeactivate.classList.remove('ativo')
+    function alternador(elementoAtivo, elementoDesativar, elementoAtivar, ativar, desativar, indicador) {
+        elementoDesativar.classList.add('ativo')
+        elementoDesativar.classList.remove('inativo')
+        elementoAtivar.classList.add('inativo')
+        elementoAtivar.classList.remove('ativo')
 
-        if (elementToActivate === geral) {
-            indicador.style.transform = 'translateX(0)'
+        if (elementoDesativar === elementoAtivo) {
+            document.getElementById(indicador).style.transform = 'translateX(0)'
         } else {
-            indicador.style.transform = 'translateX(100%)'
+            document.getElementById(indicador).style.transform = 'translateX(100%)'
         }
+        document.getElementById(ativar).style.display = 'grid'
+        document.getElementById(desativar).style.display = 'none'
     }
 
 
