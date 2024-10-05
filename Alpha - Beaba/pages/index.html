@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oferte e Ganhe</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../geral.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="main.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="main">
         <header>
             <nav id="menu">
                 <p id="fechar" onclick="mostrarMenu()">x</p>
-                <img src="logo.png" alt="logo">
+                <img src="../logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
                     <li><a href="#" onclick="mostrarEnvioTaloes()">Envio</a></li>
                     <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
                     <li><a href="#" onclick="mostrarManutencao()">Manutenção</a></li>
                     <li><a href="#" onclick="mostrarPerfil()">Perfil de Acesso</a></li>
+                    <li><a href="#" onclick="mostrarRelatorios()">Relatórios</a></li>
                 </ul>
             </nav>
             <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
-            <h1>Oferte e Ganhe</h1>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
 
         <main>
@@ -33,41 +35,41 @@
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="dataHoraEvento">Data/Hora do Evento:</label>
-                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento">
+                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento" required>
                         </div>
                         <div class="container-label">
                             <label for="lojaDestinataria">Loja Destinatária:</label>
-                            <input type="text" id="lojaDestinataria" name="lojaDestinataria">
+                            <input type="text" id="lojaDestinataria" name="lojaDestinataria" required>
                         </div>
                         <div class="container-label">
                             <label for="numeroRemessa">Número da Remessa:</label>
-                            <input type="text" id="numeroRemessa" name="numeroRemessa">
+                            <input type="text" id="numeroRemessa" name="numeroRemessa" required>
                         </div>
                     </div>
 
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="quantidadeTaloes">Quantidade de Talões:</label>
-                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes">
+                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes" required>
                         </div>
                         <div class="container-label">
                             <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio">
+                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio" required>
                         </div>
                         <div class="container-label">
                             <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
-                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista">
+                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista" required>
                         </div>
                     </div>
 
                     <div class="container-label-geral">
                         <div class="container-label">
                             <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                            <input type="text" id="idsFuncionarios" name="idsFuncionarios">
+                            <input type="text" id="idsFuncionarios" name="idsFuncionarios" required>
                         </div>
                         <div class="container-label">
                             <label for="statusProcesso">Status do Processo:</label>
-                            <select id="statusProcesso" name="statusProcesso">
+                            <select id="statusProcesso" name="statusProcesso" required>
                                 <option value="enviado">Enviado</option>
                                 <option value="entregue">Entregue</option>
                                 <option value="recebido">Recebido</option>
@@ -79,8 +81,17 @@
                 </form>
             </section>
 
-            <section id="estoque" >
+            <section id="estoque" style="display: none;">
                 <h2>Gestão de Estoque</h2>
+                <div class="filtro">
+                    <label for="loja">Loja:</label>
+                    <select id="loja" name="loja">
+                        <option value="todas">Todas</option>
+                        <option value="loja1">Loja 1</option>
+                        <option value="loja2">Loja 2</option>
+                        <option value="loja3">Loja 3</option>
+                    </select>
+                </div>
                 <table>
                     <thead class="headTabela">
                         <tr>
@@ -177,6 +188,21 @@
         
             <section id="manutencao" style="display: none;">
                 <h2>Manutenção de Talões</h2>
+                <div class="filtro">
+                    <label for="loja">Loja:</label>
+                    <select id="loja" name="loja">
+                        <option value="todas">Todas</option>
+                        <option value="loja1">Loja 1</option>
+                        <option value="loja2">Loja 2</option>
+                        <option value="loja3">Loja 3</option>
+                    </select>
+                    <label for="status" style="margin-left: 1em;">Status:</label>
+                    <select id="loja" name="status">
+                        <option value="todos">Todas</option>
+                        <option value="enviado">Enviado</option>
+                        <option value="loja2">Entregue</option>
+                    </select>
+                </div>
                 <table>
                     <thead class="headTabela">
                         <tr>
@@ -202,7 +228,10 @@
                             <td data-label="Data de Entrega">02/01/24 10:00</td>
                             <td data-label="IDs de Materiais">1, 2, 3</td>
                             <td data-label="Status">Enviado</td>
-                            <td data-label="Ações" class="acoes"><button>Editar</button> <button>Deletar</button></td>
+                            <td data-label="Ações" class="acoes">
+                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -212,7 +241,7 @@
                 <h2>Gestão de Perfis de Acesso</h2>
                 <form id="perfilForm">
                     <label for="nomePerfil">Nome do Perfil:</label>
-                    <input type="text" id="nomePerfil" name="nomePerfil">
+                    <input type="text" id="nomePerfil" name="nomePerfil" required>
                     <label for="permissoes">Permissões:</label>
                     <select id="permissoes" name="permissoes" multiple>
                         <option value="estoque">Acesso ao Estoque</option>
@@ -222,6 +251,13 @@
                     <button type="submit">Salvar Perfil</button>
                 </form>
 
+                <hr>
+
+                <h2>Perfis de Usuario</h2>
+                <div class="filtro">
+                    <label for="filtoUsuario">Nome:</label>
+                    <input type="text" name="filtoUsuario" id="filtoUsuario">
+                </div>
                 <table>
                     <thead class="headTabela">
                         <tr>
@@ -265,6 +301,59 @@
                     </select>
                     <button type="submit">Salvar Perfil</button>
                 </form>
+            </section>
+
+            <section id="relatorios">
+                <h2>Relatórios</h2>
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="mostrarTabelas" class="opcao ativo">Geral</div>
+                      <div id="mostrarGrafico" class="opcao inativo">Evolução</div>
+                      <div class="indicador"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" id="seletorTabela" >
+                    <div class="coluna">
+                        <div class="dashboard-item">
+                            <h3>Total de Usuários</h3>
+                            <p>15</p>
+                        </div>
+
+                        <div class="dashboard-item">
+                            <h3>Enviados Outubro</h3>
+                            <p>320</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-item">
+                        <h3>Estoque Baixo</h3>
+                        <table>
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Loja</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Loja">Loja 1</td>
+                                    <td data-label="Quantidade">2</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Loja">Loja 2</td>
+                                    <td data-label="Quantidade">7</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Loja">Loja 3</td>
+                                    <td data-label="Quantidade">12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <canvas id="enviosChart" style="display: none;"></canvas>       
+                
             </section>
         </main>
     </div>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferte e Ganhe</title>
+    <link rel="stylesheet" href="../geral.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../js/gerente.js"></script>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <p id="fechar" onclick="mostrarMenu()">x</p>
+                <img src="../logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" onclick="mostrarpedidoTaloes()">Pedido Talões</a></li>
+                    <li><a href="#" onclick="mostrarrecebimentoTaloes()">Recebimento Talões</a></li>
+                    <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
+                    <li><a href="#" onclick="mostrarRelatorios()">Relatorios</a></li>
+                </ul>
+            </nav>
+            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <h1 class="titulo-mobile">Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="pedidoTaloes" style="display: none;">
+                <h2>Pedido Talões</h2>
+                <form action="">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" id="nome">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" name="quantidade" id="quantidade">
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+
+            <section id="recebimentoTaloes" style="display: none;">
+                <h2>Recebimento Talões</h2>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Número</th>
+                            <th>Quantidade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Número Talão">254587954</td>
+                            <td data-label="Data">10/10/2024 - 17:35</td>
+                            <td data-label="Status">
+                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="estoque" style="display: none;">
+                <h2>Estoque</h2>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Número</th>
+                            <th>Quantidade</th>
+                            <th>Status</th>
+                            <th>Caixa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Número Talão">254587954</td>
+                            <td data-label="Cliente">Wellington Tavares</td>
+                            <td data-label="Status">Entregue</td>
+                            <td data-label="caixa">Franciele Martins</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="relatorios" style="display: none;">
+                <h2>Relatorios</h2>
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="mostrarEntradas" class="opcao ativo">Entradas</div>
+                      <div id="mostrarSaidas" class="opcao inativo">Saídas</div>
+                      <div class="indicador"></div>
+                    </div>
+                </div>
+
+                
+                <button id="exportarCSV">Exportar CSV</button>
+                
+
+                <div id="entradas" style="display: none;">
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Data</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Data">25/08/2021</td>
+                                <td data-label="Valor">R$ 100,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="saidas">
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Data</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Data">28/08/2021</td>
+                                <td data-label="Valor">R$ 10,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>

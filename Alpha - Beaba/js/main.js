@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
     window.mostrarEstoque = () => {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
     window.mostrarManutencao = () => {
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
     window.mostrarPerfil = () => {
@@ -46,31 +49,123 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfil').style.display = 'block'
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
 
-    window.mostrarEditarEnvioTaloes = () =>{
+    window.mostrarEditarEnvioTaloes = () => {
         document.getElementById('editarEnvioTaloes').style.display = 'block'
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
-    
-    window.mostrarEditarPerfil = () =>{
+
+    window.mostrarEditarPerfil = () => {
         document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('editarPerfil').style.display = 'block'
+        document.getElementById('relatorios').style.display = 'none'
     }
 
-    
-    
-    
+    window.mostrarRelatorios = () => {
+        document.getElementById('editarEnvioTaloes').style.display = 'none'
+        document.getElementById('envioTaloes').style.display = 'none'
+        document.getElementById('estoque').style.display = 'none'
+        document.getElementById('manutencao').style.display = 'none'
+        document.getElementById('perfil').style.display = 'none'
+        document.getElementById('editarPerfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'block'
+        mostrarMenu()
+        grafico()
+    }
+
+
+    // Relatorios
+    const geral = document.getElementById('mostrarTabelas')
+    const seletorGrafico = document.getElementById('mostrarGrafico')
+    const indicador = document.querySelector('.indicador')
+
+    geral.addEventListener('click', () => {
+        alternador(geral, seletorGrafico)
+        document.getElementById('seletorTabela').style.display = 'grid'
+        document.getElementById('enviosChart').style.display = 'none'
+    })
+
+    seletorGrafico.addEventListener('click', () => {
+        grafico()
+        alternador(seletorGrafico, geral)
+        document.getElementById('enviosChart').style.display = 'grid'
+        document.getElementById('seletorTabela').style.display = 'none'
+    })
+
+    alternador(geral, seletorGrafico)
+
+    let enviosChart
+    function grafico() {
+        if (enviosChart) {
+            enviosChart.destroy()
+        }
+
+        const ctx = document.getElementById('enviosChart').getContext('2d');
+        enviosChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                datasets: [{
+                    label: 'Envios de Talões',
+                    data: [12, 19, 3, 5, 2, 3, 10, 15, 20, 25, 30, 35],
+                    backgroundColor: '#c4df4e',
+                    borderColor: '#4CAF50',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Envios de Talões por mês'
+                    }
+                }
+            }
+        })
+
+        enviosChart.update()
+    }
+
+
+
+
+    // geral
+    function alternador(elementToActivate, elementToDeactivate) {
+        elementToActivate.classList.add('ativo')
+        elementToActivate.classList.remove('inativo')
+        elementToDeactivate.classList.add('inativo')
+        elementToDeactivate.classList.remove('ativo')
+
+        if (elementToActivate === geral) {
+            indicador.style.transform = 'translateX(0)'
+        } else {
+            indicador.style.transform = 'translateX(100%)'
+        }
+    }
+
 
     /*
     const profileForm = document.getElementById('perfilForm');
@@ -128,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     renderProfiles();*/
-}); 
+});
 
 
 

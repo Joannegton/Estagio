@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferte e Ganhe</title>
+    <link rel="stylesheet" href="../geral.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <!-- O caixa vai receber um sinal verde significando que o score do cliente é bom para receber um talao
+     ai caso o cliente queira, o caixa solicita um talão pelo codigo do talão e ja inclui o cliente dono do
+     talão, da baixa no sistema e entrega o talão -->
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <p id="fechar" onclick="mostrarMenu()">x</p>
+                <img src="../logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" onclick="mostrarEnvioTaloes()">Cadastro Talão</a></li>
+                </ul>
+            </nav>
+            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <h1>Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="saidaTaloes">
+                <form >
+                    <div class="container-label-geral" style="justify-content: center;">
+                        <div class="container-label">
+                            <label for="codigoTalao">Código Talão</label>
+                            <input type="number" name="codigoTalao" id="codigoTalao">
+                        </div>
+                        <i class="fas fa-search" style="margin-left: 1em; font-size: 1.5em;"></i>
+                    </div>
+                    
+                    <div class="container-label" style="margin: auto;">
+                        <p class="numeroTalao"><strong>Número do Talão:</strong> 2598578584</p>
+                        <p class="cliente"><strong>Nome do Cliente:</strong> Wellington Tavares</p>
+                        <p class="data"><strong>Data:</strong> 10/10/2024</p>
+                        <p class="valor"><strong>Valor:</strong> R$ 100,00</p>
+                    </div>
+
+                    <button type="submit">Cadastrar</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
