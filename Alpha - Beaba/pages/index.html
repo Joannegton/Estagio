@@ -91,65 +91,202 @@
                         <option value="loja2">Loja 2</option>
                         <option value="loja3">Loja 3</option>
                     </select>
+                    <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                 </div>
-                <table>
-                    <thead class="headTabela">
-                        <tr>
-                            <th>Loja</th>
-                            <th>Quantidade Recomendada</th>
-                            <th>Quantidade Mínima</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Linhas de exemplo -->
-                        <tr>
-                            <td data-label="Loja">Loja 1</td>
-                            <td data-label="Quantidade Recomendada">100</td>
-                            <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Loja">Loja 1</td>
-                            <td data-label="Quantidade Recomendada">100</td>
-                            <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Loja">Loja 1</td>
-                            <td data-label="Quantidade Recomendada">100</td>
-                            <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Loja">Loja 1</td>
-                            <td data-label="Quantidade Recomendada">100</td>
-                            <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Loja">Loja 1</td>
-                            <td data-label="Quantidade Recomendada">100</td>
-                            <td data-label="Quantidade Mínima">20</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="tabela-container">
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Loja</th>
+                                <th>Quantidade Recomendada</th>
+                                <th>Quantidade Mínima</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <section id="editarEnvioTaloes" style="display: none;">
@@ -220,53 +357,56 @@
                         <option value="enviado">Enviado</option>
                         <option value="loja2">Entregue</option>
                     </select>
+                    <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                 </div>
 
-                <table>
-                    <thead class="headTabela">
-                        <tr>
-                            <th>Data do Evento</th>
-                            <th>Loja Destino</th>
-                            <th>Quant. Talões</th>
-                            <th>Remessa</th>
-                            <th>Data do Envio</th>
-                            <th>Data de Entrega</th>
-                            <th>IDs de Materiais</th>
-                            <th>Status</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
-                            <td data-label="Loja Destinatária">Loja 1</td>
-                            <td data-label="Quantidade de Talões">50</td>
-                            <td data-label="Remessa">12345</td>
-                            <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
-                            <td data-label="Data de Entrega">02/01/24 10:00</td>
-                            <td data-label="IDs de Materiais">1, 2, 3</td>
-                            <td data-label="Status">Enviado</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
-                            <td data-label="Loja Destinatária">Loja 1</td>
-                            <td data-label="Quantidade de Talões">50</td>
-                            <td data-label="Remessa">12345</td>
-                            <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
-                            <td data-label="Data de Entrega">02/01/24 10:00</td>
-                            <td data-label="IDs de Materiais">1, 2, 3</td>
-                            <td data-label="Status">Enviado</td>
-                            <td data-label="Ações" class="acoes">
-                                <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="tabela-container">
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Data do Evento</th>
+                                <th>Loja Destino</th>
+                                <th>Quant. Talões</th>
+                                <th>Remessa</th>
+                                <th>Data do Envio</th>
+                                <th>Data de Entrega</th>
+                                <th>IDs de Materiais</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
+                                <td data-label="Loja Destinatária">Loja 1</td>
+                                <td data-label="Quantidade de Talões">50</td>
+                                <td data-label="Remessa">12345</td>
+                                <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
+                                <td data-label="Data de Entrega">02/01/24 10:00</td>
+                                <td data-label="IDs de Materiais">1, 2, 3</td>
+                                <td data-label="Status">Enviado</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
+                                <td data-label="Loja Destinatária">Loja 1</td>
+                                <td data-label="Quantidade de Talões">50</td>
+                                <td data-label="Remessa">12345</td>
+                                <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
+                                <td data-label="Data de Entrega">02/01/24 10:00</td>
+                                <td data-label="IDs de Materiais">1, 2, 3</td>
+                                <td data-label="Status">Enviado</td>
+                                <td data-label="Ações" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <section id="perfil" style="display: none;">
@@ -277,6 +417,7 @@
                       <div class="indicador" id="indicadorPerfis"></div>
                     </div>
                 </div>
+
                 <article id="seletorCadastro"  style="display: none;">
                     <h2>Cadatro de Usuário</h2>
                     <form id="perfilForm">
@@ -297,6 +438,7 @@
                     <div class="filtro">
                         <label for="filtoUsuario">Nome:</label>
                         <input type="text" name="filtoUsuario" id="filtoUsuario">
+                        <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                     </div>
                     <table>
                         <thead class="headTabela">
@@ -312,8 +454,10 @@
                                 <td data-label="Nome do Perfil" id="perfil-nome">Administrador</td>
                                 <td data-label="Permissões" id="perfil-permissoes">Acesso a Todas as Funcionalidades</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
-                                    <a href="#" class="botaoAcao" id="edit" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                    <div id="containerBotaoAcao">
+                                        <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
                                     <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
@@ -321,8 +465,11 @@
                                 <td data-label="Nome do Perfil">Joannegton</td>
                                 <td data-label="Permissões">Acesso ao estoque</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarPerfil()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                    <div id="containerBotaoAcao">
+                                        <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -340,6 +487,10 @@
                     </div>
                 </div>
 
+                <div style="text-align: end;">
+                    <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                </div>
+                
                 <div class="dashboard-grid" id="seletorTabela" >
                     <div class="coluna">
                         <div class="dashboard-item">

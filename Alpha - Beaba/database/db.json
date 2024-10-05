@@ -1,0 +1,62 @@
+{
+    "envioTaloes": [
+      {
+        "dataHoraEvento": "2024-01-01T10:00",
+        "lojaDestinataria": "Loja 1",
+        "numeroRemessa": "12345",
+        "quantidadeTaloes": 50,
+        "dataHoraEnvio": "2024-01-01T11:00",
+        "dataEntregaPrevista": "2024-01-02",
+        "idsFuncionarios": "1, 2, 3",
+        "statusProcesso": "enviado"
+      }
+    ],
+    "estoque": [
+      {
+        "loja": "Loja 1",
+        "quantidadeRecomendada": 100,
+        "quantidadeMinima": 20
+      },
+      {
+        "loja": "Loja 2",
+        "quantidadeRecomendada": 150,
+        "quantidadeMinima": 30
+      }
+    ],
+    "manutencao": [
+      {
+        "dataHoraEvento": "2024-01-01T10:00",
+        "lojaDestinataria": "Loja 1",
+        "quantidadeTaloes": 50,
+        "numeroRemessa": "12345",
+        "dataHoraEnvio": "2024-01-01T11:00",
+        "dataEntregaPrevista": "2024-01-02",
+        "idsFuncionarios": "1, 2, 3",
+        "statusProcesso": "enviado"
+      }
+    ],
+    "perfis": [
+      {
+        "nomePerfil": "Administrador",
+        "permissoes": ["Acesso a Todas as Funcionalidades"]
+      },
+      {
+        "nomePerfil": "Joannegton",
+        "permissoes": ["Acesso ao Estoque"]
+      }
+    ],
+    "relatorios": {
+      "totalUsuarios": 15,
+      "enviadosOutubro": 320,
+      "estoqueBaixo": [
+        {
+          "loja": "Loja 1",
+          "quantidade": 2
+        },
+        {
+          "loja": "Loja 2",
+          "quantidade": 7
+        }
+      ]
+    }
+  }

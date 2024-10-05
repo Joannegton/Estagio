@@ -70,35 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const perfis = document.getElementById('perfis')
     const cadastroPerfil = document.getElementById('cadastroPerfis')
 
+    // Menu alternador
     perfis.addEventListener('click', () =>{
         alternador(perfis, perfis, cadastroPerfil, 'seletorPerfis', 'seletorCadastro', 'indicadorPerfis')
     })
-
     cadastroPerfil.addEventListener('click', () =>{
         alternador(perfis, cadastroPerfil, perfis, 'seletorCadastro', 'seletorPerfis', 'indicadorPerfis')
     })
 
-    mostrarEditarPerfil = () => {
-    var nome = document.getElementById('perfil-nome');
-    var permissoes = document.getElementById('perfil-permissoes');
+    editarPerfil = () => {
+        document.getElementById('containerBotaoAcao').style.display = 'none'
+        
+        var perfilNome = document.getElementById('perfil-nome');
+        var permissoes = document.getElementById('perfil-permissoes');
+        var nome = perfilNome.innerText;
 
-    // Get current values
-    var currentNome = nome.innerText;
+        perfilNome.innerHTML = '<input type="text" id="input-nome" value="' + nome + '">';
+        permissoes.innerHTML = `
+            <select id="select-permissoes">
+                <option value="estoque">Acesso ao Estoque</option>
+                <option value="manutencao">Acesso à Manutenção</option>
+                <option value="todas">Acesso a Todas as Funcionalidades</option>
+            </select>
+        `;
 
-    // Replace text with input and select elements
-    nome.innerHTML = '<input type="text" id="input-nome" value="' + currentNome + '">';
-    permissoes.innerHTML = `
-        <select id="select-permissoes">
-            <option value="estoque">Acesso ao Estoque</option>
-            <option value="manutencao">Acesso à Manutenção</option>
-            <option value="todas">Acesso a Todas as Funcionalidades</option>
-        </select>
-    `;
-
-    document.getElementById('salvar').style.display = 'block'
-    document.getElementById('edit').style.display = 'none'
-    document.getElementById('delete').style.display = 'none'
-    
+        document.getElementById('salvar').style.display = 'block'    
     }
 
     salvarPerfil = () => {
@@ -114,8 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         // tira os inputs e select
         document.getElementById('salvar').style.display = 'none'
-        document.getElementById('edit').style.display = 'block'
-        document.getElementById('delete').style.display = 'block'
+        document.getElementById('containerBotaoAcao').style.display = 'block'
         inputNome.remove()
         selectPermissoes.remove()
     }
