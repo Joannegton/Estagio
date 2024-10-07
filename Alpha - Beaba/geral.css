@@ -326,14 +326,6 @@ canvas {
   to { opacity: 1; }
 }
 
-
-.modal-content .close:hover,
-.modal-content .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
   .main {
