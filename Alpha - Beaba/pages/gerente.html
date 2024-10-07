@@ -12,13 +12,11 @@
     <div class="main">
         <header>
             <nav id="menu">
-                <p id="fechar" onclick="mostrarMenu()">x</p>
+                <span id="fechar" onclick="mostrarMenu()">&times;</span>
                 <img src="../logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" onclick="mostrarpedidoTaloes()">Pedido Talões</a></li>
-                    <li><a href="#" onclick="mostrarrecebimentoTaloes()">Recebimento Talões</a></li>
-                    <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
+                    <li><a href="#" onclick="mostrarpedidoTaloes()">Gestão de Estoque</a></li>
                     <li><a href="#" onclick="mostrarRelatorios()">Relatorios</a></li>
                 </ul>
             </nav>
@@ -27,62 +25,85 @@
         </header>
 
         <main>
-            <section id="pedidoTaloes" style="display: none;">
-                <h2>Pedido Talões</h2>
-                <form action="">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" id="nome">
-                    <label for="quantidade">Quantidade:</label>
-                    <input type="number" name="quantidade" id="quantidade">
-                    <button type="submit">Enviar</button>
-                </form>
+            <section id="pedidoTaloes" >                   
+                <article id="estoque">
+                    <h2>Estoque</h2>
+                    <div style="text-align: end;">
+                        <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                    </div>
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>N° Caixa</th>
+                                <th>Quantidade</th>
+                                <th>Realizar Pedido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="N° Caixa">Caixa 01</td>
+                                <td data-label="Quantidade">8</td>
+                                <td data-label="Realizar Pedido" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 01')">
+                                        <i class="fas fa-box"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="N° Caixa">Caixa 02</td>
+                                <td data-label="Quantidade">5</td>
+                                <td data-label="Realizar Pedido" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 02')">
+                                        <i class="fas fa-box"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="N° Caixa">Caixa 03</td>
+                                <td data-label="Quantidade">3</td>
+                                <td data-label="Realizar Pedido" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 03')">
+                                        <i class="fas fa-box"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="N° Caixa">Caixa 04</td>
+                                <td data-label="Quantidade">10</td>
+                                <td data-label="Realizar Pedido" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 04')">
+                                        <i class="fas fa-box"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="N° Caixa">Caixa 05</td>
+                                <td data-label="Quantidade">7</td>
+                                <td data-label="Realizar Pedido" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
+                                        <i class="fas fa-box"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article id="modalPedido" class="modal">
+                    <div class="modal-content">
+                        <span id="fechar" onclick="fecharModalPedido()">&times;</span>
+                        <h2>Realizar Pedido</h2>
+                        <form action="">
+                            <label for="nome">Nome:</label>
+                            <input type="text" name="nome" id="nome">
+                            <label for="quantidade">Quantidade:</label>
+                            <input type="number" name="quantidade" id="quantidade">
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </article>
             </section>
 
-            <section id="recebimentoTaloes" style="display: none;">
-                <h2>Recebimento Talões</h2>
-                <table>
-                    <thead class="headTabela">
-                        <tr>
-                            <th>Número</th>
-                            <th>Quantidade</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Número Talão">254587954</td>
-                            <td data-label="Data">10/10/2024 - 17:35</td>
-                            <td data-label="Status">
-                                <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section id="estoque" style="display: none;">
-                <h2>Estoque</h2>
-                <table>
-                    <thead class="headTabela">
-                        <tr>
-                            <th>Número</th>
-                            <th>Quantidade</th>
-                            <th>Status</th>
-                            <th>Caixa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Número Talão">254587954</td>
-                            <td data-label="Cliente">Wellington Tavares</td>
-                            <td data-label="Status">Entregue</td>
-                            <td data-label="caixa">Franciele Martins</td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
 
             <section id="relatorios" style="display: none;">
                 <h2>Relatorios</h2>
@@ -95,27 +116,32 @@
                 </div>
 
                 
-                <button id="exportarCSV">Exportar CSV</button>
+                <div style="text-align: end;">
+                    <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                </div>
                 
-
-                <div id="entradas" style="display: none;">
+                <article id="entradas" style="display: none;">
                     <table>
                         <thead class="headTabela">
                             <tr>
-                                <th>Data</th>
-                                <th>Valor</th>
+                                <th>Número</th>
+                                <th>Quantidade</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="Data">25/08/2021</td>
-                                <td data-label="Valor">R$ 100,00</td>
+                                <td data-label="Número Talão">254587954</td>
+                                <td data-label="Data">10/10/2024 - 17:35</td>
+                                <td data-label="Status">
+                                    <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </article>
 
-                <div id="saidas">
+                <article id="saidas">
                     <table>
                         <thead class="headTabela">
                             <tr>
@@ -130,7 +156,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </article>
             </section>
 
         </main>

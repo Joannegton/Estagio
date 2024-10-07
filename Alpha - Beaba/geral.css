@@ -205,11 +205,6 @@ a.botaoAcao {
   text-decoration: none;
 }
 
-a.edit:hover,
-a.delete:hover {
-  color: #000;
-}
-
 footer {
   background-color: var(--cor-secundaria);
   color: var(--cor-branco);
@@ -302,6 +297,43 @@ canvas {
   margin-left: 0.2em;
 }
 
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: var(--cor-branco);
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+  max-width: 500px; 
+  border-radius: 10px; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s; 
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .main {
@@ -338,7 +370,11 @@ canvas {
     margin-right: 10px;
     font-size: 30px;
     cursor: pointer;
-  }
+    color: var(--cor-secundaria);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
 
   nav ul {
     list-style: none;

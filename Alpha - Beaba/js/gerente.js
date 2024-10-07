@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    window.mostrarMenu = () => {
+    mostrarMenu = () => {
         var nav = document.getElementById('menu')
         if (window.innerWidth <= 768) {
             if (nav.style.display === 'block') {
@@ -11,37 +11,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.mostrarpedidoTaloes = () => {
+    mostrarpedidoTaloes = () => {
         document.getElementById('pedidoTaloes').style.display = 'block'
-        document.getElementById('recebimentoTaloes').style.display = 'none'
-        document.getElementById('estoque').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
 
-    window.mostrarrecebimentoTaloes = () => {
+    mostrarRelatorios = () => {
         document.getElementById('pedidoTaloes').style.display = 'none'
-        document.getElementById('recebimentoTaloes').style.display = 'block'
-        document.getElementById('estoque').style.display = 'none'
-        document.getElementById('relatorios').style.display = 'none'
-        mostrarMenu()
-    }
-
-    window.mostrarEstoque = () => {
-        document.getElementById('pedidoTaloes').style.display = 'none'
-        document.getElementById('recebimentoTaloes').style.display = 'none'
-        document.getElementById('estoque').style.display = 'block'
-        document.getElementById('relatorios').style.display = 'none'
-        mostrarMenu()
-    }
-
-    window.mostrarRelatorios = () => {
-        document.getElementById('pedidoTaloes').style.display = 'none'
-        document.getElementById('recebimentoTaloes').style.display = 'none'
-        document.getElementById('estoque').style.display = 'none'
         document.getElementById('relatorios').style.display = 'block'
         mostrarMenu()
     }
+
+    abrirModalPedido = () =>{
+        document.getElementById('modalPedido').style.display = 'block'
+    }
+
+
+
+
 
     const entradas = document.getElementById('mostrarEntradas')
     const saidas = document.getElementById('mostrarSaidas')
