@@ -1,0 +1,215 @@
+1. O que é SQL?
+SQL (Structured Query Language) é a linguagem padrão para gerenciar e manipular bancos de dados relacionais. Ela permite executar comandos para criar, ler, atualizar e excluir dados (CRUD), além de administrar a estrutura do banco de dados.
+
+Principais Comandos SQL:
+SELECT: Consulta dados.
+INSERT: Insere novos dados.
+UPDATE: Atualiza dados existentes.
+DELETE: Exclui dados.
+CREATE: Cria tabelas, índices, etc.
+ALTER: Altera a estrutura do banco.
+DROP: Remove tabelas ou objetos do banco.
+2. O que é PostgreSQL?
+PostgreSQL é um sistema de gerenciamento de banco de dados relacional (SGBD) open-source. Ele suporta SQL padrão, além de várias extensões avançadas. O PostgreSQL é conhecido por sua robustez, confiabilidade e suporte a transações complexas.
+
+Características do PostgreSQL:
+Suporte a ACID (Atomicidade, Consistência, Isolamento, Durabilidade) para transações.
+Chaves estrangeiras (FK), índices, gatilhos (triggers) e visões (views).
+Suporte a tipos de dados personalizados e arrays.
+Extensível com funções definidas pelo usuário, linguagens de procedimento, e mais.
+3. Tipos de Dados no PostgreSQL
+Tipos Numéricos:
+INTEGER: Inteiros.
+SMALLINT: Inteiros menores.
+BIGINT: Inteiros grandes.
+SERIAL: Inteiros auto incrementais.
+NUMERIC(p, s): Precisão exata, onde p é a precisão total e s são as casas decimais.
+Tipos de Texto:
+VARCHAR(n): Cadeia de caracteres de comprimento variável com limite de n.
+TEXT: Texto de comprimento variável sem limite.
+Tipos de Data e Hora:
+DATE: Armazena apenas a data.
+TIME: Armazena apenas a hora.
+TIMESTAMP: Data e hora completas.
+Tipos Booleanos e Outros:
+BOOLEAN: true, false, ou null.
+ARRAY: Armazenamento de coleções de dados de um tipo específico.
+JSON e JSONB: Armazenamento de dados no formato JSON.
+4. Estrutura de Tabelas e Relacionamentos
+Chaves Primárias (PK):
+A primary key (PK) identifica unicamente uma linha em uma tabela. Exemplo:
+
+sql
+Copiar código
+id_cliente serial primary key
+Chaves Estrangeiras (FK):
+As foreign keys são usadas para criar relacionamentos entre tabelas. Elas referenciam chaves primárias em outra tabela.
+
+sql
+Copiar código
+id_cliente integer not null references cliente(id_cliente)
+Relacionamentos entre Tabelas:
+1 para 1 (1:1): Cada registro de uma tabela está relacionado a um único registro em outra tabela.
+1 para Muitos (1
+): Um registro de uma tabela pode se relacionar com vários registros em outra.
+Muitos para Muitos (N
+): Dois registros de duas tabelas podem se relacionar de maneira cruzada, geralmente implementados com uma tabela de junção.
+Exemplo de Relacionamentos:
+sql
+Copiar código
+create table cliente (
+    id_cliente serial primary key,
+    nome_cliente varchar(120)
+);
+
+create table pedido (
+    id_pedido bigserial primary key,
+    id_cliente integer references cliente(id_cliente)
+);
+5. Constraints (Restrições)
+Restrições garantem a integridade dos dados.
+
+NOT NULL: Garante que o campo não possa ser vazio.
+UNIQUE: Garante que todos os valores do campo sejam únicos.
+CHECK: Define uma regra que os dados devem seguir.
+DEFAULT: Define um valor padrão para o campo.
+Exemplo:
+
+sql
+Copiar código
+create table usuario (
+    id_usuario serial primary key,
+    nome varchar(100) not null,
+    score int check(score >= 0 and score <= 1000)
+);
+6. Consultas SQL Básicas
+SELECT:
+Consulta dados de uma tabela. Você pode usar filtros e agregações.
+
+sql
+Copiar código
+select nome_cliente from cliente where cpf = '12345678901';
+JOIN:
+Relaciona tabelas com base em uma coluna comum.
+
+sql
+Copiar código
+select cliente.nome_cliente, pedido.data_pedido
+from cliente
+join pedido on cliente.id_cliente = pedido.id_cliente;
+INSERT:
+Insere novos dados em uma tabela.
+
+sql
+Copiar código
+insert into cliente (nome_cliente, cpf) values ('João', '12345678901');
+UPDATE:
+Atualiza dados existentes.
+
+sql
+Copiar código
+update cliente set nome_cliente = 'João Silva' where id_cliente = 1;
+DELETE:
+Remove dados de uma tabela.
+
+sql
+Copiar código
+delete from cliente where id_cliente = 1;
+7. Índices e Performance
+Índices:
+Os índices aceleram as consultas em colunas específicas. Contudo, eles podem aumentar o tempo de inserção e atualização.
+
+sql
+Copiar código
+create index idx_cliente_cpf on cliente(cpf);
+Performance:
+Use índices em colunas frequentemente consultadas.
+Evite muitos joins complexos em consultas muito grandes.
+Vacuuming: O PostgreSQL usa o comando VACUUM para liberar espaço e manter a performance.
+8. Funções Agregadas
+PostgreSQL oferece várias funções agregadas, como:
+
+COUNT: Conta o número de registros.
+AVG: Calcula a média.
+SUM: Soma os valores.
+MAX e MIN: Encontram o maior e menor valor.
+Exemplo:
+
+sql
+Copiar código
+select count(*) from pedido;
+9. Transações
+As transações garantem que um conjunto de operações SQL sejam executadas de forma atômica (tudo ou nada).
+
+sql
+Copiar código
+begin;
+insert into pedido (id_cliente, id_produto, valor) values (1, 2, 100.50);
+commit;
+Se algo falhar, você pode desfazer a transação:
+
+sql
+Copiar código
+rollback;
+10. Triggers e Funções
+Os triggers são executados automaticamente quando certas operações ocorrem, como uma inserção, atualização ou exclusão.
+
+Exemplo de trigger:
+
+sql
+Copiar código
+create or replace function atualiza_score() returns trigger as $$
+begin
+    new.score := new.score + 10;
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger trigger_atualiza_score
+before insert on pedido
+for each row
+execute procedure atualiza_score();
+11. Comentários
+Você pode adicionar comentários no PostgreSQL para documentar o código:
+
+sql
+Copiar código
+-- Comentário de linha
+/* Comentário de bloco */
+12. Serialização e AUTO_INCREMENT
+PostgreSQL usa os tipos SERIAL, BIGSERIAL e SMALLSERIAL para criar colunas com valores auto incrementais.
+
+Exemplo:
+
+sql
+Copiar código
+id_cliente serial primary key
+13. Dados Semiestruturados
+PostgreSQL suporta dados semiestruturados através dos tipos JSON e JSONB. O JSONB armazena os dados em um formato binário eficiente para consultas.
+
+Exemplo:
+
+sql
+Copiar código
+create table pedidos_json (
+    id serial primary key,
+    dados jsonb
+);
+14. Views e Subconsultas
+As views são consultas armazenadas que funcionam como tabelas virtuais.
+
+Exemplo de criação de view:
+
+sql
+Copiar código
+create view clientes_ativos as
+select nome_cliente, cpf from cliente where score > 500;
+15. Backup e Restauração
+pg_dump: Faz backup de um banco de dados.
+pg_restore: Restaura o banco a partir do backup.
+bash
+Copiar código
+pg_dump dbname > backup.sql
+pg_restore -d dbname backup.sql
+Resumo Final
+PostgreSQL é uma poderosa ferramenta de banco de dados relacional que oferece funcionalidades avançadas, como suporte a transações, relacionamentos complexos, chaves estrangeiras e tipos de dados ricos. Usando SQL, é possível manipular e consultar os dados de forma eficiente, garantindo integridade e performance. É altamente extensível, com suporte a JSON, funções customizadas, triggers e views, o que o torna ideal tanto para aplicações simples quanto para sistemas de grande escala.
