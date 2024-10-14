@@ -82,15 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('containerBotaoAcao').style.display = 'none'
         
         var perfilNome = document.getElementById('perfil-nome');
-        var permissoes = document.getElementById('perfil-permissoes');
+        var permissoes = document.getElementById('perfil-tipoUsuario');
         var nome = perfilNome.innerText;
 
         perfilNome.innerHTML = '<input type="text" id="input-nome" value="' + nome + '">';
         permissoes.innerHTML = `
-            <select id="select-permissoes">
-                <option value="estoque">Acesso ao Estoque</option>
-                <option value="manutencao">Acesso à Manutenção</option>
-                <option value="todas">Acesso a Todas as Funcionalidades</option>
+            <select id="select-tipoUsuario">
+                <option value="todas">Administrador</option>
+                <option value="manutencao">Gerente</option>
+                <option value="estoque">Caixa</option>
             </select>
         `;
 
@@ -99,14 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     salvarPerfil = () => {
         var inputNome = document.getElementById('input-nome')
-        var selectPermissoes = document.getElementById('select-permissoes')
+        var selectPermissoes = document.getElementById('select-tipoUsuario')
     
         var newNome = inputNome.value
         var newPermissoes = selectPermissoes.options[selectPermissoes.selectedIndex].text
     
         // atualizar os valores
         document.getElementById('perfil-nome').innerText = newNome
-        document.getElementById('perfil-permissoes').innerText = newPermissoes
+        document.getElementById('perfil-tipoUsuario').innerText = newPermissoes
     
         // tira os inputs e select
         document.getElementById('salvar').style.display = 'none'

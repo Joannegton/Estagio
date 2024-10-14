@@ -159,6 +159,80 @@
                 </article>
             </section>
 
+
+
+            <article id="seletorCadastro"  style="display: none;">
+                <h2>Cadatro de Usuário</h2>
+                <form id="perfilForm">
+                    <label for="matriculaUsuario">Matricula do Usuario:</label>
+                    <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
+
+                    <label for="loja">Loja:</label>
+                    <select id="loja" name="loja">
+                        <option value="todas">Todas</option>
+                        <option value="loja1">Loja 1</option>
+                        <option value="loja2">Loja 2</option>
+                        <option value="loja3">Loja 3</option>
+                    </select>
+                    <label for="tipoUsuario">Tipo Usuário:</label>
+                    <select id="tipoUsuario" name="tipoUsuario" multiple>
+                        <option value="todas">Administrador</option>
+                        <option value="manutencao">Gerente</option>
+                        <option value="estoque">Caixa</option>
+                    </select>
+                    <button type="submit">Salvar Perfil</button>
+                </form>
+            </article>
+
+            <article id="seletorPerfis">
+                <h2>Perfis de Usuario</h2>
+                <div class="filtro">
+                    <label for="filtoUsuario">Nome:</label>
+                    <input type="text" name="filtoUsuario" id="filtoUsuario">
+                    <button id="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                </div>
+                <table>
+                    <thead class="headTabela">
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Nome</th>
+                            <th>Tipo usuário</th>
+                            <th>Loja</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profileTableBody">
+                        <!-- Linhas de exemplo -->
+                        <tr id="perfil-linha">
+                            <td data-label="Matricula" id="perfil-matricula">254875</td>
+                            <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
+                            <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
+                            <td data-label="Loja" id="perfil-loja">Loja 07</td>
+                            <td data-label="Ações" class="acoes" id="acoes">
+                                <div id="containerBotaoAcao">
+                                    <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Matricula" id="perfil-matricula">256584</td>
+                            <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
+                            <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
+                            <td data-label="Loja" id="perfil-loja">Loja 07</td>
+                            <td data-label="Ações" class="acoes" id="acoes">
+                                <div id="containerBotaoAcao">
+                                    <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
         </main>
     </div>
 </body>

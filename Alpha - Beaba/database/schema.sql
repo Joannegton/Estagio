@@ -14,27 +14,22 @@ create table loja (
     id_loja serial primary key,
     nome_loja varchar(120),
     endereco_loja varchar(255),
-    estoque_minimo integer
+    estoque_minimo integer,
+    gerente varchar(7) references usuario(matricula) on delete set null
 );
 
-create table taloes (
-    id_talao serial primary key,
-    id_loja integer references loja(id_loja) on delete set null,
-    data_envio date,
-    data_recebimento date,
-    quantidade integer,
-    status varchar(20)
+
+CREATE TABLE envio_taloes (
+    id_talao serial PRIMARY KEY,
+    id_loja INTEGER REFERENCES loja(id_loja) ON DELETE SET NULL,
+    data_envio DATE,
+    data_prevista_recebimento DATE,
+    quantidade INTEGER,
+    numero_remessa VARCHAR(10),
+    id_funcionario_recebimento VARCHAR(7) REFERENCES usuario(matricula) ON DELETE SET NULL,
+    status VARCHAR(20) -- Você pode adicionar uma CHECK constraint para validar valores específicos do status, se necessário
 );
 
-create table envio_taloes (
-    id_envio serial primary key,
-    data_envio date,
-    id_loja integer references loja(id_loja) on delete set null,
-    quantidade integer,
-    numero_remessa varchar(10),
-    id_funcionario_envio varchar(7) references usuario(matricula) on delete set null,
-    status varchar(20)
-);
 
 create table estoque_taloes (
     id_estoque serial primary key,
@@ -119,6 +114,13 @@ select * from estoque_taloes;
 select * from permissoes;
 select * from perfil_acesso_permissoes;
 
+-- não necessário, pois vou tratar as permissões no backend, porém para fins de estudo, o código abaixo.
+
+-- criando usuarios correspondentes as matrículas
+create user "1234567" with password 'SenhaSegura@2024#';
+create user "7654321" with password 'Quero@2024#';
+create user "2468135" with password 'SenhaSegura@2024#';
+
 -- criação de papeis
 create role administrador;
 create role gerente;
@@ -129,14 +131,13 @@ grant all privileges on table usuario, perfil_acesso, loja, taloes, envio_taloes
 grant select, insert, update on table usuario, estoque_taloes to gerente;
 grant select, update on table usuario, taloes to caixa;
 
--- atribuição usuario a permissão
 grant administrador to "1234567"; -- Ana Souza é adm
 
--- Atribuir um usuário ao papel de gerente
-grant gerente to "7654321"; -- Matrícula do Carlos Silva (Gerente)
+-- atribuir Carlos como gerente
+grant gerente to "7654321";
 
--- Atribuir um usuário ao papel de funcionário
+-- fernanda como funcionário
 grant funcionario to "2468135"; -- Matrícula da Fernanda Lima (Funcionário)
 
--- Restringindo acesso
-revoke all on database nome_do_banco from public;
+-- restringindo acesso
+revoke all on database oferteganhe from public;

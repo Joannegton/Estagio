@@ -118,7 +118,7 @@ form select {
   margin-bottom: 1em;
 }
 
-form select#permissoes {
+form select#tipoUsuario {
   height: 66px;
 }
 

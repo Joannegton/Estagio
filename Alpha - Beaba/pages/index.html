@@ -34,13 +34,20 @@
                 <form>
                     <div class="container-label-geral">
                         <div class="container-label">
-                            <label for="dataHoraEvento">Data/Hora do Evento:</label>
+                            <label for="lojaDestinataria">Loja Destinatária:</label>
+                            <select id="lojaDestinataria" name="lojaDestinataria" required>
+                                <option value="" disabled selected>Selecione a loja</option>
+                                <option value="loja1">Loja 1</option>
+                                <option value="loja2">Loja 2</option>
+                                <option value="loja3">Loja 3</option>
+                            </select>
+                        </div>
+
+                        <div class="container-label">
+                            <label for="dataHoraEvento">Data/Hora do Envio:</label>
                             <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento" required>
                         </div>
-                        <div class="container-label">
-                            <label for="lojaDestinataria">Loja Destinatária:</label>
-                            <input type="text" id="lojaDestinataria" name="lojaDestinataria" required>
-                        </div>
+                        
                         <div class="container-label">
                             <label for="numeroRemessa">Número da Remessa:</label>
                             <input type="text" id="numeroRemessa" name="numeroRemessa" required>
@@ -53,20 +60,21 @@
                             <input type="number" id="quantidadeTaloes" name="quantidadeTaloes" required>
                         </div>
                         <div class="container-label">
-                            <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio" required>
-                        </div>
-                        <div class="container-label">
                             <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
                             <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista" required>
+                        </div>
+                        <div class="container-label">
+                            <label for="funcionarioRecebimento">Funcionário a Receber:</label>
+                            <select id="funcionarioRecebimento" name="funcionarioRecebimento">
+                                <option value="todos">Todos</option>
+                                <option value="funcionario1">Funcionário 1</option>
+                                <option value="funcionario2">Funcionário 2</option>
+                                <option value="funcionario3">Funcionário 3</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="container-label-geral">
-                        <div class="container-label">
-                            <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                            <input type="text" id="idsFuncionarios" name="idsFuncionarios" required>
-                        </div>
                         <div class="container-label">
                             <label for="statusProcesso">Status do Processo:</label>
                             <select id="statusProcesso" name="statusProcesso" required>
@@ -107,7 +115,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -116,7 +124,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -125,7 +133,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -134,7 +142,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -143,7 +151,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -152,7 +160,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -161,7 +169,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -170,7 +178,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -179,7 +187,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -188,7 +196,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -197,7 +205,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -206,7 +214,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Disponível">20</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
@@ -421,13 +429,14 @@
                 <article id="seletorCadastro"  style="display: none;">
                     <h2>Cadatro de Usuário</h2>
                     <form id="perfilForm">
-                        <label for="nomePerfil">Nome do Perfil:</label>
-                        <input type="text" id="nomePerfil" name="nomePerfil" required>
-                        <label for="permissoes">Permissões:</label>
-                        <select id="permissoes" name="permissoes" multiple>
-                            <option value="estoque">Acesso ao Estoque</option>
-                            <option value="manutencao">Acesso à Manutenção</option>
-                            <option value="todas">Acesso a Todas as Funcionalidades</option>
+                        <label for="matriculaUsuario">Matricula do Usuario:</label>
+                        <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
+
+                        <label for="tipoUsuario">Tipo Usuário:</label>
+                        <select id="tipoUsuario" name="tipoUsuario" multiple>
+                            <option value="todas">Administrador</option>
+                            <option value="manutencao">Gerente</option>
+                            <option value="estoque">Caixa</option>
                         </select>
                         <button type="submit">Salvar Perfil</button>
                     </form>
@@ -443,16 +452,20 @@
                     <table>
                         <thead class="headTabela">
                             <tr>
-                                <th>Nome do Perfil</th>
-                                <th>Permissões</th>
+                                <th>Matricula</th>
+                                <th>Nome</th>
+                                <th>Tipo usuário</th>
+                                <th>Loja</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="profileTableBody">
                             <!-- Linhas de exemplo -->
                             <tr id="perfil-linha">
-                                <td data-label="Nome do Perfil" id="perfil-nome">Administrador</td>
-                                <td data-label="Permissões" id="perfil-permissoes">Acesso a Todas as Funcionalidades</td>
+                                <td data-label="Matricula" id="perfil-matricula">254875</td>
+                                <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
+                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
+                                <td data-label="Loja" id="perfil-loja">Loja 07</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
                                     <div id="containerBotaoAcao">
                                         <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
@@ -462,8 +475,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="Nome do Perfil">Joannegton</td>
-                                <td data-label="Permissões">Acesso ao estoque</td>
+                                <td data-label="Matricula" id="perfil-matricula">256584</td>
+                                <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
+                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
+                                <td data-label="Loja" id="perfil-loja">Loja 07</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
                                     <div id="containerBotaoAcao">
                                         <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
