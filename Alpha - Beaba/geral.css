@@ -266,11 +266,11 @@ canvas {
   padding: 5px 0;
   cursor: pointer;
   transition: color 0.3s;
+  font-weight: bold;
 }
 
 .opcao.ativo {
   color: #ff0000;
-  font-weight: bold;
 }
 
 .opcao.inativo {
