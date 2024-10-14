@@ -78,8 +78,7 @@
                         <div class="container-label">
                             <label for="statusProcesso">Status do Processo:</label>
                             <select id="statusProcesso" name="statusProcesso" required>
-                                <option value="enviado">Enviado</option>
-                                <option value="entregue">Entregue</option>
+                                <option value="enviado" selected>Enviado</option>
                                 <option value="recebido">Recebido</option>
                             </select>
                         </div>
@@ -297,57 +296,6 @@
                 </div>
             </section>
 
-            <section id="editarEnvioTaloes" style="display: none;">
-                <h2>Editar de Envio</h2>
-                <form>
-                    <div class="container-label-geral">
-                        <div class="container-label">
-                            <label for="dataHoraEvento">Data/Hora do Evento:</label>
-                            <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento">
-                        </div>
-                        <div class="container-label">
-                            <label for="lojaDestinataria">Loja Destinatária:</label>
-                            <input type="text" id="lojaDestinataria" name="lojaDestinataria">
-                        </div>
-                        <div class="container-label">
-                            <label for="numeroRemessa">Número da Remessa:</label>
-                            <input type="text" id="numeroRemessa" name="numeroRemessa">
-                        </div>
-                    </div>
-
-                    <div class="container-label-geral">
-                        <div class="container-label">
-                            <label for="quantidadeTaloes">Quantidade de Talões:</label>
-                            <input type="number" id="quantidadeTaloes" name="quantidadeTaloes">
-                        </div>
-                        <div class="container-label">
-                            <label for="dataHoraEnvio">Data/Hora do Envio:</label>
-                            <input type="datetime-local" id="dataHoraEnvio" name="dataHoraEnvio">
-                        </div>
-                        <div class="container-label">
-                            <label for="dataEntregaPrevista">Data de Entrega Prevista:</label>
-                            <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista">
-                        </div>
-                    </div>
-
-                    <div class="container-label-geral">
-                        <div class="container-label">
-                            <label for="idsFuncionarios">IDs dos Funcionários:</label>
-                            <input type="text" id="idsFuncionarios" name="idsFuncionarios">
-                        </div>
-                        <div class="container-label">
-                            <label for="statusProcesso">Status do Processo:</label>
-                            <select id="statusProcesso" name="statusProcesso">
-                                <option value="enviado">Enviado</option>
-                                <option value="entregue">Entregue</option>
-                                <option value="recebido">Recebido</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit">Registrar Envio</button>
-                </form>
-            </section>
         
             <section id="manutencao" style="display: none;">
                 <h2>Manutenção de Talões</h2>
@@ -372,40 +320,40 @@
                     <table>
                         <thead class="headTabela">
                             <tr>
-                                <th>Data do Evento</th>
-                                <th>Loja Destino</th>
-                                <th>Quant. Talões</th>
-                                <th>Remessa</th>
                                 <th>Data do Envio</th>
-                                <th>Data de Entrega</th>
-                                <th>IDs de Materiais</th>
+                                <th>Loja Destino</th>
+                                <th>Quantidade</th>
+                                <th>Remessa</th>
+                                <th>Data de Entrega/Previsão</th>
+                                <th>Funcionario Recebimento</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
-                                <td data-label="Loja Destinatária">Loja 1</td>
-                                <td data-label="Quantidade de Talões">50</td>
+                                <td data-label="Data do Envio">01/01/24 10:00</td>
+                                <td data-label="Loja Destino">Loja 1</td>
+                                <td data-label="Quantidade">50</td>
                                 <td data-label="Remessa">12345</td>
-                                <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
-                                <td data-label="Data de Entrega">02/01/24 10:00</td>
-                                <td data-label="IDs de Materiais">1, 2, 3</td>
-                                <td data-label="Status">Enviado</td>
+                                <td data-label="Data de Entrega/Previsão" id="DataEntregaManutencao">02/01/24 10:00</td>
+                                <td data-label="Funcionário Recebimento">Anderson Malaquias</td>
+                                <td data-label="Status" id="statusManutencao">Enviado</td>
                                 <td data-label="Ações" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                    <div id="containerBotaoAcaoManutencao">
+                                        <a href="#" class="botaoAcao" onclick="editarEnvioTalao()"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                    <a href="#" class="botaoAcao" id="salvarManutencao" onclick="salvarManutencao()" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="Data/Hora do Evento">01/01/24 10:00</td>
-                                <td data-label="Loja Destinatária">Loja 1</td>
-                                <td data-label="Quantidade de Talões">50</td>
+                                <td data-label="Data do Envio">01/01/24 10:00</td>
+                                <td data-label="Loja Destino">Loja 1</td>
+                                <td data-label="Quantidade">50</td>
                                 <td data-label="Remessa">12345</td>
-                                <td data-label="Data/Hora do Envio">01/01/24 11:00</td>
-                                <td data-label="Data de Entrega">02/01/24 10:00</td>
-                                <td data-label="IDs de Materiais">1, 2, 3</td>
+                                <td data-label="Data de Entrega/Previsão">02/01/24 10:00</td>
+                                <td data-label="Funcionário Recebimento">Anderson Malaquias</td>
                                 <td data-label="Status">Enviado</td>
                                 <td data-label="Ações" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
@@ -460,7 +408,6 @@
                             </tr>
                         </thead>
                         <tbody id="profileTableBody">
-                            <!-- Linhas de exemplo -->
                             <tr id="perfil-linha">
                                 <td data-label="Matricula" id="perfil-matricula">254875</td>
                                 <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
@@ -579,6 +526,12 @@
                 <canvas id="enviosChart" style="display: none;"></canvas>       
                 
             </section>
+
+            <div id="novaLojaContainer" style="display: none;">
+                <label for="novaLoja">Nome da Nova Loja:</label>
+                <input type="text" id="novaLoja" name="novaLoja">
+            </div>
+
         </main>
     </div>
     <footer>

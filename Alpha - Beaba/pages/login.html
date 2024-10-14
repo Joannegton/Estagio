@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Oferte e Ganhe</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../geral.css">
+    <link rel="stylesheet" href="../style/login.css">
 </head>
 <body>
     <main>
@@ -15,9 +16,53 @@
                 <input type="text" id="username" name="username" required>
                 <label for="password">Senha:</label>
                 <input type="password" id="password" name="password" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" onclick="mostrarPrimeiroAcesso()">Entrar</button>
             </form>
-            <a href="recuperarSenha.html">Esqueceu a senha?</a>
+            <a href="#" onclick="mostrarRecuperarSenha()">Esqueceu a senha?</a>
+
+        </section>
+
+        <section id="primeiroAcesso" >
+            <h2>Primeiro Acesso</h2>
+            <form id="primeiroAcessoForm">
+                <label for="matricula">Matricula:</label>
+                <input type="text" id="matricula" name="matricula" readonly value="254875">
+                <label for="email">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <label for="novaSenha">Nova Senha:</label>
+                <input type="password" id="novaSenha" name="novaSenha" required>
+                <label for="confirmarSenha">Confirmar Senha:</label>
+                <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+                <label for="loja">Loja:</label>
+                <select id="loja" name="loja" required>
+                    <option value="1">Loja 1</option>
+                    <option value="2">Loja 2</option>
+                    <option value="3">Loja 3</option>
+                    <option value="addNovaLoja">Adicionar nova loja</option>
+                </select>
+                <div id="novaLojaContainer" style="display: none;">
+                    <label for="novaLoja">Nome da Nova Loja:</label>
+                    <input type="text" id="novaLoja" name="novaLoja">
+                    <label for="enderecoNovaLoja">Endereço:</label>
+                    <input type="text" id="enderecoNovaLoja" name="enderecoNovaLoja">
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="links">
+                <a href="login.html" onclick="mostrarLogin()">Voltar</a>
+            </div>
+        </section>
+
+        <section id="recuperarSenha">
+            <h2>Recuperar Senha</h2>
+            <form id="recuperarSenhaForm">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="links">
+                <a href="login.html" onclick="mostrarLogin()">Voltar</a>
+            </div>
         </section>
     </main>
     <script src="../js/login.js"></script>

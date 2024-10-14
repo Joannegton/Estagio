@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('estoque').style.display = 'block'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'block'
         document.getElementById('perfil').style.display = 'none'
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
@@ -43,21 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'block'
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
-        document.getElementById('relatorios').style.display = 'none'
-        mostrarMenu()
-    }
-    mostrarEditarEnvioTaloes = () => {
-        document.getElementById('editarEnvioTaloes').style.display = 'block'
-        document.getElementById('envioTaloes').style.display = 'none'
-        document.getElementById('estoque').style.display = 'none'
-        document.getElementById('manutencao').style.display = 'none'
-        document.getElementById('perfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
     mostrarRelatorios = () => {
-        document.getElementById('editarEnvioTaloes').style.display = 'none'
         document.getElementById('envioTaloes').style.display = 'none'
         document.getElementById('estoque').style.display = 'none'
         document.getElementById('manutencao').style.display = 'none'
@@ -81,18 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
     editarPerfil = () => {
         document.getElementById('containerBotaoAcao').style.display = 'none'
         
-        var perfilNome = document.getElementById('perfil-nome');
-        var permissoes = document.getElementById('perfil-tipoUsuario');
-        var nome = perfilNome.innerText;
+        var perfilNome = document.getElementById('perfil-nome')
+        var permissoes = document.getElementById('perfil-tipoUsuario')
+        var nome = perfilNome.innerText
 
-        perfilNome.innerHTML = '<input type="text" id="input-nome" value="' + nome + '">';
+        perfilNome.innerHTML = '<input type="text" id="input-nome" value="' + nome + '">'
         permissoes.innerHTML = `
             <select id="select-tipoUsuario">
                 <option value="todas">Administrador</option>
                 <option value="manutencao">Gerente</option>
                 <option value="estoque">Caixa</option>
             </select>
-        `;
+        `
 
         document.getElementById('salvar').style.display = 'block'    
     }
@@ -113,6 +99,42 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('containerBotaoAcao').style.display = 'block'
         inputNome.remove()
         selectPermissoes.remove()
+    }
+
+
+    //Manutenção de talões   
+    editarEnvioTalao = ()=>{
+        document.getElementById('containerBotaoAcaoManutencao').style.display = 'none'
+
+        var statusManutencao = document.getElementById('statusManutencao')
+        var dataEntrega = document.getElementById('DataEntregaManutencao')
+
+        statusManutencao.innerHTML = `
+            <select id="select-statusManutencao">
+                <option value="enviado">Enviado</option>
+                <option value="finalizado">Recebido</option>
+            </select>
+        `
+        dataEntrega.innerHTML = `
+            <input type="date" id="input-DataEntregaManutencao">
+        `
+        document.getElementById('salvarManutencao').style.display = 'block'
+    }
+
+    salvarManutencao = () => {
+        var statusManutencao = document.getElementById('select-statusManutencao')
+        var dataEntrega = document.getElementById('input-DataEntregaManutencao')
+
+        var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text
+        var newDataEntrega = dataEntrega.value
+
+        document.getElementById('statusManutencao').innerText = newStatusManutencao
+        document.getElementById('DataEntregaManutencao').innerText = newDataEntrega
+
+        document.getElementById('salvarManutencao').style.display = 'none'
+        document.getElementById('containerBotaoAcaoManutencao').style.display = 'block'
+        statusManutencao.remove()
+        dataEntrega.remove()
     }
 
 
@@ -188,86 +210,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(desativar).style.display = 'none'
     }
 
-
-    /*
-    const profileForm = document.getElementById('perfilForm');
-    const profileTableBody = document.getElementById('profileTableBody');
-
-    function renderProfiles() {
-        const profiles = getProfiles();
-        profileTableBody.innerHTML = '';
-        profiles.forEach(profile => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${profile.name}</td>
-                <td>${profile.permissions.join(', ')}</td>
-                <td>
-                    <button onclick="editProfile(${profile.id})">Editar</button>
-                    <button onclick="deleteProfile(${profile.id})">Deletar</button>
-                </td>
-            `;
-            profileTableBody.appendChild(row);
-        });
-    }
-
-    profileForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const name = document.getElementById('nomePerfil').value;
-        const permissions = Array.from(document.getElementById('permissoes').selectedOptions).map(option => option.value);
-        addProfile({ name, permissions });
-        renderProfiles();
-        profileForm.reset();
-    });
-
-    window.editProfile = (id) => {
-        const profile = getProfiles().find(profile => profile.id === id);
-        if (profile) {
-            document.getElementById('nomePerfil').value = profile.name;
-            const permissoesSelect = document.getElementById('permissoes');
-            Array.from(permissoesSelect.options).forEach(option => {
-                option.selected = profile.permissions.includes(option.value);
-            });
-            profileForm.onsubmit = (event) => {
-                event.preventDefault();
-                const name = document.getElementById('nomePerfil').value;
-                const permissions = Array.from(document.getElementById('permissoes').selectedOptions).map(option => option.value);
-                updateProfile(id, { name, permissions });
-                renderProfiles();
-                profileForm.reset();
-                profileForm.onsubmit = null;
-            };
-        }
-    };
-
-    window.deleteProfile = (id) => {
-        deleteProfile(id);
-        renderProfiles();
-    };
-
-    renderProfiles();*/
-});
-
-
-
-/*
-window.mostrarEnvioTaloes = () => {
-    const taloes = getTaloes();
-    const taloesTableBody = document.getElementById('taloesTableBody');
-    taloesTableBody.innerHTML = '';
-    taloes.forEach(talao => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${talao.id}</td>
-            <td>${talao.valor}</td>
-            <td>${talao.data}</td>
-            <td>${talao.situacao}</td>
-            <td>
-                <button onclick="editarTalao(${talao.id})">Editar</button>
-                <button onclick="deletarTalao(${talao.id})">Deletar</button>
-            </td>
-        `;
-        taloesTableBody.appendChild(row);
-    });
-    document.getElementById('envioTaloes').style.display = 'block';
-}
-    */
+})
