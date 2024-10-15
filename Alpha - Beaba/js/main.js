@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('lojas').style.display = 'none'
         mostrarMenu()
     }
     mostrarEstoque = () => {
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('lojas').style.display = 'none'
         mostrarMenu()
     }
     mostrarManutencao = () => {
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('manutencao').style.display = 'block'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('lojas').style.display = 'none'
         mostrarMenu()
     }
     mostrarPerfil = () => {
@@ -41,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'block'
         document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('lojas').style.display = 'none'
         mostrarMenu()
     }
     mostrarRelatorios = () => {
@@ -49,6 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('manutencao').style.display = 'none'
         document.getElementById('perfil').style.display = 'none'
         document.getElementById('relatorios').style.display = 'block'
+        document.getElementById('lojas').style.display = 'none'
+        mostrarMenu()
+    }
+    mostrarLojas = () => {
+        document.getElementById('lojas').style.display = 'block'
+        document.getElementById('envioTaloes').style.display = 'none'
+        document.getElementById('estoque').style.display = 'none'
+        document.getElementById('manutencao').style.display = 'none'
+        document.getElementById('perfil').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
         mostrarMenu()
     }
 
@@ -136,6 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
         statusManutencao.remove()
         dataEntrega.remove()
     }
+
+
+    // Lojas
+    const lojas = document.getElementById('todasLojas')
+    const cadastroLoja = document.getElementById('cadastroLoja')
+
+    lojas.addEventListener('click', () =>{
+        alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas')
+    })
+    cadastroLoja.addEventListener('click', () =>{
+        alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas')
+    })
 
 
     // Relatorios

@@ -15,12 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('pedidoTaloes').style.display = 'block'
         document.getElementById('relatorios').style.display = 'none'
         document.getElementById('perfilAcesso').style.display = 'none'
+        document.getElementById('editarLoja').style.display = 'none'
         mostrarMenu()
     }
 
     mostrarRelatorios = () => {
         document.getElementById('pedidoTaloes').style.display = 'none'
         document.getElementById('relatorios').style.display = 'block'
+        document.getElementById('editarLoja').style.display = 'none'
         document.getElementById('perfilAcesso').style.display = 'none'
         mostrarMenu()
     }
@@ -29,11 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('perfilAcesso').style.display = 'block'
         document.getElementById('pedidoTaloes').style.display = 'none'
         document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('editarLoja').style.display = 'none'
         mostrarMenu()
     }
 
     abrirModalPedido = () =>{
         document.getElementById('modalPedido').style.display = 'block'
+    }
+
+    mostrarEditarLoja = () => {
+        document.getElementById('perfilAcesso').style.display = 'none'
+        document.getElementById('pedidoTaloes').style.display = 'none'
+        document.getElementById('relatorios').style.display = 'none'
+        document.getElementById('editarLoja').style.display = 'block'
     }
 
     // Perfis de acesso
@@ -47,6 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
     cadastroPerfil.addEventListener('click', ()=> {
         alternador(cadastroPerfil, perfil, cadastroPerfil, 'seletorCadastro', 'seletorPerfis', 'indicadorPerfil')
     })
+
+    cadastroMassa = () => {
+        var botao = document.getElementById('cadastrarMassa')
+        console.log(botao.textContent)
+        if(botao.innerHTML === 'Cadastro em Massa'){
+            document.getElementById('cadastroSimples').style.display = 'none'
+            document.getElementById('cadastroMassa').style.display = 'flex'
+            botao.innerHTML = 'Cadastro unitário'
+        } else if(botao.innerHTML === 'Cadastro unitário'){
+            document.getElementById('cadastroSimples').style.display = 'block'
+            document.getElementById('cadastroMassa').style.display = 'none'
+            botao.innerHTML = 'Cadastro em Massa'
+        }
+    }
 
     // Relatórios
     const saidas = document.getElementById('mostrarSaidas')
