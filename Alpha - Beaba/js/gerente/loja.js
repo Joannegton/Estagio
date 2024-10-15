@@ -1,8 +1,13 @@
-import { esconderElementos } from "../utils.js";
+import { esconderElementos, mostrarMenu } from "../utils.js"
 
 function mostrarEditarLoja(){
-    document.getElementById('editarLoja').style.display = 'block';
-    esconderElementos(['estoqueTaloes', 'relatorios', 'perfilAcesso']);
+    document.getElementById('editarLoja').style.display = 'block'
+    esconderElementos(['estoqueTaloes', 'relatorios', 'perfilAcesso'])
+    mostrarMenu()
 }
 
-export { mostrarEditarLoja };
+function salvarLoja(){
+    alert('Salvar loja')
+}
+
+export { mostrarEditarLoja, salvarLoja }

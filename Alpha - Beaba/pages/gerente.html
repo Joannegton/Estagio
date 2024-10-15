@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="../geral.css">
     <link rel="stylesheet" href="../style/gerente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="../js/gerente.js"></script>
-</head>
+    <script type="module" src="../js/gerente/geral.js"></script></head>
 <body>
     <div class="main">
         <header>
@@ -17,10 +16,10 @@
                 <img src="../logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" onclick="mostrarpedidoTaloes()">Gestão de Estoque</a></li>
-                    <li><a href="#" onclick="mostrarPerfilAcesso()">Perfil de Acesso</a></li>
-                    <li><a href="#" onclick="mostrarEditarLoja()">Loja</a></li>
-                    <li><a href="#" onclick="mostrarRelatorios()">Relatorios</a></li>
+                    <li><a href="#" id="mostrarGestaoEstoque">Gestão de Estoque</a></li>
+                    <li><a href="#" id="mostrarGestaoPerfil">Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarGestaoLoja">Loja</a></li>
+                    <li><a href="#" id="mostrarGestaoRelatorio">Relatorios</a></li>
                 </ul>
             </nav>
             <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
@@ -28,26 +27,25 @@
         </header>
 
         <main>
-            <section id="pedidoTaloes">
-                <article id="estoque">
+            <section id="estoqueTaloes">
                     <h2>Estoque</h2>
                     <div style="text-align: end;">
-                        <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                        <button id="exportarEstoque" class="exportarCSV">Exportar CSV</button>
                     </div>
                     <table>
                         <thead class="headTabela">
                             <tr>
                                 <th>N° Caixa</th>
                                 <th>Quantidade</th>
-                                <th>Realizar Pedido</th>
+                                <th>Repor estoque</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td data-label="N° Caixa">Caixa 01</td>
                                 <td data-label="Quantidade">8</td>
-                                <td data-label="Realizar Pedido" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 01')">
+                                <td data-label="Repor estoque" class="acoes">
+                                    <a href="#" class="botaoAcao" id="reporEstoque">
                                         <i class="fas fa-box"></i>
                                     </a>
                                 </td>
@@ -90,21 +88,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </article>
-
-                <article id="modalPedido" class="modal">
-                    <div class="modal-content">
-                        <span id="fechar" onclick="fecharModalPedido()">&times;</span>
-                        <h2>Realizar Pedido</h2>
-                        <form action="">
-                            <label for="nome">Nome:</label>
-                            <input type="text" name="nome" id="nome">
-                            <label for="quantidade">Quantidade:</label>
-                            <input type="number" name="quantidade" id="quantidade">
-                            <button type="submit">Enviar</button>
-                        </form>
-                    </div>
-                </article>
             </section>
 
             <section id="perfilAcesso" style="display: none;">
@@ -120,8 +103,8 @@
                     <h2>Perfis de Usuario</h2>
                     <div class="filtro">
                         <label for="filtoUsuario">Nome:</label>
-                        <input type="text" name="filtoUsuario" id="filtoUsuario">
-                        <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                        <input type="text" name="filtroUsuario" id="filtroUsuario">
+                        <button id="exportarPerfis" class="exportarCSV" >Exportar CSV</button>
                     </div>
                     <table>
                         <thead class="headTabela">
@@ -136,13 +119,13 @@
                             <tr id="perfil-linha">
                                 <td data-label="Matricula" id="perfil-matricula">254875</td>
                                 <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                <td data-label="Nº do Caixa" id="numero-caixa">Caixa 07</td>
+                                <td data-label="Ações" class="acoes" id="acoesPerfil">
+                                    <div id="BotaoAcaoPerfil">
+                                        <a href="#" class="botaoAcao" id="editarCaixa"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="deletarPerfil"><i class="fas fa-trash-alt"></i></a>
                                     </div>
-                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEdicaoCaixa" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -168,7 +151,7 @@
                     </div>
                     <form id="perfilForm">
                         <div id="cadastroMassa" style="display: none;">
-                            <input type="file" name="cadastroEmMassa" id="cadastroEmMassa">
+                            <input type="file" name="cadastroEmMassa" id="cadastroEmMassa" accept=".xls,.xlsx,.csv">
                             <table style="background-color: white;">
                                 <thead class="headTabela">
                                     <tr>
@@ -206,7 +189,7 @@
                                 <option value="caixa7">Caixa 07</option>
                             </select>
                         </div>
-                        <button type="submit">Salvar Perfil</button>
+                        <button type="submit" id="CadastrarPerfil">Cadastrar Perfil</button>
                     </form>
                 </article>
             </section>
@@ -220,7 +203,7 @@
                     <input type="text" id="enderecoLoja" name="enderecoLoja">
                     <label for="qntCaixas">Quantidade de Caixas(físicos):</label>
                     <input type="number" id="qntCaixas" name="qntCaixas">
-                    <button type="submit">Salvar Loja</button>
+                    <button type="submit" id="salvarLoja">Salvar Loja</button>
                 </form>
             </section>
 
@@ -230,23 +213,24 @@
                     <div class="seletor">
                       <div id="mostrarSaidas" class="opcao ativo">Saídas</div>
                       <div id="mostrarEntradas" class="opcao inativo">Entradas</div>
-                      <div class="indicador" id="indicador"></div>
+                      <div class="indicador" id="indicadorRelatorio"></div>
                     </div>
                 </div>
     
                 <div style="text-align: end;">
-                    <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                    <button id="exportarRelatorios" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                 </div>
                 
                 <article id="entradas" style="display: none;">
                     <table>
                         <thead class="headTabela">
                             <tr>
-                                <th></th>
+                                <th>Data Envio</th>
                                 <th>Remessa</th>
                                 <th>Quantidade</th>
                                 <th>Data Recebimento/Prevista</th>
                                 <th>Status</th>
+                                <th>Marcar Recebido</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -255,8 +239,9 @@
                                 <td data-label="Remessa">254587954</td>
                                 <td data-label="Quantidade">150</td>
                                 <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                <td data-label="Status">
-                                    <a href="#" class="edit" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                <td data-label="Status" id="statusRemessa">Enviado</td>
+                                <td data-label="Marcar Recebido">
+                                    <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -267,7 +252,7 @@
                     <table>
                         <thead class="headTabela">
                             <tr>
-                                <th>Data</th>
+                                <th>Data Saída</th>
                                 <th>Cliente</th>
                                 <th>Colaborador</th>
                             </tr>

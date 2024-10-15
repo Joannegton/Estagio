@@ -1,17 +1,18 @@
-import { esconderElementos } from "../utils.js";
+import { esconderElementos, mostrarMenu } from "../utils.js"
 
 function mostrarPedidoTaloes() {
-    document.getElementById('estoqueTaloes').style.display = 'block';
-    esconderElementos(['relatorios', 'perfilAcesso', 'editarLoja']);
+    document.getElementById('estoqueTaloes').style.display = 'block'
+    esconderElementos(['relatorios', 'perfilAcesso', 'editarLoja'])
+    mostrarMenu()
 }
 
 function reporEstoque(){
-    alert('Repor estoque');
+    alert('Repor estoque')
 }
 
 function exportarEstoque(){
-    alert('Exportar estoque');
+    alert('Exportar estoque')
 }
 
 
-export { mostrarPedidoTaloes, reporEstoque, exportarEstoque };
+export { mostrarPedidoTaloes, reporEstoque, exportarEstoque }

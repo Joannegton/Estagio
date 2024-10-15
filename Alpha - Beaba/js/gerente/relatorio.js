@@ -1,21 +1,32 @@
-import { esconderElementos, alternador } from "../utils.js";
-
-function alternadorRelatorios() {
-    const saidas = document.getElementById('mostrarSaidas');
-    const entradas = document.getElementById('mostrarEntradas');
-
-    saidas.addEventListener('click', () => {
-        alternador(saidas, saidas, entradas, 'saidas', 'entradas', 'indicadorRelatorio');
-    });
-
-    entradas.addEventListener('click', () => {
-        alternador(entradas, saidas, entradas, 'entradas', 'saidas', 'indicadorRelatorio');
-    });
-}
+import { esconderElementos, alternador, mostrarMenu } from "../utils.js"
 
 function mostrarRelatorios() {
-    document.getElementById('relatorios').style.display = 'block';
-    esconderElementos(['estoqueTaloes', 'perfilAcesso', 'editarLoja']);
+    document.getElementById('relatorios').style.display = 'block'
+    esconderElementos(['estoqueTaloes', 'perfilAcesso', 'editarLoja'])
+    mostrarMenu()
 }
 
-export { mostrarRelatorios, alternadorRelatorios };
+function alternadorRelatorios() {
+    const saidas = document.getElementById('mostrarSaidas')
+    const entradas = document.getElementById('mostrarEntradas')
+
+    saidas.addEventListener('click', () => {
+        alternador(saidas, saidas, entradas, 'saidas', 'entradas', 'indicadorRelatorio')
+    })
+
+    entradas.addEventListener('click', () => {
+        alternador(entradas, saidas, entradas, 'entradas', 'saidas', 'indicadorRelatorio')
+    })
+}
+
+function exportarRelatorios(){
+    alert('Exportar relatorios')
+}
+
+
+function alterarStatus(){
+    document.getElementById('statusRemessa').innerText = 'Recebido'
+}
+
+
+export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios, alterarStatus }
