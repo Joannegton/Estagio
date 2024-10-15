@@ -3,41 +3,6 @@ create table perfil_acesso (
     descricao varchar(20)
 );
 
-create table usuario (
-    matricula varchar(7) primary key,
-    nome_usuario varchar(120),
-    senha varchar(120) default 'Quero@2024#',
-    id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
-);
-
-create table loja (
-    id_loja serial primary key,
-    nome_loja varchar(120),
-    endereco_loja varchar(255),
-    estoque_minimo integer,
-    gerente varchar(7) references usuario(matricula) on delete set null
-);
-
-
-CREATE TABLE envio_taloes (
-    id_talao serial PRIMARY KEY,
-    id_loja INTEGER REFERENCES loja(id_loja) ON DELETE SET NULL,
-    data_envio DATE,
-    data_prevista_recebimento DATE,
-    quantidade INTEGER,
-    numero_remessa VARCHAR(10),
-    id_funcionario_recebimento VARCHAR(7) REFERENCES usuario(matricula) ON DELETE SET NULL,
-    status VARCHAR(20) -- Você pode adicionar uma CHECK constraint para validar valores específicos do status, se necessário
-);
-
-
-create table estoque_taloes (
-    id_estoque serial primary key,
-    id_loja integer references loja(id_loja) on delete set null,
-    quantidade_disponivel integer,
-    quantidade_recomendada integer
-);
-
 create table permissoes (
     id_permissao serial primary key,
     descricao varchar(30)
@@ -49,95 +14,142 @@ create table perfil_acesso_permissoes (
     primary key (id_perfil_acesso, id_permissao)
 );
 
+create table usuario (
+    matricula varchar(7) primary key unique,
+    nome_usuario varchar(120),
+    senha varchar(120) default 'Quero@2024#',
+    id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
+);
 
--- dados ficticios
-INSERT INTO perfil_acesso (descricao)
-VALUES
-    ('Administrador'),
-    ('Gerente'),
-    ('Caixa');
+create table loja (
+    id_loja serial primary key,
+    nome_loja varchar(120),
+    endereco_loja varchar(255),
+    caixas_fisicos integer,
+    estoque_minimo integer,
+    gerente_id varchar(7) references usuario(matricula) on delete set null
+);
 
-INSERT INTO usuario (matricula, nome_usuario, senha, id_perfil_acesso)
-VALUES
-    ('1234567', 'Ana Souza', 'SenhaSegura@2024#', 1),
-    ('7654321', 'Carlos Silva', 'Quero@2024#', 2),
-    ('2468135', 'Fernanda Lima', 'SenhaSegura@2024#', 3);
+create table envio_taloes (
+    id_talao serial primary key,
+    id_loja integer references loja(id_loja) on delete set null,
+    data_envio date,
+    data_recebimento_previsto date,
+    quantidade integer,
+    numero_remessa varchar(10),
+    id_funcionario_recebimento varchar(7) references usuario(matricula) on delete set null,
+    status varchar(20)
+);
 
-INSERT INTO loja (nome_loja, endereco_loja, estoque_minimo)
-VALUES
-    ('Loja Central', 'Av. Paulista, 1000, São Paulo - SP', 100),
-    ('Loja Sul', 'Rua da Praia, 50, Santos - SP', 50),
-    ('Loja Norte', 'Av. Norte, 500, Fortaleza - CE', 80);
+create table estoque_taloes (
+    id_estoque serial primary key,
+    id_loja integer references loja(id_loja) on delete set null,
+    quantidade_disponivel integer,
+    quantidade_recomendada integer
+);
 
-INSERT INTO taloes (id_loja, data_envio, data_recebimento, quantidade, status)
-VALUES
-    (1, '2024-01-10', '2024-01-15', 500, 'Recebido'),
-    (2, '2024-02-12', '2024-02-17', 300, 'Recebido'),
-    (3, '2024-03-05', NULL, 400, 'Em trânsito');
+create table caixa (
+    id_caixa serial primary key,
+    id_loja integer references loja(id_loja) on delete set null,
+    matricula varchar(7) references usuario(matricula) on delete cascade,
+    estoque integer
+);
 
-INSERT INTO envio_taloes (data_envio, id_loja, quantidade, numero_remessa, id_funcionario_envio, status)
-VALUES
-    ('2024-01-08', 1, 500, 'REM001', '1234567', 'Enviado'),
-    ('2024-02-10', 2, 300, 'REM002', '7654321', 'Enviado'),
-    ('2024-03-03', 3, 400, 'REM003', '2468135', 'Enviado');
+create table saida_taloes (
+    id_saida_talao serial primary key,
+    codigo_talao varchar(10),
+    numero_remessa varchar(10) references envio_taloes(numero_remessa),
+    matricula varchar(7) references usuario(matricula) on delete cascade
+);
 
-INSERT INTO estoque_taloes (id_loja, quantidade_disponivel, quantidade_recomendada)
-VALUES
+-- dados fictícios
+
+insert into perfil_acesso (descricao)
+values
+    ('administrador'),
+    ('gerente'),
+    ('caixa');
+
+insert into permissoes (descricao)
+values
+    ('visualizar estoque'),
+    ('alterar estoque'),
+    ('enviar talões'),
+    ('receber talões');
+
+insert into perfil_acesso_permissoes (id_perfil_acesso, id_permissao)
+values
+    (1, 1),  -- administrador pode visualizar o estoque
+    (1, 2),  -- administrador pode alterar o estoque
+    (1, 3),  -- administrador pode enviar talões
+    (1, 4),  -- administrador pode receber talões
+    (2, 1),  -- gerente pode visualizar o estoque
+    (2, 3),  -- gerente pode enviar talões
+    (3, 1);  -- caixa pode apenas visualizar o estoque
+
+insert into usuario (matricula, nome_usuario, senha, id_perfil_acesso)
+values
+    ('1234567', 'ana souza', 'SenhaSegura@2024#', 1),
+    ('7654321', 'carlos silva', 'Quero@2024#', 2),
+    ('2468135', 'fernanda lima', 'SenhaSegura@2024#', 3);
+
+insert into loja (nome_loja, endereco_loja, caixas_fisicos, estoque_minimo, gerente_id)
+values
+    ('loja central', 'av. paulista, 1000, são paulo - sp', 5, 100, '1234567'),
+    ('loja sul', 'rua da praia, 50, santos - sp', 3, 50, '7654321'),
+    ('loja norte', 'av. norte, 500, fortaleza - ce', 4, 80, '2468135');
+
+insert into envio_taloes (id_loja, data_envio, data_recebimento_previsto, quantidade, numero_remessa, id_funcionario_recebimento, status)
+values
+    (1, '2024-01-08', '2024-01-15', 500, 'REM001', '1234567', 'enviado'),
+    (2, '2024-02-10', '2024-02-17', 300, 'REM002', '7654321', 'enviado'),
+    (3, '2024-03-03', '2024-03-10', 400, 'REM003', '2468135', 'enviado');
+
+insert into estoque_taloes (id_loja, quantidade_disponivel, quantidade_recomendada)
+values
     (1, 200, 500),
     (2, 150, 300),
     (3, 50, 400);
 
-INSERT INTO permissoes (descricao)
-VALUES
-    ('Visualizar Estoque'),
-    ('Alterar Estoque'),
-    ('Enviar Taloes'),
-    ('Receber Taloes');
+insert into caixa (id_loja, matricula, estoque)
+values
+    (1, '1234567', 200),
+    (2, '7654321', 150),
+    (3, '2468135', 50);
 
-INSERT INTO perfil_acesso_permissoes (id_perfil_acesso, id_permissao)
-VALUES
-    (1, 1),  -- Administrador pode visualizar o estoque
-    (1, 2),  -- Administrador pode alterar o estoque
-    (1, 3),  -- Administrador pode enviar talões
-    (1, 4),  -- Administrador pode receber talões
-    (2, 1),  -- Gerente pode visualizar o estoque
-    (2, 3),  -- Gerente pode enviar talões
-    (3, 1);  -- Funcionário pode apenas visualizar o estoque
+insert into saida_taloes (codigo_talao, numero_remessa, matricula)
+values
+    ('TALAO001', 'REM001', '1234567'),
+    ('TALAO002', 'REM002', '7654321'),
+    ('TALAO003', 'REM003', '2468135');
 
-
+-- consultas
 select * from usuario;
 select * from perfil_acesso;
 select * from loja;
-select * from taloes;
 select * from envio_taloes;
 select * from estoque_taloes;
 select * from permissoes;
 select * from perfil_acesso_permissoes;
+select * from caixa;
+select * from saida_taloes;
 
--- não necessário, pois vou tratar as permissões no backend, porém para fins de estudo, o código abaixo.
+-- gerenciamento de permissões de banco de dados
 
--- criando usuarios correspondentes as matrículas
 create user "1234567" with password 'SenhaSegura@2024#';
 create user "7654321" with password 'Quero@2024#';
 create user "2468135" with password 'SenhaSegura@2024#';
 
--- criação de papeis
 create role administrador;
 create role gerente;
 create role caixa;
 
--- conceder permissões
-grant all privileges on table usuario, perfil_acesso, loja, taloes, envio_taloes, estoque_taloes, permissoes, perfil_acesso_permissoes to administrador;
-grant select, insert, update on table usuario, estoque_taloes to gerente;
-grant select, update on table usuario, taloes to caixa;
+grant all privileges on table usuario, perfil_acesso, loja, envio_taloes, estoque_taloes, permissoes, perfil_acesso_permissoes, caixa, saida_taloes to administrador;
+grant select, insert, update on table usuario, estoque_taloes, caixa to gerente;
+grant select, update on table usuario, envio_taloes, caixa, saida_taloes to caixa;
 
-grant administrador to "1234567"; -- Ana Souza é adm
-
--- atribuir Carlos como gerente
+grant administrador to "1234567";
 grant gerente to "7654321";
+grant caixa to "2468135";
 
--- fernanda como funcionário
-grant funcionario to "2468135"; -- Matrícula da Fernanda Lima (Funcionário)
-
--- restringindo acesso
-revoke all on database oferteganhe from public;
+revoke all on database your_database from public;
