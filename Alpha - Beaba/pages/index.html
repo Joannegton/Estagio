@@ -6,7 +6,7 @@
     <title>Oferte e Ganhe</title>
     <link rel="stylesheet" href="../geral.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="../js/main.js"></script>
+    <script src="../js/adm/main.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -17,12 +17,12 @@
                 <img src="../logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" onclick="mostrarEnvioTaloes()">Envio</a></li>
-                    <li><a href="#" onclick="mostrarEstoque()">Estoque</a></li>
-                    <li><a href="#" onclick="mostrarManutencao()">Manutenção</a></li>
-                    <li><a href="#" onclick="mostrarPerfil()">Perfil de Acesso</a></li>
-                    <li><a href="#" onclick="mostrarLojas()">Lojas</a></li>
-                    <li><a href="#" onclick="mostrarRelatorios()">Relatórios</a></li>
+                    <li><a href="#" id="mostrarEnvioTaloes">Envio</a></li>
+                    <li><a href="#" id="mostrarEstoque">Estoque</a></li>
+                    <li><a href="#" id="mostrarManutencao">Manutenção</a></li>
+                    <li><a href="#" id="mostrarPerfil">Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarLojas">Lojas</a></li>
+                    <li><a href="#" id="mostrarRelatorio">Relatórios</a></li>
                 </ul>
             </nav>
             <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
@@ -260,16 +260,17 @@
             </section>
 
             <section id="perfil" style="display: none;">
-                <div class="alternador">
+                <div class="alternador" style="width: 300px;">
                     <div class="seletor">
-                      <div id="perfis" class="opcao ativo">Todos</div>
+                      <div id="perfis" class="opcao ativo">Usuários</div>
                       <div id="cadastroPerfis" class="opcao inativo">Cadastrar</div>
-                      <div class="indicador" id="indicadorPerfis"></div>
+                      <div id="cadastroTipoPerfil" class="opcao inativo">Tipo Perfil</div>
+                      <div class="indicador" id="indicadorPerfis" style="width: 33%;"></div>
                     </div>
                 </div>
 
                 <article id="seletorCadastro"  style="display: none;">
-                    <h2>Cadatro de Usuário</h2>
+                    <h2>Cadastro de Usuário</h2>
                     <form id="perfilForm">
                         <label for="matriculaUsuario">Matricula do Usuario:</label>
                         <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
@@ -331,6 +332,20 @@
                         </tbody>
                     </table>
                 </article>
+
+                <article id="seletorTipoPerfil">
+                    <form action="">
+                        <label for="nomePerfil">Nome do Perfil:</label>
+                        <input type="text" id="nomePerfil" name="nomePerfil">
+                        <label for="permissoesPerfil">Permissões:</label>
+                        <select name="permissoesPerfil" id="permissoesPerfil" multiple>
+                            <option value="todas">Todas Permissões</option>
+                            <option value="manutencao">Manutenção</option>
+                            <option value="estoque">Estoque</option>
+                        </select>
+                        <button type="submit">Salvar Perfil</button>
+                    </form>
+                </article>
             </section>
 
             <section id="relatorios">
@@ -339,7 +354,7 @@
                     <div class="seletor">
                       <div id="mostrarTabelas" class="opcao ativo">Geral</div>
                       <div id="mostrarGrafico" class="opcao inativo">Evolução</div>
-                      <div class="indicador" id="indicador"></div>
+                      <div class="indicador" id="indicadorRelatorios"></div>
                     </div>
                 </div>
 
@@ -423,7 +438,7 @@
                         </table>
                     </div>
                 </div>
-                <canvas id="enviosChart" style="display: none;"></canvas>       
+                <canvas id="enviosChart" style="display: none;"></canvas>
                 
             </section>
 
