@@ -74,8 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
+    window.mostrarMenu = mostrarMenu
+
     window.onload = () =>{
-        mostrarMenu()
         alternadorRelatorios()
     }
 })
