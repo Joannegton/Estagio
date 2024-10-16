@@ -48,11 +48,6 @@
                             <label for="dataHoraEvento">Data/Hora do Envio:</label>
                             <input type="datetime-local" id="dataHoraEvento" name="dataHoraEvento" required>
                         </div>
-                        
-                        <div class="container-label">
-                            <label for="numeroRemessa">Número da Remessa:</label>
-                            <input type="text" id="numeroRemessa" name="numeroRemessa" required>
-                        </div>
                     </div>
 
                     <div class="container-label-geral">
@@ -100,7 +95,7 @@
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Mínima">20</td>
                                 <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
@@ -275,7 +270,6 @@
                                 <th>Matricula</th>
                                 <th>Nome</th>
                                 <th>Tipo usuário</th>
-                                <th>Loja</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -284,7 +278,6 @@
                                 <td data-label="Matricula" id="perfil-matricula">254875</td>
                                 <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
                                 <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
-                                <td data-label="Loja" id="perfil-loja">Loja 07</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
                                     <div id="containerBotaoAcao">
                                         <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
@@ -297,7 +290,6 @@
                                 <td data-label="Matricula" id="perfil-matricula">256584</td>
                                 <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
                                 <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
-                                <td data-label="Loja" id="perfil-loja">Loja 07</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
                                     <div id="containerBotaoAcao">
                                         <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
@@ -331,7 +323,7 @@
                         <label for="nomePerfil">Nome do Perfil:</label>
                         <input type="text" id="nomePerfil" name="nomePerfil">
                         <label for="permissoesPerfil">Permissões:</label>
-                        <select name="permissoesPerfil" id="permissoesPerfil" multiple>
+                        <select name="permissoesPerfil" id="permissoesPerfil" multiple style="height: 80px;">
                             <option value="todas">Todas Permissões</option>
                             <option value="manutencao">Manutenção</option>
                             <option value="estoque">Estoque</option>
@@ -365,8 +357,7 @@
                                 <th>Loja</th>
                                 <th>Quantidade Recomendada</th>
                                 <th>Quantidade Mínima</th>
-                                <th>Caixas (físicos)</th>
-                                <th>Caixas (colaboradores)</th>
+                                <th>Nº de Caixas</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
@@ -375,8 +366,7 @@
                                 <td data-label="Loja" id="nomeLoja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Mínima">20</td>
-                                <td data-label="Quantidade Caixas (físicos)">10</td>
-                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
+                                <td data-label="Nº de Caixas">10</td>
                                 <td data-label="Editar" class="acoes">
                                     <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
                                     <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
@@ -386,8 +376,7 @@
                                 <td data-label="Loja">Loja 2</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Mínima">20</td>
-                                <td data-label="Quantidade Caixas (físicos)">10</td>
-                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
+                                <td data-label="Nº de Caixas">10</td>
                                 <td data-label="Editar" class="acoes">
                                     <a href="#" class="botaoAcao" onclick="editarLoja()"><i class="fas fa-edit"></i></a>
                                 </td>
