@@ -261,14 +261,14 @@
             <section id="perfil" style="display: none;">
                 <div class="alternador" style="width: 300px;">
                     <div class="seletor">
-                      <div id="perfis" class="opcao ativo">Usuários</div>
-                      <div id="cadastroPerfis" class="opcao inativo">Cadastrar</div>
-                      <div id="cadastroTipoPerfil" class="opcao inativo">Tipo Perfil</div>
+                      <div id="usuarios" class="opcao ativo">Usuários</div>
+                      <div id="cadastroUsuario" class="opcao inativo">Cadastrar</div>
+                      <div id="perfis" class="opcao inativo">Tipo Perfil</div>
                       <div class="indicador" id="indicadorPerfis" style="width: 33%;"></div>
                     </div>
                 </div>
 
-                <article id="seletorPerfis">
+                <article id="seletorUsuarios">
                     <h2>Perfis de Usuario</h2>
                     <div class="filtro">
                         <label for="filtoUsuarioPerfis">Nome:</label>
@@ -319,28 +319,121 @@
                         <label for="matriculaUsuario">Matricula do Usuario:</label>
                         <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
 
-                        <label for="tipoUsuario">Tipo Usuário:</label>
-                        <select id="tipoUsuario" name="tipoUsuario" multiple>
-                            <option value="todas">Administrador</option>
-                            <option value="manutencao">Gerente</option>
-                            <option value="estoque">Caixa</option>
+                        <label for="tipoUsuario">Tipo Perfil:</label>
+                        <select id="tipoUsuario" name="tipoUsuario">
+                            <option value="administrador">Administrador</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="caixa">Caixa</option>
                         </select>
                         <button type="submit" id="salvarUsuario">Salvar Usuário</button>
                     </form>
                 </article>
 
-                <article id="seletorTipoPerfil" style="display: none;">
-                    <form action="">
-                        <label for="nomePerfil">Nome do Perfil:</label>
-                        <input type="text" id="nomePerfil" name="nomePerfil">
-                        <label for="permissoesPerfil">Permissões:</label>
-                        <select name="permissoesPerfil" id="permissoesPerfil" multiple style="height: 80px;">
-                            <option value="todas">Todas Permissões</option>
-                            <option value="manutencao">Manutenção</option>
-                            <option value="estoque">Estoque</option>
-                        </select>
-                        <button type="submit" id="salvarPerfil">Salvar Perfil</button>
-                    </form>
+                <article id="seletorPerfis" style="display: none;">
+                    <h2>Perfis de Acesso</h2>
+                    <div class="filtro">
+                        <button id="cadastrarPerfil" class="exportarCSV" >Add Perfil</button>
+                    </div>
+                    <table id="tabelaPerfis">
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Permissões</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="profileTableBody">
+                            <tr id="perfil-linha">
+                                <td data-label="Nome do Perfil" id="nome-perfil">Administrador</td>
+                                <td data-label="Permissões" id="perfil-permissoes">Gerente</td>
+                                <td data-label="Ações" class="acoes" id="acoesPerfis">
+                                    <div id="containerBotaoAcao">
+                                        <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                    <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
+                                </td>
+                            </tr>
+                            <tr id="perfil-linha">
+                                <td data-label="Nome do Perfil" id="nome-perfil">Administrador</td>
+                                <td data-label="Permissões" id="perfil-permissoes">Gerente</td>
+                                <td data-label="Ações" class="acoes" id="acoesPerfis">
+                                    <div id="containerBotaoAcao">
+                                        <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                    <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="modal" id="addPerfil">
+                    <aside class="modalContent">
+                        <div class="fechar">
+                            <i class="fas fa-times close-icon" id="fecharMostrarAddPerfil"></i>
+                        </div>
+                        <h2>Cadastrar Perfil</h2>
+                        <form id="perfilCadastroForm">
+                            <label for="nomePerfil">Nome do Perfil:</label>
+                            <input type="text" id="nomePerfil" name="nomePerfil" required>
+
+                            <label for="permissoesPerfil">Permissões:</label>
+                            <table >
+                                <thead>
+                                    <tr>
+                                        <th>Funcionalidade</th>
+                                        <th>Leitura</th>
+                                        <th>Escrita</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Todas</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Perfis</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Permissões</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usuarios</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lojas</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estoque</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Caixas</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estoque Caixa</td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" id="salvarPerfil">Salvar Perfil</button>
+                        </form>
+                    </aside>
                 </article>
             </section>
 

@@ -1,7 +1,7 @@
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js';
 import { exportarEstoque, filtrarLoja, mostrarEstoque } from './estoque.js';
 import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js';
-import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil } from './perfil.js';
+import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil } from './perfil.js';
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja } from './lojas.js';
 import { alternadorRelatorios, exportarRelatorios, mostrarRelatorios } from './relatorios.js';
 import { mostrarMenu } from '../utils.js';
@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('salvarUsuario').addEventListener('click', salvarUsuario)
 
     document.getElementById('salvarPerfil').addEventListener('click', salvarPerfil)   
+
+    document.getElementById('cadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
+
+    document.getElementById('fecharMostrarAddPerfil').addEventListener('click', ()=> {
+        document.getElementById('addPerfil').style.display = 'none'
+    } )
 
     // Lojas
     document.getElementById('filtroLojaLojas').addEventListener('change', ordenarLoja)

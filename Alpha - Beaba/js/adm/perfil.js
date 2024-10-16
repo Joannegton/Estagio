@@ -7,20 +7,20 @@ function mostrarPerfil(){
 }
 
 function alternadorPerfil() {
+    const usuarios = document.getElementById('usuarios');
+    const cadastroUsuario = document.getElementById('cadastroUsuario');
     const perfis = document.getElementById('perfis');
-    const cadastroPerfil = document.getElementById('cadastroPerfis');
-    const tipoPerfil = document.getElementById('cadastroTipoPerfil');
 
+    usuarios.addEventListener('click', () => {
+        alternador3(usuarios, [cadastroUsuario, perfis], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0);
+    });
+    
+    cadastroUsuario.addEventListener('click', () => {
+        alternador3(cadastroUsuario, [usuarios, perfis], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1);
+    });
+    
     perfis.addEventListener('click', () => {
-        alternador3(perfis, [cadastroPerfil, tipoPerfil], 'seletorPerfis', ['seletorCadastro', 'seletorTipoPerfil'], 'indicadorPerfis', 0);
-    });
-    
-    cadastroPerfil.addEventListener('click', () => {
-        alternador3(cadastroPerfil, [perfis, tipoPerfil], 'seletorCadastro', ['seletorPerfis', 'seletorTipoPerfil'], 'indicadorPerfis', 1);
-    });
-    
-    tipoPerfil.addEventListener('click', () => {
-        alternador3(tipoPerfil, [perfis, cadastroPerfil], 'seletorTipoPerfil', ['seletorPerfis', 'seletorCadastro'], 'indicadorPerfis', 2);
+        alternador3(perfis, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2);
     });
 }
 
@@ -69,6 +69,10 @@ function deletarUsuario(){
 function filtrarUsuarioNome(){
     alert('filtrarUsuarioNome')
 }
+function mostrarModalCadastroPerfil(){
+    document.getElementById('addPerfil').style.display = 'flex'
+    esconderElementos('tabelaPerfis')
+}
 
 function salvarPerfil(){
     alert('salvarPerfil')
@@ -78,4 +82,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis }
+export { mostrarModalCadastroPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis }
