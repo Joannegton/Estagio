@@ -6,4 +6,10 @@ function mostrarEnvioTaloes(){
     mostrarMenu()
 }
 
-export { mostrarEnvioTaloes }
+function enviarTalao(){
+    alert('talão enviado')
+}
+
+
+
+export { mostrarEnvioTaloes, enviarTalao }

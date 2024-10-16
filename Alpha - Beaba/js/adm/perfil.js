@@ -24,10 +24,14 @@ function alternadorPerfil() {
     });
 }
 
+function salvarUsuario() {
+    alert('salvarUsuario')
+}
 
-function editarPerfil() {
+function editarUsuario() {
     document.getElementById('containerBotaoAcao').style.display = 'none'
-    
+    document.getElementById('salvarEditarUsuario').style.display = 'block'   
+
     var perfilNome = document.getElementById('perfil-nome')
     var permissoes = document.getElementById('perfil-tipoUsuario')
     var nome = perfilNome.innerText
@@ -40,11 +44,9 @@ function editarPerfil() {
             <option value="estoque">Caixa</option>
         </select>
     `
-
-    document.getElementById('salvar').style.display = 'block'   
 }
 
-function salvarPerfil() {
+function salvarEdicaoUsuario() {
     var inputNome = document.getElementById('input-nome')
     var selectPermissoes = document.getElementById('select-tipoUsuario')
 
@@ -54,10 +56,26 @@ function salvarPerfil() {
     document.getElementById('perfil-nome').innerText = newNome
     document.getElementById('perfil-tipoUsuario').innerText = newPermissoes;
 
-    document.getElementById('salvar').style.display = 'none';
+    document.getElementById('salvarEditarUsuario').style.display = 'none';
     document.getElementById('containerBotaoAcao').style.display = 'block';
     inputNome.remove();
     selectPermissoes.remove();
 }
 
-export { editarPerfil, salvarPerfil, mostrarPerfil, alternadorPerfil }
+function deletarUsuario(){
+    alert('deletarUsuario')
+}
+
+function filtrarUsuarioNome(){
+    alert('filtrarUsuarioNome')
+}
+
+function salvarPerfil(){
+    alert('salvarPerfil')
+}
+
+function exportarPerfis(){
+    alert('exportarPerfis')
+}
+
+export { salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis }

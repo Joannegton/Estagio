@@ -6,4 +6,12 @@ function mostrarEstoque(){
     mostrarMenu()
 }
 
-export { mostrarEstoque }
+function filtrarLoja(){
+    alert('filtrando loja')
+}
+
+function exportarEstoque(){
+    alert('exportando estoque')
+}
+
+export { mostrarEstoque, filtrarLoja, exportarEstoque }

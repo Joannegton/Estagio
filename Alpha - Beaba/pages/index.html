@@ -85,21 +85,16 @@
                         </div>
                     </div>
 
-                    <button type="submit">Registrar Envio</button>
+                    <button type="submit" id="registrarEnvioTalao">Registrar Envio</button>
                 </form>
             </section>
 
             <section id="estoque" style="display: none;">
                 <h2>Gestão de Estoque</h2>
                 <div class="filtro">
-                    <label for="loja">Loja:</label>
-                    <select id="loja" name="loja">
-                        <option value="todas">Todas</option>
-                        <option value="loja1">Loja 1</option>
-                        <option value="loja2">Loja 2</option>
-                        <option value="loja3">Loja 3</option>
-                    </select>
-                    <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                    <label for="filtroLoja">Loja:</label>
+                    <input type="text" name="filtroLoja" id="filtroLoja">
+                    <button id="exportarEstoque" class="exportarCSV">Exportar CSV</button>
                 </div>
                 <div class="tabela-container">
                     <table>
@@ -108,6 +103,7 @@
                                 <th>Loja</th>
                                 <th>Quantidade Recomendada</th>
                                 <th>Quantidade Mínima</th>
+                                <th>Quantidade Atual</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,76 +111,85 @@
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                             <tr>
                                 <td data-label="Loja">Loja 1</td>
                                 <td data-label="Quantidade Recomendada">100</td>
                                 <td data-label="Quantidade Disponível">20</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Loja">Loja 1</td>
-                                <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Disponível">20</td>
+                                <td data-label="Quantidade Atual">20</td>
                             </tr>
                         </tbody>
                     </table>
@@ -194,20 +199,18 @@
             <section id="manutencao" style="display: none;">
                 <h2>Manutenção de Talões</h2>
                 <div class="filtro">
-                    <label for="loja">Loja:</label>
-                    <select id="loja" name="loja">
-                        <option value="todas">Todas</option>
-                        <option value="loja1">Loja 1</option>
-                        <option value="loja2">Loja 2</option>
-                        <option value="loja3">Loja 3</option>
+                    <label for="filtroLojaManutencao">Loja:</label>
+                    <select id="filtroLojaManutencao" name="filtroLojaManutencao">
+                        <option value="asc">A - Z</option>
+                        <option value="desc">Z - A</option>
                     </select>
-                    <label for="status" style="margin-left: 1em;">Status:</label>
-                    <select id="loja" name="status">
+                    <label for="filtroStatusManutencao" style="margin-left: 1em;">Status:</label>
+                    <select id="filtroStatusManutencao" name="filtroStatusManutencao">
                         <option value="todos">Todas</option>
                         <option value="enviado">Enviado</option>
-                        <option value="loja2">Entregue</option>
+                        <option value="entregue">Entregue</option>
                     </select>
-                    <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                    <button id="exportarManutencao" class="exportarCSV">Exportar CSV</button>
                 </div>
 
                 <div class="tabela-container">
@@ -235,10 +238,10 @@
                                 <td data-label="Status" id="statusManutencao">Enviado</td>
                                 <td data-label="Ações" class="acoes">
                                     <div id="containerBotaoAcaoManutencao">
-                                        <a href="#" class="botaoAcao" onclick="editarEnvioTalao()"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="#" class="botaoAcao" id="editarEnvioTalao"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="excluirEnvioTalao"><i class="fas fa-trash-alt"></i></a>
                                     </div>
-                                    <a href="#" class="botaoAcao" id="salvarManutencao" onclick="salvarManutencao()" style="display: none;"><i class="fas fa-save"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEdicaoTalao" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -269,28 +272,12 @@
                     </div>
                 </div>
 
-                <article id="seletorCadastro"  style="display: none;">
-                    <h2>Cadastro de Usuário</h2>
-                    <form id="perfilForm">
-                        <label for="matriculaUsuario">Matricula do Usuario:</label>
-                        <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
-
-                        <label for="tipoUsuario">Tipo Usuário:</label>
-                        <select id="tipoUsuario" name="tipoUsuario" multiple>
-                            <option value="todas">Administrador</option>
-                            <option value="manutencao">Gerente</option>
-                            <option value="estoque">Caixa</option>
-                        </select>
-                        <button type="submit">Salvar Perfil</button>
-                    </form>
-                </article>
-
                 <article id="seletorPerfis">
                     <h2>Perfis de Usuario</h2>
                     <div class="filtro">
-                        <label for="filtoUsuario">Nome:</label>
-                        <input type="text" name="filtoUsuario" id="filtoUsuario">
-                        <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                        <label for="filtoUsuarioPerfis">Nome:</label>
+                        <input type="text" name="filtoUsuarioPerfis" id="filtoUsuarioPerfis">
+                        <button id="exportarPerfis" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                     </div>
                     <table>
                         <thead class="headTabela">
@@ -310,10 +297,10 @@
                                 <td data-label="Loja" id="perfil-loja">Loja 07</td>
                                 <td data-label="Ações" class="acoes" id="acoes">
                                     <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
                                     </div>
-                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -333,7 +320,23 @@
                     </table>
                 </article>
 
-                <article id="seletorTipoPerfil">
+                <article id="seletorCadastro"  style="display: none;">
+                    <h2>Cadastro de Usuário</h2>
+                    <form id="perfilForm">
+                        <label for="matriculaUsuario">Matricula do Usuario:</label>
+                        <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
+
+                        <label for="tipoUsuario">Tipo Usuário:</label>
+                        <select id="tipoUsuario" name="tipoUsuario" multiple>
+                            <option value="todas">Administrador</option>
+                            <option value="manutencao">Gerente</option>
+                            <option value="estoque">Caixa</option>
+                        </select>
+                        <button type="submit" id="salvarUsuario">Salvar Usuário</button>
+                    </form>
+                </article>
+
+                <article id="seletorTipoPerfil" style="display: none;">
                     <form action="">
                         <label for="nomePerfil">Nome do Perfil:</label>
                         <input type="text" id="nomePerfil" name="nomePerfil">
@@ -343,7 +346,79 @@
                             <option value="manutencao">Manutenção</option>
                             <option value="estoque">Estoque</option>
                         </select>
-                        <button type="submit">Salvar Perfil</button>
+                        <button type="submit" id="salvarPerfil">Salvar Perfil</button>
+                    </form>
+                </article>
+            </section>
+
+            <section id="lojas" style="display: none;">
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="todasLojas" class="opcao ativo">Todos</div>
+                      <div id="cadastroLoja" class="opcao inativo">Cadastrar</div>
+                      <div class="indicador" id="indicadorLojas"></div>
+                    </div>
+                </div>
+
+                <article id="seletorLojas">
+                    <div class="filtro">
+                        <label for="filtroLojaLojas">Loja:</label>
+                        <select id="filtroLojaLojas" name="filtroLojaLojas">
+                            <option value="asc">A - Z</option>
+                            <option value="desc">Z - A</option>
+                        </select>
+                    </div>
+
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Loja</th>
+                                <th>Quantidade Recomendada</th>
+                                <th>Quantidade Mínima</th>
+                                <th>Caixas (físicos)</th>
+                                <th>Caixas (colaboradores)</th>
+                                <th>Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Loja" id="nomeLoja">Loja 1</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Caixas (físicos)">10</td>
+                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
+                                <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Loja">Loja 2</td>
+                                <td data-label="Quantidade Recomendada">100</td>
+                                <td data-label="Quantidade Mínima">20</td>
+                                <td data-label="Quantidade Caixas (físicos)">10</td>
+                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
+                                <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" onclick="editarLoja()"><i class="fas fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article id="seletorCadastroLoja" style="display: none;">
+                    <form action="">
+                        <label for="novaLoja">Nome da Loja:</label>
+                        <input type="text" id="novaLoja" name="novaLoja">
+                        <label for="enderecoLoja">Endereço:</label>
+                        <input type="text" id="enderecoLoja" name="enderecoLoja">
+                        <label for="gerenteLoja">Gerente</label>
+                        <select name="gerenteLoja" id="gerenteLoja">
+                            <option value="gerente1">Gerente 1</option>
+                            <option value="gerente2">Gerente 2</option>
+                            <option value="gerente3">Gerente 3</option>
+                        </select>
+                        <button type="submit" id="salvarLoja">Salvar Loja</button>
                     </form>
                 </article>
             </section>
@@ -359,7 +434,7 @@
                 </div>
 
                 <div style="text-align: end;">
-                    <button id="exportarCSV" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
+                    <button id="exportarRelatorios" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                 </div>
                 
                 <div class="dashboard-grid" id="seletorTabela" >
@@ -440,69 +515,6 @@
                 </div>
                 <canvas id="enviosChart" style="display: none;"></canvas>
                 
-            </section>
-
-            <section id="lojas" style="display: none;">
-                <div class="alternador">
-                    <div class="seletor">
-                      <div id="todasLojas" class="opcao ativo">Todos</div>
-                      <div id="cadastroLoja" class="opcao inativo">Cadastrar</div>
-                      <div class="indicador" id="indicadorLojas"></div>
-                    </div>
-                </div>
-
-                <article id="seletorLojas">
-                    <table>
-                        <thead class="headTabela">
-                            <tr>
-                                <th>Loja</th>
-                                <th>Quantidade Recomendada</th>
-                                <th>Quantidade Mínima</th>
-                                <th>Caixas (físicos)</th>
-                                <th>Caixas (colaboradores)</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Loja">Loja 1</td>
-                                <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
-                                <td data-label="Quantidade Caixas (físicos)">10</td>
-                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
-                                <td data-label="Editar" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="editarLoja()"><i class="fas fa-edit"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Loja">Loja 2</td>
-                                <td data-label="Quantidade Recomendada">100</td>
-                                <td data-label="Quantidade Mínima">20</td>
-                                <td data-label="Quantidade Caixas (físicos)">10</td>
-                                <td data-label="Quantidade Caixas (colaboradores)">5</td>
-                                <td data-label="Editar" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="editarLoja()"><i class="fas fa-edit"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
-
-                <article id="seletorCadastroLoja" style="display: none;">
-                    <form action="">
-                        <label for="novaLoja">Nome da Loja:</label>
-                        <input type="text" id="novaLoja" name="novaLoja">
-                        <label for="enderecoLoja">Endereço:</label>
-                        <input type="text" id="enderecoLoja" name="enderecoLoja">
-                        <label for="gerenteLoja">Gerente</label>
-                        <select name="gerenteLoja" id="gerenteLoja">
-                            <option value="gerente1">Gerente 1</option>
-                            <option value="gerente2">Gerente 2</option>
-                            <option value="gerente3">Gerente 3</option>
-                        </select>
-                        <button type="submit">Salvar Loja</button>
-                    </form>
-                </article>
             </section>
 
         </main>

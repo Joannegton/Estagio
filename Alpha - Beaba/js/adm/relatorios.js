@@ -20,6 +20,10 @@ function alternadorRelatorios() {
     });
 }
 
+function exportarRelatorios(){
+    alert('Relatório exportado com sucesso!')
+}
+
 let enviosChart;
 
 function grafico() {
@@ -62,4 +66,4 @@ function grafico() {
 }
 
 
-export { mostrarRelatorios, alternadorRelatorios }
+export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios }
