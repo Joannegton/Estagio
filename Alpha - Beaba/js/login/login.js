@@ -1,31 +1,68 @@
 import { esconderElementos } from "../utils.js";
 
-function mostrarRecuperarSenha(){
+function mostrarRecuperarSenha() {
     document.getElementById('recuperarSenha').style.display = 'flex';
     esconderElementos(['primeiroAcesso']);
 }
 
-function mostrarPrimeiroAcesso(){
+function mostrarPrimeiroAcesso() {
     document.getElementById('primeiroAcesso').style.display = 'flex';
     esconderElementos(['recuperarSenha']);
 }
 
-function mostrarLogin(){
+function mostrarLogin() {
     document.getElementById('login').style.display = 'block';
     esconderElementos(['recuperarSenha', 'primeiroAcesso']);
 }
-function login(){
 
+function login() {
+    const matricula = document.getElementById('matricula').value;
+    const senha = document.getElementById('senha').value;
+
+    if (senha === 'Quero@2024#') {
+        const tipoUsuario = getUserType(matricula); 
+
+        if (tipoUsuario === 'caixa') {
+            window.location.href = 'caixa.html';
+            sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+        } else if (tipoUsuario === 'gerente') {
+            window.location.href = 'gerente.html#perfilAcesso';
+        } else {
+            alert('Perfil inválido para esse login');
+        }
+    } else if (matricula === '123456' && senha === '123456') {
+        const tipoUsuario = getUserType(matricula); // Replace with actual logic to get user type
+
+        if (tipoUsuario === 'caixa') {
+            window.location.href = 'caixa.html';
+        } else if (tipoUsuario === 'gerente') {
+            window.location.href = 'gerente.html';
+        } else if (tipoUsuario === 'admin') {
+            window.location.href = 'index.html';
+        }
+    } else {
+        alert('Matrícula ou senha inválida');
+    }
 }
 
-function logout(){
-
+function getUserType(matricula) {
+    return 'caixa';
 }
 
-function recuperarSenha(){
-    alert('Senha recuperada com sucesso!')
+// Controle de timeout e múltiplos logins
+function checkSession() {
+    if (!sessionStorage.getItem('auth')) {
+        //window.location.href = 'login.html';
+    }
 }
 
+function logout() {
+    // Implement logout functionality
+}
 
+function recuperarSenha() {
+    const email = document.getElementById('email').value;
+    alert(`Instruções de recuperação de senha foram enviadas para ${email}`);
+}
 
-export {login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha }
+export { login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha };

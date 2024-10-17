@@ -21,7 +21,7 @@ nav {
   background-color: var(--cor-primaria);
   color: var(--cor-branco);
   text-align: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -250,10 +250,15 @@ footer {
   background-color: var(--cor-secundaria);
   color: var(--cor-branco);
   text-align: center;
-  padding: 3px 0;
+  padding:  0;
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+footer p {
+  margin: 0;
+  padding: 0.5em;
 }
 
 .dashboard-grid {
@@ -400,7 +405,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 55%;
     background-color: var(--cor-primaria);
     color: var(--cor-branco);
