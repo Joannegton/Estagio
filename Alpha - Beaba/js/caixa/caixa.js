@@ -11,4 +11,11 @@ function mostrarEnvioTaloes(){
     esconderElementos(['perfilUsuario'])
 }
 
-export { mostrarPerfilUsuario, mostrarEnvioTaloes }
+function saidaTalao(e){
+    const data = new FormData(e.target)
+    const talao = data.get('numeroTalao')
+    console.log(talao)
+    alert('Talão enviado com sucesso!')
+}
+
+export { mostrarPerfilUsuario, mostrarEnvioTaloes, saidaTalao }

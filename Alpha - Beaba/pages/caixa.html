@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caixa - Oferte e Ganhe</title>
     <link rel="stylesheet" href="../geral.css">
+    <link rel="stylesheet" href="../style/caixa.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../js/caixa/main.js" type="module"></script>
 </head>
@@ -20,7 +21,7 @@
                 <img src="../logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" id="mostrarEnvioTaloes">Cadastro Talão</a></li>
+                    <li><a href="#" id="mostrarEnvioTaloes">Saída de Talão</a></li>
                 </ul>
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
@@ -40,22 +41,14 @@
 
         <main>
             <section id="saidaTaloes">
-                <form >
+                <h2>Saída de Talão</h2>
+                <form id="formSaidaTalao">
                     <div class="container-label-geral" style="justify-content: center;">
-                        <div class="container-label">
-                            <label for="codigoTalao">Código Talão</label>
-                            <input type="number" name="codigoTalao" id="codigoTalao">
+                        <div class="container-label talao">
+                            <label for="numeroTalao">Número do Talão:</label>
+                            <input type="number" name="numeroTalao" id="numeroTalao">
                         </div>
-                        <i class="fas fa-search" style="margin-left: 1em; font-size: 1.5em;"></i>
                     </div>
-                    
-                    <div class="container-label" style="margin: auto;">
-                        <p class="numeroTalao"><strong>Número do Talão: </strong>2598578584</p>
-                        <p class="cliente"><strong>Nome do Cliente: </strong>Wellington Tavares</p>
-                        <p class="Caixa"><strong>Caixa: </strong>Robervania</p>
-                        <p class="data"><strong>Data: </strong>10/10/2024</p>
-                    </div>
-
                     <button type="submit">Cadastrar</button>
                 </form>
             </section>

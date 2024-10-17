@@ -1,5 +1,5 @@
 import { esconderElementos, logout } from "../utils.js";
-import { mostrarEnvioTaloes, mostrarPerfilUsuario } from "./caixa.js"
+import { mostrarEnvioTaloes, mostrarPerfilUsuario, saidaTalao } from "./caixa.js"
 
 document.addEventListener('DOMContentLoaded',() => {
     // Verifica se é o 1º acesso
@@ -13,4 +13,8 @@ document.addEventListener('DOMContentLoaded',() => {
     document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
     document.getElementById('sair-usuario').addEventListener('click', logout)
 
+    document.getElementById('formSaidaTalao').addEventListener('submit', (e) => {
+        e.preventDefault()
+        saidaTalao(e)
+    })
 })

@@ -58,7 +58,7 @@ create table caixa (
 create table saida_taloes (
     id_saida_talao serial primary key,
     codigo_talao varchar(10),
-    numero_remessa integer references envio_taloes(numero_remessa),
+    data_saida date default current_date,
     matricula varchar(7) references usuario(matricula) on delete cascade
 );
 
