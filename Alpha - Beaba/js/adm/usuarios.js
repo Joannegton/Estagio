@@ -2,7 +2,7 @@ import { alternador, esconderElementos, mostrarMenu } from "../utils.js"
 
 function mostrarUsuarios(){
     document.getElementById('usuarios').style.display = 'block'
-    esconderElementos(['relatorios', 'taloes', 'perfil', 'estoque', 'lojas'])
+    esconderElementos(['relatorios', 'taloes', 'perfil', 'estoque', 'lojas', 'perfilUsuario'])
     mostrarMenu()
 }
 

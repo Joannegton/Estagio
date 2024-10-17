@@ -5,6 +5,7 @@ function mostrarPerfilAcesso(){
     esconderElementos(['estoqueTaloes', 'relatorios', 'editarLoja'])
     mostrarMenu()
 }
+
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
     esconderElementos(['estoqueTaloes', 'relatorios', 'editarLoja', 'perfilAcesso'])

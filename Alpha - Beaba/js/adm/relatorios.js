@@ -2,7 +2,7 @@ import { mostrarMenu, esconderElementos, alternador } from "../utils.js"
 
 function mostrarRelatorios() {
     document.getElementById('relatorios').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'perfil', 'manutencao', 'lojas'])
+    esconderElementos(['envioTaloes', 'estoque', 'perfil', 'manutencao', 'lojas', 'perfilUsuario'])
     mostrarMenu()
 }
 
@@ -24,7 +24,27 @@ function exportarRelatorios(){
     alert('Relatório exportado com sucesso!')
 }
 
-let enviosChart;
+function iconeEstoqueBaixo(){
+    const rows = document.querySelectorAll("#corpoTabelaEstoqueBaixo tr")
+    rows.forEach(row => {
+        const quantidade = row.querySelector(".quantidade");
+        const quantidadeMinima = row.querySelector(".quantidadeMinima");
+
+        if (quantidade && quantidadeMinima) {
+            const quantidadeInt = parseInt(quantidade.textContent, 10);
+            const quantidadeMinimaInt = parseInt(quantidadeMinima.textContent, 10);
+
+            if (quantidadeInt < quantidadeMinimaInt) {
+                if (!quantidade.innerHTML.includes('low-stock')) {
+                    quantidade.innerHTML += ' <span class="low-stock">!</span>';
+                }
+            }
+        }
+    })
+}
+
+
+let enviosChart
 
 function grafico() {
     if (enviosChart) {
@@ -66,4 +86,4 @@ function grafico() {
 }
 
 
-export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios }
+export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo }

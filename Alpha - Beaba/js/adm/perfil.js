@@ -2,7 +2,13 @@ import { alternador, alternador3, mostrarMenu, esconderElementos } from "../util
 
 function mostrarPerfil(){
     document.getElementById('perfil').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas'])
+    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfilUsuario'])
+    mostrarMenu()
+}
+
+function mostrarPerfilUsuario(){
+    document.getElementById('perfilUsuario').style.display = 'block'
+    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
     mostrarMenu()
 }
 
@@ -82,4 +88,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { mostrarModalCadastroPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis }
+export { mostrarModalCadastroPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }

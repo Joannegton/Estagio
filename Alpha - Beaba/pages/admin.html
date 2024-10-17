@@ -27,11 +27,11 @@
                 </ul>
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
-                    <div>
+                    <div id="usuario-info">
                         <p class="usuario-nome">Anderson Malaquias</p>
                         <p class="usuario-nome">234578</p>
                     </div>
-                    <div>
+                    <div id="sair-usuario">
                         <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
                         <p class="usuario-sair">Sair</p>
                     </div> 
@@ -688,21 +688,24 @@
                             <thead class="headTabela">
                                 <tr>
                                     <th>Loja</th>
-                                    <th>Quantidade</th>
+                                    <th>Quant</th>
+                                    <th>Quant Min</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="corpoTabelaEstoqueBaixo">
                                 <tr>
                                     <td data-label="Loja">Loja 1</td>
-                                    <td data-label="Quantidade">2</td>
+                                    <td data-label="Quantidade" class="quantidade">2</td>
+                                    <td data-label="Quantidade Mínima" class="quantidadeMinima">20</td>
                                     <td data-label="Enviar" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="botaoAcao" id="arrumarEstoqueLoja"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td data-label="Loja">Loja 2</td>
                                     <td data-label="Quantidade">7</td>
+                                    <td data-label="Quantidade Mínima">7</td>
                                     <td data-label="Enviar" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     </td>
@@ -710,6 +713,7 @@
                                 <tr>
                                     <td data-label="Loja">Loja 3</td>
                                     <td data-label="Quantidade">12</td>
+                                    <td data-label="Quantidade Mínima">12</td>
                                     <td data-label="Enviar" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     </td>
@@ -717,13 +721,15 @@
                                 <tr>
                                     <td data-label="Loja">Loja 4</td>
                                     <td data-label="Quantidade">14</td>
+                                    <td data-label="Quantidade Mínima">14</td>
                                     <td data-label="Enviar" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    </td>
+                                    </td>a
                                 </tr>
                                 <tr>
                                     <td data-label="Loja">Loja 5</td>
                                     <td data-label="Quantidade">19</td>
+                                    <td data-label="Quantidade Mínima">19</td>
                                     <td data-label="Enviar" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     </td>
@@ -731,6 +737,7 @@
                                 <tr>
                                     <td data-label="Loja">Loja 6</td>
                                     <td data-label="Quantidade">20</td>
+                                    <td data-label="Quantidade Mínima">20</td>
                                     <td data-label="Enviar" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="mostrarEnvioTaloes()"><i class="fas fa-edit"></i></a>
                                     </td>
@@ -741,6 +748,33 @@
                 </div>
                 <canvas id="enviosChart" style="display: none;"></canvas>
                 
+            </section>
+
+            <section id="perfilUsuario" style="display: none;">
+                <h2>Perfil do Usuário</h2>
+                <form >
+                    <div class="container-labe">
+                        <label for="matricula">Matricula:</label>
+                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="container-labe">
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="Repetirsenha">Repetir Senha:</label>
+                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                    </div>
+                    <button type="submit">Salvar</button>
+                </form>
             </section>
 
         </main>

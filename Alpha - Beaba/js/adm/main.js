@@ -1,10 +1,10 @@
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js';
 import { exportarEstoque, filtrarLoja, mostrarEstoque } from './estoque.js';
 import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js';
-import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil } from './perfil.js';
+import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario } from './perfil.js';
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja } from './lojas.js';
-import { alternadorRelatorios, exportarRelatorios, mostrarRelatorios } from './relatorios.js';
-import { mostrarMenu, identificarBaixoEstoque } from '../utils.js';
+import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js';
+import { mostrarMenu, identificarBaixoEstoque, logout } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
@@ -26,8 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     document.getElementById('mostrarRelatorio').addEventListener('click', () => {
         mostrarRelatorios()
+        iconeEstoqueBaixo()
         alternadorRelatorios()
     })
+
+    document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
+    document.getElementById('sair-usuario').addEventListener('click', logout)
 
     // Envio de talões
     document.getElementById('registrarEnvioTalao').addEventListener('click', enviarTalao)
@@ -83,9 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
+    document.getElementById('arrumarEstoqueLoja').addEventListener('click', mostrarEnvioTaloes)
+
+    // Mostrar menu para mobile
     window.mostrarMenu = mostrarMenu
 
+    // Carrega funcionalidades de relatórios pois é a página inicial
     window.onload = () =>{
         alternadorRelatorios()
+        iconeEstoqueBaixo()
     }
 })

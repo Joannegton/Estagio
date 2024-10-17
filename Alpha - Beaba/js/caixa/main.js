@@ -1,4 +1,4 @@
-import { esconderElementos } from "../utils.js";
+import { esconderElementos, logout } from "../utils.js";
 import { mostrarEnvioTaloes, mostrarPerfilUsuario } from "./caixa.js"
 
 document.addEventListener('DOMContentLoaded',() => {
@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded',() => {
     }
 
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', mostrarEnvioTaloes)
-    document.getElementById('mostrarPerfilUsuario').addEventListener('click', mostrarPerfilUsuario)
-
-    
+    document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
+    document.getElementById('sair-usuario').addEventListener('click', logout)
 
 })

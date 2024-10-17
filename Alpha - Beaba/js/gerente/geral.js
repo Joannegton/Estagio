@@ -2,26 +2,37 @@ import { alternadorPerfilAcesso, mostrarPerfilAcesso, buscarNome, exportarPerfis
 import { alternadorRelatorios, mostrarRelatorios, exportarRelatorios, alterarStatus } from './relatorio.js';
 import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js';
 import { mostrarEditarLoja, salvarLoja } from './loja.js';
-import { mostrarMenu } from "../utils.js";
+import { logout, mostrarMenu } from "../utils.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    // Identificar primeiro Acesso
     if(sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
         mostrarPerfilUsuario()
         sessionStorage.removeItem('mostrarPerfilUsuario')
     }
 
-    // Estoque
+    // Menu navegação
     document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes);
-    document.getElementById('reporEstoque').addEventListener('click', reporEstoque)
-    document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque);
-    
-    // Perfis
     document.getElementById('mostrarGestaoPerfil').addEventListener('click', ()=>{
         mostrarPerfilAcesso()
         alternadorPerfilAcesso()
     })
+    document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
+    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', ()=>{
+        mostrarRelatorios()
+        alternadorRelatorios()
+    })
+
+    document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
+    document.getElementById('sair-usuario').addEventListener('click', logout)
+
+    // Estoque
+    document.getElementById('reporEstoque').addEventListener('click', reporEstoque)
+    document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque);
+    
+    // Perfis
+    
 
     document.getElementById('filtroUsuario').addEventListener('input', buscarNome)
     
@@ -38,15 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('deletarPerfil').addEventListener('click', deletarPerfil)
 
     // Ações relacionadas a Loja
-    document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
 
     document.getElementById('salvarLoja').addEventListener('click', salvarLoja)
 
     // Ações relacionadas a relatorios
-    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', ()=>{
-        mostrarRelatorios()
-        alternadorRelatorios()
-    })
+    
 
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
 

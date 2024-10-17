@@ -5,6 +5,7 @@ function mostrarPerfilUsuario(){
     esconderElementos(['saidaTaloes'])
 }
 
+
 function mostrarEnvioTaloes(){
     document.getElementById('saidaTaloes').style.display = 'block'
     esconderElementos(['perfilUsuario'])

@@ -14,7 +14,7 @@ function alternadorLojas(){
 
 function mostrarLojas(){
     document.getElementById('lojas').style.display = 'block'
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'estoque'])
+    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'estoque', 'perfilUsuario'])
     mostrarMenu()
 }
 

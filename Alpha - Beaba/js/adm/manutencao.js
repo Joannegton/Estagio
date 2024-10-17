@@ -2,7 +2,7 @@ import { esconderElementos, mostrarMenu } from "../utils.js"
 
 function mostrarManutencao(){
     document.getElementById('manutencao').style.display = 'block'
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'estoque', 'lojas'])
+    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'estoque', 'lojas', 'perfilUsuario'])
     mostrarMenu()
 }
 

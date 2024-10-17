@@ -52,4 +52,10 @@ function identificarBaixoEstoque(){
     });
 }
 
-export { mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque};
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+}
+
+export { mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout};

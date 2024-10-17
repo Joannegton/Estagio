@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
     document.getElementById('mostrarPrimeiroAcesso').addEventListener('click', mostrarPrimeiroAcesso)
     document.getElementById('mostrarRecuperarSenha').addEventListener('click', mostrarRecuperarSenha)
-    
+
     document.getElementById('fecharRecuperarSenha').addEventListener('click', mostrarLogin)
     document.getElementById('fecharMostrarLogin').addEventListener('click', mostrarLogin)
     
