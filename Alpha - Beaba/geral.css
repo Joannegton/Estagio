@@ -143,6 +143,8 @@ form {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  width: 650px;
+  margin: auto;
 }
 
 .container-label {
@@ -173,9 +175,6 @@ form select {
   margin-bottom: 1em;
 }
 
-form select#tipoUsuario {
-  height: 66px;
-}
 
 form button {
   background-color: var(--cor-primaria);
@@ -501,6 +500,7 @@ footer p {
   .container-label-geral {
     flex-direction: column;
     align-items: center;
+    width: fit-content;
   }
 
   .headTabela {

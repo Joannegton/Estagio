@@ -31,11 +31,25 @@ function alternador3(elementoAtivo, elementosDesativar, ativar, desativarArr, in
     document.getElementById(indicador).style.transform = `translateX(${posicao * 100}%)`; 
 }
 
-
 function esconderElementos(ids) {
     ids.forEach(id => {
         document.getElementById(id).style.display = 'none';
     });
 }
 
-export { mostrarMenu, alternador, alternador3, esconderElementos };
+function identificarBaixoEstoque(){
+    const rows = document.querySelectorAll('tr');
+    rows.forEach(row => {
+        const quantRecomendada = row.querySelector('.quant-minima');
+        const quantAtual = row.querySelector('.quant-atual');
+        if (quantRecomendada && quantAtual) {
+            const recomendadaValue = parseInt(quantRecomendada.textContent, 10);
+            const atualValue = parseInt(quantAtual.textContent, 10);
+            if (atualValue < recomendadaValue) {
+                quantAtual.classList.add('quant-atual-baixa');
+            }
+        }
+    });
+}
+
+export { mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque};

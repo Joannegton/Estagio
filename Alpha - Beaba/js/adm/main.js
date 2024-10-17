@@ -4,14 +4,17 @@ import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManu
 import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil } from './perfil.js';
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja } from './lojas.js';
 import { alternadorRelatorios, exportarRelatorios, mostrarRelatorios } from './relatorios.js';
-import { mostrarMenu } from '../utils.js';
+import { mostrarMenu, identificarBaixoEstoque } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', () =>{
         mostrarEnvioTaloes()
     })
-    document.getElementById('mostrarEstoque').addEventListener('click', mostrarEstoque)
+    document.getElementById('mostrarEstoque').addEventListener('click', () => {
+        mostrarEstoque()
+        identificarBaixoEstoque()
+    })
     document.getElementById('mostrarManutencao').addEventListener('click', mostrarManutencao)
     document.getElementById('mostrarPerfil').addEventListener('click', () => {
         mostrarPerfil()
