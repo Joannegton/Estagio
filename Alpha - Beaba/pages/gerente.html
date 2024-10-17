@@ -21,9 +21,20 @@
                     <li><a href="#" id="mostrarGestaoLoja">Loja</a></li>
                     <li><a href="#" id="mostrarGestaoRelatorio">Relatorios</a></li>
                 </ul>
+                <div class="usuario">
+                    <i class="fas fa-user usuario-icon" ></i> 
+                    <div>
+                        <p class="usuario-nome">Anderson Malaquias</p>
+                        <p class="usuario-nome">234578</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
+                        <p class="usuario-sair">Sair</p>
+                    </div> 
+                </div>
             </nav>
             <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
-            <h1 class="titulo-mobile">Oferte e Ganhe</h1>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
 
         <main>
@@ -268,8 +279,32 @@
                 </article>
             </section>
 
-            <section id="PerfilUsuario"></section>
-
+            <section id="perfilUsuario" style="display: none;">
+                <h2>Perfil do Usuário</h2>
+                <form >
+                    <div class="container-labe">
+                        <label for="matricula">Matricula:</label>
+                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="container-labe">
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                    </div>
+                    <div class="container-labe">
+                        <label for="Repetirsenha">Repetir Senha:</label>
+                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                    </div>
+                    <button type="submit">Salvar</button>
+                </form>
+            </section>
         </main>
     </div>
     <footer>

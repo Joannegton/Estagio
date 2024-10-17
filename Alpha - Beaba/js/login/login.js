@@ -25,28 +25,35 @@ function login() {
         if (tipoUsuario === 'caixa') {
             window.location.href = 'caixa.html';
             sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+
         } else if (tipoUsuario === 'gerente') {
-            window.location.href = 'gerente.html#perfilAcesso';
+            window.location.href = 'gerente.html';
+            sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+
         } else {
             alert('Perfil inválido para esse login');
         }
+
     } else if (matricula === '123456' && senha === '123456') {
         const tipoUsuario = getUserType(matricula); // Replace with actual logic to get user type
 
         if (tipoUsuario === 'caixa') {
             window.location.href = 'caixa.html';
+
         } else if (tipoUsuario === 'gerente') {
             window.location.href = 'gerente.html';
+
         } else if (tipoUsuario === 'admin') {
             window.location.href = 'index.html';
         }
+        
     } else {
         alert('Matrícula ou senha inválida');
     }
 }
 
 function getUserType(matricula) {
-    return 'caixa';
+    return 'gerente';
 }
 
 // Controle de timeout e múltiplos logins

@@ -1,4 +1,4 @@
-import { alternadorPerfilAcesso, mostrarPerfilAcesso, buscarNome, exportarPerfis, cadastroMassa, cadastrarPerfil, mostrarInput, salvarEdicaoCaixa, deletarPerfil } from './perfil.js';
+import { alternadorPerfilAcesso, mostrarPerfilAcesso, buscarNome, exportarPerfis, cadastroMassa, cadastrarPerfil, mostrarInput, salvarEdicaoCaixa, deletarPerfil, mostrarPerfilUsuario } from './perfil.js';
 import { alternadorRelatorios, mostrarRelatorios, exportarRelatorios, alterarStatus } from './relatorio.js';
 import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js';
 import { mostrarEditarLoja, salvarLoja } from './loja.js';
@@ -6,6 +6,11 @@ import { mostrarMenu } from "../utils.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    if(sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
+        mostrarPerfilUsuario()
+        sessionStorage.removeItem('mostrarPerfilUsuario')
+    }
 
     // Estoque
     document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes);

@@ -4,7 +4,7 @@ import { mostrarEnvioTaloes, mostrarPerfilUsuario } from "./caixa.js"
 document.addEventListener('DOMContentLoaded',() => {
     // Verifica se é o 1º acesso
     if (sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
-        esconderElementos(['saidaTaloes'])
+        //esconderElementos(['relatorios'])
         mostrarPerfilUsuario()
         sessionStorage.removeItem('mostrarPerfilUsuario')
     }
