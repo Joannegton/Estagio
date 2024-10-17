@@ -75,6 +75,8 @@ function deletarUsuario(){
 function filtrarUsuarioNome(){
     alert('filtrarUsuarioNome')
 }
+
+// Cadastro de Perfil
 function mostrarModalCadastroPerfil(){
     document.getElementById('addPerfil').style.display = 'flex'
     esconderElementos('tabelaPerfis')
@@ -84,8 +86,27 @@ function salvarPerfil(){
     alert('salvarPerfil')
 }
 
+function mostrarModalEditPerfil(){
+    document.getElementById('modalEditPerfil').style.display = 'flex'
+}
+
+function editarPerfil(){
+    mostrarModalEditPerfil()
+}
+
+function salvarEditarPerfil(){
+    alert('Perfil Editado')
+}
+
+function deletarPerfil(){
+    const confirmacao = confirm('Tem certeza que deseja deletar o perfil?');
+    if (confirmacao) {
+        alert('Perfil deletado com sucesso.');
+    }
+}
+
 function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { mostrarModalCadastroPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }
+export { deletarPerfil, mostrarModalCadastroPerfil, editarPerfil, salvarEditarPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }

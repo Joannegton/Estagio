@@ -23,28 +23,43 @@ function salvarLoja(){
 }
 
 function editarLoja(){
-    document.getElementById('editarLoja').style.display = 'none'
+    esconderElementos(['editarLoja'])
     document.getElementById('salvarEditarLoja').style.display = 'block'
 
-    var nomeLoja = document.getElementById('nomeLoja')
-    var nome = nomeLoja.innerText
+    let nomeLoja = document.getElementById('nomeLoja')
+    let nome = nomeLoja.innerText
+
+    let qntCaixas = document.getElementById('qntCaixas')
+    let qnt = parseInt(qntCaixas.innerText)
 
     nomeLoja.innerHTML = '<input type="text" id="input-nomeLoja" value="' + nome + '">'
+    qntCaixas.innerHTML = '<input type="number" id="input-qntCaixas" value="' + qnt + '">'
+    
 }
 
 function salvarEditarLoja(){
-    var inputNome = document.getElementById('input-nomeLoja')
-    var newNome = inputNome.value
+    let inputNome = document.getElementById('input-nomeLoja')
+    let newNome = inputNome.value
+
+    let inputQnt = document.getElementById('input-qntCaixas')
+    let novaQnt = inputQnt.value
 
     document.getElementById('nomeLoja').innerText = newNome
+    document.getElementById('qntCaixas').innerText = novaQnt
 
-    document.getElementById('salvarEditarLoja').style.display = 'none'
+    esconderElementos(['salvarEditarLoja'])
     document.getElementById('editarLoja').style.display = 'block'
     inputNome.remove()
+    inputQnt.remove()
 }
 
 function ordenarLoja(){
     alert('Ordenar loja')
 }
 
-export { mostrarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+function exportarLojas(){
+    alert('Exportar lojas')
+}
+
+
+export { mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }

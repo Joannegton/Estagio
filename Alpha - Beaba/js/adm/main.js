@@ -1,10 +1,10 @@
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js';
 import { exportarEstoque, filtrarLoja, mostrarEstoque } from './estoque.js';
 import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js';
-import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario } from './perfil.js';
-import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja } from './lojas.js';
+import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario, editarPerfil, salvarEditarPerfil, deletarPerfil } from './perfil.js';
+import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja, exportarLojas } from './lojas.js';
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js';
-import { mostrarMenu, identificarBaixoEstoque, logout } from '../utils.js';
+import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
@@ -67,27 +67,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('salvarUsuario').addEventListener('click', salvarUsuario)
 
-    document.getElementById('salvarPerfil').addEventListener('click', salvarPerfil)   
-
     document.getElementById('cadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
-
+    
+    document.getElementById('salvarPerfil').addEventListener('click', salvarPerfil)  
+    
     document.getElementById('fecharMostrarAddPerfil').addEventListener('click', ()=> {
-        document.getElementById('addPerfil').style.display = 'none'
+        esconderElementos(['addPerfil'])
     } )
+
+    document.getElementById('editarPerfil').addEventListener('click', editarPerfil)
+
+    document.getElementById('deletarPerfis').addEventListener('click', deletarPerfil)
+
+    document.getElementById('formSalvarEditarPermissoes').addEventListener('submit', salvarEditarPerfil)
+
+    document.getElementById('fecharModalEditPermissoes').addEventListener('click', () => {
+        esconderElementos(['modalEditPerfil'])
+    })
+
 
     // Lojas
     document.getElementById('filtroLojaLojas').addEventListener('change', ordenarLoja)
+
+    document.getElementById('exportarLojas').addEventListener('click', exportarLojas)
 
     document.getElementById('editarLoja').addEventListener('click', editarLoja)
 
     document.getElementById('salvarEditarLoja').addEventListener('click', salvarEditarLoja)
 
-    document.getElementById('salvarLoja').addEventListener('click', salvarLoja)   
+    document.getElementById('salvarLoja').addEventListener('submit', salvarLoja)   
+
 
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
     document.getElementById('arrumarEstoqueLoja').addEventListener('click', mostrarEnvioTaloes)
+
 
     // Mostrar menu para mobile
     window.mostrarMenu = mostrarMenu
