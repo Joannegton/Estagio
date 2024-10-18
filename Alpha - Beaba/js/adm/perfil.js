@@ -12,6 +12,7 @@ function mostrarPerfilUsuario(){
     mostrarMenu()
 }
 
+
 function alternadorPerfil() {
     const usuarios = document.getElementById('usuarios');
     const cadastroUsuario = document.getElementById('cadastroUsuario');
@@ -27,9 +28,11 @@ function alternadorPerfil() {
     
     perfis.addEventListener('click', () => {
         alternador3(perfis, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2);
+        mostrarPermissoes()
     });
 }
 
+// Usuario
 function salvarUsuario() {
     alert('salvarUsuario')
 }
@@ -76,7 +79,30 @@ function filtrarUsuarioNome(){
     alert('filtrarUsuarioNome')
 }
 
-// Cadastro de Perfil
+// Perfil
+function mostrarPermissoes(){
+    const permissoes = {
+        leitura: ['Perfis', 'Usuarios', 'Lojas', 'Estoque'],
+        escrita: ['Perfis', 'Usuarios', 'Lojas']
+    }
+
+    document.querySelectorAll('.visualizar').forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            const tipo = this.getAttribute('data-tipo');
+            const data = permissoes[tipo];
+            if (data) {
+                this.setAttribute('data-content', data.join(', '));
+            } else {
+                console.error('Tipo de permissão não encontrado:', tipo);
+            }
+        })
+    })
+}
+
+function modalVisualizarPermissoes(){
+    document.getElementById('modalVisualizarPermissoes').style.display = 'flex'
+}
+
 function mostrarModalCadastroPerfil(){
     document.getElementById('addPerfil').style.display = 'flex'
     esconderElementos('tabelaPerfis')
@@ -109,4 +135,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { deletarPerfil, mostrarModalCadastroPerfil, editarPerfil, salvarEditarPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }
+export { modalVisualizarPermissoes, deletarPerfil, mostrarModalCadastroPerfil, editarPerfil, salvarEditarPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }

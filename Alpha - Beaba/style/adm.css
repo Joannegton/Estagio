@@ -20,3 +20,31 @@
     white-space: nowrap;
     z-index: 10;
   }
+
+
+
+.visualizar {
+  position: relative;
+  cursor: pointer;
+}
+
+.visualizar::after {
+  content: attr(data-content);
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  top: -25px;
+  left: 0;
+  white-space: nowrap;
+  z-index: 10;
+  display: none;
+}
+
+.visualizar:hover{
+  color: var(--cor-primaria);
+}
+
+.visualizar:hover::after {
+  display: block;
+}
