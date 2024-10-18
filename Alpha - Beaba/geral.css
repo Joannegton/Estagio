@@ -41,6 +41,7 @@ header{
 
 header nav img {
   width: 80%;
+  margin: auto;
   margin-top: 10px;
 }
 
@@ -290,10 +291,19 @@ tr:hover {
 .tabela-container {
   max-height: 400px;
   overflow-y: auto;
-  width: fit-content;
+  margin: 0 auto;
+  position: relative;
   min-width: 60%;
-  margin: auto;
+  width: fit-content;
 }
+
+.tabela-container thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--cor-terciaria);
+}
+
 
 /* -Botão- */
 button {
@@ -520,6 +530,9 @@ footer p {
     display: none;
   }
 
+  .tabela-container{
+    width: 100%;
+  }
   table,
   thead,
   tbody,
