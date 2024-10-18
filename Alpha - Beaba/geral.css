@@ -127,8 +127,8 @@ main {
 section {
   background-color: var(--cor-branco);
   border: 1px solid var(--cor-secundaria);
+  padding: 1em 0;
   border-radius: 5px;
-  padding: 15px;
   margin-bottom: 20px;
 }
 
@@ -196,15 +196,31 @@ form button:hover {
   background-color: var(--cor-primaria-hover);
 }
 
-/* -filtro e alternado- */
+/* -filtro e alternador- */
 .filtro {
   display: flex;
   justify-content: right;
+  align-items: center;
   margin-bottom: 1em;
+  background-color: rgba(255, 255, 0, 0.514);
+  padding: 10px 0;
 }
+
 
 .filtro label {
   margin-right: 0.2em;
+  font-weight: bold;
+}
+
+.exportarCSV {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  border: none;
+  border-radius: 5px;
+  padding: .3em;
+  cursor: pointer;
+  margin-left: .3em;
+  margin-right: 10%;
 }
 
 #fechar {
@@ -257,8 +273,6 @@ table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  margin-bottom: 2em;
-  margin: 0 auto;
 
 }
 
@@ -297,7 +311,7 @@ tr:hover {
   width: fit-content;
 }
 
-.tabela-container thead {
+.tabela-container .headTabela {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -324,16 +338,6 @@ a.botaoAcao {
   margin-right: 10px;
   color: var(--cor-primaria);
   text-decoration: none;
-}
-
-.exportarCSV {
-  background-color: var(--cor-primaria);
-  color: var(--cor-branco);
-  border: none;
-  border-radius: 5px;
-  padding: 0.1em;
-  cursor: pointer;
-  margin-left: 0.2em;
 }
 
 /* -Relatorios- */
@@ -454,7 +458,7 @@ footer p {
     color: var(--cor-branco);
     text-align: center;
     display: none;
-    z-index: 1;
+    z-index: 1000;
   }
 
   #fechar {
@@ -531,7 +535,7 @@ footer p {
   }
 
   .tabela-container{
-    width: 100%;
+    width: 95%;
   }
   table,
   thead,
