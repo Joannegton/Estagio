@@ -35,8 +35,12 @@ nav {
   display: none;
 }
 
+header{
+  width: 30%;
+}
+
 header nav img {
-  height: 150px;
+  width: 80%;
   margin-top: 10px;
 }
 
@@ -250,8 +254,11 @@ form button:hover {
 /* -Tabelas- */
 table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   margin-bottom: 2em;
+  margin: 0 auto;
+
 }
 
 table,
@@ -262,7 +269,7 @@ td {
 
 th,
 td {
-  padding: 0.2em;
+  padding: 0.3em;
   text-align: left;
 }
 
@@ -283,6 +290,9 @@ tr:hover {
 .tabela-container {
   max-height: 400px;
   overflow-y: auto;
+  width: fit-content;
+  min-width: 60%;
+  margin: auto;
 }
 
 /* -Botão- */
@@ -401,9 +411,8 @@ footer p {
   to { opacity: 1; }
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  
+/* Responsividade Tablet */
+@media (max-width: 1000px) {
   html{
     height: fit-content;
   }
@@ -422,6 +431,7 @@ footer p {
     align-items: center;
     background-color: #4caf4f8a;
     padding: 0.5em;
+    width: 100%;
   }
 
   nav {
@@ -496,7 +506,10 @@ footer p {
   header h1.tituloMobile {
     display: block;
   }
+}
 
+/* Responsividade Mobile*/
+@media (max-width: 768px) {
   .container-label-geral {
     flex-direction: column;
     align-items: center;

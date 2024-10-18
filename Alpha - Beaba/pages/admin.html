@@ -318,79 +318,81 @@
                         <input type="text" name="filtoUsuarioPerfis" id="filtoUsuarioPerfis">
                         <button id="exportarPerfis" class="exportarCSV" onclick="exportarCsv()">Exportar CSV</button>
                     </div>
-                    <table>
-                        <thead class="headTabela">
-                            <tr>
-                                <th>Matricula</th>
-                                <th>Nome</th>
-                                <th>Tipo usuário</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="profileTableBody">
-                            <tr id="perfil-linha">
-                                <td data-label="Matricula" id="perfil-matricula">254875</td>
-                                <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="edit" ><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Matricula" id="perfil-matricula">268741</td>
-                                <td data-label="Nome do Perfil" id="perfil-nome">Juliana Costa</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Admin</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Matricula" id="perfil-matricula">274896</td>
-                                <td data-label="Nome do Perfil" id="perfil-nome">Fernando Oliveira</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="edit" ><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Matricula" id="perfil-matricula">286954</td>
-                                <td data-label="Nome do Perfil" id="perfil-nome">Carla Souza</td>
-                                <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
-                                <td data-label="Ações" class="acoes" id="acoes">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
+                    <div class="tabela-container">
+                        <table>
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Matricula</th>
+                                    <th>Nome</th>
+                                    <th>Tipo usuário</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profileTableBody">
+                                <tr id="perfil-linha">
+                                    <td data-label="Matricula" id="perfil-matricula">254875</td>
+                                    <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
+                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
+                                    <td data-label="Ações" class="acoes" id="acoes">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
+                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
+                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
+                                    <td data-label="Ações" class="acoes" id="acoes">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="edit" ><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Matricula" id="perfil-matricula">268741</td>
+                                    <td data-label="Nome do Perfil" id="perfil-nome">Juliana Costa</td>
+                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Admin</td>
+                                    <td data-label="Ações" class="acoes" id="acoes">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Matricula" id="perfil-matricula">274896</td>
+                                    <td data-label="Nome do Perfil" id="perfil-nome">Fernando Oliveira</td>
+                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa</td>
+                                    <td data-label="Ações" class="acoes" id="acoes">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="edit" ><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Matricula" id="perfil-matricula">286954</td>
+                                    <td data-label="Nome do Perfil" id="perfil-nome">Carla Souza</td>
+                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Gerente</td>
+                                    <td data-label="Ações" class="acoes" id="acoes">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarUsuarioPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarUsuarioPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarUsuario" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
                         
-                    </table>
+                        </table>
+                    </div>
                 </article>
 
                 <article id="seletorCadastro"  style="display: none;">
@@ -419,57 +421,59 @@
                             <input type="text" id="nomePerfil" name="nomePerfil" required>
 
                             <label for="permissoesPerfil">Permissões:</label>
-                            <table >
-                                <thead>
-                                    <tr>
-                                        <th>Funcionalidade</th>
-                                        <th>Leitura</th>
-                                        <th>Escrita</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Todas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Perfis</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Permissões</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Usuarios</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lojas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Estoque</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Caixas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Estoque Caixa</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="tabela-container">
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th>Funcionalidade</th>
+                                            <th>Leitura</th>
+                                            <th>Escrita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Todas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Perfis</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Permissões</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Usuarios</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lojas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estoque</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caixas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estoque Caixa</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button type="submit" id="salvarPerfil">Salvar Perfil</button>
                         </form>
                     </aside>
@@ -480,62 +484,64 @@
                     <div class="filtro">
                         <button id="cadastrarPerfil" class="exportarCSV">Add Perfil</button>
                     </div>
-                    <table id="tabelaPerfis">
-                        <thead class="headTabela">
-                            <tr>
-                                <th>Nome</th>
-                                <th>Permissões</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="profileTableBody">
-                            <tr id="perfil-linha">
-                                <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
-                                <td data-label="Permissões" id="perfil-permissoes">
-                                    <span class="visualizar" data-tipo="leitura">Leitura</span> | 
-                                    <span class="visualizar" data-tipo="escrita">Escrita</span> |
-                                    <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
-                                </td>
-                                <td data-label="Ações" class="acoes" id="acoesPerfis">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr id="perfil-linha">
-                                <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
-                                <td data-label="Permissões" id="perfil-permissoes">
-                                    <span class="visualizar" data-tipo="leitura">Leitura</span> | 
-                                    <span class="visualizar" data-tipo="escrita">Escrita</span> |
-                                    <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
-                                </td>
-                                <td data-label="Ações" class="acoes" id="acoesPerfis">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr id="perfil-linha">
-                                <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
-                                <td data-label="Permissões" id="perfil-permissoes">
-                                    <span class="visualizar" data-tipo="leitura">Leitura</span> | 
-                                    <span class="visualizar" data-tipo="escrita">Escrita</span> |
-                                    <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
-                                </td>
-                                <td data-label="Ações" class="acoes" id="acoesPerfis">
-                                    <div id="containerBotaoAcao">
-                                        <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="tabela-container">
+                        <table id="tabelaPerfis">
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Permissões</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profileTableBody">
+                                <tr id="perfil-linha">
+                                    <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
+                                    <td data-label="Permissões" id="perfil-permissoes">
+                                        <span class="visualizar" data-tipo="leitura">Leitura</span> |
+                                        <span class="visualizar" data-tipo="escrita">Escrita</span> |
+                                        <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                    <td data-label="Ações" class="acoes" id="acoesPerfis">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr id="perfil-linha">
+                                    <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
+                                    <td data-label="Permissões" id="perfil-permissoes">
+                                        <span class="visualizar" data-tipo="leitura">Leitura</span> |
+                                        <span class="visualizar" data-tipo="escrita">Escrita</span> |
+                                        <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                    <td data-label="Ações" class="acoes" id="acoesPerfis">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                                <tr id="perfil-linha">
+                                    <td data-label="Nome do Perfil" id="nome-perfil">Gerente</td>
+                                    <td data-label="Permissões" id="perfil-permissoes">
+                                        <span class="visualizar" data-tipo="leitura">Leitura</span> |
+                                        <span class="visualizar" data-tipo="escrita">Escrita</span> |
+                                        <a href="#" class="botaoAcao" id="visualizarPermissoes"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                    <td data-label="Ações" class="acoes" id="acoesPerfis">
+                                        <div id="containerBotaoAcao">
+                                            <a href="#" class="botaoAcao" id="editarPerfis"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="botaoAcao" id="deletarPerfis"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <a href="#" class="botaoAcao" id="salvarEditarPerfis" style="display: none;"><i class="fas fa-save"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <article class="modal" id="modalVisualizarPermissoes">
@@ -544,68 +550,8 @@
                             <i class="fas fa-times close-icon" id="fecharModalVisualizarPermissoes"></i>
                         </div>
                         <h2>Permissões Gerente</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Funcionalidade</th>
-                                    <th>Leitura</th>
-                                    <th>Escrita</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Todas</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_todas"  disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_todas"  disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Perfis</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_perfis" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_perfis" checked disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Permissões</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_permissoes"  disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_permissoes"  disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Usuarios</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_usuarios" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_usuarios" checked disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Lojas</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_lojas" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_lojas" checked disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Estoque</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_estoque" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_estoque" checked disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Caixas</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_caixas" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_caixas" checked disabled></td>
-                                </tr>
-                                <tr>
-                                    <td>Estoque Caixa</td>
-                                    <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa" checked disabled></td>
-                                    <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa" checked disabled></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </aside>
-                </article>
-
-                <article class="modal" id="modalEditPerfil">
-                    <aside class="modalContent">
-                        <div class="fechar">
-                            <i class="fas fa-times close-icon" id="fecharModalEditPermissoes"></i> 
-                        </div>
-                        <h2>Editar Permissões</h2>
-                        <form id="formSalvarEditarPermissoes">
-                            <table >
+                        <div class="tabela-container">
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Funcionalidade</th>
@@ -616,46 +562,110 @@
                                 <tbody>
                                     <tr>
                                         <td>Todas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_todas"  disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_todas"  disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Perfis</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_perfis" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_perfis" checked disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Permissões</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_permissoes"  disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_permissoes"  disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Usuarios</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_usuarios" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_usuarios" checked disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Lojas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_lojas" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_lojas" checked disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Estoque</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque" checked disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Caixas</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_caixas" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_caixas" checked disabled></td>
                                     </tr>
                                     <tr>
                                         <td>Estoque Caixa</td>
-                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
-                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
+                                        <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa" checked disabled></td>
+                                        <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa" checked disabled></td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </aside>
+                </article>
+
+                <article class="modal" id="modalEditPerfil">
+                    <aside class="modalContent">
+                        <div class="fechar">
+                            <i class="fas fa-times close-icon" id="fecharModalEditPermissoes"></i> 
+                        </div>
+                        <h2>Editar Permissões</h2>
+                        <form id="formSalvarEditarPermissoes">
+                            <div class="tabela-container">
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th>Funcionalidade</th>
+                                            <th>Leitura</th>
+                                            <th>Escrita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Todas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Perfis</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Permissões</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Usuarios</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lojas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estoque</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caixas</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estoque Caixa</td>
+                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
+                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button type="submit" >Salvar Permissões</button>
                         </form>
                     </aside>
@@ -683,90 +693,92 @@
                         <button id="exportarLojas" class="exportarCSV">Exportar CSV</button>
                     </div>
 
-                    <table>
-                        <thead class="headTabela">
-                            <tr>
-                                <th>Loja</th>
-                                <th>Quantidade Recomendada</th>
-                                <th>Quantidade Mínima</th>
-                                <th>Nº de Caixas</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                              <td data-label="Loja" id="nomeLoja">Loja 1</td>
-                              <td data-label="Quantidade Recomendada">100</td>
-                              <td data-label="Quantidade Mínima">20</td>
-                              <td data-label="Nº de Caixas" id="qntCaixas">10</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 2</td>
-                              <td data-label="Quantidade Recomendada">150</td>
-                              <td data-label="Quantidade Mínima">30</td>
-                              <td data-label="Nº de Caixas">15</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 3</td>
-                              <td data-label="Quantidade Recomendada">80</td>
-                              <td data-label="Quantidade Mínima">15</td>
-                              <td data-label="Nº de Caixas">8</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 4</td>
-                              <td data-label="Quantidade Recomendada">200</td>
-                              <td data-label="Quantidade Mínima">50</td>
-                              <td data-label="Nº de Caixas">20</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 5</td>
-                              <td data-label="Quantidade Recomendada">120</td>
-                              <td data-label="Quantidade Mínima">25</td>
-                              <td data-label="Nº de Caixas">12</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 6</td>
-                              <td data-label="Quantidade Recomendada">90</td>
-                              <td data-label="Quantidade Mínima">18</td>
-                              <td data-label="Nº de Caixas">9</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td data-label="Loja">Loja 7</td>
-                              <td data-label="Quantidade Recomendada">110</td>
-                              <td data-label="Quantidade Mínima">22</td>
-                              <td data-label="Nº de Caixas">11</td>
-                              <td data-label="Editar" class="acoes">
-                                <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
-                              </td>
-                            </tr>
-                          </tbody>
-                          
-                    </table>
+                    <div class="tabela-container">
+                        <table>
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Loja</th>
+                                    <th>Quantidade Recomendada</th>
+                                    <th>Quantidade Mínima</th>
+                                    <th>Nº de Caixas</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td data-label="Loja" id="nomeLoja">Loja 1</td>
+                                  <td data-label="Quantidade Recomendada">100</td>
+                                  <td data-label="Quantidade Mínima">20</td>
+                                  <td data-label="Nº de Caixas" id="qntCaixas">10</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 2</td>
+                                  <td data-label="Quantidade Recomendada">150</td>
+                                  <td data-label="Quantidade Mínima">30</td>
+                                  <td data-label="Nº de Caixas">15</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 3</td>
+                                  <td data-label="Quantidade Recomendada">80</td>
+                                  <td data-label="Quantidade Mínima">15</td>
+                                  <td data-label="Nº de Caixas">8</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 4</td>
+                                  <td data-label="Quantidade Recomendada">200</td>
+                                  <td data-label="Quantidade Mínima">50</td>
+                                  <td data-label="Nº de Caixas">20</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 5</td>
+                                  <td data-label="Quantidade Recomendada">120</td>
+                                  <td data-label="Quantidade Mínima">25</td>
+                                  <td data-label="Nº de Caixas">12</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 6</td>
+                                  <td data-label="Quantidade Recomendada">90</td>
+                                  <td data-label="Quantidade Mínima">18</td>
+                                  <td data-label="Nº de Caixas">9</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td data-label="Loja">Loja 7</td>
+                                  <td data-label="Quantidade Recomendada">110</td>
+                                  <td data-label="Quantidade Mínima">22</td>
+                                  <td data-label="Nº de Caixas">11</td>
+                                  <td data-label="Editar" class="acoes">
+                                    <a href="#" class="botaoAcao" id="editarLoja"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="botaoAcao" id="salvarEditarLoja" style="display: none;"><i class="fas fa-save"></i></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                        
+                        </table>
+                    </div>
                 </article>
 
                 <article id="seletorCadastroLoja" style="display: none;">

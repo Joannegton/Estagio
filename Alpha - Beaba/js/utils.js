@@ -1,6 +1,6 @@
 function mostrarMenu() {
     const nav = document.getElementById('menu');
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 1000) {
         nav.style.display = (nav.style.display === 'block') ? 'none' : 'block';
     }
 }
