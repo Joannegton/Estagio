@@ -29,12 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         iconeEstoqueBaixo()
         alternadorRelatorios()
     })
-
     document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
     document.getElementById('sair-usuario').addEventListener('click', logout)
 
     // Envio de talões
-    document.getElementById('registrarEnvioTalao').addEventListener('click', enviarTalao)
+    document.getElementById('registrarEnvioTalao').addEventListener('submit', (e) =>{
+        e.preventDefault()
+        enviarTalao()
+    })
 
     // Estoque
     document.getElementById('filtroLoja').addEventListener('input', filtrarLoja)
@@ -54,12 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtoUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)
 
     document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
-
-    document.getElementById('editarUsuarioPerfis').addEventListener('click', editarUsuario)
-
-    document.getElementById('salvarEditarUsuario').addEventListener('click', salvarEdicaoUsuario)
-
-    document.getElementById('deletarUsuarioPerfis').addEventListener('click', deletarUsuario)
 
     document.getElementById('salvarUsuario').addEventListener('click', salvarUsuario)
 

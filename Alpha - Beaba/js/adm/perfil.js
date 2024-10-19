@@ -51,7 +51,7 @@ function renderizarTabelaUsuarios(){
             <td data-label="Nome do Perfil" id="perfil-nome${item.matricula}">${item.nome_perfil}</td>
             <td data-label="Tipo de Usuário" id="perfil-tipoUsuario${item.matricula}">${item.tipoUsuario}</td>
             <td data-label="Ações" class="acoes" id="acoes">
-                <div id="containerBotaoAcao">
+                <div id="containerBotaoAcao${item.matricula}">
                     <a href="#" class="botaoAcao" id="editarUsuarioPerfis${item.matricula}"><i class="fas fa-edit"></i></a>
                     <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${item.matricula}"><i class="fas fa-trash-alt"></i></a>
                 </div>
@@ -68,7 +68,7 @@ function renderizarTabelaUsuarios(){
             deletarUsuario(item.matricula)
         })
         document.getElementById(`salvarEditarUsuario${item.matricula}`).addEventListener('click', () => {
-            salvarUsuario(item.matricula)
+            salvarEdicaoUsuario(item.matricula)
         })
         
         //botões de paginação
@@ -103,17 +103,17 @@ function salvarUsuario() {
     alert('salvarUsuario')
 }
 
-function editarUsuario() {
-    document.getElementById('containerBotaoAcao').style.display = 'none'
-    document.getElementById('salvarEditarUsuario').style.display = 'block'   
+function editarUsuario(matricula) {
+    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'none'
+    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'block'   
 
-    var perfilNome = document.getElementById('perfil-nome')
-    var permissoes = document.getElementById('perfil-tipoUsuario')
+    var perfilNome = document.getElementById(`perfil-nome${matricula}`)
+    var permissoes = document.getElementById(`perfil-tipoUsuario${matricula}`)
     var nome = perfilNome.innerText
 
-    perfilNome.innerHTML = '<input type="text" id="input-nome" value="' + nome + '">';
+    perfilNome.innerHTML = `<input type="text" id="input-nome${matricula}" value="${nome }">`;
     permissoes.innerHTML = `
-        <select id="select-tipoUsuario">
+        <select id="select-tipoUsuario${matricula}">
             <option value="todas">Administrador</option>
             <option value="manutencao">Gerente</option>
             <option value="estoque">Caixa</option>
@@ -121,23 +121,23 @@ function editarUsuario() {
     `
 }
 
-function salvarEdicaoUsuario() {
-    var inputNome = document.getElementById('input-nome')
-    var selectPermissoes = document.getElementById('select-tipoUsuario')
+function salvarEdicaoUsuario(matricula) {
+    var inputNome = document.getElementById(`input-nome${matricula}`)
+    var selectPermissoes = document.getElementById(`select-tipoUsuario${matricula}`)
 
     var newNome = inputNome.value
     var newPermissoes = selectPermissoes.options[selectPermissoes.selectedIndex].text
 
-    document.getElementById('perfil-nome').innerText = newNome
-    document.getElementById('perfil-tipoUsuario').innerText = newPermissoes;
+    document.getElementById(`perfil-nome${matricula}`).innerText = newNome
+    document.getElementById(`perfil-tipoUsuario${matricula}`).innerText = newPermissoes;
 
-    document.getElementById('salvarEditarUsuario').style.display = 'none';
-    document.getElementById('containerBotaoAcao').style.display = 'block';
+    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'none';
+    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block';
     inputNome.remove();
     selectPermissoes.remove();
 }
 
-function deletarUsuario(){
+function deletarUsuario(matricula){
     alert('deletarUsuario')
 }
 
