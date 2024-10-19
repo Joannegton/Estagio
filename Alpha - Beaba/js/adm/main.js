@@ -3,7 +3,7 @@ import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManu
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos } from '../utils.js'
-import { exportarEstoque, filtrarLoja, mostrarEstoque } from './estoque.js'
+import { dados, renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,6 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroLoja').addEventListener('input', filtrarLoja)
 
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
+
+    document.getElementById('pagAnt').addEventListener('click', () => {
+        if (dados.paginaAtual > 1) {
+            dados.paginaAtual--;
+            renderizarTabela();
+        }
+    });
+    
+    document.getElementById('proxPag').addEventListener('click', () => {
+        if ((dados.paginaAtual * dados.itensPorPagina) < dados.dadosEstoque.length) {
+            dados.paginaAtual++;
+            renderizarTabela();
+        }
+        console.log(dados.paginaAtual)
+    });
 
     // Manutenção
     document.getElementById('filtroLojaManutencao').addEventListener('change', filtarLojaManutencao)
