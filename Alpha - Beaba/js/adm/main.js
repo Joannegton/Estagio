@@ -1,5 +1,5 @@
 import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario, editarPerfil, salvarEditarPerfil, deletarPerfil, modalVisualizarPermissoes } from './perfil.js'
-import { editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js'
+import { dadosManutencaoGeral, editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js'
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos } from '../utils.js'
@@ -41,20 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
 
-    document.getElementById('pagAnt').addEventListener('click', () => {
-        if (dados.paginaAtual > 1) {
-            dados.paginaAtual--;
-            renderizarTabela();
-        }
-    });
     
-    document.getElementById('proxPag').addEventListener('click', () => {
-        if ((dados.paginaAtual * dados.itensPorPagina) < dados.dadosEstoque.length) {
-            dados.paginaAtual++;
-            renderizarTabela();
-        }
-        console.log(dados.paginaAtual)
-    });
 
     // Manutenção
     document.getElementById('filtroLojaManutencao').addEventListener('change', filtarLojaManutencao)
@@ -62,12 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroStatusManutencao').addEventListener('change', filtarStatusManutencao)
 
     document.getElementById('exportarManutencao').addEventListener('click', exportarManutencao)
-    
-    document.getElementById('editarEnvioTalao').addEventListener('click', editarEnvioTalao)
-
-    document.getElementById('salvarEdicaoTalao').addEventListener('click', salvarEdicaoTalao)
-    
-    document.getElementById('excluirEnvioTalao').addEventListener('click', excluirEnvioTalao)
     
     // Usuario
     document.getElementById('filtoUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)

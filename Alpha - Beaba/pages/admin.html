@@ -147,78 +147,15 @@
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Remessa">12345</td>
-                                <td data-label="Data do Envio">01/01/24 10:00</td>
-                                <td data-label="Loja Destino">Loja 1</td>
-                                <td data-label="Quantidade">50</td>
-                                <td data-label="Recebimento">Anderson Malaquias</td>
-                                <td data-label="Data de Entrega" id="DataEntregaManutencao">02/01/24 10:00</td>
-                                <td data-label="Status" id="statusManutencao">Enviado</td>
-                                <td data-label="Ações" class="acoes">
-                                    <div id="containerBotaoAcaoManutencao">
-                                        <a href="#" class="botaoAcao" id="editarEnvioTalao"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="botaoAcao" id="excluirEnvioTalao"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    <a href="#" class="botaoAcao" id="salvarEdicaoTalao" style="display: none;"><i class="fas fa-save"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Remessa">12346</td>
-                                <td data-label="Data do Envio">01/02/24 14:30</td>
-                                <td data-label="Loja Destino">Loja 2</td>
-                                <td data-label="Quantidade">75</td>
-                                <td data-label="Recebimento">Maria Silva</td>
-                                <td data-label="Data de Entrega">03/02/24 09:00</td>
-                                <td data-label="Status">Enviado</td>
-                                <td data-label="Ações" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Remessa">12347</td>
-                                <td data-label="Data do Envio">02/02/24 12:00</td>
-                                <td data-label="Loja Destino">Loja 3</td>
-                                <td data-label="Quantidade">30</td>
-                                <td data-label="Recebimento">João Pereira</td>
-                                <td data-label="Data de Entrega">04/02/24 10:30</td>
-                                <td data-label="Status">Pendente</td>
-                                <td data-label="Ações" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Remessa">12348</td>
-                                <td data-label="Data do Envio">03/02/24 08:45</td>
-                                <td data-label="Loja Destino">Loja 4</td>
-                                <td data-label="Quantidade">100</td>
-                                <td data-label="Recebimento">Carlos Sousa</td>
-                                <td data-label="Data de Entrega">05/02/24 15:00</td>
-                                <td data-label="Status">Enviado</td>
-                                <td data-label="Ações" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-label="Remessa">12349</td>
-                                <td data-label="Data do Envio">04/02/24 16:00</td>
-                                <td data-label="Loja Destino">Loja 5</td>
-                                <td data-label="Quantidade">60</td>
-                                <td data-label="Recebimento">Ana Ribeiro</td>
-                                <td data-label="Data de Entrega">06/02/24 14:00</td>
-                                <td data-label="Status">Pendente</td>
-                                <td data-label="Ações" class="acoes">
-                                    <a href="#" class="botaoAcao" onclick="mostrarEditarEnvioTaloes()"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="botaoAcao"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                        <tbody id="manutencao-tbody">
+                        <!-- Infos inseridas via js -->
                         </tbody>
-                        
                     </table>
+                </div>
+                <div class="pagination">
+                    <button id="pagAntManutencao" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                    <span id="pagInfoManutencao"></span>
+                    <button id="proxPagManutencao">Próxima <i class="fas fa-chevron-right"></i></button>
                 </div>
             </section>
 

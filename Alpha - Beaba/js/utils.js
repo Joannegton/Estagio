@@ -52,10 +52,29 @@ function identificarBaixoEstoque(){
     });
 }
 
+function adicionarPaginacao(dados, renderizarFunc, pagAntId, proxPagId, tabela) {
+    document.getElementById(pagAntId).addEventListener('click', () => {
+        if (dados.paginaAtual > 1) {
+            dados.paginaAtual--;
+            renderizarFunc();
+        }
+    });
+
+    document.getElementById(proxPagId).addEventListener('click', () => {
+        if ((dados.paginaAtual * dados.itensPorPagina) < dados[`dados${tabela}`].length) {
+            dados.paginaAtual++;
+            renderizarFunc();
+        }
+    });
+
+    renderizarFunc();
+}
+
+
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     window.location.href = 'login.html';
 }
 
-export { mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout};
+export {adicionarPaginacao,  mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout};

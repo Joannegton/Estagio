@@ -1,4 +1,4 @@
-import { esconderElementos, mostrarMenu } from "../utils.js";
+import { adicionarPaginacao, esconderElementos, mostrarMenu } from "../utils.js";
 
 const dados = {
     paginaAtual: 1,
@@ -50,6 +50,7 @@ function renderizarTabela() {
     document.getElementById('pagAnt').disabled = dados.paginaAtual === 1;
     document.getElementById('proxPag').disabled = fim >= dados.dadosEstoque.length;
 }
+adicionarPaginacao(dados, renderizarTabela, 'pagAnt', 'proxPag', 'Estoque')
 
 function mostrarEstoque() {
     document.getElementById('estoque').style.display = 'block';
