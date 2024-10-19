@@ -3,7 +3,7 @@ import { adicionarPaginacao, esconderElementos, mostrarMenu } from "../utils.js"
 function mostrarManutencao(){
     document.getElementById('manutencao').style.display = 'block'
     esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'estoque', 'lojas', 'perfilUsuario'])
-    renderizarTabelaManutencao()
+    adicionarPaginacao(dadosManutencaoGeral, renderizarTabelaManutencao, 'pagAntManutencao', 'proxPagManutencao', 'Manutencao')
     mostrarMenu()
 }
 
@@ -77,13 +77,11 @@ function renderizarTabelaManutencao() {
         });
     })
 
-    // edição dos botões de paginação
-    console.log(dadosManutencaoGeral.paginaAtual)
+    // botões de paginação
     document.getElementById('pagInfoManutencao').textContent = `Página ${dadosManutencaoGeral.paginaAtual} de ${Math.ceil(dadosManutencaoGeral.dadosManutencao.length / dadosManutencaoGeral.itensPorPagina)}`
     document.getElementById('pagAntManutencao').disabled = dadosManutencaoGeral.paginaAtual === 1
     document.getElementById('proxPagManutencao').disabled =  fim >= dadosManutencaoGeral.dadosManutencao.length
 }
-adicionarPaginacao(dadosManutencaoGeral, renderizarTabelaManutencao, 'pagAntManutencao', 'proxPagManutencao', 'Manutencao')
 
 function editarEnvioTalao(remessa) {
     document.getElementById(`containerBotaoAcaoManutencao${remessa}`).style.display = 'none'

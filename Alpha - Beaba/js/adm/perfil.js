@@ -1,8 +1,9 @@
-import { alternador, alternador3, mostrarMenu, esconderElementos } from "../utils.js"
+import { alternador, alternador3, mostrarMenu, esconderElementos, adicionarPaginacao } from "../utils.js"
 
 function mostrarPerfil(){
     document.getElementById('perfil').style.display = 'block'
     esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfilUsuario'])
+    adicionarPaginacao(dadosUsuarioGeral, renderizarTabelaUsuarios, 'pagAntUsuarios', 'proxPagUsuarios', 'Usuario' )
     mostrarMenu()
 }
 
@@ -12,6 +13,71 @@ function mostrarPerfilUsuario(){
     mostrarMenu()
 }
 
+const dadosUsuarioGeral = {
+    paginaAtual: 1,
+    itensPorPagina: 13,
+    dadosUsuario: [
+        { matricula: '123456', nome_perfil: 'Wellington Tavares Galbarini', tipoUsuario: 'Administrador' },
+        { matricula: '654321', nome_perfil: 'Marcelo D3 da Silva', tipoUsuario: 'Gerente' },
+        { matricula: '112233', nome_perfil: 'Ana Beatriz Oliveira', tipoUsuario: 'Caixa' },
+        { matricula: '334455', nome_perfil: 'Carlos Henrique Souza', tipoUsuario: 'Caixa' },
+        { matricula: '556677', nome_perfil: 'Joana Maria Santos', tipoUsuario: 'Administrador' },
+        { matricula: '778899', nome_perfil: 'Roberto Lima Costa', tipoUsuario: 'Caixa' },
+        { matricula: '998877', nome_perfil: 'Fernanda Alves Pereira', tipoUsuario: 'Gerente' },
+        { matricula: '121314', nome_perfil: 'Lucas Mendes Ferreira', tipoUsuario: 'Caixa' },
+        { matricula: '141516', nome_perfil: 'Juliana Prado Martins', tipoUsuario: 'Supervisor' },
+        { matricula: '171819', nome_perfil: 'Ricardo Fagundes Torres', tipoUsuario: 'Administrador' },
+        { matricula: '202122', nome_perfil: 'Maria Clara Araújo', tipoUsuario: 'Caixa' },
+        { matricula: '232425', nome_perfil: 'Paulo Sérgio Ramos', tipoUsuario: 'Gerente' },
+        { matricula: '262728', nome_perfil: 'Thiago Gomes Silva', tipoUsuario: 'Caixa' },
+        { matricula: '293031', nome_perfil: 'Amanda Costa Rodrigues', tipoUsuario: 'Caixa' },
+        { matricula: '323334', nome_perfil: 'Felipe Nogueira Lima', tipoUsuario: 'Gerente' }
+
+    ]
+}
+
+function renderizarTabelaUsuarios(){
+    const tbody = document.getElementById('usuarios-tbody')
+    tbody.innerHTML = ''
+
+    const inicio = (dadosUsuarioGeral.paginaAtual -1) * dadosUsuarioGeral.itensPorPagina
+    const fim = inicio + dadosUsuarioGeral.itensPorPagina
+    const dadosLimitados = dadosUsuarioGeral.dadosUsuario.slice(inicio, fim)
+
+    dadosLimitados.forEach(item => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+            <td data-label="Matricula" id="perfil-matricula${item.matricula}">${item.matricula}</td>
+            <td data-label="Nome do Perfil" id="perfil-nome${item.matricula}">${item.nome_perfil}</td>
+            <td data-label="Tipo de Usuário" id="perfil-tipoUsuario${item.matricula}">${item.tipoUsuario}</td>
+            <td data-label="Ações" class="acoes" id="acoes">
+                <div id="containerBotaoAcao">
+                    <a href="#" class="botaoAcao" id="editarUsuarioPerfis${item.matricula}"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${item.matricula}"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                <a href="#" class="botaoAcao" id="salvarEditarUsuario${item.matricula}" style="display: none;"><i class="fas fa-save"></i></a>
+            </td>
+        `
+        tbody.appendChild(tr)
+
+        // eventos de click
+        document.getElementById(`editarUsuarioPerfis${item.matricula}`).addEventListener('click', () => {
+            editarUsuario(item.matricula)
+        })
+        document.getElementById(`deletarUsuarioPerfis${item.matricula}`).addEventListener('click', () => {
+            deletarUsuario(item.matricula)
+        })
+        document.getElementById(`salvarEditarUsuario${item.matricula}`).addEventListener('click', () => {
+            salvarUsuario(item.matricula)
+        })
+        
+        //botões de paginação
+        document.getElementById('pagInfoUsuarios').textContent = `Página ${dadosUsuarioGeral.paginaAtual} de ${Math.ceil(dadosUsuarioGeral.dadosUsuario.length / dadosUsuarioGeral.itensPorPagina)}`
+        document.getElementById('pagAntUsuarios').disabled = dadosUsuarioGeral.paginaAtual === 1
+        document.getElementById('proxPagUsuarios').disabled =  fim >= dadosUsuarioGeral.dadosUsuario.length
+
+    })
+}
 
 function alternadorPerfil() {
     const usuarios = document.getElementById('usuarios');

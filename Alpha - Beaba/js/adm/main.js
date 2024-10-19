@@ -92,10 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('exportarLojas').addEventListener('click', exportarLojas)
 
-    document.getElementById('editarLoja').addEventListener('click', editarLoja)
-
-    document.getElementById('salvarEditarLoja').addEventListener('click', salvarEditarLoja)
-
     document.getElementById('salvarLoja').addEventListener('submit', salvarLoja)   
 
 
