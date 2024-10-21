@@ -199,7 +199,7 @@ form button:hover {
   align-items: center;
   margin-bottom: 1em;
   background-color: rgba(255, 255, 0, 0.514);
-  padding: 10px 0;
+  padding: 1em;
 }
 
 
@@ -216,7 +216,6 @@ form button:hover {
   padding: .3em;
   cursor: pointer;
   margin-left: .3em;
-  margin-right: 10%;
 }
 
 #fechar {
@@ -226,7 +225,7 @@ form button:hover {
 .alternador {
   position: relative;
   width: 200px;
-  margin: 20px auto;
+  margin: 20px auto 0;
 }
 
 .seletor {
