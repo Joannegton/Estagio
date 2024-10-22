@@ -218,7 +218,7 @@
 
                 <article id="seletorCadastro" style="display: none;">
                     <h2>Cadatro de Usuário</h2>
-                    <div style="text-align: end;">
+                    <div class="filtro" style="text-align: end;">
                         <button id="cadastrarMassa" class="exportarCSV" onclick="cadastroMassa()">Cadastro em Massa</button>
                     </div>
                     <form id="perfilForm">
@@ -226,21 +226,16 @@
                             <input type="file" name="cadastroEmMassa" id="cadastroEmMassa" accept=".xls,.xlsx,.csv">
                             <div class="tabela-container">
                                 <table style="background-color: white;">
-                                    <thead class="headTabela">
+                                    <thead >
                                         <tr>
-                                            <th  colspan="3">Exemplo de planilha</th>
+                                            <th  colspan="3">Exemplo de planilha</th> <!--usa 3 colunas-->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>654321</td>
-                                            <td>Wellington tavares</td>
-                                            <td>Caixa</td>
-                                        </tr>
-                                        <tr>
-                                            <td>123456</td>
-                                            <td>Wellington Macedo da silva</td>
-                                            <td>Caixa</td>
+                                            <td data-label="Matricula">654321</td>
+                                            <td data-label="Nome">Wellington tavares</td>
+                                            <td data-label="Numero_caixa">Caixa</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -269,7 +264,7 @@
             </section>
 
             <section id="editarLoja" style="display: none;">
-                <form action="">
+                <form id="formEditarLoja">
                     <h2>Editar Loja</h2>
                     <label for="novaLoja">Nome da Loja:</label>
                     <input type="text" id="novaLoja" name="novaLoja">
