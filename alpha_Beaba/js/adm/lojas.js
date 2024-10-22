@@ -52,6 +52,7 @@ function renderizarTabelaLojas(){
     dadosLimitados.forEach(item => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
+            <td data-label="Cód" id="idLoja${item.id_loja}">${item.id_loja}</td>
             <td data-label="Loja" id="nomeLoja${item.id_loja}">${item.loja}</td>
             <td data-label="Gerente" id="nomeGerente${item.id_loja}">${item.gerente}</td>
                 <td data-label="Quantidade Recomendada">${item.qntRecomend}</td>
