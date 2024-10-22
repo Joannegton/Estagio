@@ -1,10 +1,10 @@
-import { alternador, alternador3, mostrarMenu, esconderElementos, adicionarPaginacao } from "../utils.js"
+import { alternador, alternador3, mostrarMenu, esconderElementos, adicionarPaginacao, mostrarElemento } from "../utils.js"
 
 function mostrarPerfil(){
-    document.getElementById('perfil').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfilUsuario'])
-    adicionarPaginacao(dadosUsuarioGeral, renderizarTabelaUsuarios, 'pagAntUsuarios', 'proxPagUsuarios', 'Usuario' )
-    mostrarMenu()
+    mostrarElemento('perfil', 'mostrarPerfil', ()=> {
+        adicionarPaginacao(dadosUsuarioGeral, renderizarTabelaUsuarios, 'pagAntUsuarios', 'proxPagUsuarios', 'Usuario' )
+        alternadorPerfil()
+    })
 }
 
 function mostrarPerfilUsuario(){

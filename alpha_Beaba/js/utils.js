@@ -5,6 +5,19 @@ function mostrarMenu() {
     }
 }
 
+function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) {
+    const links = document.querySelectorAll('#menu ul li a');
+    links.forEach(link => link.classList.remove('ativo'));
+    if (linkAtivarId) {
+        document.getElementById(linkAtivarId).classList.add('ativo');
+    }
+    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario', 'estoque']);
+    document.getElementById(elementoId).style.display = 'block';
+    mostrarMenu();
+    funcoesAdicional();
+}
+
+
 // Função para alternar entre elementos
 function alternador(elementoAtivo, elementoDesativar, elementoAtivar, ativar, desativar, indicador) {
     elementoDesativar.classList.add('ativo');
@@ -81,4 +94,4 @@ function logout() {
     window.location.href = 'login.html';
 }
 
-export {adicionarPaginacao,  mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout};
+export {mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout};

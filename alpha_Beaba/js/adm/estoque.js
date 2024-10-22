@@ -1,4 +1,4 @@
-import { adicionarPaginacao, esconderElementos, mostrarMenu } from "../utils.js";
+import { adicionarPaginacao, identificarBaixoEstoque, mostrarElemento } from "../utils.js";
 
 const dados = {
     paginaAtual: 1,
@@ -50,13 +50,12 @@ function renderizarTabela() {
     document.getElementById('pagAnt').disabled = dados.paginaAtual === 1;
     document.getElementById('proxPag').disabled = fim >= dados.dadosEstoque.length;
 }
-adicionarPaginacao(dados, renderizarTabela, 'pagAnt', 'proxPag', 'Estoque')
 
 function mostrarEstoque() {
-    document.getElementById('estoque').style.display = 'block';
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario']);
-    mostrarMenu();
-    renderizarTabela();
+    mostrarElemento('estoque', 'mostrarEstoque', ()=> {
+        adicionarPaginacao(dados, renderizarTabela, 'pagAnt', 'proxPag', 'Estoque')
+        identificarBaixoEstoque()
+    })
 }
 
 function filtrarLoja() {

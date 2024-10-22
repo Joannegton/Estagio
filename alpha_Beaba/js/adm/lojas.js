@@ -1,4 +1,4 @@
-import { adicionarPaginacao, alternador, esconderElementos, mostrarMenu } from "../utils.js"
+import { adicionarPaginacao, alternador, esconderElementos, mostrarElemento, mostrarMenu } from "../utils.js"
 
 function alternadorLojas(){
     const lojas = document.getElementById('todasLojas');
@@ -13,10 +13,10 @@ function alternadorLojas(){
 }
 
 function mostrarLojas(){
-    document.getElementById('lojas').style.display = 'block'
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'estoque', 'perfilUsuario'])
-    adicionarPaginacao(dadosLojaGeral, renderizarTabelaLojas, 'pagAntLojas', 'proxPagLojas', 'Loja' )
-    mostrarMenu()
+    mostrarElemento('lojas', 'mostrarLojas', () =>{
+        adicionarPaginacao(dadosLojaGeral, renderizarTabelaLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
+        alternadorLojas()
+    })
 }
 
 const dadosLojaGeral = {

@@ -1,10 +1,9 @@
-import { adicionarPaginacao, esconderElementos, mostrarMenu } from "../utils.js"
+import { adicionarPaginacao, esconderElementos, mostrarElemento, mostrarMenu } from "../utils.js"
 
 function mostrarManutencao(){
-    document.getElementById('manutencao').style.display = 'block'
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'estoque', 'lojas', 'perfilUsuario'])
-    adicionarPaginacao(dadosManutencaoGeral, renderizarTabelaManutencao, 'pagAntManutencao', 'proxPagManutencao', 'Manutencao')
-    mostrarMenu()
+    mostrarElemento('manutencao', 'mostrarManutencao', () => {
+        adicionarPaginacao(dadosManutencaoGeral, renderizarTabelaManutencao, 'pagAntManutencao', 'proxPagManutencao', 'Manutencao')
+    })
 }
 
 const dadosManutencaoGeral = {

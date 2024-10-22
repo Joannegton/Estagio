@@ -2,32 +2,27 @@ import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, fi
 import { dadosManutencaoGeral, editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js'
 import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
-import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos } from '../utils.js'
+import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos, mostrarElemento } from '../utils.js'
 import { dados, renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
-import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
+import { enviarTalao } from './envioTaloes.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', () =>{
-        mostrarEnvioTaloes()
+        mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {})
     })
     document.getElementById('mostrarEstoque').addEventListener('click', () => {
         mostrarEstoque()
-        identificarBaixoEstoque()
     })
     document.getElementById('mostrarManutencao').addEventListener('click', mostrarManutencao)
     document.getElementById('mostrarPerfil').addEventListener('click', () => {
         mostrarPerfil()
-        alternadorPerfil()
     })
     document.getElementById('mostrarLojas').addEventListener('click', () => {
         mostrarLojas()
-        alternadorLojas()
     })
     document.getElementById('mostrarRelatorio').addEventListener('click', () => {
         mostrarRelatorios()
-        iconeEstoqueBaixo()
-        alternadorRelatorios()
     })
     document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
     document.getElementById('sair-usuario').addEventListener('click', logout)

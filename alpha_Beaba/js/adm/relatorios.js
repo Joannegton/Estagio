@@ -1,9 +1,10 @@
-import { mostrarMenu, esconderElementos, alternador } from "../utils.js"
+import { mostrarMenu, esconderElementos, alternador, mostrarElemento } from "../utils.js"
 
 function mostrarRelatorios() {
-    document.getElementById('relatorios').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'perfil', 'manutencao', 'lojas', 'perfilUsuario'])
-    mostrarMenu()
+    mostrarElemento('relatorios', 'mostrarRelatorio', () =>{
+        iconeEstoqueBaixo()
+        alternadorRelatorios()
+    })
 }
 
 function alternadorRelatorios() {
