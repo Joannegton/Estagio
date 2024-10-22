@@ -18,8 +18,8 @@
                 <ul>
                     <li><a href="#" id="mostrarGestaoEstoque">Gestão de Estoque</a></li>
                     <li><a href="#" id="mostrarGestaoPerfil">Perfil de Acesso</a></li>
-                    <li><a href="#" id="mostrarGestaoLoja">Loja</a></li> <!-- editarLoja -->
-                    <li><a href="#" id="mostrarGestaoRelatorio">Relatorios</a></li>
+                    <li><a href="#" id="mostrarGestaoLoja">Loja</a></li> 
+                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo">Relatorios</a></li>
                 </ul>
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
@@ -101,6 +101,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="paginacao">
+                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoEstoque"></span>
+                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                    </div>
             </section>
 
             <section id="perfilAcesso" style="display: none;">
@@ -156,6 +161,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="paginacao">
+                        <button id="pagAntUsuarios" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoUsuarios"></span>
+                        <button id="proxPagUsuarios">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
 
@@ -265,6 +275,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="paginacao">
+                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoEstoque"></span>
+                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </article>
 
                 <article id="saidas">
@@ -285,6 +300,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="paginacao">
+                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoEstoque"></span>
+                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
             </section>

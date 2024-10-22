@@ -323,7 +323,7 @@ tr:hover {
 }
 
 .tabela-container {
-  /*max-height: 460px;*/
+  max-height: fit-content;
   overflow-y: auto;
   margin: 0 auto;
   position: relative;
