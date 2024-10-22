@@ -4,6 +4,7 @@
   --cor-secundaria: #333;
   --cor-terciaria: #fcd848be;
   --cor-branco: #fff;
+  --cor-preta: #000000;
 }
 
 html {
@@ -179,10 +180,10 @@ form label {
 }
 
 form input, form select, form input[type="date"] {
-  width: 100%;
   height: 1em;
   padding: 0.5em .2em;
   margin-bottom: 1em;
+  border: 1px solid #ced4da;
 }
 
 input[type="checkbox"] {
@@ -190,17 +191,12 @@ input[type="checkbox"] {
   padding: 0;
 }
 
-
-
 form select {
   width: 100%;
   height: 28.75px;
   padding: 0.45em 0;
   margin-bottom: 1em;
 }
-
-
-
 
 form button {
   background-color: var(--cor-primaria);
@@ -450,12 +446,21 @@ canvas {
   justify-content: end;
 }
 
-.fechar i{
+.fechar i {
   text-decoration: none;
-  color: var(--cor-primaria);
+  color: #45a049;
   font-weight: bold;
   cursor: pointer;
   font-size: 1.3em;
+  transition: color 0.3s ease;
+}
+
+.fechar i:hover {
+  color: #303f9f;
+}
+
+.container-labe input{
+  width: 100%;
 }
 
 /* -Footer- */
@@ -464,8 +469,6 @@ footer {
   color: var(--cor-branco);
   text-align: center;
   padding:  0;
-  /*position: fixed;
-  bottom: 0;*/
   width: 100%;
   height: 5%;
 }

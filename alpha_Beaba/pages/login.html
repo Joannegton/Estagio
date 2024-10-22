@@ -1,36 +1,44 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login page for Oferte e Ganhe">
     <title>Login - Oferte e Ganhe</title>
-    <link rel="stylesheet" href="../geral.css">
+    <link rel="icon" href="../favicon.ico">
     <link rel="stylesheet" href="../style/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../js/login/main.js" type="module"></script>
 </head>
 <body>
-    <header>
-        <h1>Oferte e Ganhe</h1>
-    </header>
     <main>
-        <section id="login">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <label for="matricula">Matricula:</label>
-                <input type="text" id="matricula" name="matricula" required>
-                <label for="senha">Senha:</label>
-                <input type="senha" id="senha" name="senha" required>
-                <button type="submit" id="entrar">Entrar</button>
-            </form>
-            <div class="containerOpcoes">
-                <a href="#" id="mostrarRecuperarSenha">Esqueceu a senha?</a>
-                <a href="#" id="mostrarPrimeiroAcesso">Primeiro Acesso</a>
+        <div id="login" class="login-container">
+            <div class="login-box">
+                <img src="../logo.png" alt="Oferte e Ganhe Logo">
+                <h2>Acesso - Oferte e Ganhe</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="matricula">Matricula:</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Digite sua matricula" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Lembrar-me</label>
+                    </div>
+                    <button type="submit" id="entrar">Entrar</button>
+                </form>
+                <div class="login-options">
+                    <a href="#" id="mostrarRecuperarSenha">Esqueceu a senha?</a>
+                    <a href="#" id="mostrarPrimeiroAcesso">Primeiro Acesso</a>
+                </div>
             </div>
+        </div>
 
-        </section>
-
-        <section id="primeiroAcesso" class="modal">
+        <div id="primeiroAcesso" class="modal">
             <article class="modalContent">
                 <div class="fechar">
                     <i class="fas fa-times close-icon" id="fecharMostrarLogin"></i> 
@@ -41,21 +49,23 @@
                     <p><strong>Senha: </strong>Senha padrão recebida do seu gestor.</p>
                 </div>
             </article>
-        </section>
+        </div>
 
-        <section id="recuperarSenha" class="modal">            
+        <div id="recuperarSenha" class="modal">            
             <article class="modalContent">
                 <div class="fechar">
                     <i class="fas fa-times close-icon" id="fecharRecuperarSenha"></i> 
                 </div>
                 <h2>Recuperar Senha</h2>
                 <form id="recuperarSenhaForm">
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required>
-                    <button type="submit" id="recuperarSenha">recuperar Senha</button>
+                    <div class="input-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <button type="submit" >Recuperar Senha</button>
                 </form>
             </article>
-        </section>
+        </div>
     </main>
 </body>
 </html>

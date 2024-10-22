@@ -6,7 +6,9 @@ function mostrarRecuperarSenha() {
 }
 
 function mostrarPrimeiroAcesso() {
-    document.getElementById('primeiroAcesso').style.display = 'flex';
+    const elemento = document.getElementById('primeiroAcesso')
+    elemento.style.display = 'flex'
+    elementodocument.classList.add('show');
     esconderElementos(['recuperarSenha']);
 }
 

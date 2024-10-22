@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded',() => {
     document.getElementById('fecharMostrarLogin').addEventListener('click', mostrarLogin)
     
     document.getElementById('entrar').addEventListener('click', login)
-    document.getElementById('recuperarSenha').addEventListener('click', recuperarSenha)
     
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    document.getElementById('recuperarSenhaForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        recuperarSenha();
+    })
+
+    document.getElementById('loginForm').addEventListener('submit', (event) => {
         event.preventDefault();
         login();
     })
