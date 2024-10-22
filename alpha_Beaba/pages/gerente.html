@@ -38,7 +38,7 @@
         </header>
 
         <main>
-            <section id="estoqueTaloes">
+            <section id="estoqueTaloes" style="display: none;">
                     <h2>Estoque</h2>
                     <div class="filtro">
                         <label for="filtoEstoque">Caixa:</label>
@@ -87,6 +87,51 @@
                                     <td data-label="Quantidade">10</td>
                                     <td data-label="Realizar Pedido" class="acoes">
                                         <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 04')">
+                                            <i class="fas fa-box"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="N° Caixa">Caixa 05</td>
+                                    <td data-label="Quantidade">7</td>
+                                    <td data-label="Realizar Pedido" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
+                                            <i class="fas fa-box"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="N° Caixa">Caixa 05</td>
+                                    <td data-label="Quantidade">7</td>
+                                    <td data-label="Realizar Pedido" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
+                                            <i class="fas fa-box"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="N° Caixa">Caixa 05</td>
+                                    <td data-label="Quantidade">7</td>
+                                    <td data-label="Realizar Pedido" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
+                                            <i class="fas fa-box"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="N° Caixa">Caixa 05</td>
+                                    <td data-label="Quantidade">7</td>
+                                    <td data-label="Realizar Pedido" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
+                                            <i class="fas fa-box"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="N° Caixa">Caixa 05</td>
+                                    <td data-label="Quantidade">7</td>
+                                    <td data-label="Realizar Pedido" class="acoes">
+                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
                                             <i class="fas fa-box"></i>
                                         </a>
                                     </td>
@@ -236,21 +281,26 @@
                 </form>
             </section>
 
-            <section id="relatorios" style="display: none;">
+            <section id="relatorios">
                 <h2>Relatorios</h2>
                 <div class="alternador">
                     <div class="seletor">
-                      <div id="mostrarSaidas" class="opcao ativo">Saídas</div>
-                      <div id="mostrarEntradas" class="opcao inativo">Entradas</div>
+                        <div id="mostrarEntradas" class="opcao ativo">Entradas</div>
+                      <div id="mostrarSaidas" class="opcao inativo">Saídas</div>
                       <div class="indicador" id="indicadorRelatorio"></div>
                     </div>
                 </div>
     
-                <div style="text-align: end;">
+                <div class="filtro" style="margin-top: 1em;">
                     <button id="exportarRelatorios" class="exportarCSV" onclick="exportarCsv()">Exportar</button>
                 </div>
                 
-                <article id="entradas" style="display: none;">
+                <article id="entradas">
+                        <div class="dashboard-item dashboard-item-estoque dashboard-item-mob">
+                            <h3>Estoque de Talões</h3>
+                            <p>87</p>
+                        </div>
+
                     <div class="tabela-container">
                         <table>
                             <thead class="headTabela">
@@ -284,7 +334,7 @@
                     </div>
                 </article>
 
-                <article id="saidas">
+                <article id="saidas" style="display: none;">
                     <div class="tabela-container">
                         <table>
                             <thead class="headTabela">

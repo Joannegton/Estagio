@@ -1,9 +1,9 @@
-import { esconderElementos, alternador, mostrarMenu } from "../utils.js"
+import { esconderElementos, alternador, mostrarMenu, mostrarElemento } from "../utils.js"
 
 function mostrarRelatorios() {
-    document.getElementById('relatorios').style.display = 'block'
-    esconderElementos(['estoqueTaloes', 'perfilAcesso', 'editarLoja'])
-    mostrarMenu()
+    mostrarElemento('relatorios', 'mostrarGestaoRelatorio', () =>{
+        alternadorRelatorios()
+    })
 }
 
 function alternadorRelatorios() {
@@ -11,11 +11,11 @@ function alternadorRelatorios() {
     const entradas = document.getElementById('mostrarEntradas')
 
     saidas.addEventListener('click', () => {
-        alternador(saidas, saidas, entradas, 'saidas', 'entradas', 'indicadorRelatorio')
+        alternador(saidas, entradas, saidas, 'saidas', 'entradas', 'indicadorRelatorio')
     })
 
     entradas.addEventListener('click', () => {
-        alternador(entradas, saidas, entradas, 'entradas', 'saidas', 'indicadorRelatorio')
+        alternador(entradas, entradas, saidas, 'entradas', 'saidas', 'indicadorRelatorio')
     })
 }
 

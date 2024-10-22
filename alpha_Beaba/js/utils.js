@@ -11,7 +11,7 @@ function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) 
     if (linkAtivarId) {
         document.getElementById(linkAtivarId).classList.add('ativo');
     }
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario', 'estoque']);
+    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario', 'estoque', 'estoqueTaloes', 'perfilAcesso', 'editarLoja', 'perfilUsuario']);
     document.getElementById(elementoId).style.display = 'block';
     mostrarMenu();
     funcoesAdicional();
@@ -50,7 +50,10 @@ function alternador3(elementoAtivo, elementosDesativar, ativar, desativarArr, in
 
 function esconderElementos(ids) {
     ids.forEach(id => {
-        document.getElementById(id).style.display = 'none';
+        const elemento = document.getElementById(id)
+        if(elemento){
+            elemento.style.display = 'none'
+        }
     });
 }
 

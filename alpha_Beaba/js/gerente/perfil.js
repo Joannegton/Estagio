@@ -1,9 +1,9 @@
-import { esconderElementos, alternador, mostrarMenu } from "../utils.js"
+import { esconderElementos, alternador, mostrarMenu, mostrarElemento } from "../utils.js"
 
 function mostrarPerfilAcesso(){
-    document.getElementById('perfilAcesso').style.display = 'block'
-    esconderElementos(['estoqueTaloes', 'relatorios', 'editarLoja'])
-    mostrarMenu()
+    mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', () =>{
+        alternadorPerfilAcesso()
+    })
 }
 
 function mostrarPerfilUsuario(){

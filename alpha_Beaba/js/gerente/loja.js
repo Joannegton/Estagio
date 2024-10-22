@@ -1,9 +1,9 @@
-import { esconderElementos, mostrarMenu } from "../utils.js"
+import { mostrarElemento } from "../utils.js"
 
 function mostrarEditarLoja(){
-    document.getElementById('editarLoja').style.display = 'block'
-    esconderElementos(['estoqueTaloes', 'relatorios', 'perfilAcesso'])
-    mostrarMenu()
+    mostrarElemento('editarLoja', 'mostrarGestaoLoja', ()=>{
+
+    })
 }
 
 function salvarLoja(){

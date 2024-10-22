@@ -4,3 +4,17 @@
     margin: auto;
     
 }
+
+.dashboard-item-estoque{
+    min-height: 50px !important;
+    padding: 0;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.dashboard-item-estoque h3{
+    margin: 5px;
+}
+.dashboard-item-estoque p{
+    margin: 5px;
+}
