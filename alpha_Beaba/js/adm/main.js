@@ -1,9 +1,9 @@
-import { alternadorPerfil, mostrarPerfil, editarUsuario, salvarEdicaoUsuario, filtrarUsuarioNome, exportarPerfis, deletarUsuario, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario, editarPerfil, salvarEditarPerfil, deletarPerfil, modalVisualizarPermissoes } from './perfil.js'
-import { dadosManutencaoGeral, editarEnvioTalao, excluirEnvioTalao, exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, salvarEdicaoTalao } from './manutencao.js'
-import { mostrarLojas, alternadorLojas, ordenarLoja, editarLoja, salvarEditarLoja, salvarLoja, exportarLojas } from './lojas.js'
+import { mostrarPerfil, filtrarUsuarioNome, exportarPerfis, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario, editarPerfil, salvarEditarPerfil, deletarPerfil, modalVisualizarPermissoes } from './perfil.js'
+import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
-import { mostrarMenu, identificarBaixoEstoque, logout, esconderElementos, mostrarElemento } from '../utils.js'
-import { dados, renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
+import { mostrarMenu, logout, esconderElementos, mostrarElemento } from '../utils.js'
+import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
+import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
 import { enviarTalao } from './envioTaloes.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,8 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroLoja').addEventListener('input', filtrarLoja)
 
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
-
-    
 
     // Manutenção
     document.getElementById('filtroLojaManutencao').addEventListener('change', filtarLojaManutencao)
