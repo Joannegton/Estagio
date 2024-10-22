@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded',() => {
     document.getElementById('entrar').addEventListener('click', login)
     
     document.getElementById('recuperarSenhaForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        recuperarSenha();
+        event.preventDefault()
+        recuperarSenha()
     })
 
     document.getElementById('loginForm').addEventListener('submit', (event) => {
         event.preventDefault();
-        login();
+        login()
     })
 
 

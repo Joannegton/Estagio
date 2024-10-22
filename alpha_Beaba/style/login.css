@@ -66,6 +66,25 @@ body {
   box-shadow: 0 0 8px rgba(63, 81, 181, 0.2);
 }
 
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 30px;
+}
+
+.password-container i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #333;
+}
+
 .remember-me {
   display: flex;
   align-items: center;
