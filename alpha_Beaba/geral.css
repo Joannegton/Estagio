@@ -7,12 +7,21 @@
 }
 
 
-body, html {
+html {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
-  height: 100%;  
+  height: 100vh;  
   margin: 0;
   padding: 0;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .main {
@@ -125,15 +134,22 @@ main {
   margin: 0 auto;
 }
 
-section {
+section  {
   background-color: var(--cor-branco);
   border: 1px solid var(--cor-secundaria);
   border-radius: 5px;
-  height: calc(100% - 2em);
+  height: 100%;
 }
 
 section h2 {
   text-align: center;
+}
+
+article{
+  height: 93%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 /* -Formularios- */
@@ -298,7 +314,7 @@ tr:hover {
 }
 
 .tabela-container {
-  max-height: 460px;
+  /*max-height: 460px;*/
   overflow-y: auto;
   margin: 0 auto;
   position: relative;
@@ -370,21 +386,29 @@ a.botaoAcao {
 }
 
 .dashboard-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--cor-branco);
-    padding: 10px 20px;
-    margin-bottom: 0.5em;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    min-height: 120px;
-    min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cor-branco);
+  padding: 10px 20px;
+  margin-bottom: 0.5em;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 120px;
+  min-width: 100px;
+}
+
+h3{
+  margin: 10px 0;
+}
+
+.dashboard-grid p{
+  margin: 0;
 }
 
 canvas {
-  width: 85% !important;
+  width: 80% !important;
   margin: 0 auto;
   padding: 0;
 }
@@ -431,9 +455,10 @@ footer {
   color: var(--cor-branco);
   text-align: center;
   padding:  0;
-  position: fixed;
-  bottom: 0;
+  /*position: fixed;
+  bottom: 0;*/
   width: 100%;
+  height: 5%;
 }
 
 footer p {
@@ -449,17 +474,16 @@ footer p {
 
 /* Responsividade Tablet */
 @media (max-width: 1000px) {
-  html{
-    height: fit-content;
-  }
 
   .main {
     display: block;
     flex: 1;
+    height: 95%;
   }
 
   main {
     width: 90%;
+    height: 90%;
   }
 
   header {
@@ -555,6 +579,7 @@ footer p {
 
   .tabela-container{
     width: 95%;
+    height: 73%;
   }
   table,
   thead,
@@ -580,9 +605,6 @@ footer p {
     border-left: 1px solid black;
   }
 
-  
-
-    
   th::before,
   td::before {
     content: attr(data-label);
@@ -608,7 +630,27 @@ footer p {
     border-right: 1px solid black;
 }
 
-  footer {
-    position: relative;
-  }
+.coluna{
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-grid{
+  display: flex;
+  flex-direction: column;
+  height: 77%;
+}
+
+.dashboard-item-mob{
+  min-height: 10px;
+  height: 35%;
+}
+
+.dashboard-item-mob-estoque{
+  overflow-y: auto;
+  display: flex;
+  justify-content: start;
+  margin: 12px 5px;
+}
+
 }

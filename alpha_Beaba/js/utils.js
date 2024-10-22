@@ -12,7 +12,11 @@ function alternador(elementoAtivo, elementoDesativar, elementoAtivar, ativar, de
     elementoAtivar.classList.add('inativo');
     elementoAtivar.classList.remove('ativo');
 
-    document.getElementById(ativar).style.display = 'grid';
+    if(ativar == 'seletorTabela'){
+        document.getElementById(ativar).style.display = 'grid';
+    } else{
+        document.getElementById(ativar).style.display = 'block';
+    }
     document.getElementById(desativar).style.display = 'none';
     document.getElementById(indicador).style.transform = elementoAtivo === elementoDesativar ? 'translateX(0)' : 'translateX(100%)';
 }
@@ -26,7 +30,7 @@ function alternador3(elementoAtivo, elementosDesativar, ativar, desativarArr, in
 
     elementoAtivo.classList.add('ativo');
     elementoAtivo.classList.remove('inativo');
-    document.getElementById(ativar).style.display = 'grid';
+    document.getElementById(ativar).style.display = 'block';
 
     document.getElementById(indicador).style.transform = `translateX(${posicao * 100}%)`; 
 }
