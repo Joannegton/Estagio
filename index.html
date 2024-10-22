@@ -119,7 +119,7 @@
                         <option value="asc">A - Z</option>
                         <option value="desc">Z - A</option>
                     </select>
-                    <label for="filtroStatusManutencao" style="margin-left: 1em;">Status:</label>
+                    <label for="filtroStatusManutencao" style="margin-left: .3em;">Status:</label>
                     <select id="filtroStatusManutencao" name="filtroStatusManutencao">
                         <option value="todos">Todas</option>
                         <option value="enviado">Enviado</option>
@@ -127,7 +127,6 @@
                     </select>
                     <button id="exportarManutencao" class="exportarCSV">Exportar</button>
                 </div>
-
                 <div class="tabela-container">
                     <table>
                         <thead class="headTabela">
@@ -475,7 +474,6 @@
             </section>
 
             <section id="lojas" style="display: none;">
-                <h2>Lojas Quero Quero</h2>
                 <div class="alternador">
                     <div class="seletor">
                       <div id="todasLojas" class="opcao ativo">Todos</div>
@@ -485,6 +483,7 @@
                 </div>
 
                 <article id="seletorLojas">
+                    <h2>Lojas Quero Quero</h2>
                     <div class="filtro">
                         <label for="filtroLojaLojas">Loja:</label>
                         <select id="filtroLojaLojas" name="filtroLojaLojas">
@@ -518,6 +517,7 @@
                 </article>
 
                 <article id="seletorCadastroLoja" style="display: none;">
+                    <h2>Cadastro de Loja</h2>
                     <form id="salvarLoja">
                         <label for="novaLoja">Nome da Loja:</label>
                         <input type="text" id="novaLoja" name="novaLoja">
@@ -544,30 +544,30 @@
                     </div>
                 </div>
 
-                <div style="text-align: end;">
+                <div class="filtro" style="margin-top: 1em;">
                     <button id="exportarRelatorios" class="exportarCSV" onclick="exportarCsv()">Exportar</button>
                 </div>
                 
                 <div class="dashboard-grid" id="seletorTabela" >
-                    <div class="coluna">
-                        <div style="display: flex; justify-content: space-around;">
-                            <div class="dashboard-item">
+                    <div style="height: fit-content; margin: 0 5px;">
+                        <div class="coluna" style="display: flex; justify-content: space-around;">
+                            <div class="dashboard-item dashboard-item-mob">
                                 <h3>Total de Usuários</h3>
                                 <p>15</p>
                             </div>
-                            <div class="dashboard-item">
+                            <div class="dashboard-item dashboard-item-mob">
                                 <h3>Total de Lojas</h3>
                                 <p>3</p>
                             </div>
                         </div>
 
-                        <div class="dashboard-item">
+                        <div class="dashboard-item dashboard-item-mob">
                             <h3>Enviados Outubro</h3>
                             <p>320</p>
                         </div>
                     </div>
 
-                    <div class="dashboard-item">
+                    <div class="dashboard-item dashboard-item-mob-estoque">
                         <h3>Estoque Baixo</h3>
                         <table>
                             <thead class="headTabela">
