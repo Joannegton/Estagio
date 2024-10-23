@@ -17,56 +17,67 @@ function mostrarLogin() {
     esconderElementos(['recuperarSenha', 'primeiroAcesso']);
 }
 
-function login() {
+async function login() {
     const matricula = document.getElementById('matricula').value;
     const senha = document.getElementById('senha').value;
 
-    if (senha === 'Quero@2024#') {
-        const tipoUsuario = getUserType(matricula); 
+    try {
+        const response = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({matricula, senha})
+        })
 
-        if (tipoUsuario === 'caixa') {
-            window.location.href = 'caixa.html';
-            sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+        if (response.ok){
+            const data = await response.json()
+            const {nome, tipoUsuario} = data.user
 
-        } else if (tipoUsuario === 'gerente') {
-            window.location.href = 'gerente.html';
-            sessionStorage.setItem('mostrarPerfilUsuario', 'true');
-
+            sessionStorage.setItem('matricula', matricula);
+            sessionStorage.setItem('tipoUsuario', tipoUsuario);
+            sessionStorage.setItem('nome', nome);
+            //tipoUsuario = 1 -> administrador, tipoUsuario = 2 -> gerente, tipoUsuario = 3 -> caixa
+            if (senha === 'Quero@2024#') {
+                if (tipoUsuario === 3) {
+                    window.location.href = 'caixa.html';
+                    sessionStorage.setItem('mostrarPerfilUsuario', 'true'); //na pagina caixa.html, se mostrarPerfilUsuario for true, esignidica que é o primeiro acesso
+                } else if (tipoUsuario === 2) {
+                    window.location.href = 'gerente.html';
+                    sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+                } else {
+                    alert('Perfil inválido para esse login');
+                }
+            } else {
+                if (tipoUsuario === 3) {
+                    window.location.href = 'caixa.html';
+                } else if (tipoUsuario === 2) {
+                    window.location.href = 'gerente.html';
+                } else if (tipoUsuario === 1) {
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Perfil inválido para esse login');
+                }
+            }
         } else {
-            alert('Perfil inválido para esse login');
+            alert('Email ou senha inválidos');
         }
-
-    } else if (matricula === '123456' && senha === '123456') {
-        const tipoUsuario = getUserType(matricula); // Replace with actual logic to get user type
-
-        if (tipoUsuario === 'caixa') {
-            window.location.href = 'caixa.html';
-
-        } else if (tipoUsuario === 'gerente') {
-            window.location.href = 'gerente.html';
-
-        } else if (tipoUsuario === 'admin') {
-            window.location.href = 'index.html';
-        }
-        
-    } else {
-        alert('Matrícula ou senha inválida');
+    } catch (error) {
+        console.error('Erro ao fazer login: ', error)
+        alert('Erro ao fazer login')
     }
-}
-
-function getUserType(matricula) {
-    return 'gerente';
 }
 
 // Controle de timeout e múltiplos logins
 function checkSession() {
     if (!sessionStorage.getItem('auth')) {
-        //window.location.href = 'login.html';
+        window.location.href = 'login.html';
     }
 }
 
 function logout() {
-    // Implement logout functionality
+    sessionStorage.removeItem('auth');
+    window.location.href = 'login.html';
 }
 
 function recuperarSenha() {
@@ -74,4 +85,4 @@ function recuperarSenha() {
     alert(`Instruções de recuperação de senha foram enviadas para ${email}`);
 }
 
-export { login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha };
+export { login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha, checkSession };
