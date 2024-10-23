@@ -1,9 +1,11 @@
+article#entradas{
+    height: 63%;
+}
 #cadastroMassa{
     flex-direction: column; 
     width: 90%;
     margin: auto;
     max-width: 600px;
-    
 }
 
 .dashboard-item-estoque{
