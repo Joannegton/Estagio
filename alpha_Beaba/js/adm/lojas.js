@@ -8,6 +8,7 @@ function alternadorLojas(){
 
     lojas.addEventListener('click', () => {
         alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas');
+        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
     })
     cadastroLoja.addEventListener('click', () => {
         alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas');
@@ -16,7 +17,7 @@ function alternadorLojas(){
 
 function mostrarLojas(){
     mostrarElemento('lojas', 'mostrarLojas', () =>{
-        adicionarPaginacao(dadosLojaGeral, renderizarTabelaLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
+        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
         alternadorLojas()
     })
 }
@@ -35,36 +36,34 @@ async function fetchLojas(){
         }
         
         lojas = await response.json()
-        return lojas
+        renderizarTabelaLojas(lojas)
     } catch (error) {
         console.error('Erro ao buscar lojas:', error)
         alert('Erro ao buscar lojas, consulte o Administrador do sistema') 
     }
 }
 
-const dadosLojaGeral = {
-    paginaAtual: 1,
-    itensPorPagina: 13,
-    dadosLoja: lojas
-}
 
-function renderizarTabelaLojas(){
+function renderizarTabelaLojas(listalojas){
     const tbody = document.getElementById('lojas-tbody')
     tbody.innerHTML = ''
 
-    const inicio = (dadosLojaGeral.paginaAtual - 1) * dadosLojaGeral.itensPorPagina
-    const fim = inicio + dadosLojaGeral.itensPorPagina
-    const dadosLimitados = dadosLojaGeral.dadosLoja.slice(inicio, fim)
+    const paginaAtual = 1
+    const itensPorPagina = 13
+
+    const inicio = (paginaAtual - 1) * itensPorPagina
+    const fim = inicio + itensPorPagina
+    const dadosLimitados = listalojas.slice(inicio, fim)
 
     dadosLimitados.forEach(item => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td data-label="Cód" id="idLoja${item.id_loja}">${item.id_loja}</td>
-            <td data-label="Loja" id="nomeLoja${item.id_loja}">${item.loja}</td>
-            <td data-label="Gerente" id="nomeGerente${item.id_loja}">${item.gerente}</td>
-                <td data-label="Quantidade Recomendada">${item.qntRecomend}</td>
-                <td data-label="Quantidade Mínima">${item.qntMinima}</td>
-                <td data-label="Nº de Caixas" id="qntCaixas${item.id_loja}">${item.numCaixas}</td>
+            <td data-label="Loja" id="nomeLoja${item.id_loja}">${item.nome_loja}</td>
+            <td data-label="Gerente" id="nomeGerente${item.id_loja}">${item.nome_usuario}</td>
+                <td data-label="Quantidade Recomendada">${item.estoque_minimo * 1.5}</td>
+                <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
+                <td data-label="Nº de Caixas" id="qntCaixas${item.id_loja}">${item.caixas_fisicos}</td>
                 <td data-label="Editar" class="acoes">
                 <div id="containerBotaoAcaoLoja${item.id_loja}">
                 <a href="#" class="botaoAcao" id="editarLoja${item.id_loja}"><i class="fas fa-edit"></i></a>
@@ -88,9 +87,9 @@ function renderizarTabelaLojas(){
     })
 
     //botões paginação
-    document.getElementById('pagInfoLojas').textContent = `Página ${dadosLojaGeral.paginaAtual} de ${Math.ceil(dadosLojaGeral.dadosLoja.length / dadosLojaGeral.itensPorPagina)}`
-    document.getElementById('pagAntLojas').disabled = dadosLojaGeral.paginaAtual === 1
-    document.getElementById('proxPagLojas').disabled =  fim >= dadosLojaGeral.dadosLoja.length
+    document.getElementById('pagInfoLojas').textContent = `Página ${paginaAtual} de ${Math.ceil(listalojas.length / itensPorPagina)}`
+    document.getElementById('pagAntLojas').disabled = paginaAtual === 1
+    document.getElementById('proxPagLojas').disabled =  fim >= listalojas.length
 
 }
 
@@ -141,4 +140,4 @@ function exportarLojas(){
 }
 
 
-export { mostrarLojas, fetchLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+export {  mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
