@@ -1,8 +1,10 @@
-import { alternador, alternador3, mostrarMenu, esconderElementos, adicionarPaginacao, mostrarElemento } from "../utils.js"
+import { alternador3, mostrarMenu, esconderElementos, adicionarPaginacao, mostrarElemento } from "../utils.js"
+import { carregarSelectsCadastroUsuario, carregarSelectsTipoUsuario, fetchUsuarios } from "./usuarios.js"
+
+let perfis = []
 
 function mostrarPerfil(){
     mostrarElemento('perfil', 'mostrarPerfil', ()=> {
-        adicionarPaginacao(dadosUsuarioGeral, renderizarTabelaUsuarios, 'pagAntUsuarios', 'proxPagUsuarios', 'Usuario' )
         alternadorPerfil()
     })
 }
@@ -13,156 +15,111 @@ function mostrarPerfilUsuario(){
     mostrarMenu()
 }
 
-const dadosUsuarioGeral = {
-    paginaAtual: 1,
-    itensPorPagina: 13,
-    dadosUsuario: [
-        { matricula: '123456', nome_perfil: 'Wellington Tavares Galbarini', tipoUsuario: 'Administrador' },
-        { matricula: '654321', nome_perfil: 'Marcelo D3 da Silva', tipoUsuario: 'Gerente' },
-        { matricula: '112233', nome_perfil: 'Ana Beatriz Oliveira', tipoUsuario: 'Caixa' },
-        { matricula: '334455', nome_perfil: 'Carlos Henrique Souza', tipoUsuario: 'Caixa' },
-        { matricula: '556677', nome_perfil: 'Joana Maria Santos', tipoUsuario: 'Administrador' },
-        { matricula: '778899', nome_perfil: 'Roberto Lima Costa', tipoUsuario: 'Caixa' },
-        { matricula: '998877', nome_perfil: 'Fernanda Alves Pereira', tipoUsuario: 'Gerente' },
-        { matricula: '121314', nome_perfil: 'Lucas Mendes Ferreira', tipoUsuario: 'Caixa' },
-        { matricula: '141516', nome_perfil: 'Juliana Prado Martins', tipoUsuario: 'Supervisor' },
-        { matricula: '171819', nome_perfil: 'Ricardo Fagundes Torres', tipoUsuario: 'Administrador' },
-        { matricula: '202122', nome_perfil: 'Maria Clara Araújo', tipoUsuario: 'Caixa' },
-        { matricula: '232425', nome_perfil: 'Paulo Sérgio Ramos', tipoUsuario: 'Gerente' },
-        { matricula: '262728', nome_perfil: 'Thiago Gomes Silva', tipoUsuario: 'Caixa' },
-        { matricula: '293031', nome_perfil: 'Amanda Costa Rodrigues', tipoUsuario: 'Caixa' },
-        { matricula: '323334', nome_perfil: 'Felipe Nogueira Lima', tipoUsuario: 'Gerente' }
+function alternadorPerfil() {
+    fetchUsuarios()
+    const usuarios = document.getElementById('usuarios');
+    const cadastroUsuario = document.getElementById('cadastroUsuario');
+    const perfisElemento = document.getElementById('perfis');
 
-    ]
+    usuarios.addEventListener('click', () => {
+        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0);
+        fetchUsuarios()
+    });
+    
+    cadastroUsuario.addEventListener('click', () => {
+        alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
+        carregarSelectsCadastroUsuario()
+        carregarSelectsTipoUsuario()
+    });
+    
+    perfisElemento.addEventListener('click', async () => {
+        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2);
+        await fetchPerfis()
+        renderizarTabelaPerfis(perfis)
+    });
 }
 
-function renderizarTabelaUsuarios(){
-    const tbody = document.getElementById('usuarios-tbody')
+function renderizarTabelaPerfis(perfisRenderizar){
+    const tbody = document.getElementById('perfis-tbody')
     tbody.innerHTML = ''
 
-    const inicio = (dadosUsuarioGeral.paginaAtual -1) * dadosUsuarioGeral.itensPorPagina
-    const fim = inicio + dadosUsuarioGeral.itensPorPagina
-    const dadosLimitados = dadosUsuarioGeral.dadosUsuario.slice(inicio, fim)
-
-    dadosLimitados.forEach(item => {
+    perfisRenderizar.forEach(perfil => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
-            <td data-label="Matricula" id="perfil-matricula${item.matricula}">${item.matricula}</td>
-            <td data-label="Nome do Perfil" id="perfil-nome${item.matricula}">${item.nome_perfil}</td>
-            <td data-label="Tipo de Usuário" id="perfil-tipoUsuario${item.matricula}">${item.tipoUsuario}</td>
-            <td data-label="Ações" class="acoes" id="acoes">
-                <div id="containerBotaoAcao${item.matricula}">
-                    <a href="#" class="botaoAcao" id="editarUsuarioPerfis${item.matricula}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${item.matricula}"><i class="fas fa-trash-alt"></i></a>
+            <td data-label="Nome do Perfil" id="nome-perfil${perfil.id_perfil_acesso}">${perfil.perfil_descricao}</td>
+            <td data-label="Permissões" id="perfil-permissoes${perfil.id_perfil_acesso}">
+                <div class="container-permissoes">
+                    <span class="visualizar" data-tipo="leitura" data-id="${perfil.id_perfil_acesso}">Leitura</span> | 
+                    <span class="visualizar" data-tipo="escrita" data-id="${perfil.id_perfil_acesso}">Escrita</span> | 
+                    <a href="#" class="botaoAcao" id="visualizarPermissoes${perfil.id_perfil_acesso}" style="margin-left: 5px;"><i class="fas fa-eye"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEditarUsuario${item.matricula}" style="display: none;"><i class="fas fa-save"></i></a>
+            </td>
+            <td data-label="Ações" class="acoes" id="acoesPerfis${perfil.id_perfil_acesso}">
+                <div id="containerBotaoAcao">
+                    <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none;"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
 
         // eventos de click
-        document.getElementById(`editarUsuarioPerfis${item.matricula}`).addEventListener('click', () => {
-            editarUsuario(item.matricula)
+        document.getElementById(`editarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
+            editarPerfil()
         })
-        document.getElementById(`deletarUsuarioPerfis${item.matricula}`).addEventListener('click', () => {
-            deletarUsuario(item.matricula)
+        document.getElementById(`deletarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
+            deletarPerfil()
         })
-        document.getElementById(`salvarEditarUsuario${item.matricula}`).addEventListener('click', () => {
-            salvarEdicaoUsuario(item.matricula)
+        document.getElementById(`visualizarPermissoes${perfil.id_perfil_acesso}`).addEventListener('click', () => {
+            modalVisualizarPermissoes()
         })
-        
-        //botões de paginação
-        document.getElementById('pagInfoUsuarios').textContent = `Página ${dadosUsuarioGeral.paginaAtual} de ${Math.ceil(dadosUsuarioGeral.dadosUsuario.length / dadosUsuarioGeral.itensPorPagina)}`
-        document.getElementById('pagAntUsuarios').disabled = dadosUsuarioGeral.paginaAtual === 1
-        document.getElementById('proxPagUsuarios').disabled =  fim >= dadosUsuarioGeral.dadosUsuario.length
+        document.getElementById(`salvarEditarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
+            salvarEditarPerfil()
+        })
+
+        // evento de mouseenter para mostrar permissões
+        document.querySelectorAll(`#perfil-permissoes${perfil.id_perfil_acesso} .visualizar`).forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                const tipo = this.getAttribute('data-tipo')
+                const id = this.getAttribute('data-id')
+                mostrarPermissoes(id, tipo)
+            })
+        })
+
 
     })
 }
 
-function alternadorPerfil() {
-    const usuarios = document.getElementById('usuarios');
-    const cadastroUsuario = document.getElementById('cadastroUsuario');
-    const perfis = document.getElementById('perfis');
+async function fetchPerfis() {
+    try {
+        const response = await fetch('http://localhost:5000/perfis')
+        if (!response.ok) {
+            throw new Error('Erro ao buscar perfis')
+        }
 
-    usuarios.addEventListener('click', () => {
-        alternador3(usuarios, [cadastroUsuario, perfis], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0);
-    });
-    
-    cadastroUsuario.addEventListener('click', () => {
-        alternador3(cadastroUsuario, [usuarios, perfis], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1);
-    });
-    
-    perfis.addEventListener('click', () => {
-        alternador3(perfis, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2);
-        mostrarPermissoes()
-    });
-}
-
-// Usuario
-function salvarUsuario() {
-    alert('salvarUsuario')
-}
-
-function editarUsuario(matricula) {
-    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'none'
-    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'block'   
-
-    var perfilNome = document.getElementById(`perfil-nome${matricula}`)
-    var permissoes = document.getElementById(`perfil-tipoUsuario${matricula}`)
-    var nome = perfilNome.innerText
-
-    perfilNome.innerHTML = `<input type="text" id="input-nome${matricula}" value="${nome }">`;
-    permissoes.innerHTML = `
-        <select id="select-tipoUsuario${matricula}">
-            <option value="todas">Administrador</option>
-            <option value="manutencao">Gerente</option>
-            <option value="estoque">Caixa</option>
-        </select>
-    `
-}
-
-function salvarEdicaoUsuario(matricula) {
-    var inputNome = document.getElementById(`input-nome${matricula}`)
-    var selectPermissoes = document.getElementById(`select-tipoUsuario${matricula}`)
-
-    var newNome = inputNome.value
-    var newPermissoes = selectPermissoes.options[selectPermissoes.selectedIndex].text
-
-    document.getElementById(`perfil-nome${matricula}`).innerText = newNome
-    document.getElementById(`perfil-tipoUsuario${matricula}`).innerText = newPermissoes;
-
-    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'none';
-    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block';
-    inputNome.remove();
-    selectPermissoes.remove();
-}
-
-function deletarUsuario(matricula){
-    alert('deletarUsuario')
-}
-
-function filtrarUsuarioNome(){
-    alert('filtrarUsuarioNome')
+        perfis = await response.json()
+    } catch (error) {
+        console.error('Erro ao buscar perfis:', error)
+    }
 }
 
 // Perfil
-function mostrarPermissoes(){
+function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+
     const permissoes = {
-        leitura: ['Perfis', 'Usuarios', 'Lojas', 'Estoque'],
-        escrita: ['Perfis', 'Usuarios', 'Lojas']
+        leitura: perfil.permissoes_leitura,
+        escrita: perfil.permissoes_escrita
     }
 
-    document.querySelectorAll('.visualizar').forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            const tipo = this.getAttribute('data-tipo');
-            const data = permissoes[tipo];
-            if (data) {
-                this.setAttribute('data-content', data.join(', '));
-            } else {
-                console.error('Tipo de permissão não encontrado:', tipo);
-            }
-        })
-    })
+    const data = permissoes[tipoPermissao]
+    if (data){
+        const element = document.querySelector(`.visualizar[data-id="${idPerfilAcesso}"][data-tipo="${tipoPermissao}"]`)
+        element.setAttribute('data-content', data.join(', '));
+    } else {
+        console.error('Tipo de permissão não encontrado:', tipoPermissao);
+    }
 }
 
 function modalVisualizarPermissoes(){
@@ -201,4 +158,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { modalVisualizarPermissoes, deletarPerfil, mostrarModalCadastroPerfil, editarPerfil, salvarEditarPerfil, salvarPerfil, salvarUsuario, deletarUsuario, editarUsuario, salvarEdicaoUsuario, mostrarPerfil, alternadorPerfil, filtrarUsuarioNome, exportarPerfis, mostrarPerfilUsuario }
+export { mostrarPerfil, mostrarPerfilUsuario, mostrarPermissoes, mostrarModalCadastroPerfil, salvarPerfil, mostrarModalEditPerfil, modalVisualizarPermissoes, editarPerfil, salvarEditarPerfil, deletarPerfil, exportarPerfis }

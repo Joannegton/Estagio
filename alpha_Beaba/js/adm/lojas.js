@@ -1,5 +1,7 @@
 import { adicionarPaginacao, alternador, esconderElementos, mostrarElemento, mostrarMenu } from "../utils.js"
 
+let lojas = []
+
 function alternadorLojas(){
     const lojas = document.getElementById('todasLojas');
     const cadastroLoja = document.getElementById('cadastroLoja');
@@ -19,26 +21,31 @@ function mostrarLojas(){
     })
 }
 
+async function fetchLojas(){
+    try {
+        const response = await fetch('http://localhost:5000/lojas', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    
+        if (!response.ok) {
+            throw new Error('Erro ao buscar lojas')
+        }
+        
+        lojas = await response.json()
+        return lojas
+    } catch (error) {
+        console.error('Erro ao buscar lojas:', error)
+        alert('Erro ao buscar lojas, consulte o Administrador do sistema') 
+    }
+}
+
 const dadosLojaGeral = {
     paginaAtual: 1,
     itensPorPagina: 13,
-    dadosLoja: [
-        { id_loja: 1, loja: 'Loja 01', qntRecomend: 25, qntMinima: 15, numCaixas: 3, gerente: 'Carlos Almeida' },
-        { id_loja: 2, loja: 'Loja 02', qntRecomend: 30, qntMinima: 20, numCaixas: 4, gerente: 'Fernanda Silva' },
-        { id_loja: 3, loja: 'Loja 03', qntRecomend: 50, qntMinima: 30, numCaixas: 6, gerente: 'Paulo Roberto' },
-        { id_loja: 4, loja: 'Loja 04', qntRecomend: 40, qntMinima: 25, numCaixas: 5, gerente: 'Ana Carolina' },
-        { id_loja: 5, loja: 'Loja 05', qntRecomend: 60, qntMinima: 35, numCaixas: 8, gerente: 'Marcelo Souza' },
-        { id_loja: 6, loja: 'Loja 06', qntRecomend: 45, qntMinima: 28, numCaixas: 7, gerente: 'Juliana Ferreira' },
-        { id_loja: 7, loja: 'Loja 07', qntRecomend: 20, qntMinima: 12, numCaixas: 2, gerente: 'Lucas Oliveira' },
-        { id_loja: 8, loja: 'Loja 08', qntRecomend: 35, qntMinima: 22, numCaixas: 4, gerente: 'Renata Costa' },
-        { id_loja: 9, loja: 'Loja 09', qntRecomend: 55, qntMinima: 32, numCaixas: 6, gerente: 'Rafael Nunes' },
-        { id_loja: 10, loja: 'Loja 10', qntRecomend: 70, qntMinima: 40, numCaixas: 9, gerente: 'Mariana Ramos' },
-        { id_loja: 11, loja: 'Loja 11', qntRecomend: 25, qntMinima: 18, numCaixas: 3, gerente: 'Gustavo Vieira' },
-        { id_loja: 12, loja: 'Loja 12', qntRecomend: 65, qntMinima: 38, numCaixas: 7, gerente: 'Patrícia Moreira' },
-        { id_loja: 13, loja: 'Loja 13', qntRecomend: 80, qntMinima: 45, numCaixas: 10, gerente: 'Cláudio Lima' },
-        { id_loja: 14, loja: 'Loja 14', qntRecomend: 90, qntMinima: 50, numCaixas: 12, gerente: 'Simone Alves' },
-        { id_loja: 15, loja: 'Loja 15', qntRecomend: 100, qntMinima: 55, numCaixas: 15, gerente: 'Eduardo Martins' }
-    ]
+    dadosLoja: lojas
 }
 
 function renderizarTabelaLojas(){
@@ -134,4 +141,4 @@ function exportarLojas(){
 }
 
 
-export { mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+export { mostrarLojas, fetchLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }

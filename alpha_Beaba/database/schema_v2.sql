@@ -5,7 +5,8 @@ create table perfil_acesso (
 
 create table permissoes (
     id_permissao serial primary key,
-    descricao varchar(30) not null
+    descricao varchar(30) not null,
+    tipo_permissao varchar(20) not null
 );
 
 -- Tabela de Relacionamento entre Perfis de Acesso e Permissões
@@ -19,11 +20,13 @@ create table usuario (
     matricula varchar(7) primary key unique,
     nome_usuario varchar(120),
     senha varchar(120) default 'Quero@2024#',
+    token varchar(120),
+    cod_loja integer references loja(cod_loja) on delete set null,
     id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
 );
 
 create table loja (
-    id_loja serial primary key,
+    cod_loja serial primary key,
     nome_loja varchar(120) not null,
     endereco_loja varchar(255),
     caixas_fisicos integer,
@@ -33,7 +36,7 @@ create table loja (
 
 create table envio_taloes (
     numero_remessa serial primary key,
-    id_loja integer references loja(id_loja) on delete set null,
+    cod_loja integer references loja(cod_loja) on delete set null,
     data_envio date,
     data_recebimento_previsto date,
     quantidade integer,
@@ -43,14 +46,14 @@ create table envio_taloes (
 
 create table estoque_taloes (
     id_estoque serial primary key,
-    id_loja integer references loja(id_loja) on delete set null,
+    cod_loja integer references loja(cod_loja) on delete set null,
     quantidade_disponivel integer,
     quantidade_recomendada integer
 );
 
 create table caixa (
     id_caixa serial primary key,
-    id_loja integer references loja(id_loja) on delete set null,
+    cod_loja integer references loja(cod_loja) on delete set null,
     matricula varchar(7) references usuario(matricula) on delete cascade,
     estoque integer
 );
@@ -106,19 +109,19 @@ values
     ('loja sul', 'rua da praia, 50, santos - sp', 3, 50, '7654321'),
     ('loja norte', 'av. norte, 500, fortaleza - ce', 4, 80, '2468135');
 
-insert into envio_taloes (id_loja, data_envio, data_recebimento_previsto, quantidade, id_funcionario_recebimento, status)
+insert into envio_taloes (cod_loja, data_envio, data_recebimento_previsto, quantidade, id_funcionario_recebimento, status)
 values
     (1, '2024-01-08', '2024-01-15', 500, '1234567', 'enviado'),
     (2, '2024-02-10', '2024-02-17', 300, '7654321', 'recebido'),
     (3, '2024-03-03', '2024-03-10', 400, '2468135', 'enviado');
 
-insert into estoque_taloes (id_loja, quantidade_disponivel, quantidade_recomendada)
+insert into estoque_taloes (cod_loja, quantidade_disponivel, quantidade_recomendada)
 values
     (1, 200, 500),
     (2, 150, 300),
     (3, 50, 400);
 
-insert into caixa (id_loja, matricula, estoque)
+insert into caixa (cod_loja, matricula, estoque)
 values
     (1, '1234567', 200),
     (2, '7654321', 150),

@@ -41,7 +41,7 @@
             <section id="estoqueTaloes" style="display: none;">
                     <h2>Estoque</h2>
                     <div class="filtro">
-                        <label for="filtoEstoque">Caixa:</label>
+                        <label for="filtroEstoque">Caixa:</label>
                         <input type="text" name="filtroEstoque" id="filtroEstoque">
                         <button id="exportarEstoque" class="exportarCSV" >Exportar</button>
                     </div>
@@ -167,7 +167,7 @@
                 <article id="seletorPerfis">
                     <h2>Perfis de Usuario</h2>
                     <div class="filtro">
-                        <label for="filtoUsuario">Nome:</label>
+                        <label for="filtroUsuario">Nome:</label>
                         <input type="text" name="filtroUsuario" id="filtroUsuario">
                         <button id="exportarPerfis" class="exportarCSV" >Exportar</button>
                     </div>
@@ -181,7 +181,7 @@
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="profileTableBody">
+                            <tbody id="perfis-tbody">
                                 <tr id="perfil-linha">
                                     <td data-label="Matricula" id="perfil-matricula">254875</td>
                                     <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
@@ -305,7 +305,7 @@
                     <div class="filtro" style="text-align: end;">
                         <button id="cadastrarMassa" class="exportarCSV" onclick="cadastroMassa()">Cadastro em Massa</button>
                     </div>
-                    <form id="perfilForm">
+                    <form id="formCadUsuario">
                         <div id="cadastroMassa" style="display: none;">
                             <input type="file" name="cadastroEmMassa" id="cadastroEmMassa" accept=".xls,.xlsx,.csv">
                             <div class="tabela-container">

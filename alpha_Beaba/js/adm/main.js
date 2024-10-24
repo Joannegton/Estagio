@@ -1,10 +1,11 @@
-import { mostrarPerfil, filtrarUsuarioNome, exportarPerfis, salvarUsuario, salvarPerfil, mostrarModalCadastroPerfil, mostrarPerfilUsuario, editarPerfil, salvarEditarPerfil, deletarPerfil, modalVisualizarPermissoes } from './perfil.js'
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarElemento } from '../utils.js'
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
 import { enviarTalao } from './envioTaloes.js'
+import { deletarPerfil, editarPerfil, mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvarEditarPerfil } from './perfil.js';
+import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
@@ -46,11 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportarManutencao').addEventListener('click', exportarManutencao)
     
     // Usuario
-    document.getElementById('filtoUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)
+    document.getElementById('filtroUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)
+
+    document.getElementById('ordenarUsuario').addEventListener('change', ordenarUsuarios)
+ 
+    document.getElementById('ordenarLojaUsuario').addEventListener('change', ordenarLojaUsuarios)
 
     document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
 
-    document.getElementById('salvarUsuario').addEventListener('click', salvarUsuario)
+    document.getElementById('formCadUsuario').addEventListener('submit', event => {
+        event.preventDefault()
+        salvarUsuario()
+    })
 
     // Perfil
     document.getElementById('cadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
@@ -61,11 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         esconderElementos(['addPerfil'])
     })
 
-    document.getElementById('editarPerfis').addEventListener('click', editarPerfil)
+    //document.getElementById('editarPerfis').addEventListener('click', editarPerfil)
 
-    document.getElementById('deletarPerfis').addEventListener('click', deletarPerfil)
+    //document.getElementById('deletarPerfis').addEventListener('click', deletarPerfil)
 
-    document.getElementById('visualizarPermissoes').addEventListener('click', modalVisualizarPermissoes)
+    //document.getElementById('visualizarPermissoes').addEventListener('click', modalVisualizarPermissoes)
     document.getElementById('fecharModalVisualizarPermissoes').addEventListener('click', () => {
         esconderElementos(['modalVisualizarPermissoes'])
     })

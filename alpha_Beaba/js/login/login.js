@@ -32,11 +32,14 @@ async function login() {
 
         if (response.ok){
             const data = await response.json()
-            const {nome, tipoUsuario} = data.user
+            const {token, user} = data
+            const {nome, tipoUsuario} = user
 
+            sessionStorage.setItem('token', token)
             sessionStorage.setItem('matricula', matricula);
             sessionStorage.setItem('tipoUsuario', tipoUsuario);
             sessionStorage.setItem('nome', nome);
+
             //tipoUsuario = 1 -> administrador, tipoUsuario = 2 -> gerente, tipoUsuario = 3 -> caixa
             if (senha === 'Quero@2024#') {
                 if (tipoUsuario === 3) {
@@ -44,6 +47,9 @@ async function login() {
                     sessionStorage.setItem('mostrarPerfilUsuario', 'true'); //na pagina caixa.html, se mostrarPerfilUsuario for true, esignidica que é o primeiro acesso
                 } else if (tipoUsuario === 2) {
                     window.location.href = 'gerente.html';
+                    sessionStorage.setItem('mostrarPerfilUsuario', 'true');
+                } else if (tipoUsuario === 1) {
+                    window.location.href = 'admin.html';
                     sessionStorage.setItem('mostrarPerfilUsuario', 'true');
                 } else {
                     alert('Perfil inválido para esse login');
@@ -68,15 +74,31 @@ async function login() {
     }
 }
 
+function isTokenExpirado(token) {
+    //Divide o token JWT em três partes e seleciona a 2ª parte (payload) para decodificar e transforma em JSON
+    const payload = JSON.parse(atob(token.split('.')[1])) //atob - Decodifica a string Base64
+    const expiry = payload.exp; //exp é o tempo de expiração do token
+    const now = Math.floor(Date.now() / 1000); //Math.floor(...): Arredonda o valor para baixo para obter um número inteiro.
+    return now > expiry;
+}
+
 // Controle de timeout e múltiplos logins
 function checkSession() {
-    if (!sessionStorage.getItem('auth')) {
+    const token = sessionStorage.getItem('token');
+    if (!token || isTokenExpirado(token)) {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('matricula');
+        sessionStorage.removeItem('tipoUsuario');
+        sessionStorage.removeItem('nome');
         window.location.href = 'login.html';
     }
 }
 
 function logout() {
-    sessionStorage.removeItem('auth');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('matricula');
+    sessionStorage.removeItem('tipoUsuario');
+    sessionStorage.removeItem('nome');
     window.location.href = 'login.html';
 }
 
