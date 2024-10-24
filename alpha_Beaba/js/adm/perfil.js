@@ -17,26 +17,26 @@ function mostrarPerfilUsuario(){
 
 function alternadorPerfil() {
     fetchUsuarios()
-    const usuarios = document.getElementById('usuarios');
-    const cadastroUsuario = document.getElementById('cadastroUsuario');
-    const perfisElemento = document.getElementById('perfis');
+    const usuarios = document.getElementById('usuarios')
+    const cadastroUsuario = document.getElementById('cadastroUsuario')
+    const perfisElemento = document.getElementById('perfis')
 
     usuarios.addEventListener('click', () => {
-        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0);
+        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
         fetchUsuarios()
-    });
+    })
     
     cadastroUsuario.addEventListener('click', () => {
         alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
         carregarSelectsCadastroUsuario()
         carregarSelectsTipoUsuario()
-    });
+    })
     
     perfisElemento.addEventListener('click', async () => {
-        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2);
+        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
         await fetchPerfis()
         renderizarTabelaPerfis(perfis)
-    });
+    })
 }
 
 function renderizarTabelaPerfis(perfisRenderizar){
@@ -51,7 +51,7 @@ function renderizarTabelaPerfis(perfisRenderizar){
                 <div class="container-permissoes">
                     <span class="visualizar" data-tipo="leitura" data-id="${perfil.id_perfil_acesso}">Leitura</span> | 
                     <span class="visualizar" data-tipo="escrita" data-id="${perfil.id_perfil_acesso}">Escrita</span> | 
-                    <a href="#" class="botaoAcao" id="visualizarPermissoes${perfil.id_perfil_acesso}" style="margin-left: 5px;"><i class="fas fa-eye"></i></a>
+                    <a href="#" class="botaoAcao" id="visualizarPermissoes${perfil.id_perfil_acesso}" style="margin-left: 5px"><i class="fas fa-eye"></i></a>
                 </div>
             </td>
             <td data-label="Ações" class="acoes" id="acoesPerfis${perfil.id_perfil_acesso}">
@@ -59,7 +59,7 @@ function renderizarTabelaPerfis(perfisRenderizar){
                     <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit"></i></a>
                     <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none;"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
@@ -116,9 +116,9 @@ function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
     const data = permissoes[tipoPermissao]
     if (data){
         const element = document.querySelector(`.visualizar[data-id="${idPerfilAcesso}"][data-tipo="${tipoPermissao}"]`)
-        element.setAttribute('data-content', data.join(', '));
+        element.setAttribute('data-content', data.join('\n')) // join - transforma o array em string separando por \n
     } else {
-        console.error('Tipo de permissão não encontrado:', tipoPermissao);
+        console.error('Tipo de permissão não encontrado:', tipoPermissao)
     }
 }
 
@@ -148,9 +148,9 @@ function salvarEditarPerfil(){
 }
 
 function deletarPerfil(){
-    const confirmacao = confirm('Tem certeza que deseja deletar o perfil?');
+    const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
     if (confirmacao) {
-        alert('Perfil deletado com sucesso.');
+        alert('Perfil deletado com sucesso.')
     }
 }
 

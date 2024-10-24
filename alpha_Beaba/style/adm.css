@@ -51,10 +51,11 @@
   position: absolute;
   background-color: #fff;
   border: 1px solid #ccc;
+  width: auto;
+  white-space: pre-wrap; /* Permite a quebra de linha */
   padding: 5px;
   top: -25px;
   left: 0;
-  white-space: nowrap;
   z-index: 10;
   display: none;
 }

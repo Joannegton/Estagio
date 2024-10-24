@@ -17,7 +17,6 @@ function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) 
     funcoesAdicional()
 }
 
-
 // Função para alternar entre elementos
 function alternador(elementoAtivo, elementoDesativar, elementoAtivar, ativar, desativar, indicador) {
     elementoDesativar.classList.add('ativo')
@@ -119,4 +118,19 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     }
 }
 
-export {carregarDadosSelect, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+function mostrarFiltros(id) {
+    var filtroOptions = document.getElementById(id);
+    var toggleButton = document.getElementById('mostrarFiltro').querySelector('i');
+    
+    if (filtroOptions.classList.contains('show')) {
+      filtroOptions.classList.remove('show');
+      toggleButton.classList.remove('fa-chevron-up');
+      toggleButton.classList.add('fa-chevron-down');
+    } else {
+      filtroOptions.classList.add('show');
+      toggleButton.classList.remove('fa-chevron-down');
+      toggleButton.classList.add('fa-chevron-up');
+    }
+  }
+
+export {carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}

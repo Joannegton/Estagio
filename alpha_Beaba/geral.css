@@ -222,19 +222,39 @@ form button:hover {
 }
 
 /* -filtro e alternador- */
+.filtro-container {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: .5em 1em;
+  margin-bottom: 1em;
+  background-color: rgba(255, 255, 0, 0.514);
+}
+
 .filtro {
   display: flex;
   justify-content: right;
   align-items: center;
-  margin-bottom: 1em;
-  background-color: rgba(255, 255, 0, 0.514);
-  padding: 1em;
 }
 
 
-.filtro label {
+.filtro label, .filtro-container label {
+  margin-left: 0.5em;
   margin-right: 0.2em;
   font-weight: bold;
+}
+
+.mostrarFiltro{
+  display: none;
+}
+
+.iconeFiltro{
+  font-size: 20px;
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: 0 .2em;
+  margin-right: .5em;
 }
 
 .exportarCSV {
@@ -673,4 +693,40 @@ footer p {
   margin: 12px 5px;
 }
 
+.mostrarFiltro{
+  display: block;
+}
+
+
+.filtro {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: rgba(252, 252, 167, 0.849);
+  border: 1px solid #ccc;
+}
+
+.filtro.show {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container-nome{
+  width: 100%;
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+.container-selects{
+  width: 100%;
+  text-align: center;
+}
 }
