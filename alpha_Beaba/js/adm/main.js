@@ -35,11 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Estoque
-    document.getElementById('filtroLoja').addEventListener('input', filtrarLoja)
+    document.getElementById('filtroLojaEstoque').addEventListener('input', filtrarLoja)
 
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
 
     // Manutenção
+    document.getElementById('filtroManutencaoNomeLoja').addEventListener('input', () => {})
+
     document.getElementById('filtroLojaManutencao').addEventListener('change', filtarLojaManutencao)
 
     document.getElementById('filtroStatusManutencao').addEventListener('change', filtarStatusManutencao)

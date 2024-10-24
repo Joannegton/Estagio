@@ -87,9 +87,29 @@
 
             <section id="estoque" style="display: none;">
                 <h2>Gestão de Estoque</h2>
-                <div class="filtro">
-                    <label for="filtroLoja">Loja:</label>
-                    <input type="text" name="filtroLoja" id="filtroLoja">
+                <div class="filtro-container">
+                    <div id="mostrarFiltroEstoque" class="mostrarFiltro" >
+                        <Label>Filtros:</Label>
+                        <i class="fas fa-chevron-down iconeFiltro"  onclick="mostrarFiltros('opcoesFiltroEstoque', 'mostrarFiltroEstoque')"></i>
+                    </div>
+                    <div class="filtro" id="opcoesFiltroEstoque">
+                        <div class="container-nome">
+                            <label for="filtroEstoque">Estoque:</label>
+                            <input type="text" name="filtroEstoque" id="filtroEstoque">
+                        </div>
+                        <div class="container-selects">
+                            <label for="ordenarEstoqueData">Data:</label>
+                            <select id="ordenarEstoqueData" name="ordenarEstoqueData">
+                                <option value="asc">Ascendente</option>
+                                <option value="desc">Descendente</option>
+                            </select>
+                            <label for="filtroLojaEstoque">Loja:</label>
+                            <select id="filtroLojaEstoque" name="filtroLojaEstoque">
+                                <option value="asc">A - Z</option>
+                                <option value="desc">Z - A</option>
+                            </select>
+                        </div>
+                    </div>
                     <button id="exportarEstoque" class="exportarCSV">Exportar</button>
                 </div>
                 <div class="tabela-container">
@@ -116,20 +136,34 @@
         
             <section id="manutencao" style="display: none;">
                 <h2>Manutenção de Remessa</h2>
-                <div class="filtro">
-                    <label for="filtroLojaManutencao">Loja:</label>
-                    <select id="filtroLojaManutencao" name="filtroLojaManutencao">
-                        <option value="asc">A - Z</option>
-                        <option value="desc">Z - A</option>
-                    </select>
-                    <label for="filtroStatusManutencao" style="margin-left: .3em;">Status:</label>
-                    <select id="filtroStatusManutencao" name="filtroStatusManutencao">
-                        <option value="todos">Todas</option>
-                        <option value="enviado">Enviado</option>
-                        <option value="entregue">Entregue</option>
-                    </select>
+                <div class="filtro-container">
+                    <div id="mostrarFiltroManutencao" class="mostrarFiltro">
+                        <Label>Filtros:</Label>
+                        <i class="fas fa-chevron-down iconeFiltro"  onclick="mostrarFiltros('opcoesFiltroManutencao', 'mostrarFiltroManutencao')"></i>
+                    </div>
+                    <div class="filtro" id="opcoesFiltroManutencao">
+                        <div class="container-nome">
+                            <label for="filtroManutencaoNomeLoja">Loja:</label>
+                            <input type="text" name="filtroManutencaoNomeLoja" id="filtroManutencaoNomeLoja">
+                        </div>
+
+                        <div class="container-selects">
+                            <label for="filtroLojaManutencao">Loja:</label>
+                            <select id="filtroLojaManutencao" name="filtroLojaManutencao">
+                                <option value="asc">A - Z</option>
+                                <option value="desc">Z - A</option>
+                            </select>
+                            <label for="filtroStatusManutencao" style="margin-left: .3em;">Status:</label>
+                            <select id="filtroStatusManutencao" name="filtroStatusManutencao">
+                                <option value="todos">Todas</option>
+                                <option value="enviado">Enviado</option>
+                                <option value="entregue">Entregue</option>
+                            </select>
+                        </div>
+                    </div>
                     <button id="exportarManutencao" class="exportarCSV">Exportar</button>
                 </div>
+
                 <div class="tabela-container">
                     <table>
                         <thead class="headTabela">
@@ -169,10 +203,11 @@
                 <article id="seletorUsuarios">
                     <h2>Perfis de Usuario</h2>
                     <div class="filtro-container">
-                        <div id="mostrarFiltro" class="mostrarFiltro" >
+                        <div id="mostrarFiltroContainer" class="mostrarFiltro" >
                             <Label>Filtros:</Label>
-                            <i class="fas fa-chevron-down iconeFiltro"  onclick="mostrarFiltros('opcoesFiltro')"></i>
-                        </div> <div class="filtro" id="opcoesFiltro">
+                            <i class="fas fa-chevron-down iconeFiltro"  onclick="mostrarFiltros('opcoesFiltro', 'mostrarFiltroContainer')"></i>
+                        </div> 
+                        <div class="filtro" id="opcoesFiltro">
                             <div class="container-nome">
                                 <label for="filtroUsuarioPerfis">Nome:</label>
                                 <input type="text" name="filtroUsuarioPerfis" id="filtroUsuarioPerfis">
@@ -461,7 +496,7 @@
                 
                 <article id="seletorLojas">
                     <h2>Lojas Quero Quero</h2>
-                    <div class="filtro">
+                    <div class="filtro-container">
                         <label for="filtroLojaLojas">Loja:</label>
                         <select id="filtroLojaLojas" name="filtroLojaLojas">
                             <option value="asc">A - Z</option>

@@ -118,9 +118,9 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     }
 }
 
-function mostrarFiltros(id) {
-    var filtroOptions = document.getElementById(id);
-    var toggleButton = document.getElementById('mostrarFiltro').querySelector('i');
+function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
+    const filtroOptions = document.getElementById(mostrarFiltroId);
+    const toggleButton = document.getElementById(containerFiltroId).querySelector('i');
     
     if (filtroOptions.classList.contains('show')) {
       filtroOptions.classList.remove('show');
