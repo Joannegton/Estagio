@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
-    document.getElementById('arrumarEstoqueLoja').addEventListener('click', mostrarEnvioTaloes)
 
 
     // Mostrar menu e filtros para mobile

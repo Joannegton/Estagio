@@ -24,7 +24,7 @@ taloesRouter.post('/enviarTaloes', (req, res) => {
 
 
 
-taloesRouter.get('/manutencao', (req, res) => {
+taloesRouter.get('/taloes', (req, res) => {
     conectarDb(async client => {
         try {
             const result = await client.query(`
