@@ -66,17 +66,17 @@ body {
   box-shadow: 0 0 8px rgba(63, 81, 181, 0.2);
 }
 
-.password-container {
+.senha-container {
   position: relative;
   width: 100%;
 }
 
-.password-container input {
+.senha-container input {
   width: 100%;
   padding-right: 30px;
 }
 
-.password-container i {
+.senha-container i {
   position: absolute;
   right: 10px;
   top: 50%;

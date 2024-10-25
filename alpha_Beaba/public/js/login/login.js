@@ -17,6 +17,15 @@ function mostrarLogin() {
     esconderElementos(['recuperarSenha', 'primeiroAcesso']);
 }
 
+function visualizarSenha() {
+    const senha = document.getElementById('senha');
+    if (senha.type === 'password') {
+        senha.type = 'text';
+    } else {
+        senha.type = 'password';
+    }
+}
+
 async function login() {
     const matricula = document.getElementById('matricula').value;
     const senha = document.getElementById('senha').value;
@@ -107,4 +116,4 @@ function recuperarSenha() {
     alert(`Instruções de recuperação de senha foram enviadas para ${email}`);
 }
 
-export { login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha, checkSession };
+export { visualizarSenha, login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha, checkSession };
