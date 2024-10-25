@@ -3,14 +3,14 @@ import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRel
 import { mostrarMenu, logout, esconderElementos, mostrarElemento, mostrarFiltros } from '../utils.js'
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
-import { enviarTalao } from './envioTaloes.js'
+import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvarEditarPerfil, salvarPerfil } from './perfil.js';
 import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu navigation
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', () =>{
-        mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {})
+        mostrarEnvioTaloes()
     })
     document.getElementById('mostrarEstoque').addEventListener('click', () => {
         mostrarEstoque()
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('sair-usuario').addEventListener('click', logout)
 
     // Envio de talões
-    document.getElementById('registrarEnvioTalao').addEventListener('submit', (e) =>{
+    document.getElementById('formEnvioTalao').addEventListener('submit', (e) =>{
         e.preventDefault()
         enviarTalao()
     })

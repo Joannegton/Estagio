@@ -5,7 +5,7 @@ const usuarioRouter = require('./routes/usuarioRoute')
 const lojasRouter = require('./routes/lojasRoutes')
 const { perfisRouter } = require('./routes/perfisRoutes')
 const estoqueRouter = require('./routes/estoqueRoutes')
-const manutencaoRouter = require('./routes/manutencaoRoutes')
+const taloesRouter = require('./routes/taloesRoutes')
 const app = express()
 
 app.use(express.json())
@@ -16,7 +16,7 @@ app.use(usuarioRouter)
 app.use(lojasRouter)
 app.use(perfisRouter)
 app.use(estoqueRouter)
-app.use(manutencaoRouter)
+app.use(taloesRouter)
 
 
 const port = 5000
