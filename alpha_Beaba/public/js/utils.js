@@ -56,19 +56,20 @@ function esconderElementos(ids) {
     })
 }
 
-function identificarBaixoEstoque(){
-    const rows = document.querySelectorAll('tr')
+function identificarBaixoEstoque() {
+    console.log('identificarBaixoEstoque');
+    const rows = document.querySelectorAll('tr');
     rows.forEach(row => {
-        const quantRecomendada = row.querySelector('.quant-minima')
-        const quantAtual = row.querySelector('.quant-atual')
-        if (quantRecomendada && quantAtual) {
-            const recomendadaValue = parseInt(quantRecomendada.textContent, 10)
-            const atualValue = parseInt(quantAtual.textContent, 10)
-            if (atualValue < recomendadaValue) {
-                quantAtual.classList.add('quant-atual-baixa')
+        const quantMinima = row.querySelector('.quant-minima');
+        const quantAtual = row.querySelector('.quant-atual');
+        if (quantMinima && quantAtual) {
+            const minimaValue = parseInt(quantMinima.textContent, 10);
+            const atualValue = parseInt(quantAtual.textContent, 10);
+            if (atualValue < minimaValue) {
+                quantAtual.classList.add('quant-atual-baixa');
             }
         }
-    })
+    });
 }
 
 function adicionarPaginacao(dados, renderizarFunc, pagAntId, proxPagId, tabela) {
@@ -156,4 +157,27 @@ function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
   
 }
 
-export {enviarDados, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+function converterDataParaBR(dataISO) {
+    const data = new Date(dataISO);
+    return data.toLocaleDateString('pt-BR');
+}
+
+function converterDataHoraParaBR(dataISO) {
+    const data = new Date(dataISO);
+    const dataFormatada = data.toLocaleDateString('pt-BR', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const horaFormatada = data.toLocaleTimeString('pt-BR', {
+        timeZone: 'UTC',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    return `${dataFormatada} ${horaFormatada}`;
+}
+
+
+
+export {converterDataParaBR, converterDataHoraParaBR, enviarDados, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}

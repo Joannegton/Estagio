@@ -39,7 +39,6 @@ async function fetchLojas(){
         renderizarTabelaLojas(lojas)
     } catch (error) {
         console.error('Erro ao buscar lojas:', error)
-        alert('Erro ao buscar lojas, consulte o Administrador do sistema') 
     }
 }
 
