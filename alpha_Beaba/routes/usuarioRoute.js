@@ -23,9 +23,15 @@ usuarioRouter.get('/usuarios', (req, res)=> {
     conectarDb(async client => {
         try {
             const result = await client.query(`
-                SELECT matricula, nome_usuario, descricao as tipo_usuario, nome_loja FROM usuario
+                SELECT 
+                    usuario.matricula, 
+                    usuario.nome_usuario, 
+                    p.descricao AS tipo_usuario, 
+                    l.nome_loja 
+                FROM usuario
                 JOIN perfil_acesso p ON usuario.id_perfil_acesso = p.id_perfil_acesso
-                JOIN loja l ON usuario.cod_loja = l.id_loja`
+                LEFT JOIN loja l ON usuario.cod_loja = l.cod_loja
+            `
             )
             res.status(200).json(result.rows)
         } catch (error) {

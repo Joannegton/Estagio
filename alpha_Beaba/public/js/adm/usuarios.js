@@ -1,4 +1,4 @@
-import { carregarDadosSelect } from "../utils.js"
+import { carregarDadosSelect, enviarDados } from "../utils.js"
 
 let usuarios = []
 
@@ -125,29 +125,23 @@ function filtrarUsuarioNome(event) {
 
 //salvar, edição e deletar
 async function salvarUsuario() {
-    const matricula = document.getElementById('matriculaUsuario').value
-    const tipoUsuario = document.getElementById('tipoUsuario').value
-    const loja = document.getElementById('lojaUsuario').value
+    const formulario = document.getElementById('formCadUsuario')
+    const formData = new FormData(formulario)
 
-    try {
-        const response = await fetch('http://localhost:5000/cadastrarUsuario', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({matricula, tipoUsuario, loja})
-        })
+    const data = { 
+        matricula: formData.get('matriculaUsuario'), 
+        tipoUsuario: formData.get('tipoUsuario'), 
+        loja: formData.get('lojaUsuario') 
+    }
 
-        if (response.ok){
-            alert('Usuário cadastrado com sucesso')
-            document.getElementById('matriculaUsuario').value = ''
-            document.getElementById('tipoUsuario').value = ''
-            document.getElementById('lojaUsuario').value = ''
-        }
+    console.log(data)
+    const result = await enviarDados('http://localhost:5000/cadastrarUsuario', data)
 
-    } catch (error) {
-        console.error('Erro ao cadastrar usuário:', error)
-        alert('Erro ao cadastrar usuário, consulte o Administrador do sistema')
+    if (result.success) {
+        alert('Usuário cadastrado com sucesso')
+        formulario.reset()
+    } else {
+        alert('Erro ao cadastrar usuário.')
     }
 }
 
@@ -194,7 +188,7 @@ function carregarSelectsTipoUsuario(){
     carregarDadosSelect('tipoUsuario', 'http://localhost:5000/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
 function carregarSelectsCadastroUsuario(){
-    carregarDadosSelect('lojaUsuario', 'http://localhost:5000/lojas', 'id_loja', 'nome_loja')
+    carregarDadosSelect('lojaUsuario', 'http://localhost:5000/lojas', 'cod_loja', 'nome_loja')
 }
 
 

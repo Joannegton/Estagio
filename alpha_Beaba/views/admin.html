@@ -301,58 +301,78 @@
                             <label for="permissoesPerfil">Permissões:</label>
                             <div class="tabela-container">
                                 <table >
-                                    <thead>
+                                    <thead class="headTabela">
                                         <tr>
-                                            <th>Funcionalidade</th>
+                                            <th>Módulo</th>
                                             <th>Leitura</th>
                                             <th>Escrita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Todas as permissões -->
                                         <tr>
-                                            <td>Todas</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_todas"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_todas"></td>
+                                            <td data-label="Módulo">Todas</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Todas"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Todas"></td>
                                         </tr>
+                                        <!-- Perfis -->
                                         <tr>
-                                            <td>Perfis</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_perfis"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_perfis"></td>
+                                            <td data-label="Módulo">Perfis</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Perfis"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Perfis"></td>
                                         </tr>
+                                        <!-- Permissões -->
                                         <tr>
-                                            <td>Permissões</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_permissoes"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_permissoes"></td>
+                                            <td data-label="Módulo">Permissões</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Permissões"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Permissões"></td>
                                         </tr>
+                                        <!-- Usuários -->
                                         <tr>
-                                            <td>Usuarios</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_usuarios"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_usuarios"></td>
+                                            <td data-label="Módulo">Usuários</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Usuarios"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Usuarios"></td>
                                         </tr>
+                                        <!-- Lojas -->
                                         <tr>
-                                            <td>Lojas</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_lojas"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_lojas"></td>
+                                            <td data-label="Módulo">Lojas</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Lojas"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Lojas"></td>
                                         </tr>
+                                        <!-- Estoque -->
                                         <tr>
-                                            <td>Estoque</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque"></td>
+                                            <td data-label="Módulo">Estoque</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Estoque"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Estoque"></td>
                                         </tr>
+                                        <!-- Caixas -->
                                         <tr>
-                                            <td>Caixas</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_caixas"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_caixas"></td>
+                                            <td data-label="Módulo">Caixas</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Caixas"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Caixas"></td>
                                         </tr>
+                                        <!-- Estoque Caixa -->
                                         <tr>
-                                            <td>Estoque Caixa</td>
-                                            <td><input type="checkbox" name="permissoes" value="leitura_estoque_caixa"></td>
-                                            <td><input type="checkbox" name="permissoes" value="escrita_estoque_caixa"></td>
+                                            <td data-label="Módulo">Estoque Caixa</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Estoque Caixa"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Estoque Caixa"></td>
+                                        </tr>
+                                        <!-- Envio Talões -->
+                                        <tr>
+                                            <td data-label="Módulo">Envio Talões</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Envio Talões"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Envio Talões"></td>
+                                        </tr>
+                                        <!-- Saída Talões -->
+                                        <tr>
+                                            <td data-label="Módulo">Saída Talões</td>
+                                            <td data-label="Leitura"><input type="checkbox" name="permissoes" value="leitura_Saída Talões"></td>
+                                            <td data-label="Escrita"><input type="checkbox" name="permissoes" value="escrita_Saída Talões"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <button type="submit" id="salvarPerfil">Salvar Perfil</button>
+                            <button type="submit">Salvar Perfil</button>
                         </form>
                     </aside>
                 </article>
@@ -366,7 +386,7 @@
                         <h2>Permissões Gerente</h2>
                         <div class="tabela-container">
                             <table>
-                                <thead>
+                                <thead class="headTabela">
                                     <tr>
                                         <th>Funcionalidade</th>
                                         <th>Leitura</th>
@@ -429,7 +449,7 @@
                         <form id="formSalvarEditarPermissoes">
                             <div class="tabela-container">
                                 <table >
-                                    <thead>
+                                    <thead class="headTabela">
                                         <tr>
                                             <th>Funcionalidade</th>
                                             <th>Leitura</th>
@@ -532,19 +552,13 @@
 
                 <article id="seletorCadastroLoja" style="display: none;">
                     <h2>Cadastro de Loja</h2>
-                    <form id="salvarLoja">
-                        <label for="idLoja">Código da Loja:</label>
-                        <input type="text" id="idLoja" name="idLoja">
+                    <form id="formSalvarLoja">
                         <label for="novaLoja">Nome da Loja:</label>
                         <input type="text" id="novaLoja" name="novaLoja">
                         <label for="enderecoLoja">Endereço:</label>
                         <input type="text" id="enderecoLoja" name="enderecoLoja">
-                        <label for="gerenteLoja">Gerente</label>
-                        <select name="gerenteLoja" id="gerenteLoja">
-                            <option value="gerente1">Gerente 1</option>
-                            <option value="gerente2">Gerente 2</option>
-                            <option value="gerente3">Gerente 3</option>
-                        </select>
+                        <label for="telefoneLoja">Telefone:</label>
+                        <input type="tel" id="telefoneLoja" name="telefoneLoja">
                         <button type="submit">Salvar Loja</button>
                     </form>
                 </article>

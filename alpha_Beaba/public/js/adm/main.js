@@ -4,7 +4,7 @@ import { mostrarMenu, logout, esconderElementos, mostrarElemento, mostrarFiltros
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js';
 import { enviarTalao } from './envioTaloes.js'
-import { deletarPerfil, editarPerfil, mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvarEditarPerfil } from './perfil.js';
+import { mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvarEditarPerfil, salvarPerfil } from './perfil.js';
 import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,7 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Perfil
     document.getElementById('cadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
     
-    document.getElementById('salvarPerfil').addEventListener('click', salvarPerfil)  
+    document.getElementById('perfilCadastroForm').addEventListener('submit', (e) => {
+        e.preventDefault()
+        salvarPerfil()
+    })  
     
     document.getElementById('fecharMostrarAddPerfil').addEventListener('click', ()=> {
         esconderElementos(['addPerfil'])
@@ -91,7 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('exportarLojas').addEventListener('click', exportarLojas)
 
-    document.getElementById('salvarLoja').addEventListener('submit', salvarLoja)   
+    document.getElementById('formSalvarLoja').addEventListener('submit', (e) => {
+        e.preventDefault()
+        salvarLoja()
+    })   
 
 
     // Relatórios

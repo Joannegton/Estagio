@@ -1,4 +1,4 @@
-import { alternador3, mostrarMenu, esconderElementos, adicionarPaginacao, mostrarElemento } from "../utils.js"
+import { alternador3, mostrarMenu, esconderElementos, mostrarElemento, enviarDados } from "../utils.js"
 import { carregarSelectsCadastroUsuario, carregarSelectsTipoUsuario, fetchUsuarios } from "./usuarios.js"
 
 let perfis = []
@@ -105,6 +105,25 @@ async function fetchPerfis() {
 }
 
 // Perfil
+async function salvarPerfil(){
+    const formulario = document.getElementById('perfilCadastroForm')
+    const formData = new FormData(formulario)
+
+    const data = {
+        nomePerfil: formData.get('nomePerfil'),
+        permissoes: formData.getAll('permissoes')
+    }
+
+    const result = await enviarDados('http://localhost:5000/cadastrarPerfil', data)
+    
+    if(result.success){
+        alert('Perfil cadastrado com sucesso!')
+        formulario.reset()
+    } else {
+        alert('Erro ao cadastrar perfil.')
+    }
+}
+
 function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
     const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
 
@@ -129,10 +148,6 @@ function modalVisualizarPermissoes(){
 function mostrarModalCadastroPerfil(){
     document.getElementById('addPerfil').style.display = 'flex'
     esconderElementos('tabelaPerfis')
-}
-
-function salvarPerfil(){
-    alert('salvarPerfil')
 }
 
 function mostrarModalEditPerfil(){

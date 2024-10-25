@@ -118,6 +118,28 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     }
 }
 
+async function enviarDados(url, data) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            return { success: true };
+        } else {
+            const errorData = await response.json();
+            return { success: false, error: errorData.message || 'Erro ao enviar dados.' };
+        }
+    } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+        return { success: false, error: 'Erro ao enviar dados, consulte o Administrador do sistema.' };
+    }
+}
+
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId);
     const toggleButton = document.getElementById(containerFiltroId).querySelector('i');
@@ -131,6 +153,7 @@ function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
       toggleButton.classList.remove('fa-chevron-down');
       toggleButton.classList.add('fa-chevron-up');
     }
-  }
+  
+}
 
-export {carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+export {enviarDados, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}

@@ -5,7 +5,7 @@ create table perfil_acesso (
 
 create table permissoes (
     id_permissao serial primary key,
-    descricao varchar(30) not null,
+    modulo varchar(30) not null,
     tipo_permissao varchar(20) not null
 );
 
@@ -16,28 +16,34 @@ create table perfil_acesso_permissoes (
     primary key (id_perfil_acesso, id_permissao)
 );
 
+create table loja (
+    cod_loja serial primary key,
+    nome_loja varchar(120) not null,
+    endereco_loja varchar(255),
+    telefone varchar(20),
+    caixas_fisicos integer,
+    estoque_minimo integer
+);
+
 create table usuario (
     matricula varchar(7) primary key unique,
     nome_usuario varchar(120),
     senha varchar(120) default 'Quero@2024#',
+    email varchar(120),
     token varchar(120),
     cod_loja integer references loja(cod_loja) on delete set null,
     id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
 );
 
-create table loja (
-    cod_loja serial primary key,
-    nome_loja varchar(120) not null,
-    endereco_loja varchar(255),
-    caixas_fisicos integer,
-    estoque_minimo integer,
-    gerente_id varchar(7) references usuario(matricula) on delete set null
-);
+-- se tentar criar a tabela com gerente_id da erro
+alter table loja
+add column gerente_id varchar(7) references usuario(matricula) on delete set null; 
+
 
 create table envio_taloes (
     numero_remessa serial primary key,
     cod_loja integer references loja(cod_loja) on delete set null,
-    data_envio date,
+    data_envio timestamp,
     data_recebimento_previsto date,
     quantidade integer,
     id_funcionario_recebimento varchar(7) references usuario(matricula) on delete set null,
@@ -45,7 +51,6 @@ create table envio_taloes (
 );
 
 create table estoque_taloes (
-    id_estoque serial primary key,
     cod_loja integer references loja(cod_loja) on delete set null,
     quantidade_disponivel integer,
     quantidade_recomendada integer
@@ -71,83 +76,58 @@ create table estoque_caixa (
     quantidade_estoque_caixa integer
 );
 
+-- Inserindo permissões de leitura e escrita para todas as funcionalidades
 
--- dados fictícios
+-- Permissões para 'Todas'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Todas', 'leitura'),
+('Todas', 'escrita');
 
-insert into perfil_acesso (descricao)
-values
-    ('administrador'),
-    ('gerente'),
-    ('caixa');
+-- Permissões para 'Perfis'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Perfis', 'leitura'),
+('Perfis', 'escrita');
 
-insert into permissoes (descricao)
-values
-    ('visualizar estoque'),
-    ('alterar estoque'),
-    ('enviar talões'),
-    ('receber talões');
+-- Permissões para 'Permissões'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Permissões', 'leitura'),
+('Permissões', 'escrita');
 
-insert into perfil_acesso_permissoes (id_perfil_acesso, id_permissao)
-values
-    (1, 1),  -- administrador pode visualizar o estoque
-    (1, 2),  -- administrador pode alterar o estoque
-    (1, 3),  -- administrador pode enviar talões
-    (1, 4),  -- administrador pode receber talões
-    (2, 1),  -- gerente pode visualizar o estoque
-    (2, 3),  -- gerente pode enviar talões
-    (3, 1);  -- caixa pode apenas visualizar o estoque
+-- Permissões para 'Usuarios'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Usuarios', 'leitura'),
+('Usuarios', 'escrita');
 
-insert into usuario (matricula, nome_usuario, senha, id_perfil_acesso)
-values
-    ('1234567', 'ana souza', 'SenhaSegura@2024#', 1),
-    ('7654321', 'carlos silva', 'Quero@2024#', 2),
-    ('2468135', 'fernanda lima', 'SenhaSegura@2024#', 3);
+-- Permissões para 'Lojas'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Lojas', 'leitura'),
+('Lojas', 'escrita');
 
-insert into loja (nome_loja, endereco_loja, caixas_fisicos, estoque_minimo, gerente_id)
-values
-    ('loja central', 'av. paulista, 1000, são paulo - sp', 5, 100, '1234567'),
-    ('loja sul', 'rua da praia, 50, santos - sp', 3, 50, '7654321'),
-    ('loja norte', 'av. norte, 500, fortaleza - ce', 4, 80, '2468135');
+-- Permissões para 'Estoque'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Estoque', 'leitura'),
+('Estoque', 'escrita');
 
-insert into envio_taloes (cod_loja, data_envio, data_recebimento_previsto, quantidade, id_funcionario_recebimento, status)
-values
-    (1, '2024-01-08', '2024-01-15', 500, '1234567', 'enviado'),
-    (2, '2024-02-10', '2024-02-17', 300, '7654321', 'recebido'),
-    (3, '2024-03-03', '2024-03-10', 400, '2468135', 'enviado');
+-- Permissões para 'Caixas'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Caixas', 'leitura'),
+('Caixas', 'escrita');
 
-insert into estoque_taloes (cod_loja, quantidade_disponivel, quantidade_recomendada)
-values
-    (1, 200, 500),
-    (2, 150, 300),
-    (3, 50, 400);
+-- Permissões para 'Estoque Caixa'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Estoque Caixa', 'leitura'),
+('Estoque Caixa', 'escrita');
 
-insert into caixa (cod_loja, matricula, estoque)
-values
-    (1, '1234567', 200),
-    (2, '7654321', 150),
-    (3, '2468135', 50);
+-- Permissões para 'Envio Talões'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Envio Talões', 'leitura'),
+('Envio Talões', 'escrita');
 
-insert into saida_taloes (codigo_talao, numero_remessa, matricula)
-values
-    ('TALAO001', 1, '1234567'),
-    ('TALAO002', 2, '7654321'),
-    ('TALAO003', 3, '2468135');
+-- Permissões para 'Saída Talões'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Saída Talões', 'leitura'),
+('Saída Talões', 'escrita');
 
-insert into estoque_caixa (id_caixa, quantidade_estoque_caixa)
-values
-    (1, 100),
-    (2, 80),   
-    (3, 40);   
 
--- consultas
-select * from usuario;
-select * from perfil_acesso;
-select * from loja;
-select * from envio_taloes;
-select * from estoque_taloes;
-select * from permissoes;
-select * from perfil_acesso_permissoes;
-select * from caixa;
-select * from saida_taloes;
-select * from estoque_caixa; 
+
 
