@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login page for Oferte e Ganhe">
+    <title>Login - Oferte e Ganhe</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../js/login/main.js" type="module"></script>
+</head>
+<body>
+    <main>
+        <div id="login" class="login-container">
+            <div class="login-box">
+                <img src="../img/logo.png" alt="Oferte e Ganhe Logo">
+                <h2>Acesso - Oferte e Ganhe</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="matricula">Matricula:</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Digite sua matricula" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Senha:</label>
+                        <div class="senha-container">
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                            <i class="fas fa-eye" id="visualizarSenha" style="cursor: pointer;"></i>
+                        </div>
+                    </div>
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Lembrar-me</label>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
+                <div class="login-options">
+                    <a href="#" id="mostrarRecuperarSenha">Esqueceu a senha?</a>
+                    <a href="#" id="mostrarPrimeiroAcesso">Primeiro Acesso</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="primeiroAcesso" class="modal">
+            <article class="modalContent">
+                <div class="fechar">
+                    <i class="fas fa-times close-icon" id="fecharMostrarLogin"></i> 
+                </div>
+                <h2>Primeiro Acesso</h2>
+                <div class="contentPrimeiroAcesso">
+                    <p><strong>Matricula: </strong>Insira seu número de matricula.</p>
+                    <p><strong>Senha: </strong>Senha padrão recebida do seu gestor.</p>
+                </div>
+            </article>
+        </div>
+
+        <div id="recuperarSenha" class="modal">            
+            <article class="modalContent">
+                <div class="fechar">
+                    <i class="fas fa-times close-icon" id="fecharRecuperarSenha"></i> 
+                </div>
+                <h2>Recuperar Senha</h2>
+                <form id="recuperarSenhaForm">
+                    <div class="input-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <button type="submit" >Recuperar Senha</button>
+                </form>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
