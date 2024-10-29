@@ -8,19 +8,10 @@ const pool = new Pool({
     port: 5432
 });
 
-function conectarDb(callback) {
-    pool.connect((err, client, release) => { // Se uma conexão estiver disponível, ela será fornecida ao callback, se não ele aguarda uma conexão
-        if (err) {
-            return console.error('Erro ao conectar ao banco de dados:', err.stack);
-        }
-        console.log('Conexão bem-sucedida ao banco de dados');
-        
-        // função a ser executada apos a conexão
-        callback(client);
-
-        // Libera o cliente e desconecta
-        release();
-    });
+async function conectarDb() {
+    const client = await pool.connect();
+    console.log('Conexão bem-sucedida ao banco de dados');
+    return client;
 }
 
-module.exports = { pool, conectarDb };
+module.exports = { conectarDb };

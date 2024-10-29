@@ -10,7 +10,7 @@ function mostrarEstoque() {
     
 async function fetchEstoque() {
     try {
-        const response = await fetch('http://localhost:3000/estoque')
+        const response = await fetch('http://localhost:3000/api/estoque')
         if (!response.ok) {
             throw new Error('Erro ao buscar estoque')
         }

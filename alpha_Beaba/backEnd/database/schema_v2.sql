@@ -30,7 +30,7 @@ create table usuario (
     nome_usuario varchar(120),
     senha varchar(120) default 'Quero@2024#',
     email varchar(120),
-    token varchar(120),
+    token varchar(255),
     cod_loja integer references loja(cod_loja) on delete set null,
     id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
 );

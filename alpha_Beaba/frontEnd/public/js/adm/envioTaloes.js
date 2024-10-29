@@ -29,11 +29,11 @@ function enviarTalao(){
 }
 
 function carregarSelectsLojas(){
-    carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/lojas', 'cod_loja', 'nome_loja')
+    carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
 }
 
 function carregarSelectsFuncionarios(){
-    carregarDadosSelect('funcionarioRecebimento', 'http://localhost:3000/usuarios', 'matricula', 'nome_usuario')
+    carregarDadosSelect('funcionarioRecebimento', 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario')
 }
 
 

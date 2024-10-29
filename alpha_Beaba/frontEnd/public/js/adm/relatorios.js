@@ -26,9 +26,9 @@ function alternadorRelatorios() {
 }
 
 async function carregarDadosRelatorios(){    
-    carregarDadosElemento('http://localhost:3000/usuarios', 'usuariosTotais')
+    carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais')
 
-    carregarDadosElemento('http://localhost:3000/lojas', 'lojasTotais')
+    carregarDadosElemento('http://localhost:3000/api/lojas', 'lojasTotais')
 
     carregarDadosElemento('http://localhost:3000/taloes', 'enviadosTotais')
 }
@@ -36,7 +36,7 @@ async function carregarDadosRelatorios(){
 function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
 
-    fetch('http://localhost:3000/estoque')
+    fetch('http://localhost:3000/api/estoque')
         .then(response => response.json())
         .then(data => {
             data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)

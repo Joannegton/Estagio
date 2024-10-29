@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { conectarDb } = require('../config/conexao');
 const bcrypt = require('bcrypt');
+const getUsuariosHandler = require('../controllers/usuarioController');
 
 const usuarioRouter = Router();
 
@@ -19,26 +20,7 @@ usuarioRouter.post('/cadastrarUsuario', (req, res) => {
     })
 })
 
-usuarioRouter.get('/usuarios', (req, res)=> {
-    conectarDb(async client => {
-        try {
-            const result = await client.query(`
-                SELECT 
-                    usuario.matricula, 
-                    usuario.nome_usuario, 
-                    p.descricao AS tipo_usuario, 
-                    l.nome_loja 
-                FROM usuario
-                JOIN perfil_acesso p ON usuario.id_perfil_acesso = p.id_perfil_acesso
-                LEFT JOIN loja l ON usuario.cod_loja = l.cod_loja
-            `
-            )
-            res.status(200).json(result.rows)
-        } catch (error) {
-            console.error('Erro ao executar a query:', error.stack)
-            res.status(500).send('Erro ao executar a query')
-        }
-    })
-})
+usuarioRouter.get('/usuarios', getUsuariosHandler)
+
 
 module.exports = usuarioRouter

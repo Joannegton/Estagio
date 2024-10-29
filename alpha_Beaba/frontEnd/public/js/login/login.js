@@ -31,7 +31,7 @@ async function login() {
     const senha = document.getElementById('senha').value;
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,30 +52,30 @@ async function login() {
             //tipoUsuario = 1 -> administrador, tipoUsuario = 2 -> gerente, tipoUsuario = 3 -> caixa
             if (senha === 'Quero@2024#') {
                 if (tipoUsuario === 3) {
-                    window.location.href = 'caixa.html';
+                    window.location.href = 'caixa';
                     sessionStorage.setItem('mostrarPerfilUsuario', 'true'); //na pagina caixa.html, se mostrarPerfilUsuario for true, esignidica que é o primeiro acesso
                 } else if (tipoUsuario === 2) {
-                    window.location.href = 'gerente.html';
+                    window.location.href = 'gerente';
                     sessionStorage.setItem('mostrarPerfilUsuario', 'true');
                 } else if (tipoUsuario === 1) {
-                    window.location.href = 'admin.html';
+                    window.location.href = 'admin';
                     sessionStorage.setItem('mostrarPerfilUsuario', 'true');
                 } else {
                     alert('Perfil inválido para esse login');
                 }
             } else {
                 if (tipoUsuario === 3) {
-                    window.location.href = 'caixa.html';
+                    window.location.href = 'caixa';
                 } else if (tipoUsuario === 2) {
-                    window.location.href = 'gerente.html';
+                    window.location.href = 'gerente';
                 } else if (tipoUsuario === 1) {
-                    window.location.href = 'index.html';
+                    window.location.href = 'index';
                 } else {
                     alert('Perfil inválido para esse login');
                 }
             }
         } else {
-            alert('Email ou senha inválidos');
+            alert('Matricula ou senha inválidos');
         }
     } catch (error) {
         console.error('Erro ao fazer login: ', error)

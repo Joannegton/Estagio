@@ -24,7 +24,7 @@ function mostrarLojas(){
 
 async function fetchLojas(){
     try {
-        const response = await fetch('http://localhost:3000/lojas', {
+        const response = await fetch('http://localhost:3000/api/lojas', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ function editarLoja(cod_loja){
         </select>
     `
     
-    carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/usuarios', 'matricula', 'nome_usuario').then(() => {
+    carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario').then(() => {
         const selectGerente = document.getElementById(`select-gerente${cod_loja}`)
         for (let i = 0; i < selectGerente.options.length; i++) {
             if (selectGerente.options[i].text === gerente) {

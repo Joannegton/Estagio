@@ -4,7 +4,7 @@ let usuarios = []
 
 async function fetchUsuarios() {
     try {
-        const response = await fetch('http://localhost:3000/usuarios', {
+        const response = await fetch('http://localhost:3000/api/usuarios', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -188,7 +188,7 @@ function carregarSelectsTipoUsuario(){
     carregarDadosSelect('tipoUsuario', 'http://localhost:3000/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
 function carregarSelectsCadastroUsuario(){
-    carregarDadosSelect('lojaUsuario', 'http://localhost:3000/lojas', 'cod_loja', 'nome_loja')
+    carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
 }
 
 

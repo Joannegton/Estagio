@@ -19,11 +19,11 @@ app.use(express.static(path.join(__dirname, '../frontEnd/public')))
 // Rotas para as páginas HTML
 app.use(viewRouter)
 
-app.use(loginRouter)
-app.use(usuarioRouter)
-app.use(lojasRouter)
-app.use(perfisRouter)
-app.use(estoqueRouter)
-app.use(taloesRouter)
+app.use('/api', loginRouter)
+app.use('/api', estoqueRouter)
+app.use('/api', lojasRouter)
+app.use('/api', usuarioRouter)
+app.use('/api', perfisRouter)
+app.use('/api', taloesRouter)
 
 module.exports = app
