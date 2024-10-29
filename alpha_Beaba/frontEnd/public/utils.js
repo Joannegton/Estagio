@@ -92,7 +92,7 @@ function adicionarPaginacao(dados, renderizarFunc, pagAntId, proxPagId, tabela) 
 function logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    window.location.href = 'login.html'
+    window.location.href = 'login'
 }
 
 async function carregarDadosSelect(idSelect, url, value, textContent) {

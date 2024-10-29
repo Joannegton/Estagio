@@ -10,7 +10,7 @@ function mostrarManutencao(){
 
 async function fetchEnvioTaloes() {
     try {
-        const response = await fetch('http://localhost:3000/taloes')
+        const response = await fetch('http://localhost:3000/api/taloes')
 
         if(!response.ok){
             throw new Error('Erro ao buscar envio de talões')

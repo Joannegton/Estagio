@@ -8,13 +8,17 @@ import { mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvar
 import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Identificar primeiro Acesso
+    if(sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
+        mostrarPerfilUsuario()
+        sessionStorage.removeItem('mostrarPerfilUsuario')
+    }
+
     // Menu navigation
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', () =>{
         mostrarEnvioTaloes()
     })
-    document.getElementById('mostrarEstoque').addEventListener('click', () => {
-        mostrarEstoque()
-    })
+    document.getElementById('mostrarEstoque').addEventListener('click', mostrarEstoque)
     document.getElementById('mostrarManutencao').addEventListener('click', mostrarManutencao)
     document.getElementById('mostrarPerfil').addEventListener('click', () => {
         mostrarPerfil()
