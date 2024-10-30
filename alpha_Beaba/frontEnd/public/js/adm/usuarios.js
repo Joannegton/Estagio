@@ -185,7 +185,7 @@ function deletarUsuario(matricula){
 
 // carregar selects
 function carregarSelectsTipoUsuario(){
-    carregarDadosSelect('tipoUsuario', 'http://localhost:3000/perfis', 'id_perfil_acesso', 'perfil_descricao')
+    carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
 function carregarSelectsCadastroUsuario(){
     carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')

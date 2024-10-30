@@ -93,7 +93,7 @@ function renderizarTabelaPerfis(perfisRenderizar){
 
 async function fetchPerfis() {
     try {
-        const response = await fetch('http://localhost:3000/perfis')
+        const response = await fetch('http://localhost:3000/api/perfis')
         if (!response.ok) {
             throw new Error('Erro ao buscar perfis')
         }

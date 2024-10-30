@@ -4,6 +4,8 @@ const getPerfisHandler = require('../controllers/perfisController')
 
 const perfisRouter = Router()
 
+perfisRouter.get('/perfis', getPerfisHandler)
+
 perfisRouter.post('/cadastrarPerfil', (req, res) => {
     const { nomePerfil, permissoes } = req.body
     console.log('data:', nomePerfil, permissoes)
@@ -38,7 +40,6 @@ perfisRouter.post('/cadastrarPerfil', (req, res) => {
     })
 })
 
-perfisRouter.get('/perfis', getPerfisHandler)
 
 perfisRouter.get('/perfil/:id', (req, res) => {
     const id = req.params.id
