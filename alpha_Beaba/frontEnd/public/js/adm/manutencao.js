@@ -57,13 +57,6 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
         `
         tbody.appendChild(tr)
 
-        const status = document.getElementById(`statusManutencao${item.numero_remessa}`)
-        if(status.innerText === 'Enviado'){
-            status.style.backgroundColor = '#ffcf0f91'
-        } else {
-            status.style.backgroundColor = '#29ff3054'
-        }
-
         // Eventos de clique
         document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
             editarEnvioTalao(item.numero_remessa)
@@ -74,6 +67,24 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
         document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
             salvarEdicaoTalao(item.numero_remessa)
         })
+        
+        // Estilização do status
+        const status = document.getElementById(`statusManutencao${item.numero_remessa}`)
+        if(status.innerText === 'Enviado'){
+            status.style.backgroundColor = '#ffcf0f91'
+        } else {
+            status.style.backgroundColor = '#29ff3054'
+        }
+
+        // Estilização da data de entrega
+        const dataEntregaElemento = document.getElementById(`DataEntregaManutencao${item.numero_remessa}`)
+        const dataEntrega = new Date(item.data_recebimento_previsto)
+        const dataAtual = new Date()
+
+        if(dataEntrega < dataAtual && item.status === 'Enviado'){
+            dataEntregaElemento.style.backgroundColor = '#fc48488e'
+        }
+
     })
 
     // botões de paginação
