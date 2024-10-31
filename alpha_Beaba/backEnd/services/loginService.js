@@ -2,7 +2,7 @@ const { conectarDb } = require('../config/conexao');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const SECRET_KEY = '6G>K9(Qk=^1iDx}N6FwAzZ^uwBJpyC'; // secret key para assinar o token JWT
+const SECRET_KEY = process.env.SECRET_KEY_JWT; //assinar o token JWT
 
 async function login(matricula, senha) {
     const client = await conectarDb();

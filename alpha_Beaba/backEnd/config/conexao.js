@@ -9,6 +9,7 @@ const pool = new Pool({
     port: process.env.DB_PORT
 })
 
+
 async function conectarDb() {
     const client = await pool.connect()
     console.log('Conexão bem-sucedida ao banco de dados')
