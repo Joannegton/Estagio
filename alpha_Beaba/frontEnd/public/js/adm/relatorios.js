@@ -30,12 +30,13 @@ async function carregarDadosRelatorios(){
 
     carregarDadosElemento('http://localhost:3000/api/lojas', 'lojasTotais')
 
-    carregarDadosElemento('http://localhost:3000/taloes', 'enviadosTotais')
+    carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
 }
 
 function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
-
+    tabelaEstoqueBaixo.innerHTML = ''
+    
     fetch('http://localhost:3000/api/estoque')
         .then(response => response.json())
         .then(data => {
@@ -50,7 +51,7 @@ function renderizartabelaEstoqueBaixo(){
                     <td data-label="Quantidade" class="quantidade" id="${estoque.cod_loja}">${estoque.quantidade_disponivel}</td>
                     <td data-label="Quantidade Mínima" class="quantidadeMinima" id="${estoque.cod_loja}">${estoque.estoque_minimo}</td>
                     <td data-label="Enviar" class="acoes">
-                        <a href="#" class="botaoAcao" id="arrumarEstoqueLoja${estoque.cod_loja}"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="botaoAcao" id="arrumarEstoqueLoja${estoque.cod_loja}" title="Enviar"><i class="fas fa-edit"></i></a>
                     </td>
                 `
                 tabelaEstoqueBaixo.appendChild(tr)

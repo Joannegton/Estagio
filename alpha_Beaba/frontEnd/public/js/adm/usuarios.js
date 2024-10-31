@@ -44,10 +44,10 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
             <td data-label="Loja" id="perfil-loja${usuario.matricula}">${usuario.nome_loja}</td>
             <td data-label="Ações" class="acoes" id="acoes">
                 <div id="containerBotaoAcao${usuario.matricula}">
-                    <a href="#" class="botaoAcao" id="editarUsuarioPerfis${usuario.matricula}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${usuario.matricula}"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="botaoAcao" id="editarUsuarioPerfis${usuario.matricula}" title="Editar"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${usuario.matricula}" title="Excluir"><i class="fas fa-trash-alt"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEditarUsuario${usuario.matricula}" style="display: none"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEditarUsuario${usuario.matricula}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)

@@ -49,13 +49,20 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
             <td data-label="Status" id="statusManutencao${item.numero_remessa}">${item.status}</td>
             <td data-label="Ações" class="acoes">
                 <div id="containerBotaoAcaoManutencao${item.numero_remessa}">
-                    <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}" title="Editar"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}" title="Exluir"><i class="fas fa-trash-alt"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" style="display: none;"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none;"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
+
+        const status = document.getElementById(`statusManutencao${item.numero_remessa}`)
+        if(status.innerText === 'Enviado'){
+            status.style.backgroundColor = '#ffcf0f91'
+        } else {
+            status.style.backgroundColor = '#29ff3054'
+        }
 
         // Eventos de clique
         document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {

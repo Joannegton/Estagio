@@ -59,15 +59,15 @@ function renderizarTabelaLojas(listalojas){
         tr.innerHTML = `
             <td data-label="Cód" id="idLoja${item.cod_loja}">${item.cod_loja}</td>
             <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
-            <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.nome_usuario}</td>
+            <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.gerente}</td>
                 <td data-label="Quantidade Recomendada">${item.estoque_minimo * 1.5}</td>
                 <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
                 <td data-label="Editar" class="acoes">
                 <div id="containerBotaoAcaoLoja${item.cod_loja}">
-                <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}"><i class="fas fa-trash-alt"></i></a>
+                <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}" title="Exxcluir"><i class="fas fa-trash-alt"></i></a>
                 </div>            
-                <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" style="display: none;"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none;"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)

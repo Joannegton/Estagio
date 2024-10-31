@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Menu navigation
+
+    if(window.innerWidth > 768){
+        document.getElementById('menu').style.display = 'block'
+    }
     document.getElementById('mostrarEnvioTaloes').addEventListener('click', () =>{
         mostrarEnvioTaloes()
     })

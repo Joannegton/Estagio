@@ -56,10 +56,10 @@ function renderizarTabelaPerfis(perfisRenderizar){
             </td>
             <td data-label="Ações" class="acoes" id="acoesPerfis${perfil.id_perfil_acesso}">
                 <div id="containerBotaoAcao">
-                    <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit" title="Editar"></i></a>
+                    <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt" title="Excluir"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none"><i class="fas fa-save" title="Salvar"></i></a>
             </td>
         `
         tbody.appendChild(tr)
@@ -85,7 +85,7 @@ function renderizarTabelaPerfis(perfisRenderizar){
                 const id = this.getAttribute('data-id')
                 mostrarPermissoes(id, tipo)
             })
-        })
+        }) 
 
 
     })
