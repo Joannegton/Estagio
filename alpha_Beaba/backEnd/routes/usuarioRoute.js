@@ -5,6 +5,8 @@ const getUsuariosHandler = require('../controllers/usuarioController');
 
 const usuarioRouter = Router();
 
+usuarioRouter.get('/usuarios', getUsuariosHandler)
+
 usuarioRouter.post('/cadastrarUsuario', (req, res) => {
     const { matricula, tipoUsuario, loja} = req.body
 
@@ -20,7 +22,6 @@ usuarioRouter.post('/cadastrarUsuario', (req, res) => {
     })
 })
 
-usuarioRouter.get('/usuarios', getUsuariosHandler)
 
 
 module.exports = usuarioRouter

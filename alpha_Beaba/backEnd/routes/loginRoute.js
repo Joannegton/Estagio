@@ -7,8 +7,6 @@ loginRouter.post('/login', loginHandler);
 
 loginRouter.post('/recuperarSenha', (req, res) => {
     const { email } = req.body;
-
-    // Implement password recovery logic here
     res.status(200).send(`Instruções de recuperação de senha foram enviadas para ${email}`);
 });
 
