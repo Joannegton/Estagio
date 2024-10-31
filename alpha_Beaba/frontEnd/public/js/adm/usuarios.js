@@ -1,6 +1,12 @@
-import { carregarDadosSelect, enviarDados } from "../../utils.js"
+import { carregarDadosSelect, enviarDados, esconderElementos, mostrarMenu } from "../../utils.js"
 
 let usuarios = []
+
+function mostrarPerfilUsuario(){
+    document.getElementById('perfilUsuario').style.display = 'block'
+    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
+    mostrarMenu()
+}
 
 async function fetchUsuarios() {
     try {
@@ -184,13 +190,11 @@ function deletarUsuario(matricula){
 }
 
 // carregar selects
-function carregarSelectsTipoUsuario(){
-    carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
-}
 function carregarSelectsCadastroUsuario(){
     carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
+    carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
 
 
 
-export {usuarios, carregarSelectsTipoUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, renderizarTabelaUsuarios, salvarUsuario, editarUsuario, salvarEdicaoUsuario, deletarUsuario, filtrarUsuarioNome }
+export {usuarios, mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, renderizarTabelaUsuarios, salvarUsuario, editarUsuario, salvarEdicaoUsuario, deletarUsuario, filtrarUsuarioNome }

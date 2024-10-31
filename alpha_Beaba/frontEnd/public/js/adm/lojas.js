@@ -3,21 +3,21 @@ import { adicionarPaginacao, alternador, carregarDadosSelect, enviarDados, escon
 let lojas = []
 
 function alternadorLojas(){
-    const lojas = document.getElementById('todasLojas');
-    const cadastroLoja = document.getElementById('cadastroLoja');
+    const lojas = document.getElementById('todasLojas')
+    const cadastroLoja = document.getElementById('cadastroLoja')
 
     lojas.addEventListener('click', () => {
-        alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas');
-        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
+        alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas')
+        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja')
     })
     cadastroLoja.addEventListener('click', () => {
-        alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas');
+        alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas')
     })
 }
 
 function mostrarLojas(){
     mostrarElemento('lojas', 'mostrarLojas', () =>{
-        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja');
+        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja')
         alternadorLojas()
     })
 }
@@ -60,14 +60,14 @@ function renderizarTabelaLojas(listalojas){
             <td data-label="Cód" id="idLoja${item.cod_loja}">${item.cod_loja}</td>
             <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
             <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.gerente}</td>
-                <td data-label="Quantidade Recomendada">${item.estoque_minimo * 1.5}</td>
+                <td data-label="Quantidade Recomendada">${item.estoque_minimo + 50}</td>
                 <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
                 <td data-label="Editar" class="acoes">
                 <div id="containerBotaoAcaoLoja${item.cod_loja}">
                 <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
                     <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}" title="Exxcluir"><i class="fas fa-trash-alt"></i></a>
                 </div>            
-                <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none;"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
@@ -75,13 +75,13 @@ function renderizarTabelaLojas(listalojas){
         //Eventos de click
         document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', () => {
             editarLoja(item.cod_loja)
-        });
+        })
         document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () => {
             salvarEditarLoja(item.cod_loja)
-        });
+        })
         document.getElementById(`excluirLoja${item.cod_loja}`).addEventListener('click', () => {
             excluirLoja(item.cod_loja)
-        });
+        })
     })
 
     //botões paginação

@@ -44,19 +44,19 @@ function editarEnvioTalao() {
 }
 
 function salvarEdicaoTalao() {
-    var statusManutencao = document.getElementById('select-statusManutencao');
-    var dataEntrega = document.getElementById('input-DataEntregaManutencao');
+    var statusManutencao = document.getElementById('select-statusManutencao')
+    var dataEntrega = document.getElementById('input-DataEntregaManutencao')
 
-    var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text;
-    var newDataEntrega = dataEntrega.value;
+    var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text
+    var newDataEntrega = dataEntrega.value
 
-    document.getElementById('statusManutencao').innerText = newStatusManutencao;
-    document.getElementById('DataEntregaManutencao').innerText = newDataEntrega;
+    document.getElementById('statusManutencao').innerText = newStatusManutencao
+    document.getElementById('DataEntregaManutencao').innerText = newDataEntrega
 
-    document.getElementById('salvarEdicaoTalao').style.display = 'none';
-    document.getElementById('containerBotaoAcaoManutencao').style.display = 'block';
-    statusManutencao.remove();
-    dataEntrega.remove();
+    document.getElementById('salvarEdicaoTalao').style.display = 'none'
+    document.getElementById('containerBotaoAcaoManutencao').style.display = 'block'
+    statusManutencao.remove()
+    dataEntrega.remove()
 }
 
 function excluirEnvioTalao() {

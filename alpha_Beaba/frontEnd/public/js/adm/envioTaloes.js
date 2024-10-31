@@ -2,8 +2,7 @@ import { carregarDadosSelect, enviarDados, mostrarElemento } from "../../utils.j
 
 function mostrarEnvioTaloes(){
     mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {
-        carregarSelectsLojas()
-        carregarSelectsFuncionarios()
+        carregarSelects()
     })
 }
 
@@ -19,7 +18,7 @@ function enviarTalao(){
         dataRecebimentoPrevisto: formData.get('dataEntregaPrevista')
     }
 
-    const response = enviarDados('http://localhost:3000/enviarTaloes', data)
+    const response = enviarDados('http://localhost:3000/api/enviarTaloes', data)
     if (response.success){
         alert('Talão enviado com sucesso')
         formulario.reset()
@@ -28,13 +27,11 @@ function enviarTalao(){
     }
 }
 
-function carregarSelectsLojas(){
+function carregarSelects(){
     carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
-}
-
-function carregarSelectsFuncionarios(){
     carregarDadosSelect('funcionarioRecebimento', 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario')
 }
+
 
 
 export { mostrarEnvioTaloes, enviarTalao }

@@ -1,4 +1,4 @@
-import { adicionarPaginacao, identificarBaixoEstoque, mostrarElemento } from "../../utils.js";
+import { adicionarPaginacao, identificarBaixoEstoque, mostrarElemento } from "../../utils.js"
 
 let estoque = []
 
@@ -24,33 +24,33 @@ async function fetchEstoque() {
 }
     
 function renderizarTabela(estoqueRenderizar) {
-    const tbody = document.getElementById('estoque-tbody');
-    tbody.innerHTML = '';
+    const tbody = document.getElementById('estoque-tbody')
+    tbody.innerHTML = ''
 
     const paginaAtual = 1
     const itensPorPagina = 15
 
-    const inicio = (paginaAtual - 1) * itensPorPagina;
-    const fim = inicio + itensPorPagina;
-    const dadosLimitados = estoqueRenderizar.slice(inicio, fim);
+    const inicio = (paginaAtual - 1) * itensPorPagina
+    const fim = inicio + itensPorPagina
+    const dadosLimitados = estoqueRenderizar.slice(inicio, fim)
 
     dadosLimitados.forEach(item => {
-        const tr = document.createElement('tr');
+        const tr = document.createElement('tr')
         tr.innerHTML = `
             <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
             <td data-label="Quantidade Recomendada" id="qntRecomendada${item.cod_loja}" class="quant-recomendada">${item.quantidade_recomendada}</td>
             <td data-label="Quantidade Mínima" id="qntMinima${item.cod_loja}" class="quant-minima">${item.estoque_minimo}</td>
             <td data-label="Quantidade Atual" id="qntAtual${item.cod_loja}" class="quant-atual">${item.quantidade_disponivel}</td>
-        `;
-        tbody.appendChild(tr);
-    });
+        `
+        tbody.appendChild(tr)
+    })
 
 
 
     //botões de paginação
-    document.getElementById('pagInfo').textContent = `Página ${paginaAtual} de ${Math.ceil(estoqueRenderizar.length / itensPorPagina)}`;
-    document.getElementById('pagAnt').disabled = paginaAtual === 1;
-    document.getElementById('proxPag').disabled = fim >= estoqueRenderizar.length;
+    document.getElementById('pagInfo').textContent = `Página ${paginaAtual} de ${Math.ceil(estoqueRenderizar.length / itensPorPagina)}`
+    document.getElementById('pagAnt').disabled = paginaAtual === 1
+    document.getElementById('proxPag').disabled = fim >= estoqueRenderizar.length
 
 
 }
@@ -59,11 +59,11 @@ function renderizarTabela(estoqueRenderizar) {
 
 
 function filtrarLoja() {
-    alert('filtrando loja');
+    alert('filtrando loja')
 }
 
 function exportarEstoque() {
-    alert('exportando estoque');
+    alert('exportando estoque')
 }
 
-export { renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque };
+export { renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque }

@@ -30,8 +30,8 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
     const paginaAtual = 1
     const itensPorPagina = 15
 
-    const inicio = (paginaAtual - 1) * itensPorPagina;
-    const fim = inicio + itensPorPagina;
+    const inicio = (paginaAtual - 1) * itensPorPagina
+    const fim = inicio + itensPorPagina
     const dadosLimitados = listaTaloesEnviados.slice(inicio, fim)
 
     dadosLimitados.forEach(item => {
@@ -52,7 +52,7 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
                     <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}" title="Editar"><i class="fas fa-edit"></i></a>
                     <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}" title="Exluir"><i class="fas fa-trash-alt"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none;"><i class="fas fa-save"></i></a>
+                <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
@@ -67,13 +67,13 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
         // Eventos de clique
         document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
             editarEnvioTalao(item.numero_remessa)
-        });
+        })
         document.getElementById(`excluirEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
             excluirEnvioTalao(item.numero_remessa)
-        });
+        })
         document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
             salvarEdicaoTalao(item.numero_remessa)
-        });
+        })
     })
 
     // botões de paginação
@@ -99,19 +99,19 @@ function editarEnvioTalao(numero_remessa) {
 }
 
 function salvarEdicaoTalao(numero_remessa) {
-    var statusManutencao = document.getElementById(`select-statusManutencao${numero_remessa}`);
-    var dataEntrega = document.getElementById(`input-DataEntregaManutencao${numero_remessa}`);
+    var statusManutencao = document.getElementById(`select-statusManutencao${numero_remessa}`)
+    var dataEntrega = document.getElementById(`input-DataEntregaManutencao${numero_remessa}`)
 
-    var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text;
-    var newDataEntrega = dataEntrega.value;
+    var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text
+    var newDataEntrega = dataEntrega.value
 
-    document.getElementById(`statusManutencao${numero_remessa}`).innerText = newStatusManutencao;
-    document.getElementById(`DataEntregaManutencao${numero_remessa}`).innerText = newDataEntrega;
+    document.getElementById(`statusManutencao${numero_remessa}`).innerText = newStatusManutencao
+    document.getElementById(`DataEntregaManutencao${numero_remessa}`).innerText = newDataEntrega
 
-    document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'none';
-    document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block';
-    statusManutencao.remove();
-    dataEntrega.remove();
+    document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'none'
+    document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
+    statusManutencao.remove()
+    dataEntrega.remove()
 }
 
 function excluirEnvioTalao() {

@@ -4,8 +4,8 @@ import { mostrarMenu, logout, esconderElementos, mostrarFiltros } from '../../ut
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
-import { mostrarModalCadastroPerfil, mostrarPerfil, mostrarPerfilUsuario, salvarEditarPerfil, salvarPerfil } from './perfil.js'
-import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js'
+import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
+import { filtrarUsuarioNome, mostrarPerfilUsuario, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso

@@ -1,5 +1,5 @@
-import { alternador3, mostrarMenu, esconderElementos, mostrarElemento, enviarDados } from "../../utils.js"
-import { carregarSelectsCadastroUsuario, carregarSelectsTipoUsuario, fetchUsuarios } from "./usuarios.js"
+import { alternador3, esconderElementos, mostrarElemento, enviarDados } from "../../utils.js"
+import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 
 let perfis = []
 
@@ -9,11 +9,7 @@ function mostrarPerfil(){
     })
 }
 
-function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
-    mostrarMenu()
-}
+
 
 function alternadorPerfil() {
     fetchUsuarios()
@@ -29,7 +25,6 @@ function alternadorPerfil() {
     cadastroUsuario.addEventListener('click', () => {
         alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
         carregarSelectsCadastroUsuario()
-        carregarSelectsTipoUsuario()
     })
     
     perfisElemento.addEventListener('click', async () => {
@@ -173,4 +168,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { mostrarPerfil, mostrarPerfilUsuario, mostrarPermissoes, mostrarModalCadastroPerfil, salvarPerfil, mostrarModalEditPerfil, modalVisualizarPermissoes, editarPerfil, salvarEditarPerfil, deletarPerfil, exportarPerfis }
+export { mostrarPerfil, mostrarPermissoes, mostrarModalCadastroPerfil, salvarPerfil, mostrarModalEditPerfil, modalVisualizarPermissoes, editarPerfil, salvarEditarPerfil, deletarPerfil, exportarPerfis }
