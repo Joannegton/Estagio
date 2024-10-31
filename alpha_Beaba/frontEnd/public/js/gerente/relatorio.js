@@ -24,8 +24,10 @@ function exportarRelatorios(){
 }
 
 
+
 function alterarStatus(){
     document.getElementById('statusRemessa').innerText = 'Recebido'
+    document.getElementById('statusRemessa').style.backgroundColor = '#29ff3054'
 }
 
 

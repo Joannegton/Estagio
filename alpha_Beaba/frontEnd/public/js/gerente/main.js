@@ -50,6 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('alterarStatus').addEventListener('click', alterarStatus)
 
+    const status = document.querySelectorAll('#statusRemessa')
+    for (let i = 0; i < status.length; i++) {
+        if(status[i].innerText === 'Enviado'){
+            status[i].style.backgroundColor = '#ffcf0f91'
+        } else {
+            status[i].style.backgroundColor = '#29ff3054'
+            //document.getElementById('alterarStatus').style.display = 'none'
+        }
+
+    }
+
     // Menu
     window.mostrarMenu = () => {
         mostrarMenu()
