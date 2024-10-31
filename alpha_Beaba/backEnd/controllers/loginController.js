@@ -1,21 +1,56 @@
-const login = require('../services/loginService');
+const loginService = require('../services/loginService');
 
-async function loginHandler(req, res) {
-    const { matricula, senha } = req.body;
-    try {
-        const { token, user } = await login(matricula, senha);
-        res.status(200).json({
-            mensagem: 'Login bem-sucedido',
-            token,
-            user: {
-                matricula: user.matricula,
-                nome: user.nome_usuario,
-                tipoUsuario: user.id_perfil_acesso
-            }
-        });
-    } catch (err) {
-        res.status(401).send(err.message);
+class LoginController {
+    async login(req, res) {
+        const { matricula, senha } = req.body;
+        try {
+            const { token, user } = await loginService.login(matricula, senha);
+            res.status(200).json({
+                mensagem: 'Login bem-sucedido',
+                token,
+                user: {
+                    matricula: user.matricula,
+                    nome: user.nome_usuario,
+                    tipoUsuario: user.id_perfil_acesso
+                }
+            });
+        } catch (err) {
+            res.status(401).json({ mensagem: err.message });
+        }
     }
+
+    async recoverPassword(req, res) {
+        const { email } = req.body;
+        try {
+            const message = await loginService.recoverPassword(email);
+            res.status(200).send(message);
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    }
+
+    async logout(req, res) {
+        const { matricula } = req.body;
+        try {
+            await loginService.logout(matricula);
+            res.status(200).send('Logout realizado com sucesso');
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    }
+
+
+    async changePassword(req, res) {
+        const { matricula, senhaAtual, novaSenha } = req.body;
+        try {
+            await loginService.changePassword(matricula, senhaAtual, novaSenha);
+            res.status(200).send('Senha alterada com sucesso');
+        } catch (err) {
+            res.status(401).send(err.message);
+        }
+    }
+
+
 }
 
-module.exports = loginHandler;
+module.exports = new LoginController();

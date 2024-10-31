@@ -6,9 +6,9 @@ function mostrarEnvioTaloes(){
     })
 }
 
-function enviarTalao(){
-    const formulario = document.getElementById('formEnvioTalao')
-    const formData = new FormData(formulario)
+async function enviarTalao() {
+    const formulario = document.getElementById('formEnvioTalao');
+    const formData = new FormData(formulario);
 
     const data = {
         lojaDestino: formData.get('lojaDestinataria'),
@@ -16,16 +16,18 @@ function enviarTalao(){
         quantidade: formData.get('quantidadeTaloes'),
         recebedor: formData.get('funcionarioRecebimento'),
         dataRecebimentoPrevisto: formData.get('dataEntregaPrevista')
-    }
+    };
 
-    const response = enviarDados('http://localhost:3000/api/enviarTaloes', data)
-    if (response.success){
-        alert('Talão enviado com sucesso')
-        formulario.reset()
+    const response = await enviarDados('http://localhost:3000/api/enviarTaloes', data);
+
+    if (response.success) {
+        alert('Talão enviado com sucesso');
+        formulario.reset();
     } else {
-        alert('Erro ao enviar talão, consulte o Administrador do sistema')
+        alert(`Erro ao enviar talão: ${response.error}`);
     }
 }
+
 
 function carregarSelects(){
     carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')

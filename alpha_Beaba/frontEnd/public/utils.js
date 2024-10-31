@@ -130,9 +130,8 @@ async function enviarDados(url, data) {
         });
 
         if (response.ok) {
-            return { success: true };
+            return { success: true, data: 'Talões enviados com sucesso' };
         } else {
-            const errorData = await response.json();
             return { success: false, error: errorData.message || 'Erro ao enviar dados.' };
         }
     } catch (error) {
@@ -140,6 +139,7 @@ async function enviarDados(url, data) {
         return { success: false, error: 'Erro ao enviar dados, consulte o Administrador do sistema.' };
     }
 }
+
 
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId);

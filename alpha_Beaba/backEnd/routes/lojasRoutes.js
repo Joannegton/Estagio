@@ -1,10 +1,15 @@
-const {cadastrarLojaHandle, getLojasHandler} = require('../controllers/lojaController')
+const lojaController = require('../controllers/lojaController')
 const { Router } = require('express')
 
 const lojasRouter = Router()
 
-lojasRouter.post('/cadastrarLoja', cadastrarLojaHandle)
+lojasRouter.get('/lojas', lojaController.getLojas)
+lojasRouter.get('/loja/:codLoja', lojaController.getLojaById)
 
-lojasRouter.get('/lojas', getLojasHandler)
+lojasRouter.post('/cadastrarLoja', lojaController.createLoja)
+lojasRouter.delete('/deletarLoja/:codLoja', lojaController.deleteLoja)
+lojasRouter.put('/atualizarLoja/:codLoja', lojaController.updateLoja)
+
+
 
 module.exports = lojasRouter

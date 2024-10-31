@@ -11,9 +11,7 @@ const pool = new Pool({
 
 
 async function conectarDb() {
-    const client = await pool.connect()
-    console.log('Conexão bem-sucedida ao banco de dados')
-    return client
+    return await pool.connect()
 }
 
 module.exports = { conectarDb }

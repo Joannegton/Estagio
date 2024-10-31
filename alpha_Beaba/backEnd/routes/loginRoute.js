@@ -1,13 +1,15 @@
-const {Router} = require('express')
-const loginHandler = require('../controllers/loginController')
-const loginRouter = Router()
+const { Router } = require('express');
+const loginController = require('../controllers/loginController');
 
-loginRouter.post('/login', loginHandler);
+const loginRouter = Router();
 
+loginRouter.post('/login', loginController.login);
 
-loginRouter.post('/recuperarSenha', (req, res) => {
-    const { email } = req.body;
-    res.status(200).send(`Instruções de recuperação de senha foram enviadas para ${email}`);
-});
+loginRouter.post('/recuperarSenha', loginController.recoverPassword);
+
+loginRouter.post('/logout', loginController.logout);
+
+loginRouter.post('/alterarSenha', loginController.changePassword);
+
 
 module.exports = loginRouter;
