@@ -8,56 +8,8 @@ function mostrarPerfil(){
     mostrarElemento('perfil', 'mostrarPerfil', alternadorPerfil)
 }
 
-function visualizarPermissoes(idPerfilAcesso) {
-    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
-    if (!perfil) {
-        alert('Perfil não encontrado')
-        return
-    }
-
-    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil
-
-
-    document.getElementById('nomePerfilTitulo').innerHTML = perfil_descricao
-
-    // Marcar os checkboxes de acordo com as permissões do perfil e desabilitá-los
-    const checkboxes = document.querySelectorAll('#corpoTabelaPermissoes input[type="checkbox"]')
-    checkboxes.forEach(checkbox => {
-        const [tipo, modulo] = checkbox.value.split('_')
-        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo)
-        checkbox.disabled = true // Desabilitar os checkboxes
-    })
-
-    // Mostrar o modal de visualização
-    document.getElementById('modalVisualizarPermissoes').style.display = 'flex'
-}
-
 function mostrarModalCadastroPerfil(){
     document.getElementById('addPerfil').style.display = 'flex'
-}
-
-
-// alternador de sessões (Usuários, Cadastro de Usuários e Perfis)
-async function alternadorPerfil() {
-    await fetchUsuarios()
-    const usuarios = document.getElementById('usuarios')
-    const cadastroUsuario = document.getElementById('cadastroUsuario')
-    const perfisElemento = document.getElementById('perfis')
-
-    usuarios.addEventListener('click', async () => {
-        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
-        await fetchUsuarios()
-    })
-    
-    cadastroUsuario.addEventListener('click', () => {
-        alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
-        carregarSelectsCadastroUsuario()
-    })
-    
-    perfisElemento.addEventListener('click', async () => {
-        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
-        await fetchPerfis()
-    })
 }
 
 function renderizarTabelaPerfis(perfisRenderizar){
@@ -101,6 +53,30 @@ function renderizarTabelaPerfis(perfisRenderizar){
     })
 }
 
+// alternador de sessões (Usuários, Cadastro de Usuários e Perfis)
+async function alternadorPerfil() {
+    await fetchUsuarios()
+    const usuarios = document.getElementById('usuarios')
+    const cadastroUsuario = document.getElementById('cadastroUsuario')
+    const perfisElemento = document.getElementById('perfis')
+
+    usuarios.addEventListener('click', async () => {
+        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
+        await fetchUsuarios()
+    })
+    
+    cadastroUsuario.addEventListener('click', () => {
+        alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
+        carregarSelectsCadastroUsuario()
+    })
+    
+    perfisElemento.addEventListener('click', async () => {
+        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
+        await fetchPerfis()
+    })
+}
+
+// buscar informações de perfis
 async function fetchPerfis() {
     try {
         const response = await fetch('http://localhost:3000/api/perfis')
@@ -112,6 +88,8 @@ async function fetchPerfis() {
         renderizarTabelaPerfis(perfis)
     } catch (error) {
         console.error('Erro ao buscar perfis:', error)
+        //modificar
+        alert('Sem conexão com o banco')
     }
 }
 
@@ -211,29 +189,6 @@ async function salvarEditarPerfil(idPerfilAcesso) {
     }
 }
 
-// vizualição de permissões
-function mostrarPermissoesMouseOver(idPerfilAcesso, tipoPermissao){
-    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
-
-    if (!perfil){
-        console.error('Perfil não encontrado:', idPerfilAcesso)
-        return
-    }
-
-    const permissoes = {
-        leitura: perfil.permissoes_leitura,
-        escrita: perfil.permissoes_escrita
-    }
-
-    const data = permissoes[tipoPermissao]
-    if (data){
-        const element = document.querySelector(`.visualizar[data-id="${idPerfilAcesso}"][data-tipo="${tipoPermissao}"]`)
-        element.setAttribute('data-content', data.join('\n')) // join - transforma o array em string separando por \n
-    } else {
-        console.error('Tipo de permissão não encontrado:', tipoPermissao)
-    }
-}
-
 async function deletarPerfil(idPerfilAcesso){
     const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
     if (confirmacao) {
@@ -258,6 +213,54 @@ async function deletarPerfil(idPerfilAcesso){
         }
     }
 }
+
+// vizualição de permissões
+function mostrarPermissoesMouseOver(idPerfilAcesso, tipoPermissao){
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+
+    if (!perfil){
+        console.error('Perfil não encontrado:', idPerfilAcesso)
+        return
+    }
+
+    const permissoes = {
+        leitura: perfil.permissoes_leitura,
+        escrita: perfil.permissoes_escrita
+    }
+
+    const data = permissoes[tipoPermissao]
+    if (data){
+        const element = document.querySelector(`.visualizar[data-id="${idPerfilAcesso}"][data-tipo="${tipoPermissao}"]`)
+        element.setAttribute('data-content', data.join('\n')) // join - transforma o array em string separando por \n
+    } else {
+        console.error('Tipo de permissão não encontrado:', tipoPermissao)
+    }
+}
+
+function visualizarPermissoes(idPerfilAcesso) {
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+    if (!perfil) {
+        alert('Perfil não encontrado')
+        return
+    }
+
+    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil
+
+
+    document.getElementById('nomePerfilTitulo').innerHTML = perfil_descricao
+
+    // Marcar os checkboxes de acordo com as permissões do perfil e desabilitá-los
+    const checkboxes = document.querySelectorAll('#corpoTabelaPermissoes input[type="checkbox"]')
+    checkboxes.forEach(checkbox => {
+        const [tipo, modulo] = checkbox.value.split('_')
+        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo)
+        checkbox.disabled = true // Desabilitar os checkboxes
+    })
+
+    // Mostrar o modal de visualização
+    document.getElementById('modalVisualizarPermissoes').style.display = 'flex'
+}
+
 
 function exportarPerfis(){
     alert('exportarPerfis')

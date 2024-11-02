@@ -2,31 +2,11 @@ import { carregarDadosSelect, esconderElementos, mostrarMenu } from "../../utils
 
 let usuarios = []
 
+// Visualização de sessoes
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
     esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
     mostrarMenu()
-}
-
-async function fetchUsuarios() {
-    try {
-        const response = await fetch('http://localhost:3000/api/usuarios', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        if (!response.ok) {
-            throw new Error('Erro ao buscar usuários')
-        }
-
-        usuarios = await response.json()
-        renderizarTabelaUsuarios(usuarios)
-    } catch (error) {
-        console.error('Erro ao buscar usuários:', error)
-        alert('Erro ao buscar usuários, consulte o Administrador do sistema')
-    }
 }
 
 function renderizarTabelaUsuarios(usuariosParaRenderizar) {
@@ -98,21 +78,37 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
     renderizarPagina()
 }
 
+//buscar informações de usuarios
+async function fetchUsuarios() {
+    try {
+        const response = await fetch('http://localhost:3000/api/usuarios')
+        if (!response.ok) {
+            throw new Error('Erro ao buscar usuários')
+        }
+
+        usuarios = await response.json()
+        renderizarTabelaUsuarios(usuarios)
+    } catch (error) {
+        console.error('Erro ao buscar usuários:', error)
+        //modificar
+        alert('Erro ao buscar usuários, consulte o Administrador do sistema')
+    }
+}
+
 //salvar, edição e deletar
 async function createUser() {
     const formulario = document.getElementById('formCadUsuario')
     const formData = new FormData(formulario)
 
+    if (!data.matricula || !data.tipoUsuario) {
+        alert('Matrícula e tipo de usuário são obrigatórios')
+        return
+    }
     const data = { 
         matricula: formData.get('matriculaUsuario'), 
         nome: formData.get('nomeUsuario'),
         tipoUsuario: formData.get('tipoUsuario'), 
         loja: formData.get('lojaUsuario') 
-    }
-
-    if (!data.matricula || !data.tipoUsuario) {
-        alert('Matrícula e tipo de usuário são obrigatórios')
-        return
     }
 
     try {
@@ -233,7 +229,6 @@ function carregarSelectsCadastroUsuario(){
     carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
     carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
-
 
 //ordenação e filtros
 function ordenarUsuarios(event) {
