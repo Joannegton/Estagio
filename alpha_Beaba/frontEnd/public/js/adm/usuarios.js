@@ -1,4 +1,4 @@
-import { carregarDadosSelect, esconderElementos, mostrarMenu } from "../../utils.js"
+import { carregarDadosSelect, esconderElementos, filtrarPorNome, mostrarMenu, ordenarArray } from "../../utils.js"
 
 let usuarios = []
 
@@ -233,33 +233,19 @@ function carregarSelectsCadastroUsuario(){
 //ordenação e filtros
 function ordenarUsuarios(event) {
     const ordenarPor = event.target.value
-
-    usuarios.sort((a, b) => {
-        if (!a || !b) return 0
-        if (!a.nome_usuario) return 1 // Coloca 'a' no final se 'nome_usuario' for null ou undefined
-        if (!b.nome_usuario) return -1 // Coloca 'b' no final se 'nome_usuario' for null ou undefined
-        return (ordenarPor === 'asc') ? a.nome_usuario.localeCompare(b.nome_usuario) : b.nome_usuario.localeCompare(a.nome_usuario)
-    })
+    ordenarArray(usuarios, 'nome_usuario', ordenarPor)
     renderizarTabelaUsuarios(usuarios)
 }
 
 function ordenarLojaUsuarios(event) {
     const ordenarPor = event.target.value
-
-    usuarios.sort((a, b) => {
-        if (!a || !b) return 0
-        if (!a.nome_loja) return 1 // Coloca 'a' no final se 'nome_loja' for null ou undefined
-        if (!b.nome_loja) return -1 // Coloca 'b' no final se 'nome_loja' for null ou undefined
-        return ordenarPor === 'asc' ? a.nome_loja.localeCompare(b.nome_loja) : b.nome_loja.localeCompare(a.nome_loja)
-    })
+    ordenarArray(usuarios, 'nome_loja', ordenarPor)
     renderizarTabelaUsuarios(usuarios)
 }
 
 function filtrarUsuarioNome(event) {
-    const filtro = event.target.value.toLowerCase()
-    const usuariosFiltrados = usuarios.filter(usuario => {
-        return usuario && usuario.nome_usuario && usuario.nome_usuario.toLowerCase().includes(filtro) //verifica se o usuario existe e se o nome do usuario não é null
-    })
+    const filtro = event.target.value
+    const usuariosFiltrados = filtrarPorNome(usuarios, 'nome_usuario', filtro)
     renderizarTabelaUsuarios(usuariosFiltrados)
 }
 export { mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }

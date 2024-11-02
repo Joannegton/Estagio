@@ -2,7 +2,7 @@ import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, most
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarFiltros } from '../../utils.js'
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
-import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js'
+import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
 import { filtrarUsuarioNome, mostrarPerfilUsuario, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
@@ -37,10 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Estoque
-    document.getElementById('filtroLojaEstoque').addEventListener('input', filtrarLoja)
+    document.getElementById('filtrarNomeLoja').addEventListener('input', filtrarNomeLoja)
+    
+    document.getElementById('filtroLojaEstoque').addEventListener('change', ordenarLojaEstoque)
 
+    document.getElementById('ordenarQntEstoque').addEventListener('change', ordenarEstoque)
+    
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
-
+    
     // Manutenção
     document.getElementById('filtroManutencaoNomeLoja').addEventListener('input', () => {})
 

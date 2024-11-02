@@ -2,6 +2,7 @@ import { alternador, carregarDadosSelect, esconderElementos, mostrarElemento, mo
 
 let lojas = [] 
 
+// funções de exibição
 function mostrarLojas(){
     mostrarElemento('lojas', 'mostrarLojas', alternadorLojas)
 }
@@ -103,6 +104,8 @@ function renderizarTabelaLojas(listalojas){
     paginarLojas()
 }
 
+
+// funções de salvar, editar e exluir
 async function salvarLoja(){
     const formulario = document.getElementById('formSalvarLoja')
     const formData = new FormData(formulario)
@@ -237,6 +240,8 @@ async function excluirLoja(cod_loja){
     }
 }
 
+
+// funções de filtro e ordenação
 function ordenarLoja(event){
     const ordenarPor = event.target.value
     ordenarArray(lojas, 'nome_loja', ordenarPor)

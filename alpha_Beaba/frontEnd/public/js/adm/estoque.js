@@ -1,23 +1,10 @@
-import { identificarBaixoEstoque, mostrarElemento } from "../../utils.js"
+import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../../utils.js"
 
 let estoque = []
 
+// Funções de exibição
 function mostrarEstoque() {
     mostrarElemento('estoque', 'mostrarEstoque', fetchEstoque)
-}
-    
-async function fetchEstoque() {
-    try {
-        const response = await fetch('http://localhost:3000/api/estoque')
-        if (!response.ok) {
-            throw new Error('Erro ao buscar estoque')
-        }
-
-        estoque = await response.json()
-        renderizarTabela(estoque)
-    } catch (error) {
-        console.error('Erro ao buscar estoque:', error)
-    }
 }
     
 function renderizarTabela(estoqueRenderizar) {
@@ -67,15 +54,41 @@ function renderizarTabela(estoqueRenderizar) {
     paginarEstoque()
 }
 
+async function fetchEstoque() {
+    try {
+        const response = await fetch('http://localhost:3000/api/estoque')
+        if (!response.ok) {
+            throw new Error('Erro ao buscar estoque')
+        }
 
+        estoque = await response.json()
+        renderizarTabela(estoque)
+    } catch (error) {
+        console.error('Erro ao buscar estoque:', error)
+    }
+}
 
+//filtros e ordenação
+function filtrarNomeLoja(event){
+    const filtro = event.target.value
+    const estoqueFiltrados = filtrarPorNome(estoque, 'nome_loja', filtro)
+    renderizarTabela(estoqueFiltrados)
+}
 
-function filtrarLoja() {
-    alert('filtrando loja')
+function ordenarLojaEstoque(event) {
+    const ordenarPor = event.target.value
+    ordenarArray(estoque, 'nome_loja', ordenarPor)
+    renderizarTabela(estoque)
+}
+
+function ordenarEstoque(event) {
+    const ordenarPor = event.target.value
+    ordenarArray(estoque, 'quantidade_disponivel', ordenarPor)
+    renderizarTabela(estoque)
 }
 
 function exportarEstoque() {
     alert('exportando estoque')
 }
 
-export { renderizarTabela, mostrarEstoque, filtrarLoja, exportarEstoque }
+export { renderizarTabela, ordenarEstoque, filtrarNomeLoja, mostrarEstoque, ordenarLojaEstoque, exportarEstoque }

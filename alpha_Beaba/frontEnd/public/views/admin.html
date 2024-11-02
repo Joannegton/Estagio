@@ -85,14 +85,14 @@
                     </div>
                     <div class="filtro" id="opcoesFiltroEstoque">
                         <div class="container-nome">
-                            <label for="filtroEstoque">Estoque:</label>
-                            <input type="text" name="filtroEstoque" id="filtroEstoque">
+                            <label for="filtrarNomeLoja">Loja:</label>
+                            <input type="text" name="filtrarNomeLoja" id="filtrarNomeLoja">
                         </div>
                         <div class="container-selects">
-                            <label for="ordenarEstoqueData">Data:</label>
-                            <select id="ordenarEstoqueData" name="ordenarEstoqueData">
-                                <option value="asc">Ascendente</option>
-                                <option value="desc">Descendente</option>
+                            <label for="ordenarQntEstoque">Qnt:</label>
+                            <select id="ordenarQntEstoque" name="ordenarQntEstoque">
+                                <option value="asc">Menor</option>
+                                <option value="desc">Maior</option>
                             </select>
                             <label for="filtroLojaEstoque">Loja:</label>
                             <select id="filtroLojaEstoque" name="filtroLojaEstoque">
@@ -114,7 +114,6 @@
                             </tr>
                         </thead>
                         <tbody id="estoque-tbody">
-                            <!-- Infos inseridas via js -->
                         </tbody>   
                     </table>
                 </div>

@@ -5,6 +5,7 @@ function mostrarMenu() {
     }
 }
 
+// função para mostrar sessão e inicializar
 function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) {
     const links = document.querySelectorAll('#menu ul li a')
     links.forEach(link => link.classList.remove('ativo'))
@@ -47,6 +48,7 @@ function alternador3(elementoAtivo, elementosDesativar, ativar, desativarArr, in
     document.getElementById(indicador).style.transform = `translateX(${posicao * 100}%)` 
 }
 
+//função para esconder elementos
 function esconderElementos(ids) {
     ids.forEach(id => {
         const elemento = document.getElementById(id)
@@ -56,29 +58,31 @@ function esconderElementos(ids) {
     })
 }
 
-function identificarBaixoEstoque() {
-    console.log('identificarBaixoEstoque');
-    const rows = document.querySelectorAll('tr');
-    rows.forEach(row => {
-        const quantMinima = row.querySelector('.quant-minima');
-        const quantAtual = row.querySelector('.quant-atual');
-        if (quantMinima && quantAtual) {
-            const minimaValue = parseInt(quantMinima.textContent, 10);
-            const atualValue = parseInt(quantAtual.textContent, 10);
-            if (atualValue < minimaValue) {
-                quantAtual.classList.add('quant-atual-baixa');
-            }
-        }
-    });
-}
 
 function ordenarArray(array, propriedade, ordem = 'asc') {
     array.sort((a, b) => {
-        if (!a || !b) return 0;
-        if (!a[propriedade]) return 1; // Coloca 'a' no final se a propriedade for null ou undefined
-        if (!b[propriedade]) return -1; // Coloca 'b' no final se a propriedade for null ou undefined
-        return (ordem === 'asc') ? a[propriedade].localeCompare(b[propriedade]) : b[propriedade].localeCompare(a[propriedade]);
-    });
+        if (!a || !b) return 0
+        if (!a[propriedade]) return 1 // Coloca 'a' no final se a propriedade for null ou undefined
+        if (!b[propriedade]) return -1 // Coloca 'b' no final se a propriedade for null ou undefined
+
+        const propA = a[propriedade]
+        const propB = b[propriedade]
+
+        if (typeof propA === 'string' && typeof propB === 'string') {
+            return (ordem === 'asc') ? propA.localeCompare(propB) : propB.localeCompare(propA)
+        } else if (typeof propA === 'number' && typeof propB === 'number') {
+            return (ordem === 'asc') ? propA - propB : propB - propA
+        } else {
+            return 0
+        }
+    })
+}
+
+function filtrarPorNome(array, propriedade, filtro) {
+    const filtroLowerCase = filtro.toLowerCase()
+    return array.filter(item => {
+        return item && item[propriedade] && item[propriedade].toLowerCase().includes(filtroLowerCase)
+    })
 }
 
 function logout() {
@@ -87,9 +91,8 @@ function logout() {
     window.location.href = 'login'
 }
 
+// carregar dados em selects
 async function carregarDadosSelect(idSelect, url, value, textContent) {
-    console.log(`Carregando dados para o select: ${idSelect}`); // Log para depuração
-
     const select = document.getElementById(idSelect)
     select.innerHTML = ''
 
@@ -113,8 +116,23 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     }
 }
 
+//função para identificar estoque baixo e alertar
+function identificarBaixoEstoque() {
+    const rows = document.querySelectorAll('tr')
+    rows.forEach(row => {
+        const quantMinima = row.querySelector('.quant-minima')
+        const quantAtual = row.querySelector('.quant-atual')
+        if (quantMinima && quantAtual) {
+            const minimaValue = parseInt(quantMinima.textContent, 10)
+            const atualValue = parseInt(quantAtual.textContent, 10)
+            if (atualValue < minimaValue) {
+                quantAtual.classList.add('quant-atual-baixa')
+            }
+        }
+    })
+}
 
-
+// mostrar no mobile
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId);
     const toggleButton = document.getElementById(containerFiltroId).querySelector('i');
@@ -131,6 +149,7 @@ function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
   
 }
 
+// conversão data e hora
 function converterDataParaBR(dataISO) {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR');
@@ -154,4 +173,4 @@ function converterDataHoraParaBR(dataISO) {
 
 
 
-export {ordenarArray, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+export {ordenarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
