@@ -59,6 +59,7 @@ async function alternadorPerfil() {
     const usuarios = document.getElementById('usuarios')
     const cadastroUsuario = document.getElementById('cadastroUsuario')
     const perfisElemento = document.getElementById('perfis')
+    carregarSelectsCadastroUsuario()
 
     usuarios.addEventListener('click', async () => {
         alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)

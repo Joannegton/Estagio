@@ -46,16 +46,38 @@ class UsuarioService {
         const client = await conectarDb()
         const senha = await bcrypt.hash('Quero@2024#', 10)
         try {
+            await client.query('BEGIN')
+
             const result = await client.query(
                 'INSERT INTO usuario (matricula, nome_usuario, senha, cod_loja, id_perfil_acesso) VALUES ($1, $2, $3, $4, $5)',
                 [matricula, nome, senha, loja, tipoUsuario]
             )
-            return result.rowCount > 0
+            if (result.rowCount > 0 && loja) {
+                const updateResult = await client.query(
+                    'UPDATE loja SET gerente_id = $1 WHERE cod_loja = $2',
+                    [matricula, loja]
+                );
+        
+                if (updateResult.rowCount > 0) {
+                    await client.query('COMMIT');
+                    return true;
+                } else {
+                    await client.query('ROLLBACK');
+                    return false;
+                }
+            } else if (result.rowCount > 0) {
+                await client.query('COMMIT');
+                return true;
+            } else {
+                await client.query('ROLLBACK');
+                return false;
+            }
         } catch (error) {
-            console.error('Erro ao executar a query:', error.stack)
-            throw error
+            await client.query('ROLLBACK');
+            console.error('Erro ao criar usuário e atualizar loja: ', error);
+            return false;
         } finally {
-            client.release()
+            client.release();
         }
     }
 

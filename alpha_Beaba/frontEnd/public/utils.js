@@ -88,6 +88,8 @@ function logout() {
 }
 
 async function carregarDadosSelect(idSelect, url, value, textContent) {
+    console.log(`Carregando dados para o select: ${idSelect}`); // Log para depuração
+
     const select = document.getElementById(idSelect)
     select.innerHTML = ''
 
