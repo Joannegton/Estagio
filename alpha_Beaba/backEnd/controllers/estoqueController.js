@@ -4,7 +4,7 @@ class EstoqueController {
     async  getEstoque(req, res) {
         try {
             const estoque = await estoqueService.getEstoque()
-            res.status(200).json(estoque)
+            estoque ? res.status(200).json(estoque) : res.status(404).send('Erro ao buscar estoque.')
         } catch (error) {
             console.error('Erro ao buscar o estoque:', error.stack)
             res.status(500).send('Erro ao buscar o estoque')

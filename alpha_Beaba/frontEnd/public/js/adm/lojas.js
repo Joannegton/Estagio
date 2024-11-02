@@ -39,10 +39,9 @@ async function fetchLojas(){
 }
 
 function renderizarTabelaLojas(listalojas){
-    const tbody = document.getElementById('lojas-tbody')
-
     let paginaAtual = 1
     const itensPorPagina = 10
+    const tbody = document.getElementById('lojas-tbody')
 
     function paginarLojas(){
         const inicio = (paginaAtual - 1) * itensPorPagina

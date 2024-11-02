@@ -13,6 +13,7 @@ class EstoqueService {
                     et.quantidade_disponivel
                 FROM loja l
                 JOIN estoque_taloes et ON l.cod_loja = et.cod_loja
+                ORDER BY quantidade_disponivel 
             `)
             return result.rows
         } catch (error) {

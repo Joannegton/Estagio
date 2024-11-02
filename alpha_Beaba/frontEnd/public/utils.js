@@ -114,6 +114,7 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
 }
 
 
+
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId);
     const toggleButton = document.getElementById(containerFiltroId).querySelector('i');
