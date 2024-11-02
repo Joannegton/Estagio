@@ -203,7 +203,7 @@ async function salvarEdicaoUsuario(matricula) {
 }
 
 async function deletarUsuario(matricula) {
-    const confirmacao = confirm('Deseja realmente excluir este usuário?');
+    const confirmacao = confirm('Deseja realmente excluir este usuário?')
 
     if (confirmacao) {
         try {
@@ -212,18 +212,18 @@ async function deletarUsuario(matricula) {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            });
+            })
 
             if (response.ok) {
-                alert('Usuário deletado com sucesso');
-                fetchUsuarios();
+                alert('Usuário deletado com sucesso')
+                await fetchUsuarios()
             } else {
-                const errorData = await response.json();
-                alert(`Erro ao deletar usuário: ${errorData.message || response.statusText}`);
+                const errorData = await response.json()
+                alert(`Erro ao deletar usuário: ${errorData.message || response.statusText}`)
             }
         } catch (error) {
-            console.error('Erro ao deletar usuário:', error);
-            alert('Erro ao deletar usuário. Por favor, tente novamente mais tarde.');
+            console.error('Erro ao deletar usuário:', error)
+            alert('Erro ao deletar usuário. Por favor, tente novamente mais tarde.')
         }
     }
 }
