@@ -24,13 +24,13 @@ class UsuarioService {
         }
     }
 
-    async createUser(matricula, tipoUsuario, loja) {
+    async createUser(matricula, nome, tipoUsuario, loja) {
         const client = await conectarDb();
         const senha = await bcrypt.hash('Quero@2024#', 10);
         try {
             const result = await client.query(
-                'INSERT INTO usuario (matricula, senha, cod_loja, id_perfil_acesso) VALUES ($1, $2, $3, $4)',
-                [matricula, senha, loja, tipoUsuario]
+                'INSERT INTO usuario (matricula, nome_usuario, senha, cod_loja, id_perfil_acesso) VALUES ($1, $2, $3, $4, $5)',
+                [matricula, nome, senha, loja, tipoUsuario]
             );
             return result;
         } catch (error) {

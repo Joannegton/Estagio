@@ -1,4 +1,4 @@
-import { alternador3, esconderElementos, mostrarElemento, enviarDados } from "../../utils.js"
+import { alternador3, esconderElementos, mostrarElemento } from "../../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 
 let perfis = []
@@ -109,13 +109,20 @@ async function salvarPerfil(){
         permissoes: formData.getAll('permissoes')
     }
 
-    const result = await enviarDados('http://localhost:3000/cadastrarPerfil', data)
-    
-    if(result.success){
-        alert('Perfil cadastrado com sucesso!')
+    const result = await fetch('http://localhost:3000/cadastrarPerfil', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    if (result.ok) {
+        alert('Perfil cadastrado com sucesso')
         formulario.reset()
-    } else {
-        alert('Erro ao cadastrar perfil.')
+    }
+    else {
+        alert('Erro ao cadastrar perfil')
     }
 }
 

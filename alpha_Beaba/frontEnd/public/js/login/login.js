@@ -75,7 +75,7 @@ async function login() {
                 }
             }
         } else {
-            alert('Matricula ou senha inválidos');
+            confirm('Você ja tem uma sessão ativa, deseja sair?');
         }
     } catch (error) {
         console.error('Erro ao fazer login: ', error)

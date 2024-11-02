@@ -12,9 +12,14 @@ class UsuarioController {
     }
 
     async createUser(req, res) {
-        const { matricula, tipoUsuario, loja } = req.body;
+        const { matricula, nome, tipoUsuario, loja } = req.body;
+
+        if (!matricula || !tipoUsuario) {
+            return res.status(400).send('Matrícula e tipo de usuário são obrigatórios');
+        }
         try {
-            const result = await usuarioService.cadastrarUsuario(matricula, tipoUsuario, loja);
+            const result = await usuarioService.createUser(matricula, nome, tipoUsuario, loja);
+            console.log('result:', result);
             result ? res.status(201).send('Usuário cadastrado com sucesso') : res.status(400).send('Erro ao cadastrar usuário');
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack);

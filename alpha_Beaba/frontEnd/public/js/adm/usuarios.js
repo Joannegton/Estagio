@@ -1,4 +1,4 @@
-import { carregarDadosSelect, enviarDados, esconderElementos, mostrarMenu } from "../../utils.js"
+import { carregarDadosSelect, esconderElementos, mostrarMenu } from "../../utils.js"
 
 let usuarios = []
 
@@ -130,24 +130,31 @@ function filtrarUsuarioNome(event) {
 }
 
 //salvar, edição e deletar
-async function salvarUsuario() {
+async function createUser() {
     const formulario = document.getElementById('formCadUsuario')
     const formData = new FormData(formulario)
 
     const data = { 
         matricula: formData.get('matriculaUsuario'), 
+        nome: formData.get('nomeUsuario'),
         tipoUsuario: formData.get('tipoUsuario'), 
         loja: formData.get('lojaUsuario') 
     }
 
-    console.log(data)
-    const result = await enviarDados('http://localhost:3000/cadastrarUsuario', data)
+    const result = await fetch('http://localhost:3000/api/cadastrarUsuario', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
 
-    if (result.success) {
+    if (result.ok) {
         alert('Usuário cadastrado com sucesso')
         formulario.reset()
-    } else {
-        alert('Erro ao cadastrar usuário.')
+    }
+    else {
+        alert('Erro ao cadastrar usuário')
     }
 }
 
@@ -197,4 +204,4 @@ function carregarSelectsCadastroUsuario(){
 
 
 
-export {usuarios, mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, renderizarTabelaUsuarios, salvarUsuario, editarUsuario, salvarEdicaoUsuario, deletarUsuario, filtrarUsuarioNome }
+export {usuarios, mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, renderizarTabelaUsuarios, createUser, editarUsuario, salvarEdicaoUsuario, deletarUsuario, filtrarUsuarioNome }

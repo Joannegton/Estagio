@@ -1,4 +1,4 @@
-import { adicionarPaginacao, alternador, carregarDadosSelect, enviarDados, esconderElementos, mostrarElemento, mostrarMenu } from "../../utils.js"
+import { adicionarPaginacao, alternador, carregarDadosSelect, esconderElementos, mostrarElemento, mostrarMenu } from "../../utils.js"
 
 let lojas = []
 
@@ -101,13 +101,20 @@ async function salvarLoja(){
         telefoneLoja: formData.get('telefoneLoja')
     }
 
-    const result = await enviarDados('http://localhost:3000/cadastrarLoja', data)
+    const result = await fetch('http://localhost:3000/cadastrarLoja', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
 
-    if (result.success){
+    if (result.ok) {
         alert('Loja cadastrada com sucesso')
         formulario.reset()
-    } else {
-        alert('Erro ao cadastrar loja, consulte o Administrador do sistema')
+    }
+    else {
+        alert('Erro ao cadastrar loja')
     }
 }
 

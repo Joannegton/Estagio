@@ -119,27 +119,6 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     }
 }
 
-async function enviarDados(url, data) {
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            return { success: true, data: 'Talões enviados com sucesso' };
-        } else {
-            return { success: false, error: errorData.message || 'Erro ao enviar dados.' };
-        }
-    } catch (error) {
-        console.error('Erro ao enviar dados:', error);
-        return { success: false, error: 'Erro ao enviar dados, consulte o Administrador do sistema.' };
-    }
-}
-
 
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId);
@@ -180,4 +159,4 @@ function converterDataHoraParaBR(dataISO) {
 
 
 
-export {converterDataParaBR, converterDataHoraParaBR, enviarDados, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+export {converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}

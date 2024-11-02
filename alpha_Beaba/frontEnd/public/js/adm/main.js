@@ -5,7 +5,7 @@ import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js
 import { mostrarEstoque, filtrarLoja, exportarEstoque } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
-import { filtrarUsuarioNome, mostrarPerfilUsuario, ordenarLojaUsuarios, ordenarUsuarios, salvarUsuario } from './usuarios.js'
+import { filtrarUsuarioNome, mostrarPerfilUsuario, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('formCadUsuario').addEventListener('submit', event => {
         event.preventDefault()
-        salvarUsuario()
+        createUser()
     })
 
     // Perfil
