@@ -81,7 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         esconderElementos(['modalVisualizarPermissoes'])
     })
 
-    document.getElementById('formSalvarEditarPermissoes').addEventListener('submit', salvarEditarPerfil)
+    document.getElementById('formSalvarEditarPermissoes').addEventListener('submit', e => {
+        e.preventDefault();
+        const idPerfilAcesso = e.target.dataset.idPerfilAcesso
+        salvarEditarPerfil(idPerfilAcesso)
+    })
     document.getElementById('fecharModalEditPermissoes').addEventListener('click', () => {
         esconderElementos(['modalEditPerfil'])
     })

@@ -3,10 +3,11 @@ const usuarioController = require('../controllers/usuarioController')
 
 const usuarioRouter = Router()
 
-usuarioRouter.get('/usuarios', (req, res) => usuarioController.getUsers(req, res))
-usuarioRouter.get('/usuarios/:matricula', (req, res) => usuarioController.getUserById(req, res))
+usuarioRouter.get('/usuarios', usuarioController.getUsers)
+usuarioRouter.get('/usuarios/:matricula', usuarioController.getUserById)
 
-usuarioRouter.post('/cadastrarUsuario', (req, res) => usuarioController.createUser(req, res))
-usuarioRouter.put('/usuarios/:matricula', (req, res) => usuarioController.updateUser(req, res))
-usuarioRouter.delete('/usuarios/:matricula', (req, res) => usuarioController.deleteUser(req, res))
+usuarioRouter.post('/usuarios', usuarioController.createUser)
+usuarioRouter.put('/usuarios/:matricula', usuarioController.updateUser)
+usuarioRouter.delete('/usuarios/:matricula', usuarioController.deleteUser)
+
 module.exports = usuarioRouter

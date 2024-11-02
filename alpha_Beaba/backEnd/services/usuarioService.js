@@ -41,7 +41,6 @@ class UsuarioService {
             client.release()
         }
     }
-
     
     async createUser(matricula, nome, tipoUsuario, loja) {
         const client = await conectarDb()

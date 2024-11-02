@@ -4,8 +4,8 @@ class PerfisService {
     async createPerfil(nomePerfil, permissoes) {
         const client = await conectarDb()
         try {
-            await client.query('BEGIN')
-            const result = await client.query('INSERT INTO perfil_acesso (descricao) VALUES ($1) RETURNING id_perfil_acesso', [nomePerfil])
+            await client.query('BEGIN') //Inicia uma transação no banco de dados
+            const result = await client.query('INSERT INTO perfil_acesso (descricao) VALUES ($1) RETURNING id_perfil_acesso', [nomePerfil]) //Retorna o id do perfil cadastrado
             const idPerfilAcesso = result.rows[0].id_perfil_acesso
 
             for (const permissao of permissoes) {
@@ -18,11 +18,11 @@ class PerfisService {
                 await client.query('INSERT INTO perfil_acesso_permissoes (id_perfil_acesso, id_permissao) VALUES ($1, $2)', [idPerfilAcesso, idPermissao])
             }
 
-            await client.query('COMMIT')
+            await client.query('COMMIT') //Finaliza a transação no banco de dados
             return 'Perfil cadastrado com sucesso!'
         } catch (error) {
-            await client.query('ROLLBACK')
-            console.error('Erro ao cadastrar perfil:', error.stack)
+            await client.query('ROLLBACK') //Desfaz a transação no banco de dados
+            console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
             client.release()
@@ -54,24 +54,23 @@ class PerfisService {
         }
     }
 
-    async getPerfilById(id) {
+    async getPerfilById(matricula) {
         const client = await conectarDb()
         try {
-            const result = await client.query('SELECT * FROM perfil_acesso WHERE id = $1', [id])
+            const result = await client.query('SELECT * FROM perfil_acesso WHERE matricula = $1', [matricula])
             return result.rows[0]
         } catch (error) {
-            console.error('Erro ao buscar perfil:', error.stack)
+            console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
             client.release()
         }
     }
 
-    async updatePerfil(id, nomePerfil, permissoes) {
+    async updatePerfil(id, permissoes) {
         const client = await conectarDb()
         try {
             await client.query('BEGIN')
-            await client.query('UPDATE perfil_acesso SET descricao = $1 WHERE id_perfil_acesso = $2', [nomePerfil, id])
             await client.query('DELETE FROM perfil_acesso_permissoes WHERE id_perfil_acesso = $1', [id])
 
             for (const permissao of permissoes) {
@@ -88,7 +87,7 @@ class PerfisService {
             return 'Perfil atualizado com sucesso!'
         } catch (error) {
             await client.query('ROLLBACK')
-            console.error('Erro ao atualizar perfil:', error.stack)
+            console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
             client.release()
@@ -98,18 +97,23 @@ class PerfisService {
     async deletePerfil(id) {
         const client = await conectarDb()
         try {
+            await client.query('BEGIN')
             await client.query('DELETE FROM perfil_acesso_permissoes WHERE id_perfil_acesso = $1', [id])
             await client.query('DELETE FROM perfil_acesso WHERE id_perfil_acesso = $1', [id])
-            return 'Perfil deletado com sucesso!'
+            const commit = await client.query('COMMIT')
+            if (commit) {
+                return 'Perfil deletado com sucesso!'
+            } else {
+                return 'Erro ao deletar perfil'
+            }
         } catch (error) {
-            console.error('Erro ao deletar perfil:', error.stack)
+            await client.query('ROLLBACK')
+            console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
             client.release()
         }
     }
-
-    
 }
 
 module.exports = new PerfisService()

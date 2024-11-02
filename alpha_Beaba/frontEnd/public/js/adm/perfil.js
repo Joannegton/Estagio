@@ -3,14 +3,47 @@ import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 
 let perfis = []
 
+// Visualização de sessões
 function mostrarPerfil(){
     mostrarElemento('perfil', 'mostrarPerfil', ()=> {
         alternadorPerfil()
     })
 }
 
+function visualizarPermissoes(idPerfilAcesso) {
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso);
+    if (!perfil) {
+        alert('Perfil não encontrado');
+        return;
+    }
+
+    const permissoes_escrita = perfil.permissoes_escrita;
+    const permissoes_leitura = perfil.permissoes_leitura;
+
+    document.getElementById('nomePerfilTitulo').innerHTML = perfil.perfil_descricao;
+
+    // Marcar os checkboxes de acordo com as permissões do perfil e desabilitá-los
+    const checkboxes = document.querySelectorAll('#corpoTabelaPermissoes input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        const [tipo, modulo] = checkbox.value.split('_');
+        if (tipo === 'leitura') {
+            checkbox.checked = permissoes_leitura.includes(modulo);
+        } else if (tipo === 'escrita') {
+            checkbox.checked = permissoes_escrita.includes(modulo);
+        }
+        checkbox.disabled = true; // Desabilitar os checkboxes
+    });
+
+    // Mostrar o modal de visualização
+    document.getElementById('modalVisualizarPermissoes').style.display = 'flex';
+}
+
+function mostrarModalCadastroPerfil(){
+    document.getElementById('addPerfil').style.display = 'flex'
+}
 
 
+// alternador de sessões (Usuários, Cadastro de Usuários e Perfis)
 function alternadorPerfil() {
     fetchUsuarios()
     const usuarios = document.getElementById('usuarios')
@@ -29,8 +62,7 @@ function alternadorPerfil() {
     
     perfisElemento.addEventListener('click', async () => {
         alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
-        await fetchPerfis()
-        renderizarTabelaPerfis(perfis)
+        fetchPerfis()
     })
 }
 
@@ -61,13 +93,13 @@ function renderizarTabelaPerfis(perfisRenderizar){
 
         // eventos de click
         document.getElementById(`editarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            editarPerfil()
+            editarPerfil(perfil.id_perfil_acesso)
         })
         document.getElementById(`deletarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            deletarPerfil()
+            deletarPerfil(perfil.id_perfil_acesso)
         })
         document.getElementById(`visualizarPermissoes${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            modalVisualizarPermissoes()
+            visualizarPermissoes(perfil.id_perfil_acesso)
         })
         document.getElementById(`salvarEditarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
             salvarEditarPerfil()
@@ -78,11 +110,9 @@ function renderizarTabelaPerfis(perfisRenderizar){
             element.addEventListener('mouseenter', function() {
                 const tipo = this.getAttribute('data-tipo')
                 const id = this.getAttribute('data-id')
-                mostrarPermissoes(id, tipo)
+                mostrarPermissoesMouseOver(id, tipo)
             })
         }) 
-
-
     })
 }
 
@@ -94,22 +124,27 @@ async function fetchPerfis() {
         }
 
         perfis = await response.json()
+        renderizarTabelaPerfis(perfis)
     } catch (error) {
         console.error('Erro ao buscar perfis:', error)
     }
 }
 
-// Perfil
+// salvar, editar, deletar e exportar perfis
 async function salvarPerfil(){
     const formulario = document.getElementById('perfilCadastroForm')
     const formData = new FormData(formulario)
 
+    if (!formData.get('nomePerfil') || formData.getAll('permissoes').length === 0) {
+        alert('Nome do perfil e Permissões são obrigatórios')
+        return
+    }
     const data = {
         nomePerfil: formData.get('nomePerfil'),
         permissoes: formData.getAll('permissoes')
     }
 
-    const result = await fetch('http://localhost:3000/cadastrarPerfil', {
+    const result = await fetch('http://localhost:3000/api/perfis', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -119,14 +154,73 @@ async function salvarPerfil(){
 
     if (result.ok) {
         alert('Perfil cadastrado com sucesso')
+        esconderElementos(['addPerfil'])
         formulario.reset()
+        fetchPerfis()
     }
     else {
-        alert('Erro ao cadastrar perfil')
+        const errorText = result.text()
+        alert('Erro ao cadastrar perfil: ', errorText)
     }
 }
 
-function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
+function editarPerfil(idPerfilAcesso){
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+    if(!perfil){
+        alert('Perfil não encontrado')
+        return
+    }
+
+    const permissoes_escrita = perfil.permissoes_escrita
+    const permissoes_leitura = perfil.permissoes_leitura
+
+    document.getElementById('nomePerfilTituloEdit').innerHTML = perfil.perfil_descricao
+
+    // Marcar os checkboxes de acordo com as permissões do perfil
+    const checkboxes = document.querySelectorAll('#formSalvarEditarPermissoes input[type="checkbox"]')
+    checkboxes.forEach(checkbox => {
+        const [tipo, modulo] = checkbox.value.split('_')
+        if (tipo === 'leitura') {
+            checkbox.checked = permissoes_leitura.includes(modulo)
+        } else if(tipo === 'escrita'){
+            checkbox.checked = permissoes_escrita.includes(modulo)
+        }
+    })
+    // Armazenar o idPerfilAcesso no formulário
+    document.getElementById('formSalvarEditarPermissoes').dataset.idPerfilAcesso = idPerfilAcesso
+
+    // Mostrar o modal de edição
+    document.getElementById('modalEditPerfil').style.display = 'flex'
+}
+
+async function salvarEditarPerfil(idPerfilAcesso) {
+    const formulario = document.getElementById('formSalvarEditarPermissoes')
+    const formData = new FormData(formulario)
+
+    const data = {
+        permissoes: formData.getAll('permissoes')
+    }
+
+    const result = await fetch(`http://localhost:3000/api/perfis/${idPerfilAcesso}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    if (result.ok) {
+        alert('Perfil editado com sucesso')
+        document.getElementById('modalEditPerfil').style.display = 'none'
+        fetchPerfis()
+    } else {
+        const errorMessage = await result.text()
+        alert(`Erro ao editar perfil: ${errorMessage}`)
+    }
+}
+
+// vizualição de permissões
+function mostrarPermissoesMouseOver(idPerfilAcesso, tipoPermissao){
     const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
 
     const permissoes = {
@@ -143,31 +237,28 @@ function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
     }
 }
 
-function modalVisualizarPermissoes(){
-    document.getElementById('modalVisualizarPermissoes').style.display = 'flex'
-}
-
-function mostrarModalCadastroPerfil(){
-    document.getElementById('addPerfil').style.display = 'flex'
-    esconderElementos('tabelaPerfis')
-}
-
-function mostrarModalEditPerfil(){
-    document.getElementById('modalEditPerfil').style.display = 'flex'
-}
-
-function editarPerfil(){
-    mostrarModalEditPerfil()
-}
-
-function salvarEditarPerfil(){
-    alert('Perfil Editado')
-}
-
-function deletarPerfil(){
+async function deletarPerfil(idPerfilAcesso){
     const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
     if (confirmacao) {
-        alert('Perfil deletado com sucesso.')
+        try {
+            const response = await fetch(`http://localhost:3000/api/perfis/${idPerfilAcesso}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (response.ok){
+                alert('Perfil deletado com sucesso')
+                fetchPerfis()
+            } else{
+                const errorData = await response.json()
+                alert(`Erro ao deletar Perfil: ${errorData.message || response.statusText}`)
+            }
+        } catch (error) {
+            console.error('Erro ao deletar perfil: ', error)
+            alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.');
+        }
     }
 }
 
@@ -175,4 +266,4 @@ function exportarPerfis(){
     alert('exportarPerfis')
 }
 
-export { mostrarPerfil, mostrarPermissoes, mostrarModalCadastroPerfil, salvarPerfil, mostrarModalEditPerfil, modalVisualizarPermissoes, editarPerfil, salvarEditarPerfil, deletarPerfil, exportarPerfis }
+export { mostrarPerfil, mostrarPermissoesMouseOver, mostrarModalCadastroPerfil, salvarPerfil,  salvarEditarPerfil, deletarPerfil, exportarPerfis }

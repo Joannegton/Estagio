@@ -116,7 +116,7 @@ async function createUser() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/cadastrarUsuario', {
+        const response = await fetch('http://localhost:3000/api/usuarios', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
