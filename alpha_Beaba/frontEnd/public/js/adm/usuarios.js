@@ -100,10 +100,6 @@ async function createUser() {
     const formulario = document.getElementById('formCadUsuario')
     const formData = new FormData(formulario)
 
-    if (!data.matricula || !data.tipoUsuario) {
-        alert('Matrícula e tipo de usuário são obrigatórios')
-        return
-    }
     const data = { 
         matricula: formData.get('matriculaUsuario'), 
         nome: formData.get('nomeUsuario'),
@@ -111,6 +107,10 @@ async function createUser() {
         loja: formData.get('lojaUsuario') 
     }
 
+    if (!data.matricula || !data.tipoUsuario) {
+        alert('Matrícula e tipo de usuário são obrigatórios')
+        return
+    }
     try {
         const response = await fetch('http://localhost:3000/api/usuarios', {
             method: 'POST',
@@ -121,7 +121,7 @@ async function createUser() {
         })
 
         if (response.ok) {
-            alert('Usuário cadastrado com sucesso')
+            alert('Usuário cadastrado com sucesso.')
             formulario.reset()
         } else {
             const errorData = await response.json()
@@ -226,7 +226,7 @@ async function deletarUsuario(matricula) {
 
 // carregar selects
 function carregarSelectsCadastroUsuario(){
-    carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/lojas', 'cod_loja', 'nome_loja')
+    carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
     carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
 }
 

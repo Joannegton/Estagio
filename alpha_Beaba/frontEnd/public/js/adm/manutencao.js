@@ -1,11 +1,9 @@
-import { adicionarPaginacao, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
+import { converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
 
 let envioTaloes = []
 
 function mostrarManutencao(){
-    mostrarElemento('manutencao', 'mostrarManutencao', () => {
-        adicionarPaginacao( envioTaloes, fetchEnvioTaloes, 'pagAntManutencao', 'proxPagManutencao', 'Manutencao')
-    })
+    mostrarElemento('manutencao', 'mostrarManutencao', fetchEnvioTaloes)
 }
 
 async function fetchEnvioTaloes() {

@@ -1,11 +1,9 @@
-import { adicionarPaginacao, identificarBaixoEstoque, mostrarElemento } from "../../utils.js"
+import { identificarBaixoEstoque, mostrarElemento } from "../../utils.js"
 
 let estoque = []
 
 function mostrarEstoque() {
-    mostrarElemento('estoque', 'mostrarEstoque', ()=> {
-        adicionarPaginacao(estoque, fetchEstoque, 'pagAnt', 'proxPag', 'Estoque')
-    })
+    mostrarElemento('estoque', 'mostrarEstoque', fetchEstoque)
 }
     
 async function fetchEstoque() {

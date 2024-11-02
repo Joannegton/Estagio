@@ -1,23 +1,29 @@
 const lojaService = require('../services/lojaService')
 
 class LojaController {
-    async createLoja(req, res, next) {
+    async createLoja(req, res) {
         const { nomeLoja, endereco, telefoneLoja } = req.body
+
+        if (!nomeLoja) {
+            return res.status(400).send('Nome da loja é obrigatório')
+        }
 
         try {
             await lojaService.createLoja(nomeLoja, endereco, telefoneLoja)
-            res.status(200).send('Loja cadastrada com sucesso')
+            res.status(201).send('Loja cadastrada com sucesso')
         } catch (error) {
-            next(error)
+            console.error('Erro ao cadastrar loja:', error.stack)
+            res.status(500).send('Erro ao cadastrar loja')
         }
     }
 
-    async getLojas(req, res, next) {
+    async getLojas(req, res) {
         try {
             const lojas = await lojaService.getLojas()
-            res.status(200).json(lojas)
+            lojas ? res.status(200).json(lojas) : res.status(404).send("Lojas não encontradas")
         } catch (error) {
-            next(error)
+            console.error('Erro ao buscar as lojas:', error.stack)
+            res.status(500).send('Erro ao buscar as lojas')
         }
     }
 
@@ -32,29 +38,30 @@ class LojaController {
         }
     }
 
-    async updateLoja(req, res, next) {
+    async updateLoja(req, res) {
         const { codLoja } = req.params
-        const { nomeLoja, endereco, telefoneLoja } = req.body
+        const updates = req.body
 
         try {
-            await lojaService.updateLoja(codLoja, nomeLoja, endereco, telefoneLoja)
-            res.status(200).send('Loja atualizada com sucesso')
+            const result = await lojaService.updateLoja(codLoja, updates)
+            result ? res.status(200).send('Loja atualizada com sucesso') : res.status(404).send('Loja não encontrada')
         } catch (error) {
-            next(error)
+            console.error('Erro ao atualizar a loja:', error.stack)
+            res.status(500).send('Erro ao atualizar a loja')
         }
     }
 
-    async deleteLoja(req, res, next) {
+    async deleteLoja(req, res) {
         const { codLoja } = req.params
 
         try {
-            await lojaService.deleteLoja(codLoja)
-            res.status(200).send('Loja deletada com sucesso')
+            const result = await lojaService.deleteLoja(codLoja)
+            result ? res.status(200).send('Loja deletada com sucesso') : res.status(404).send('Loja não encontrada')
         } catch (error) {
-            next(error)
+            console.error('Erro ao deletar loja: ', error.stack)
+            res.status(500).send('Erro ao deletar loja')
         }
     }
-
     
 }
 

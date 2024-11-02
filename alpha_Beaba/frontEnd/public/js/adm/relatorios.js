@@ -27,7 +27,7 @@ function alternadorRelatorios() {
 
 async function carregarDadosRelatorios(){    
     carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais')
-    carregarDadosElemento('http://localhost:3000/api/lojas', 'lojasTotais')
+    carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais')
     carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
 }
 

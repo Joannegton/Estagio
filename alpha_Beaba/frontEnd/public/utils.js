@@ -72,21 +72,13 @@ function identificarBaixoEstoque() {
     });
 }
 
-function adicionarPaginacao(dados, renderizarFunc, pagAntId, proxPagId, tabela) {
-    document.getElementById(pagAntId).addEventListener('click', () => {
-        if (dados.paginaAtual > 1) {
-            dados.paginaAtual--
-            renderizarFunc()
-        }
-    })
-
-    document.getElementById(proxPagId).addEventListener('click', () => {
-        if ((dados.paginaAtual * dados.itensPorPagina) < dados[`dados${tabela}`].length) {
-            dados.paginaAtual++
-            renderizarFunc()
-        }
-    })
-    renderizarFunc()
+function ordenarArray(array, propriedade, ordem = 'asc') {
+    array.sort((a, b) => {
+        if (!a || !b) return 0;
+        if (!a[propriedade]) return 1; // Coloca 'a' no final se a propriedade for null ou undefined
+        if (!b[propriedade]) return -1; // Coloca 'b' no final se a propriedade for null ou undefined
+        return (ordem === 'asc') ? a[propriedade].localeCompare(b[propriedade]) : b[propriedade].localeCompare(a[propriedade]);
+    });
 }
 
 function logout() {
@@ -159,4 +151,4 @@ function converterDataHoraParaBR(dataISO) {
 
 
 
-export {converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect, mostrarFiltros, mostrarElemento, adicionarPaginacao, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}
+export {ordenarArray, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, identificarBaixoEstoque, logout}

@@ -21,8 +21,8 @@ class UsuarioController {
             const result = await usuarioService.createUser(matricula, nome, tipoUsuario, loja)
             result ? res.status(201).send('Usuário cadastrado com sucesso') : res.status(400).send('Erro ao cadastrar usuário')
         } catch (error) {
-            console.error('Erro ao executar a query:', error.stack)
-            res.status(500).send('Erro ao executar a query')
+            console.error('Erro ao criar usuario:', error.stack)
+            res.status(500).send('Erro ao criar usuario')
         }
     }
 
@@ -45,8 +45,8 @@ class UsuarioController {
         const result = await usuarioService.updateUser(matricula, updates)
         result ? res.status(200).send('Usuário atualizado com sucesso') : res.status(404).send('Usuário não encontrado')
     } catch (error) {
-        console.error('Erro ao executar a query:', error.stack)
-        res.status(500).send('Erro ao executar a query')
+        console.error('Erro ao atualizar usuario:', error.stack)
+        res.status(500).send('Erro ao atualizar usuario')
     }
 }
 
@@ -56,8 +56,8 @@ class UsuarioController {
             const result = await usuarioService.deleteUser(matricula)
             result ? res.status(200).send('Usuário deletado com sucesso') : res.status(404).send('Usuário não encontrado')
         } catch (error) {
-            console.error('Erro ao executar a query:', error.stack)
-            res.status(500).send('Erro ao executar a query')
+            console.error('Erro ao deletar usuario:', error.stack)
+            res.status(500).send('Erro ao deletar usuario')
         }
     }
 }

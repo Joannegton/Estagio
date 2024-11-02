@@ -1,35 +1,29 @@
-import { adicionarPaginacao, alternador, carregarDadosSelect, esconderElementos, mostrarElemento, mostrarMenu } from "../../utils.js"
+import { alternador, carregarDadosSelect, esconderElementos, mostrarElemento, mostrarMenu, ordenarArray } from "../../utils.js"
 
-let lojas = []
+let lojas = [] 
+
+function mostrarLojas(){
+    mostrarElemento('lojas', 'mostrarLojas', alternadorLojas)
+}
 
 function alternadorLojas(){
     const lojas = document.getElementById('todasLojas')
     const cadastroLoja = document.getElementById('cadastroLoja')
 
+    fetchLojas()
     lojas.addEventListener('click', () => {
         alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas')
-        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja')
+        fetchLojas()
     })
     cadastroLoja.addEventListener('click', () => {
         alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas')
     })
 }
 
-function mostrarLojas(){
-    mostrarElemento('lojas', 'mostrarLojas', () =>{
-        adicionarPaginacao(lojas, fetchLojas, 'pagAntLojas', 'proxPagLojas', 'Loja')
-        alternadorLojas()
-    })
-}
 
 async function fetchLojas(){
     try {
-        const response = await fetch('http://localhost:3000/api/lojas', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        const response = await fetch('http://localhost:3000/api/loja')
     
         if (!response.ok) {
             throw new Error('Erro ao buscar lojas')
@@ -39,56 +33,75 @@ async function fetchLojas(){
         renderizarTabelaLojas(lojas)
     } catch (error) {
         console.error('Erro ao buscar lojas:', error)
+        //modificar
+        alert('Sem conexão com a internet')
     }
 }
 
-
 function renderizarTabelaLojas(listalojas){
     const tbody = document.getElementById('lojas-tbody')
-    tbody.innerHTML = ''
 
-    const paginaAtual = 1
-    const itensPorPagina = 13
+    let paginaAtual = 1
+    const itensPorPagina = 10
 
-    const inicio = (paginaAtual - 1) * itensPorPagina
-    const fim = inicio + itensPorPagina
-    const dadosLimitados = listalojas.slice(inicio, fim)
+    function paginarLojas(){
+        const inicio = (paginaAtual - 1) * itensPorPagina
+        const fim = inicio + itensPorPagina
+        const dadosLimitados = listalojas.slice(inicio, fim)
+        tbody.innerHTML = ''
 
-    dadosLimitados.forEach(item => {
-        const tr = document.createElement('tr')
-        tr.innerHTML = `
-            <td data-label="Cód" id="idLoja${item.cod_loja}">${item.cod_loja}</td>
-            <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
-            <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.gerente}</td>
-                <td data-label="Quantidade Recomendada">${item.estoque_minimo + 50}</td>
-                <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
-                <td data-label="Editar" class="acoes">
-                <div id="containerBotaoAcaoLoja${item.cod_loja}">
-                <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}" title="Exxcluir"><i class="fas fa-trash-alt"></i></a>
-                </div>            
-                <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
-            </td>
-        `
-        tbody.appendChild(tr)
+        dadosLimitados.forEach(item => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td data-label="Cód" id="idLoja${item.cod_loja}">${item.cod_loja}</td>
+                <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
+                <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.gerente}</td>
+                    <td data-label="Quantidade Recomendada">${item.estoque_minimo + 50}</td>
+                    <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
+                    <td data-label="Editar" class="acoes">
+                    <div id="containerBotaoAcaoLoja${item.cod_loja}">
+                    <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}" title="Exxcluir"><i class="fas fa-trash-alt"></i></a>
+                    </div>            
+                    <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
+                </td>
+            `
+            tbody.appendChild(tr)
 
-        //Eventos de click
-        document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', () => {
-            editarLoja(item.cod_loja)
+            //Eventos de click
+            document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', () => {
+                editarLoja(item.cod_loja)
+            })
+            document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () => {
+                salvarEditarLoja(item.cod_loja)
+            })
+            document.getElementById(`excluirLoja${item.cod_loja}`).addEventListener('click', () => {
+                excluirLoja(item.cod_loja)
+            })
         })
-        document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () => {
-            salvarEditarLoja(item.cod_loja)
-        })
-        document.getElementById(`excluirLoja${item.cod_loja}`).addEventListener('click', () => {
-            excluirLoja(item.cod_loja)
-        })
+
+        //botões paginação
+        document.getElementById('pagInfoLojas').textContent = `Página ${paginaAtual} de ${Math.ceil(listalojas.length / itensPorPagina)}`
+        document.getElementById('pagAntLojas').disabled = paginaAtual === 1
+        document.getElementById('proxPagLojas').disabled =  fim >= listalojas.length
+
+    }
+
+    //eventos de click dos botões de paginação
+    document.getElementById('proxPagLojas').addEventListener('click', () => {
+        if((paginaAtual * itensPorPagina) < listalojas.length) {
+            paginaAtual++
+            paginarLojas()
+        }
+    })
+    document.getElementById('pagAntLojas').addEventListener('click', () => {
+        if(paginaAtual > 1) {
+            paginaAtual--
+            paginarLojas()
+        }
     })
 
-    //botões paginação
-    document.getElementById('pagInfoLojas').textContent = `Página ${paginaAtual} de ${Math.ceil(listalojas.length / itensPorPagina)}`
-    document.getElementById('pagAntLojas').disabled = paginaAtual === 1
-    document.getElementById('proxPagLojas').disabled =  fim >= listalojas.length
-
+    paginarLojas()
 }
 
 async function salvarLoja(){
@@ -101,20 +114,30 @@ async function salvarLoja(){
         telefoneLoja: formData.get('telefoneLoja')
     }
 
-    const result = await fetch('http://localhost:3000/cadastrarLoja', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-
-    if (result.ok) {
-        alert('Loja cadastrada com sucesso')
-        formulario.reset()
+    if(!data.nomeLoja){
+        alert('Nome da loja é obrigatório')
+        return
     }
-    else {
-        alert('Erro ao cadastrar loja')
+    try {
+        const response = await fetch('http://localhost:3000/api/loja', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    
+        if (response.status === 201) {
+            alert('Loja cadastrada com sucesso.')
+            formulario.reset()
+        }else {
+            const errorData = await response.json()
+            alert(`Erro ao cadastrar loja. ${errorData.message || response.statusText}`)
+        }
+    } catch (error) {
+        console.error('Erro ao cadastrar usúario: ', error)
+        alert('Erro ao cadastrar loja. Por favor, tente novamente mais tarde.')
+
     }
 }
 
@@ -146,7 +169,7 @@ function editarLoja(cod_loja){
     })
 }
 
-function salvarEditarLoja(cod_loja){
+async function salvarEditarLoja(cod_loja){
     let inputNome = document.getElementById(`input-nomeLoja${cod_loja}`)
     let newNome = inputNome.value
 
@@ -156,18 +179,69 @@ function salvarEditarLoja(cod_loja){
 
     document.getElementById(`nomeLoja${cod_loja}`).innerText = newNome
     document.getElementById(`nomeGerente${cod_loja}`).innerText = newGerente
-
     esconderElementos([`salvarEditarLoja${cod_loja}`])
     document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
-    inputNome.remove()
-    selectGerente.remove()
+    
+
+    const data = {
+        nome_loja: newNome,
+        gerente_id: matricula
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/loja/${cod_loja}`,{
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if(response.ok){
+            alert(`${newNome} atualizado com sucesso.`)
+            inputNome.remove()
+            selectGerente.remove()
+        } else{
+            const errorData = await response.json()
+            console.log("aaaaaaaaa",errorData)
+            alert(`Erro ao atualizar ${newNome}: ${errorData}`,)
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar loja: ', error)
+        alert('Erro ao atualizar loja. Por favor, tente novamente mais tarde.')
+    }
 }
 
-function excluirLoja(cod_loja){
-    alert('Loja', cod_loja, 'Excluido')
+async function excluirLoja(cod_loja){
+    const confirmacao = confirm(`Deseja realmente excluir a loja ${cod_loja}?`)
+
+    if (confirmacao) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/loja/${cod_loja}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (response.ok) {
+                alert('Loja deletada com sucesso.')
+                await fetchLojas()
+            } else {
+                const errorData = await response.json()
+                alert(`Erro ao deletar loja: ${errorData.message || response.statusText}`)
+            }
+        } catch (error) {
+            console.error('Erro ao deletar loja:', error)
+            alert('Erro ao deletar loja. Por favor, tente novamente mais tarde.')
+        }
+    }
 }
-function ordenarLoja(){
-    alert('Ordenar loja')
+
+function ordenarLoja(event){
+    const ordenarPor = event.target.value
+    ordenarArray(lojas, 'nome_loja', ordenarPor)
+    renderizarTabelaLojas(lojas)
 }
 
 function exportarLojas(){
