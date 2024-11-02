@@ -51,6 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportarManutencao').addEventListener('click', exportarManutencao)
     
     // Usuario
+    document.getElementById('formCadUsuario').addEventListener('submit', event => {
+        event.preventDefault()
+        createUser()
+    })
+
     document.getElementById('filtroUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)
 
     document.getElementById('ordenarUsuario').addEventListener('change', ordenarUsuarios)
@@ -59,13 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
 
-    document.getElementById('formCadUsuario').addEventListener('submit', event => {
-        event.preventDefault()
-        createUser()
-    })
 
     // Perfil
-    document.getElementById('cadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
+    document.getElementById('mostrarCadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
     
     document.getElementById('perfilCadastroForm').addEventListener('submit', (e) => {
         e.preventDefault()
