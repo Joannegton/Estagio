@@ -27,14 +27,15 @@ class LojaController {
         }
     }
 
-    async getLojaById(req, res, next) {
+    async getLojaById(req, res) {
         const { codLoja } = req.params
 
         try {
             const loja = await lojaService.getLojaById(codLoja)
-            res.status(200).json(loja)
+            loja ? res.status(200).json(loja) : res.status(404).send("Loja não encontrada")
         } catch (error) {
-            next(error)
+            console.error('Erro ao buscar a loja:', error.stack)
+            res.status(500).send('Erro ao buscar a loja')
         }
     }
 

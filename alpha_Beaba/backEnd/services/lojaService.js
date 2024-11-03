@@ -49,6 +49,7 @@ class LojasService {
                     loja.cod_loja, 
                     loja.nome_loja, 
                     usuario.nome_usuario AS "gerente", 
+                    loja.gerente_id,
                     loja.estoque_minimo,
                     loja.caixas_fisicos
                 FROM loja

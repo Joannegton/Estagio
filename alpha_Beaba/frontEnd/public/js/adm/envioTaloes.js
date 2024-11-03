@@ -18,7 +18,7 @@ async function enviarTalao() {
         dataRecebimentoPrevisto: formData.get('dataEntregaPrevista')
     }
 
-    const response = await fetch('http://localhost:3000/api/enviarTalao', {
+    const response = await fetch('http://localhost:3000/api/taloes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,9 +35,50 @@ async function enviarTalao() {
 }
 
 
-function carregarSelects(){
+function carregarSelects() {
     carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
-    carregarDadosSelect('funcionarioRecebimento', 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario')
+
+    const lojaSelect = document.getElementById('lojaDestinataria')
+    if (!lojaSelect.dataset.eventAdded) {
+        lojaSelect.addEventListener('change', async (event) => {
+            const codLoja = event.target.value
+            const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`)
+            const data = await response.json()
+
+            carregarGerente(data.gerente_id)
+        })
+        lojaSelect.dataset.eventAdded = true
+    }
+}
+
+async function carregarGerente(gerenteId) {
+    const funcionarioSelect = document.getElementById('funcionarioRecebimento')
+    funcionarioSelect.innerHTML = '' // Limpa o select
+
+    if (!gerenteId) {
+        const option = document.createElement('option')
+        option.value = ''
+        option.textContent = ''
+        funcionarioSelect.appendChild(option)
+        return
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/usuarios/${gerenteId}`)
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        const option = document.createElement('option')
+        option.value = data.matricula
+        option.textContent = data.nome_usuario
+        funcionarioSelect.appendChild(option)
+    } catch (error) {
+        console.error('Erro ao carregar gerente:', error)
+    }
 }
 
 

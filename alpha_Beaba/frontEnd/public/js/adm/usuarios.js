@@ -226,9 +226,18 @@ async function deletarUsuario(matricula) {
 
 // carregar selects
 function carregarSelectsCadastroUsuario(){
-    carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
-    carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
-}
+    const lojaSelect = document.getElementById('lojaUsuario');
+    const tipoUsuarioSelect = document.getElementById('tipoUsuario');
+
+    if (!lojaSelect.dataset.loaded) { // Evita recarregar os dados do select caso já tenha sido carregado
+        carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja');
+        lojaSelect.dataset.loaded = true;
+    }
+
+    if (!tipoUsuarioSelect.dataset.loaded) {
+        carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao');
+        tipoUsuarioSelect.dataset.loaded = true;
+    }}
 
 //ordenação e filtros
 function ordenarUsuarios(event) {
