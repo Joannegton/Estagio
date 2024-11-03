@@ -9,7 +9,7 @@ function mostrarEstoque() {
     
 function renderizarTabela(estoqueRenderizar) {
     let paginaAtual = 1
-    const itensPorPagina = 8
+    const itensPorPagina = 10
     const tbody = document.getElementById('estoque-tbody')
     
     function paginarEstoque(){

@@ -1,4 +1,4 @@
-import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao} from './manutencao.js'
+import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarFiltros } from '../../utils.js'
 import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
     
     // Manutenção
-    document.getElementById('filtroManutencaoNomeLoja').addEventListener('input', () => {})
+    document.getElementById('filtroManutencaoNomeLoja').addEventListener('input', filtrarNomeLojaManutencao)
 
     document.getElementById('filtroLojaManutencao').addEventListener('change', filtarLojaManutencao)
 

@@ -53,7 +53,7 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
             })
         })
 
-        // Atualiza informações de paginação
+        // botões de paginação
         document.getElementById('pagInfoUsuarios').textContent = `Página ${paginaAtual} de ${Math.ceil(usuariosParaRenderizar.length / itensPorPagina)}`
         document.getElementById('pagAntUsuarios').disabled = paginaAtual === 1
         document.getElementById('proxPagUsuarios').disabled = fim >= usuariosParaRenderizar.length

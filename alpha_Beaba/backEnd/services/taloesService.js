@@ -43,16 +43,24 @@ class TaloesService {
         }
     }
 
-    async updateTaloes( numeroRemessa, dataRecebimento, status ) {
+    async updateTaloes( numeroRemessa, updates ) {
         const client = await conectarDb()
+        const campos = []
+        const valores = []
+        let indice = 1
+
+        for (const [key, value] of Object.entries(updates)) {
+            campos.push(`${key} = $${indice}`)
+            valores.push(value)
+            indice++
+        }
+
+        const query = `UPDATE envio_taloes SET ${campos.join(', ')} WHERE numero_remessa = $${indice}`
+        valores.push(numeroRemessa)
 
         try {
-            client.query(`
-                UPDATE envio_taloes
-                SET data_recebimento_previsto = $1, status = $2
-                WHERE numero_remessa = $3
-            `, [dataRecebimento, status, numeroRemessa])
-
+            const result = await client.query(query, valores)
+            return result.rowCount > 0
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
             throw error
@@ -65,11 +73,12 @@ class TaloesService {
         const client = await conectarDb()
 
         try {
-            client.query(`
+            const result= await client.query(`
                 DELETE FROM envio_taloes
                 WHERE numero_remessa = $1
             `, [numeroRemessa])
 
+            return result.rowCount > 0
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
             throw error

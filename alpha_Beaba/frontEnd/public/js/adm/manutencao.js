@@ -1,7 +1,8 @@
-import { converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
+import { converterDataHoraParaBR, converterDataParaBR, filtrarArray, mostrarElemento, ordenarArray } from "../../utils.js"
 
 let envioTaloes = []
 
+//funções de exibição
 function mostrarManutencao(){
     mostrarElemento('manutencao', 'mostrarManutencao', fetchEnvioTaloes)
 }
@@ -9,88 +10,110 @@ function mostrarManutencao(){
 async function fetchEnvioTaloes() {
     try {
         const response = await fetch('http://localhost:3000/api/taloes')
-
         if(!response.ok){
-            throw new Error('Erro ao buscar envio de talões')
+            throw new Error('Erro ao buscar talões')
         }
 
         envioTaloes = await response.json()
         renderizarTabelaManutencao(envioTaloes)
     } catch (error) {
-        console.error('Erro ao buscar envio de talões:', error) 
+        console.error('Erro ao buscar talões:', error) 
+        //modificar
+        alert('Erro ao buscar taloes, consulte o Administrador do sistema')
     }
 }
 
 function renderizarTabelaManutencao(listaTaloesEnviados) {
     const tbody = document.getElementById('manutencao-tbody')
-    tbody.innerHTML = ''
 
-    const paginaAtual = 1
-    const itensPorPagina = 15
+    let paginaAtual = 1
+    const itensPorPagina = 10
 
-    const inicio = (paginaAtual - 1) * itensPorPagina
-    const fim = inicio + itensPorPagina
-    const dadosLimitados = listaTaloesEnviados.slice(inicio, fim)
+    function renderizarTabela(){
+        const inicio = (paginaAtual - 1) * itensPorPagina
+        const fim = inicio + itensPorPagina
+        const dadosLimitados = listaTaloesEnviados.slice(inicio, fim)
+        tbody.innerHTML = ''
 
-    dadosLimitados.forEach(item => {
-        const dataEnvio = converterDataHoraParaBR(item.data_envio)
-        const dataRecebimentoPrevisto = converterDataParaBR(item.data_recebimento_previsto)
-
-        const tr = document.createElement('tr')
-        tr.innerHTML = `
-            <td data-label="Remessa">${item.numero_remessa}</td>
-            <td data-label="Data do Envio">${dataEnvio}</td>
-            <td data-label="Loja Destino">${item.nome_loja}</td>
-            <td data-label="Quantidade">${item.quantidade}</td>
-            <td data-label="Recebimento">${item.nome_usuario}</td>
-            <td data-label="Data de Entrega" id="DataEntregaManutencao${item.numero_remessa}">${dataRecebimentoPrevisto}</td>
-            <td data-label="Status" id="statusManutencao${item.numero_remessa}">${item.status}</td>
-            <td data-label="Ações" class="acoes">
-                <div id="containerBotaoAcaoManutencao${item.numero_remessa}">
-                    <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}" title="Editar"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}" title="Exluir"><i class="fas fa-trash-alt"></i></a>
-                </div>
-                <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
-            </td>
-        `
-        tbody.appendChild(tr)
-
-        // Eventos de clique
-        document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
-            editarEnvioTalao(item.numero_remessa)
+        dadosLimitados.forEach(item => {
+            const dataEnvio = converterDataHoraParaBR(item.data_envio)
+            const dataRecebimentoPrevisto = converterDataParaBR(item.data_recebimento_previsto)
+    
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td data-label="Remessa">${item.numero_remessa}</td>
+                <td data-label="Data do Envio">${dataEnvio}</td>
+                <td data-label="Loja Destino">${item.nome_loja}</td>
+                <td data-label="Quantidade">${item.quantidade}</td>
+                <td data-label="Recebimento">${item.nome_usuario}</td>
+                <td data-label="Data de Entrega" id="DataEntregaManutencao${item.numero_remessa}">${dataRecebimentoPrevisto}</td>
+                <td data-label="Status" id="statusManutencao${item.numero_remessa}">${item.status}</td>
+                <td data-label="Ações" class="acoes">
+                    <div id="containerBotaoAcaoManutencao${item.numero_remessa}">
+                        <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}" title="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}" title="Exluir"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                    <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
+                </td>
+            `
+            tbody.appendChild(tr)
+    
+            // Eventos de clique
+            document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
+                editarEnvioTalao(item.numero_remessa)
+            })
+            document.getElementById(`excluirEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
+                excluirEnvioTalao(item.numero_remessa)
+            })
+            document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
+                salvarEdicaoTalao(item.numero_remessa)
+            })
+            
+            // Estilização do status
+            const status = document.getElementById(`statusManutencao${item.numero_remessa}`)
+            if(status.innerText === 'Enviado'){
+                status.style.backgroundColor = '#ffcf0f91'
+            } else {
+                status.style.backgroundColor = '#29ff3054'
+            }
+    
+            // Estilização da data de entrega
+            const dataEntregaElemento = document.getElementById(`DataEntregaManutencao${item.numero_remessa}`)
+            const dataEntrega = new Date(item.data_recebimento_previsto)
+            const dataAtual = new Date()
+    
+            if(dataEntrega < dataAtual && item.status === 'Enviado'){
+                dataEntregaElemento.style.backgroundColor = '#fc48488e'
+            }
+    
         })
-        document.getElementById(`excluirEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
-            excluirEnvioTalao(item.numero_remessa)
-        })
-        document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
-            salvarEdicaoTalao(item.numero_remessa)
-        })
-        
-        // Estilização do status
-        const status = document.getElementById(`statusManutencao${item.numero_remessa}`)
-        if(status.innerText === 'Enviado'){
-            status.style.backgroundColor = '#ffcf0f91'
-        } else {
-            status.style.backgroundColor = '#29ff3054'
+    
+        // botões de paginação
+        document.getElementById('pagInfoManutencao').textContent = `Página ${paginaAtual} de ${Math.ceil(listaTaloesEnviados.length / itensPorPagina)}`
+        document.getElementById('pagAntManutencao').disabled = paginaAtual === 1
+        document.getElementById('proxPagManutencao').disabled =  fim >= listaTaloesEnviados.length
+    
+    }
+
+    // Evento de clique para paginação
+    document.getElementById('proxPagManutencao').addEventListener('click', () => {
+        if ((paginaAtual * itensPorPagina) < listaTaloesEnviados.length) {
+            paginaAtual++
+            renderizarTabela()
         }
-
-        // Estilização da data de entrega
-        const dataEntregaElemento = document.getElementById(`DataEntregaManutencao${item.numero_remessa}`)
-        const dataEntrega = new Date(item.data_recebimento_previsto)
-        const dataAtual = new Date()
-
-        if(dataEntrega < dataAtual && item.status === 'Enviado'){
-            dataEntregaElemento.style.backgroundColor = '#fc48488e'
+    })
+    document.getElementById('pagAntManutencao').addEventListener('click', () => {
+        if (paginaAtual > 1) {
+            paginaAtual--
+            renderizarTabela()
         }
-
     })
 
-    // botões de paginação
-    document.getElementById('pagInfoManutencao').textContent = `Página ${paginaAtual} de ${Math.ceil(listaTaloesEnviados.length / itensPorPagina)}`
-    document.getElementById('pagAntManutencao').disabled = paginaAtual === 1
-    document.getElementById('proxPagManutencao').disabled =  fim >= listaTaloesEnviados.length
+    renderizarTabela()   
+
 }
 
+//edição e deletar remessa
 function editarEnvioTalao(numero_remessa) {
     document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
     document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'block'
@@ -107,7 +130,7 @@ function editarEnvioTalao(numero_remessa) {
     dataEntrega.innerHTML = `<input type="date" id="input-DataEntregaManutencao${numero_remessa}">`
 }
 
-function salvarEdicaoTalao(numero_remessa) {
+async function salvarEdicaoTalao(numero_remessa) {
     var statusManutencao = document.getElementById(`select-statusManutencao${numero_remessa}`)
     var dataEntrega = document.getElementById(`input-DataEntregaManutencao${numero_remessa}`)
 
@@ -119,24 +142,82 @@ function salvarEdicaoTalao(numero_remessa) {
 
     document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'none'
     document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
-    statusManutencao.remove()
-    dataEntrega.remove()
+    
+    const data = {
+        data_recebimento_previsto: newDataEntrega,
+        status: newStatusManutencao
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/taloes/${numero_remessa}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (response.ok) {
+            alert(`Dados atualizado com sucesso`)
+            statusManutencao.remove()
+            dataEntrega.remove()
+        } else{
+            const errorData = await response.json()
+            alert(`Erro ao atualizar: ${errorData.message || response.statusText}`)
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar manutenção:', error)
+        alert('Erro ao atualizar os dados. Por favor, tente novamente mais tarde.')
+    }
 }
 
-function excluirEnvioTalao() {
-    alert('Excluindo envio de talão')
+async function excluirEnvioTalao(numero_remessa) {
+    const confirmacao = confirm('Deseja realmente excluir esta Remessa?')
+
+    if (confirmacao) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/taloes/${numero_remessa}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (response.ok) {
+                alert('Remessa deletada com sucesso')
+                await fetchEnvioTaloes()
+            } else {
+                const errorData = await response.json()
+                alert(`Erro ao deletar Remessa: ${errorData.message || response.statusText}`)
+            }
+        } catch (error) {
+            console.error('Erro ao deletar remessa:', error)
+            alert('Erro ao deletar remessa. Por favor, tente novamente mais tarde.')
+        }
+    }
 }
 
-function filtarLojaManutencao() {
-    alert('Filtrando loja')
+//filtros e ordenações
+function filtarLojaManutencao(event) {
+    const ordenarPor = event.target.value
+    ordenarArray(envioTaloes, 'nome_loja', ordenarPor)
+    renderizarTabelaManutencao(envioTaloes)
 }
 
-function filtarStatusManutencao() {
-    alert('Filtrando status')
+function filtarStatusManutencao(event) {
+    const filtro = event.target.value
+    const itensFiltrados = filtrarArray(envioTaloes, 'status', filtro, 'status')
+    renderizarTabelaManutencao(itensFiltrados)
+}
+
+function filtrarNomeLojaManutencao(event){
+    const filtro = event.target.value
+    const itensFiltrados = filtrarArray(envioTaloes, 'nome_loja', filtro)
+    renderizarTabelaManutencao(itensFiltrados)
 }
 
 function exportarManutencao() {
     alert('Exportando manutenção')
 }
 
-export { renderizarTabelaManutencao,  mostrarManutencao, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }
+export { renderizarTabelaManutencao, filtrarNomeLojaManutencao, mostrarManutencao, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }

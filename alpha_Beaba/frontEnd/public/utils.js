@@ -78,6 +78,26 @@ function ordenarArray(array, propriedade, ordem = 'asc') {
     })
 }
 
+function filtrarArray(array, propriedade, filtro, tipo = 'texto') {
+    const filtroLowerCase = filtro.toLowerCase()
+
+    if (tipo === 'status' && filtroLowerCase === 'todas') {
+        return array; // Retorna a lista completa
+    }
+
+    return array.filter(item => {
+        if (!item || !item[propriedade]) return false;
+
+        if (tipo === 'texto') { // Filtro em geral
+            return item[propriedade].toLowerCase().includes(filtroLowerCase);
+        } else if (tipo === 'status') { // Filtrar por status de envio
+            return item[propriedade].toLowerCase() === filtroLowerCase;
+        }
+
+        return false
+    })
+}
+
 function filtrarPorNome(array, propriedade, filtro) {
     const filtroLowerCase = filtro.toLowerCase()
     return array.filter(item => {
@@ -134,43 +154,43 @@ function identificarBaixoEstoque() {
 
 // mostrar no mobile
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
-    const filtroOptions = document.getElementById(mostrarFiltroId);
-    const toggleButton = document.getElementById(containerFiltroId).querySelector('i');
+    const filtroOptions = document.getElementById(mostrarFiltroId)
+    const toggleButton = document.getElementById(containerFiltroId).querySelector('i')
     
     if (filtroOptions.classList.contains('show')) {
-      filtroOptions.classList.remove('show');
-      toggleButton.classList.remove('fa-chevron-up');
-      toggleButton.classList.add('fa-chevron-down');
+      filtroOptions.classList.remove('show')
+      toggleButton.classList.remove('fa-chevron-up')
+      toggleButton.classList.add('fa-chevron-down')
     } else {
-      filtroOptions.classList.add('show');
-      toggleButton.classList.remove('fa-chevron-down');
-      toggleButton.classList.add('fa-chevron-up');
+      filtroOptions.classList.add('show')
+      toggleButton.classList.remove('fa-chevron-down')
+      toggleButton.classList.add('fa-chevron-up')
     }
   
 }
 
 // conversão data e hora
 function converterDataParaBR(dataISO) {
-    const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR');
+    const data = new Date(dataISO)
+    return data.toLocaleDateString('pt-BR')
 }
 
 function converterDataHoraParaBR(dataISO) {
-    const data = new Date(dataISO);
+    const data = new Date(dataISO)
     const dataFormatada = data.toLocaleDateString('pt-BR', {
         timeZone: 'UTC',
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
-    });
+    })
     const horaFormatada = data.toLocaleTimeString('pt-BR', {
         timeZone: 'UTC',
         hour: '2-digit',
         minute: '2-digit'
-    });
-    return `${dataFormatada} ${horaFormatada}`;
+    })
+    return `${dataFormatada} ${horaFormatada}`
 }
 
 
 
-export {ordenarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

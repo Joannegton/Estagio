@@ -4,11 +4,11 @@ const taloesController = require('../controllers/taloesController');
 const taloesRouter = Router();
 
 taloesRouter.get('/taloes', taloesController.getTaloes)
-taloesRouter.get('/taloesPorLoja', taloesController.getTaloesPorLoja)
+taloesRouter.get('/taloes/:cod_loja', taloesController.getTaloesPorLoja)
 
 taloesRouter.post('/enviarTaloes', taloesController.createTaloes)
-taloesRouter.delete('/deletarTaloes', taloesController.deleteTaloes)
-taloesRouter.put('/atualizarTaloes', taloesController.updateTaloes)
+taloesRouter.delete('/taloes/:numeroRemessa', taloesController.deleteTaloes)
+taloesRouter.put('/taloes/:numeroRemessa', taloesController.updateTaloes)
 
 
 

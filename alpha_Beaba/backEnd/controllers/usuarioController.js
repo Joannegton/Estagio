@@ -41,6 +41,9 @@ class UsuarioController {
     const { matricula } = req.params
     const updates = req.body
 
+    if(!matricula || !updates) {
+        return res.status(400).send('Dados incompletos para atualizar o usuário')
+    }
     try {
         const result = await usuarioService.updateUser(matricula, updates)
         result ? res.status(200).send('Usuário atualizado com sucesso') : res.status(404).send('Usuário não encontrado')

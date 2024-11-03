@@ -26,33 +26,36 @@ class TaloesController {
         }
     }
 
-    async updateTaloes(req, res, next){
-        const { numeroRemessa, dataRecebimento, status} = req.body
+    async updateTaloes(req, res){
+        const { numeroRemessa} = req.params
+        const  updates = req.body
 
-        if (!numeroRemessa || !dataRecebimento || !status) {
+        if (!numeroRemessa || !updates) {
             return res.status(400).send('Dados incompletos para atualizar os talões')
         }
 
         try {
-            await taloesService.updateTaloes(numeroRemessa, dataRecebimento, status)
-            res.status(200).send('Talões atualizados com sucesso')
+            const result = await taloesService.updateTaloes(numeroRemessa, updates)
+            result ? res.status(200).send('Talões atualizados com sucesso') : res.status(404).send('Erro ao atualizar Remessa')
         } catch (error) {
-            next(error)
+            console.error('Erro ao atualizar Remessa', error.stack)
+            res.status(500).send('Erro ao atualizar Remessa')
         }
     }
 
-    async deleteTaloes(req, res, next){
-        const { numeroRemessa } = req.body
+    async deleteTaloes(req, res){
+        const { numeroRemessa } = req.params
 
         if (!numeroRemessa) {
             return res.status(400).send('Número da remessa não informado')
         }
 
         try {
-            await taloesService.deleteTaloes(numeroRemessa)
-            res.status(200).send('Talões deletados com sucesso')
+            const result = await taloesService.deleteTaloes(numeroRemessa)
+            result ? res.status(200).send('Remessa deletada com sucesso') : res.status(404).send('Remessa não encontrada')
         } catch (error) {
-            next(error)
+            console.error('Erro ao deletar remessa:', error.stack)
+            res.status(500).send('Erro ao deletar remessa')
         }
     }
 
