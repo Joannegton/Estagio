@@ -69,10 +69,10 @@ function renderizartabelaEstoqueBaixo(){
 
 
 let enviosChart
-/*
+
 function renderizarGrafico() {
 
-    fetch('http://localhost:3000/taloes')
+    fetch('http://localhost:3000/api/taloes')
     .then(response => response.json())
     .then(data => {
         if (enviosChart) {
@@ -82,15 +82,17 @@ function renderizarGrafico() {
         const ctx = document.getElementById('enviosChart').getContext('2d')
         const meses = {}
         data.forEach(talao => {
-            const mes = new Date(talao.data_envio).toLocaleString('default', { month: 'long' })
+            const mes = new Date(talao.data_envio).toLocaleString('pt-BR', { month: 'long' })
             if (!meses[mes]) {
                 meses[mes] = 0
             }
-            meses[mes] += ClipboardItem.quantidade
+            meses[mes] += talao.quantidade
         })
 
-        const labels = Object.keys(meses)
-            const valores = Object.values(meses)
+        const monthOrder = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
+        const labels = Object.keys(meses).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b))
+        const valores = labels.map(label => meses[label])
+
         enviosChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -126,45 +128,6 @@ function renderizarGrafico() {
     .catch(error => {
         console.error('Erro:', error)
     })  
-}*/
-
-function renderizarGrafico() {
-    if (enviosChart) {
-        enviosChart.destroy();
-    }
-
-    const ctx = document.getElementById('enviosChart').getContext('2d');
-    enviosChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-            datasets: [{
-                label: 'Envios de Talões',
-                data: [12, 19, 3, 5, 2, 3, 10, 15, 20, 25, 30, 35],
-                backgroundColor: '#c4df4e',
-                borderColor: '#4CAF50',
-                borderWidth: 1,
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false,
-                },
-                title: {
-                    display: true,
-                    text: 'Relatório de Envios de Talões por Mês'
-                }
-            }
-        }
-    })
 }
 
 function exportarRelatorios(){
