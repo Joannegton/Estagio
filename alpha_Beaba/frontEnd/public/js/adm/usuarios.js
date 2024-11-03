@@ -20,7 +20,6 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
         const inicio = (paginaAtual - 1) * itensPorPagina
         const fim = inicio + itensPorPagina
         const dadosLimitados = usuariosParaRenderizar.slice(inicio, fim)
-
         tbody.innerHTML = '' // Limpa a tabela antes de renderizar a nova página
 
         dadosLimitados.forEach(usuario => {
@@ -36,7 +35,10 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
                         <a href="#" class="botaoAcao" id="editarUsuarioPerfis${usuario.matricula}" title="Editar"><i class="fas fa-edit"></i></a>
                         <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${usuario.matricula}" title="Excluir"><i class="fas fa-trash-alt"></i></a>
                     </div>
-                    <a href="#" class="botaoAcao" id="salvarEditarUsuario${usuario.matricula}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
+                    <div id="containerEditarBotaoAcaoUsuario${usuario.matricula}" style="display: none;">
+                        <a href="#" class="botaoAcao" id="salvarEditarUsuario${usuario.matricula}" title="Salvar"><i class="fas fa-save"></i></a>
+                        <a href="#" class="botaoAcao" id="cancelarEditarUsuario${usuario.matricula}" title="Cancelar"><i class="fas fa-times"></i></a>
+                    </div>
                 </td>
             `
             tbody.appendChild(tr)
@@ -47,6 +49,9 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
             })
             document.getElementById(`salvarEditarUsuario${usuario.matricula}`).addEventListener('click', () => {
                 salvarEdicaoUsuario(usuario.matricula)
+            })
+            document.getElementById(`cancelarEditarUsuario${usuario.matricula}`).addEventListener('click', () => {
+                cancelarEditar(usuario.matricula)
             })
             document.getElementById(`deletarUsuarioPerfis${usuario.matricula}`).addEventListener('click', () => {
                 deletarUsuario(usuario.matricula)
@@ -111,6 +116,16 @@ async function createUser() {
         alert('Matrícula e tipo de usuário são obrigatórios')
         return
     }
+
+    if (data.tipoUsuario == 2) {
+        const gerenteExistente = await verificarGerenteExistente(data.loja)
+        if (gerenteExistente) {
+            alert('Já existe um gerente cadastrado para esta loja')
+            return
+        }
+        return 
+    }
+
     try {
         const response = await fetch('http://localhost:3000/api/usuarios', {
             method: 'POST',
@@ -135,20 +150,34 @@ async function createUser() {
 
 function editarUsuario(matricula) {
     document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'none'
-    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'block'   
+    document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'block'   
 
-    var perfilNome = document.getElementById(`perfil-nome${matricula}`)
-    var permissoes = document.getElementById(`perfil-tipoUsuario${matricula}`)
+    const perfilNome = document.getElementById(`perfil-nome${matricula}`)
     var nome = perfilNome.innerText
-
-    perfilNome.innerHTML = `<input type="text" id="input-nome${matricula}" value="${nome }">`
-    permissoes.innerHTML = `
+    perfilNome.setAttribute('data-original-value', nome)
+    perfilNome.innerHTML = `<input type="text" id="input-nome${matricula}" value="${nome}">`
+    
+    const perfil = document.getElementById(`perfil-tipoUsuario${matricula}`)
+    let tipoUsuario = perfil.innerText
+    perfil.setAttribute('data-original-value', tipoUsuario)
+    perfil.innerHTML = `
         <select id="select-tipoUsuario${matricula}">
-            <option value="1">Administrador</option>
-            <option value="2">Gerente</option>
-            <option value="3">Caixa</option>
+            <option>${tipoUsuario}</option>
         </select>
     `
+
+    carregarDadosSelect(`select-tipoUsuario${matricula}`, 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
+    .then(() => {
+        const select = document.getElementById(`select-tipoUsuario${matricula}`)
+        const options = select.options
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].text === tipoUsuario) {
+                select.value = options[i].value
+                break
+            }
+        }
+    })
+
 }
 
 async function salvarEdicaoUsuario(matricula) {
@@ -159,16 +188,8 @@ async function salvarEdicaoUsuario(matricula) {
     const newTipoText = selectTipoUsuario.options[selectTipoUsuario.selectedIndex].text
     const newTipoValue = selectTipoUsuario.value
 
-    if (!newTipoValue) {
-        alert('Tipo de usuário é obrigatórios')
-        return
-    }
-
     document.getElementById(`perfil-nome${matricula}`).innerText = newNome
     document.getElementById(`perfil-tipoUsuario${matricula}`).innerText = newTipoText
-
-    document.getElementById(`salvarEditarUsuario${matricula}`).style.display = 'none'
-    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
 
     const data = {
         nome_usuario: newNome,
@@ -188,6 +209,8 @@ async function salvarEdicaoUsuario(matricula) {
             alert(`${newNome} atualizado com sucesso`)
             inputNome.remove()
             selectTipoUsuario.remove()
+                document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
+                document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
         } else {
             const errorData = await response.json()
             alert(`Erro ao atualizar usuário: ${errorData.message || response.statusText}`)
@@ -196,6 +219,18 @@ async function salvarEdicaoUsuario(matricula) {
         console.error('Erro ao atualizar usuário:', error)
         alert('Erro ao atualizar usuário. Por favor, tente novamente mais tarde.')
     }
+}
+
+function cancelarEditar(matricula) {
+    const perfilNome = document.getElementById(`perfil-nome${matricula}`)
+    perfilNome.innerText = perfilNome.getAttribute('data-original-value')
+
+    const perfil = document.getElementById(`perfil-tipoUsuario${matricula}`)
+    perfil.innerText = perfil.getAttribute('data-original-value')
+
+    document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
+    document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
+
 }
 
 async function deletarUsuario(matricula) {
@@ -256,5 +291,20 @@ function filtrarUsuarioNome(event) {
     const filtro = event.target.value
     const usuariosFiltrados = filtrarPorNome(usuarios, 'nome_usuario', filtro)
     renderizarTabelaUsuarios(usuariosFiltrados)
+}
+
+async function verificarGerenteExistente(loja) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/loja/${loja}`)
+        if (!response.ok) {
+            throw new Error('Erro ao verificar gerente existente')
+        }
+        const data = await response.json()
+        return data.gerente_id != null
+    } catch (error) {
+        console.error('Erro ao verificar gerente existente:', error)
+        alert('Erro ao verificar gerente existente. Por favor, tente novamente mais tarde.')
+        return false
+    }
 }
 export { mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }

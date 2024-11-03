@@ -182,7 +182,6 @@ async function salvarEdicaoTalao(numero_remessa) {
 }
 
 function cancelarEdicao(numero_remessa) {
-    
     const statusManutencao = document.getElementById(`statusManutencao${numero_remessa}`)
     const statusAtual = statusManutencao.getAttribute('data-original-value')
     statusManutencao.innerText = statusAtual
