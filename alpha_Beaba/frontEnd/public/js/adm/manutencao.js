@@ -53,7 +53,10 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
                         <a href="#" class="botaoAcao" id="editarEnvioTalao${item.numero_remessa}" title="Editar"><i class="fas fa-edit"></i></a>
                         <a href="#" class="botaoAcao" id="excluirEnvioTalao${item.numero_remessa}" title="Exluir"><i class="fas fa-trash-alt"></i></a>
                     </div>
-                    <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
+                    <div id="containerEditarBotaoAcaoManutencao${item.numero_remessa}" style="display: none;">
+                        <a href="#" class="botaoAcao" id="salvarEdicaoTalao${item.numero_remessa}" title="Salvar"><i class="fas fa-save"></i></a>
+                        <a href="#" class="botaoAcao" id="cancelarEditarTalao${item.numero_remessa}" title="Cancelar"><i class="fas fa-times"></i></a>
+                    </div>
                 </td>
             `
             tbody.appendChild(tr)
@@ -67,6 +70,9 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
             })
             document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
                 salvarEdicaoTalao(item.numero_remessa)
+            })
+            document.getElementById(`cancelarEditarTalao${item.numero_remessa}`).addEventListener('click', () => {
+                cancelarEdicao(item.numero_remessa)
             })
             
             // Estilização do status
@@ -116,18 +122,24 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
 //edição e deletar remessa
 function editarEnvioTalao(numero_remessa) {
     document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
-    document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'block'
+    document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
 
     var statusManutencao = document.getElementById(`statusManutencao${numero_remessa}`)
-    var dataEntrega = document.getElementById(`DataEntregaManutencao${numero_remessa}`)
-
+    let statusAtual = statusManutencao.innerText.trim()
+    statusManutencao.setAttribute('data-original-value', statusAtual)
     statusManutencao.innerHTML = `
         <select id="select-statusManutencao${numero_remessa}">
-            <option value="enviado">Enviado</option>
-            <option value="finalizado">Recebido</option>
+            <option value="enviado" ${statusAtual === 'Enviado' ? 'selected' : ''}>Enviado</option>
+            <option value="recebido" ${statusAtual === 'Recebido' ? 'selected' : ''}>Recebido</option>
         </select>
     `
-    dataEntrega.innerHTML = `<input type="date" id="input-DataEntregaManutencao${numero_remessa}">`
+    var dataEntrega = document.getElementById(`DataEntregaManutencao${numero_remessa}`)
+    let dataAtual = dataEntrega.innerText
+    dataEntrega.setAttribute('data-original-value', dataAtual)
+    // Converte a data para o formato yyyy-mm-dd
+    let partesData = dataAtual.split('/');
+    let dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
+    dataEntrega.innerHTML = `<input type="date" id="input-DataEntregaManutencao${numero_remessa}" value="${dataFormatada}">`;
 }
 
 async function salvarEdicaoTalao(numero_remessa) {
@@ -136,12 +148,6 @@ async function salvarEdicaoTalao(numero_remessa) {
 
     var newStatusManutencao = statusManutencao.options[statusManutencao.selectedIndex].text
     var newDataEntrega = dataEntrega.value
-
-    document.getElementById(`statusManutencao${numero_remessa}`).innerText = newStatusManutencao
-    document.getElementById(`DataEntregaManutencao${numero_remessa}`).innerText = newDataEntrega
-
-    document.getElementById(`salvarEdicaoTalao${numero_remessa}`).style.display = 'none'
-    document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
     
     const data = {
         data_recebimento_previsto: newDataEntrega,
@@ -161,14 +167,32 @@ async function salvarEdicaoTalao(numero_remessa) {
             alert(`Dados atualizado com sucesso`)
             statusManutencao.remove()
             dataEntrega.remove()
+            await fetchEnvioTaloes()
+            document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
+            document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
         } else{
             const errorData = await response.json()
             alert(`Erro ao atualizar: ${errorData.message || response.statusText}`)
         }
+    
     } catch (error) {
         console.error('Erro ao atualizar manutenção:', error)
         alert('Erro ao atualizar os dados. Por favor, tente novamente mais tarde.')
     }
+}
+
+function cancelarEdicao(numero_remessa) {
+    
+    const statusManutencao = document.getElementById(`statusManutencao${numero_remessa}`)
+    const statusAtual = statusManutencao.getAttribute('data-original-value')
+    statusManutencao.innerText = statusAtual
+
+    var dataEntrega = document.getElementById(`DataEntregaManutencao${numero_remessa}`)
+    var dataAtual = dataEntrega.getAttribute('data-original-value')
+    dataEntrega.innerText = dataAtual
+
+    document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
+    document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
 }
 
 async function excluirEnvioTalao(numero_remessa) {

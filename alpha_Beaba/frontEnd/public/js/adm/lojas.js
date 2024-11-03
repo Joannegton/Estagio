@@ -60,10 +60,14 @@ function renderizarTabelaLojas(listalojas){
                     <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
                     <td data-label="Editar" class="acoes">
                     <div id="containerBotaoAcaoLoja${item.cod_loja}">
-                    <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="botaoAcao" id="editarLoja${item.cod_loja}" title="Editar"><i class="fas fa-edit"></i></a>
                         <a href="#" class="botaoAcao" id="excluirLoja${item.cod_loja}" title="Exxcluir"><i class="fas fa-trash-alt"></i></a>
-                    </div>            
-                    <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar" style="display: none"><i class="fas fa-save"></i></a>
+                    </div>  
+                    <div id="containerEditarBotaoAcaoLoja${item.cod_loja}" style="display: none;">
+                        <a href="#" class="botaoAcao" id="salvarEditarLoja${item.cod_loja}" title="Salvar"><i class="fas fa-save"></i></a>
+                        <a href="#" class="botaoAcao" id="cancelarEditarLoja${item.cod_loja}" title="Cancelar"><i class="fas fa-times"></i></a>
+                    </div>
+                    
                 </td>
             `
             tbody.appendChild(tr)
@@ -72,8 +76,13 @@ function renderizarTabelaLojas(listalojas){
             document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', () => {
                 editarLoja(item.cod_loja)
             })
-            document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () => {
+
+            document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () =>{
                 salvarEditarLoja(item.cod_loja)
+            })
+
+            document.getElementById(`cancelarEditarLoja${item.cod_loja}`).addEventListener('click', () => {
+                cancelarEdicao(item.cod_loja)
             })
             document.getElementById(`excluirLoja${item.cod_loja}`).addEventListener('click', () => {
                 excluirLoja(item.cod_loja)
@@ -145,20 +154,21 @@ async function salvarLoja(){
 
 function editarLoja(cod_loja){
     esconderElementos([`containerBotaoAcaoLoja${cod_loja}`])
-    document.getElementById(`salvarEditarLoja${cod_loja}`).style.display = 'block'
+    document.getElementById(`containerEditarBotaoAcaoLoja${cod_loja}`).style.display = 'block'
 
     const nomeLoja = document.getElementById(`nomeLoja${cod_loja}`)
-    let nome = nomeLoja.innerText
+    let loja = nomeLoja.innerText
+    nomeLoja.setAttribute('data-original-value', loja)     // Armazena os valores originais
+    nomeLoja.innerHTML = `<input type="text" id="input-nomeLoja${cod_loja}" value="${loja}" class="inputsEdicao">`
 
     const gerenteLoja = document.getElementById(`nomeGerente${cod_loja}`)
     let gerente = gerenteLoja.innerText
-
-    nomeLoja.innerHTML = `<input type="text" id="input-nomeLoja${cod_loja}" value="${nome}" class="inputsEdicao">`
-    
-    gerenteLoja.innerHTML = `
+    gerenteLoja.setAttribute('data-original-value', gerente)     // Armazena os valores originais
+    gerenteLoja.innerHTML = `    
         <select id="select-gerente${cod_loja}">
+            <option>${gerente}</option>
         </select>
-    `
+        `
     
     carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario').then(() => {
         const selectGerente = document.getElementById(`select-gerente${cod_loja}`)
@@ -180,10 +190,7 @@ async function salvarEditarLoja(cod_loja){
     let matricula = selectGerente.value
 
     document.getElementById(`nomeLoja${cod_loja}`).innerText = newNome
-    document.getElementById(`nomeGerente${cod_loja}`).innerText = newGerente
-    esconderElementos([`salvarEditarLoja${cod_loja}`])
-    document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
-    
+    document.getElementById(`nomeGerente${cod_loja}`).innerText = newGerente 
 
     const data = {
         nome_loja: newNome,
@@ -203,15 +210,28 @@ async function salvarEditarLoja(cod_loja){
             alert(`${newNome} atualizado com sucesso.`)
             inputNome.remove()
             selectGerente.remove()
+            esconderElementos([`containerEditarBotaoAcaoLoja${cod_loja}`])
+            document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
         } else{
             const errorData = await response.json()
-            console.log("aaaaaaaaa",errorData)
             alert(`Erro ao atualizar ${newNome}: ${errorData}`,)
         }
     } catch (error) {
         console.error('Erro ao atualizar loja: ', error)
         alert('Erro ao atualizar loja. Por favor, tente novamente mais tarde.')
     }
+}
+
+function cancelarEdicao(codLoja) {
+    const nomeLoja = document.getElementById(`nomeLoja${codLoja}`);
+    const nomeGerente = document.getElementById(`nomeGerente${codLoja}`);
+
+    // Restaura os valores originais
+    nomeLoja.innerText = nomeLoja.getAttribute('data-original-value');
+    nomeGerente.innerText = nomeGerente.getAttribute('data-original-value');
+
+    esconderElementos([`containerEditarBotaoAcaoLoja${codLoja}`])
+    document.getElementById(`containerBotaoAcaoLoja${codLoja}`).style.display = 'block'
 }
 
 async function excluirLoja(cod_loja){

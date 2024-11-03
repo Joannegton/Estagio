@@ -36,7 +36,7 @@ function editarEnvioTalao() {
     statusManutencao.innerHTML = `
         <select id="select-statusManutencao">
             <option value="enviado">Enviado</option>
-            <option value="finalizado">Recebido</option>
+            <option value="recebido">Recebido</option>
         </select>
     `
     dataEntrega.innerHTML = '<input type="date" id="input-DataEntregaManutencao">'
