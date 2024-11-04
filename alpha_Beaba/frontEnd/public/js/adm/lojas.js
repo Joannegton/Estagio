@@ -147,7 +147,7 @@ async function salvarLoja(){
             alert(`Erro ao cadastrar loja. ${errorData.message || response.statusText}`)
         }
     } catch (error) {
-        console.error('Erro ao cadastrar usúario: ', error)
+        console.error('Erro ao cadastrar loja: ', error)
         alert('Erro ao cadastrar loja. Por favor, tente novamente mais tarde.')
 
     } finally {

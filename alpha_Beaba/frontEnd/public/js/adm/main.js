@@ -1,7 +1,7 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento } from '../../utils.js'
-import { mostrarLojas, ordenarLoja, exportarLojas } from './lojas.js'
+import { mostrarLojas, ordenarLoja, exportarLojas, salvarLoja } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('formSalvarLoja').addEventListener('submit', (e) => {
         e.preventDefault()
-        salvarEditarUsuario()
+        salvarLoja()
     })   
 
     // Relatórios

@@ -74,7 +74,7 @@ class UsuarioService {
             }
         } catch (error) {
             await client.query('ROLLBACK')
-            console.error('Erro ao criar usuário e atualizar loja: ', error)
+            console.error('Erro ao executar a query: ', error)
             return false
         } finally {
             client.release()

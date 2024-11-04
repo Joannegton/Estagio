@@ -4,12 +4,28 @@ class LojasService {
     async createLoja(nomeLoja, endereco, telefoneLoja) {
         const client = await conectarDb()
         try {
+            await client.query('BEGIN')
+
             const result = await client.query(`
                 INSERT INTO loja (nome_loja, endereco_loja, telefone)
-                VALUES ($1, $2, $3)
-            `, [nomeLoja, endereco, telefoneLoja])
-            return result.rowCount > 0
+                VALUES ($1, $2, $3) RETURNING cod_loja`, [nomeLoja, endereco, telefoneLoja])
+            const codLoja = result.rows[0].cod_loja
+
+            if (codLoja) {
+                const estoqueResult = await client.query(`INSERT INTO estoque_taloes (cod_loja) VALUES ($1)`, [codLoja])
+                if (estoqueResult.rowCount > 0) {
+                    await client.query('COMMIT')
+                    return true
+                }  else{
+                    await client.query('ROLLBACK')
+                    return false
+                }
+            } else {
+                await client.query('ROLLBACK')
+                return false
+            }
         } catch (error) {
+            await client.query('ROLLBACK')
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
@@ -19,6 +35,7 @@ class LojasService {
 
     async getLojas() {
         const client = await conectarDb()
+
         try {
             const result = await client.query(`
                 SELECT 
