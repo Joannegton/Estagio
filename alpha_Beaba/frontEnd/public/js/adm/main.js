@@ -7,6 +7,7 @@ import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
 import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
 import { salvarEditarUsuario, mostrarPerfilUsuario } from './perfilUsuario.js'
+import { ModalCarregamento } from '../../components/modal_carregamento/modalCarregamento.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso
@@ -121,7 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Carrega funcionalidades de relatórios pois é a página inicial
     window.onload = async () =>{
-        mostrarModalCarregamento()
+        //mostrarModalCarregamento()
+        const modalCarregamento = new ModalCarregamento()
+        modalCarregamento.mostrar()
         try {
             checkSession()
             carregarCardUsuario()
@@ -131,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao carregar página', error)
             alert('Erro ao carregar página, tente novamente mais tarde')
         } finally{
-            esconderModalCarregamento()
+            modalCarregamento.esconder()
+            //esconderModalCarregamento()
         }
     }
 })

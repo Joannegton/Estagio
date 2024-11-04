@@ -527,9 +527,9 @@ td[data-label="Loja"]{
   width: 8px;
   height: 8px;
   margin: 0 4px;
-  background-color: #3498db;
+  background-color: var(--cor-primaria);
   border-radius: 50%;
-  animation: bounce 0.6s infinite alternate;
+  animation: pontosAnimado 0.6s infinite alternate;
 }
 
 .ponto:nth-child(2) {
@@ -540,7 +540,7 @@ td[data-label="Loja"]{
   animation-delay: 0.4s;
 }
 
-@keyframes bounce {
+@keyframes pontosAnimado {
   from {
       transform: translateY(0);
       opacity: 0.7;
