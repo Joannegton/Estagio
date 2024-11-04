@@ -5,6 +5,11 @@ function mostrarMenu() {
     }
 }
 
+function carregarCardUsuario(){
+    document.getElementById('usuario-nome').textContent = localStorage.getItem('nome')
+    document.getElementById('usuario-matricula').textContent = localStorage.getItem('tipoUsuario') + ' - ' + localStorage.getItem('matricula')  
+}
+
 // função para mostrar sessão e inicializar
 function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) {
     const links = document.querySelectorAll('#menu ul li a')
@@ -58,7 +63,7 @@ function esconderElementos(ids) {
     })
 }
 
-
+//ordenaçao e filtros
 function ordenarArray(array, propriedade, ordem = 'asc') {
     array.sort((a, b) => {
         if (!a || !b) return 0
@@ -103,6 +108,24 @@ function filtrarPorNome(array, propriedade, filtro) {
     return array.filter(item => {
         return item && item[propriedade] && item[propriedade].toLowerCase().includes(filtroLowerCase)
     })
+}
+
+// Controle de sessão e logout
+function checkSession() {
+    const token = sessionStorage.getItem('token')
+    if (!token || isTokenExpirado(token)) {
+        window.location.href = 'login'
+        sessionStorage.clear()
+        localStorage.clear()
+    }
+}
+
+function isTokenExpirado(token) {
+    //Divide o token JWT em três partes e seleciona a 2ª parte (payload) para decodificar e transforma em JSON
+    const payload = JSON.parse(atob(token.split('.')[1])) //atob - Decodifica a string Base64
+    const expiry = payload.exp //exp é o tempo de expiração do token
+    const now = Math.floor(Date.now() / 1000) //Math.floor(...): Arredonda o valor para baixo para obter um número inteiro.
+    return now > expiry
 }
 
 async function logout() {
@@ -223,4 +246,4 @@ function ativarBotao(elementoId) {
 
 
 
-export {desativarBotao, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

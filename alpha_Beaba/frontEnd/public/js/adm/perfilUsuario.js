@@ -29,7 +29,7 @@ async function salvarEditarUsuario(){
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/usuario', {
+        const response = await fetch(`http://localhost:3000/api/usuarios/${localStorage.getItem('matricula')}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

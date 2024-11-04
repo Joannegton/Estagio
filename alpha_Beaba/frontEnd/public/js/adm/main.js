@@ -1,6 +1,6 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
-import { mostrarMenu, logout, esconderElementos, mostrarFiltros } from '../../utils.js'
+import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession } from '../../utils.js'
 import { mostrarLojas, ordenarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
@@ -121,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Carrega funcionalidades de relatórios pois é a página inicial
     window.onload = () =>{
+        checkSession()
+        carregarCardUsuario()
         alternadorRelatorios()
         iconeEstoqueBaixo()
     }

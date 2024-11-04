@@ -116,8 +116,14 @@ nav ul li a.ativo {
   box-shadow: #333 1px 1px 10px;
 }
 
-.usuario p.usuario-nome {
-  margin: 0 15px 0 0;
+.usuario p#usuario-nome {
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+.usuario p#usuario-matricula{
+  font-size: .7em;
+  margin: 0;
   padding: 0;
 }
 

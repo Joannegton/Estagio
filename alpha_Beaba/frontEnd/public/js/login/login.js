@@ -17,6 +17,7 @@ function mostrarLogin() {
     esconderElementos(['recuperarSenha', 'primeiroAcesso'])
 }
 
+//arrumar
 async function login() {
     const matricula = document.getElementById('matricula').value
     const senha = document.getElementById('senha').value
@@ -103,38 +104,9 @@ function visualizarSenha() {
     }
 }
 
-
-function isTokenExpirado(token) {
-    //Divide o token JWT em três partes e seleciona a 2ª parte (payload) para decodificar e transforma em JSON
-    const payload = JSON.parse(atob(token.split('.')[1])) //atob - Decodifica a string Base64
-    const expiry = payload.exp //exp é o tempo de expiração do token
-    const now = Math.floor(Date.now() / 1000) //Math.floor(...): Arredonda o valor para baixo para obter um número inteiro.
-    return now > expiry
-}
-
-// Controle de timeout e múltiplos logins
-function checkSession() {
-    const token = sessionStorage.getItem('token')
-    if (!token || isTokenExpirado(token)) {
-        sessionStorage.removeItem('token')
-        sessionStorage.removeItem('matricula')
-        sessionStorage.removeItem('tipoUsuario')
-        sessionStorage.removeItem('nome')
-        window.location.href = 'login.html'
-    }
-}
-
-function logout() {
-    sessionStorage.removeItem('token')
-    sessionStorage.removeItem('matricula')
-    sessionStorage.removeItem('tipoUsuario')
-    sessionStorage.removeItem('nome')
-    window.location.href = 'login.html'
-}
-
 function recuperarSenha() {
     const email = document.getElementById('email').value
     alert(`Instruções de recuperação de senha foram enviadas para ${email}`)
 }
 
-export { visualizarSenha, login, logout, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha, checkSession }
+export { visualizarSenha, login, mostrarRecuperarSenha, mostrarPrimeiroAcesso, mostrarLogin, recuperarSenha }
