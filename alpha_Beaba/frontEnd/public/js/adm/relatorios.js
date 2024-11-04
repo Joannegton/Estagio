@@ -9,12 +9,12 @@ function mostrarRelatorios() {
     })
 }
 
-function alternadorRelatorios() {
+async function alternadorRelatorios() {
     const geral = document.getElementById('mostrarTabelas')
     const seletorGrafico = document.getElementById('mostrarGrafico')
 
-    carregarDadosRelatorios()
-    renderizartabelaEstoqueBaixo()
+    await carregarDadosRelatorios()
+    await renderizartabelaEstoqueBaixo()
     geral.addEventListener('click', () => {
         alternador(geral, geral, seletorGrafico, 'seletorTabela', 'enviosChart', 'indicadorRelatorios')
     })
@@ -25,17 +25,19 @@ function alternadorRelatorios() {
     })
 }
 
-async function carregarDadosRelatorios(){    
-    carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais')
-    carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais')
-    carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
+function carregarDadosRelatorios() {
+    return Promise.all([
+        carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais'),
+        carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais'),
+        carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
+    ])
 }
 
 function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
     tabelaEstoqueBaixo.innerHTML = ''
     
-    fetch('http://localhost:3000/api/estoque')
+    return fetch('http://localhost:3000/api/estoque')
         .then(response => response.json())
         .then(data => {
             data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)
@@ -153,10 +155,10 @@ function iconeEstoqueBaixo(){
     })
 }
 
-function carregarDadosElemento(url, elementoId){
+async function carregarDadosElemento(url, elementoId){
     const elemento = document.getElementById(elementoId)
 
-    fetch(url)
+    return fetch(url)
         .then(response => response.json())
         .then(data => {
             elemento.textContent = data.length

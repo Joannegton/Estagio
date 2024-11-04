@@ -1,6 +1,6 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
-import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession } from '../../utils.js'
+import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento } from '../../utils.js'
 import { mostrarLojas, ordenarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
@@ -120,10 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.mostrarFiltros = mostrarFiltros
 
     // Carrega funcionalidades de relatórios pois é a página inicial
-    window.onload = () =>{
-        checkSession()
-        carregarCardUsuario()
-        alternadorRelatorios()
-        iconeEstoqueBaixo()
+    window.onload = async () =>{
+        mostrarModalCarregamento()
+        try {
+            checkSession()
+            carregarCardUsuario()
+            await alternadorRelatorios()
+            iconeEstoqueBaixo()
+        } catch (error) {
+            console.error('Erro ao carregar página', error)
+            alert('Erro ao carregar página, tente novamente mais tarde')
+        } finally{
+            esconderModalCarregamento()
+        }
     }
 })

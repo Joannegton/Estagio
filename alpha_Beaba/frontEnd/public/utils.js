@@ -10,6 +10,34 @@ function carregarCardUsuario(){
     document.getElementById('usuario-matricula').textContent = localStorage.getItem('tipoUsuario') + ' - ' + localStorage.getItem('matricula')  
 }
 
+//se não carregar os dados, mostra o modal de carregamento
+function mostrarModalCarregamento() {
+    let modal = document.getElementById('modalCarregamento');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modalCarregamento';
+        modal.classList.add('modal');
+        modal.innerHTML = `
+            <div class="modalContent">
+                <div class="carregar-pontos">
+                    <div class="ponto"></div>
+                    <div class="ponto"></div>
+                    <div class="ponto"></div>
+                </div>
+            </div>`;
+        document.body.appendChild(modal);
+    }
+    modal.style.display = 'flex';
+}
+
+
+function esconderModalCarregamento() {
+    const modal = document.getElementById('modalCarregamento')
+    if (modal) {
+        modal.style.display = 'none'
+    }
+}
+
 // função para mostrar sessão e inicializar
 function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) {
     const links = document.querySelectorAll('#menu ul li a')
@@ -87,16 +115,16 @@ function filtrarArray(array, propriedade, filtro, tipo = 'texto') {
     const filtroLowerCase = filtro.toLowerCase()
 
     if (tipo === 'status' && filtroLowerCase === 'todas') {
-        return array; // Retorna a lista completa
+        return array // Retorna a lista completa
     }
 
     return array.filter(item => {
-        if (!item || !item[propriedade]) return false;
+        if (!item || !item[propriedade]) return false
 
         if (tipo === 'texto') { // Filtro em geral
-            return item[propriedade].toLowerCase().includes(filtroLowerCase);
+            return item[propriedade].toLowerCase().includes(filtroLowerCase)
         } else if (tipo === 'status') { // Filtrar por status de envio
-            return item[propriedade].toLowerCase() === filtroLowerCase;
+            return item[propriedade].toLowerCase() === filtroLowerCase
         }
 
         return false
@@ -246,4 +274,4 @@ function ativarBotao(elementoId) {
 
 
 
-export {desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {mostrarModalCarregamento, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
