@@ -33,7 +33,7 @@ function carregarDadosRelatorios() {
     ])
 }
 
-function renderizartabelaEstoqueBaixo(){
+async function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
     tabelaEstoqueBaixo.innerHTML = ''
     
