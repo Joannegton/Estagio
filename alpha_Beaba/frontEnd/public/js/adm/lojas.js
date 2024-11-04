@@ -1,4 +1,4 @@
-import { alternador, carregarDadosSelect, esconderElementos, mostrarElemento, mostrarMenu, ordenarArray } from "../../utils.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, mostrarElemento, ordenarArray } from "../../utils.js"
 
 let lojas = [] 
 
@@ -116,6 +116,7 @@ function renderizarTabelaLojas(listalojas){
 
 // funções de salvar, editar e exluir
 async function salvarLoja(){
+    desativarBotao('submitButtonLoja')
     const formulario = document.getElementById('formSalvarLoja')
     const formData = new FormData(formulario)
 
@@ -149,6 +150,8 @@ async function salvarLoja(){
         console.error('Erro ao cadastrar usúario: ', error)
         alert('Erro ao cadastrar loja. Por favor, tente novamente mais tarde.')
 
+    } finally {
+        ativarBotao('submitButtonLoja')
     }
 }
 
@@ -182,6 +185,7 @@ function editarLoja(cod_loja){
 }
 
 async function salvarEditarLoja(cod_loja){
+    desativarBotao(`salvarEditarLoja${cod_loja}`)
     let inputNome = document.getElementById(`input-nomeLoja${cod_loja}`)
     let newNome = inputNome.value
 
@@ -219,6 +223,8 @@ async function salvarEditarLoja(cod_loja){
     } catch (error) {
         console.error('Erro ao atualizar loja: ', error)
         alert('Erro ao atualizar loja. Por favor, tente novamente mais tarde.')
+    } finally {
+        ativarBotao(`salvarEditarLoja${cod_loja}`)
     }
 }
 
@@ -236,7 +242,7 @@ function cancelarEdicao(codLoja) {
 
 async function excluirLoja(cod_loja){
     const confirmacao = confirm(`Deseja realmente excluir a loja ${cod_loja}?`)
-
+    desativarBotao(`excluirLoja${cod_loja}`)
     if (confirmacao) {
         try {
             const response = await fetch(`http://localhost:3000/api/loja/${cod_loja}`, {
@@ -256,6 +262,8 @@ async function excluirLoja(cod_loja){
         } catch (error) {
             console.error('Erro ao deletar loja:', error)
             alert('Erro ao deletar loja. Por favor, tente novamente mais tarde.')
+        } finally {
+            ativarBotao(`excluirLoja${cod_loja}`)
         }
     }
 }

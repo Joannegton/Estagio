@@ -1,14 +1,8 @@
-import { carregarDadosSelect, esconderElementos, filtrarPorNome, mostrarMenu, ordenarArray } from "../../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, ordenarArray } from "../../utils.js"
 
 let usuarios = []
 
 // Visualização de sessoes
-function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
-    mostrarMenu()
-}
-
 function renderizarTabelaUsuarios(usuariosParaRenderizar) {
     const tbody = document.getElementById('usuarios-tbody')
     tbody.innerHTML = ''
@@ -102,6 +96,7 @@ async function fetchUsuarios() {
 
 //salvar, edição e deletar
 async function createUser() {
+    desativarBotao('submitButtonUser')
     const formulario = document.getElementById('formCadUsuario')
     const formData = new FormData(formulario)
 
@@ -145,6 +140,8 @@ async function createUser() {
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error)
         alert('Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.')
+    } finally {
+        ativarBotao('submitButtonUser')
     }
 }
 
@@ -181,6 +178,7 @@ function editarUsuario(matricula) {
 }
 
 async function salvarEdicaoUsuario(matricula) {
+    desativarBotao(`salvarEditarUsuario${matricula}`)
     const inputNome = document.getElementById(`input-nome${matricula}`)
     const selectTipoUsuario = document.getElementById(`select-tipoUsuario${matricula}`)
 
@@ -218,6 +216,8 @@ async function salvarEdicaoUsuario(matricula) {
     } catch (error) {
         console.error('Erro ao atualizar usuário:', error)
         alert('Erro ao atualizar usuário. Por favor, tente novamente mais tarde.')
+    } finally {
+        ativarBotao(`salvarEditarUsuario${matricula}`)
     }
 }
 
@@ -235,7 +235,7 @@ function cancelarEditar(matricula) {
 
 async function deletarUsuario(matricula) {
     const confirmacao = confirm('Deseja realmente excluir este usuário?')
-
+    desativarBotao(`deletarUsuarioPerfis${matricula}`)
     if (confirmacao) {
         try {
             const response = await fetch(`http://localhost:3000/api/usuarios/${matricula}`, {
@@ -255,6 +255,8 @@ async function deletarUsuario(matricula) {
         } catch (error) {
             console.error('Erro ao deletar usuário:', error)
             alert('Erro ao deletar usuário. Por favor, tente novamente mais tarde.')
+        } finally{
+            ativarBotao(`deletarUsuarioPerfis${matricula}`)
         }
     }
 }
@@ -307,4 +309,5 @@ async function verificarGerenteExistente(loja) {
         return false
     }
 }
-export { mostrarPerfilUsuario, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }
+
+export { carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }

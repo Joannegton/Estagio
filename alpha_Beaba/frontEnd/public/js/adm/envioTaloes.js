@@ -1,4 +1,4 @@
-import { carregarDadosSelect, mostrarElemento } from "../../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../../utils.js"
 
 function mostrarEnvioTaloes(){
     mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {
@@ -7,6 +7,7 @@ function mostrarEnvioTaloes(){
 }
 
 async function enviarTalao() {
+    desativarBotao('submitButtonTalao')
     const formulario = document.getElementById('formEnvioTalao')
     const formData = new FormData(formulario)
 
@@ -18,20 +19,27 @@ async function enviarTalao() {
         dataRecebimentoPrevisto: formData.get('dataEntregaPrevista')
     }
 
-    const response = await fetch('http://localhost:3000/api/taloes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-
-    if (response.ok) {
-        alert('Talão enviado com sucesso!')
-        formulario.reset()
-    } else {
-        alert('Erro ao enviar talão!')
-    }   
+    try {
+        const response = await fetch('http://localhost:3000/api/taloes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    
+        if (response.ok) {
+            alert('Talão enviado com sucesso!')
+            formulario.reset()
+        } else {
+            alert('Erro ao enviar talão!')
+        }
+    } catch (error) {
+        console.error('Erro ao enviar talão:', error)
+        alert('Erro ao enviar talão, tente novamente mais tarde')
+    } finally {
+        ativarBotao('submitButtonTalao')
+    }
 }
 
 

@@ -72,7 +72,7 @@
                             <input type="date" id="dataEntregaPrevista" name="dataEntregaPrevista" required>
                         </div>
                     </div>
-                    <button type="submit">Registrar Envio</button>
+                    <button type="submit" id="submitButtonTalao">Registrar Envio</button>
                 </form>
             </section>
 
@@ -256,7 +256,7 @@
                         <label for="lojaUsuario">Loja:</label>
                         <select id="lojaUsuario" name="lojaUsuario">
                         </select>
-                        <button type="submit">Salvar Usuário</button>
+                        <button type="submit" id="submitButtonUser">Salvar Usuário</button>
                     </form>
                 </article>
 
@@ -350,7 +350,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button type="submit">Salvar Perfil</button>
+                            <button type="submit" id="submitButtonPerfil">Salvar Perfil</button>
                         </form>
                     </aside>
                 </article>
@@ -494,7 +494,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button type="submit" >Salvar Permissões</button>
+                            <button type="submit" id="submitButtonPerfilPermissoes">Salvar Permissões</button>
                         </form>
                     </aside>
                 </article>    
@@ -552,7 +552,7 @@
                         <input type="text" id="enderecoLoja" name="enderecoLoja">
                         <label for="telefoneLoja">Telefone:</label>
                         <input type="tel" id="telefoneLoja" name="telefoneLoja">
-                        <button type="submit">Salvar Loja</button>
+                        <button type="submit" id="submitButtonLoja">Salvar Loja</button>
                     </form>
                 </article>
             </section>
@@ -611,29 +611,30 @@
             </section>
 
             <section id="perfilUsuario" style="display: none;">
-                <h2>Perfil do Usuário</h2>
-                <form >
+                <h2 id="nome_usuario"></h2>
+                <p id="perfil_usuario"></p>
+                <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
-                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                        <input type="text" name="matricula" id="matricula" disabled>
                     </div>
                     <div class="container-labe">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" value="Anderson Malaquias" >
+                        <input type="text" name="nome" id="nome" >
                     </div>
                     <div class="container-labe">
                         <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" value="malaquias@verdecard.com.br">
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="container-labe">
+                        <label for="workplace">Workplace:</label>
+                        <input type="workplace" name="email" id="workplace" >
                     </div>
                     <div class="container-labe">
                         <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                        <input type="password" name="senha" value="**********" disabled>
                     </div>
-                    <div class="container-labe">
-                        <label for="Repetirsenha">Repetir Senha:</label>
-                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
-                    </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>
             </section>
 

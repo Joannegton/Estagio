@@ -105,10 +105,26 @@ function filtrarPorNome(array, propriedade, filtro) {
     })
 }
 
-function logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    window.location.href = 'login'
+async function logout() {
+    const matricula = localStorage.getItem('matricula')
+    await fetch('http://localhost:3000/api/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ matricula })
+    }).then(response =>{
+        if(response.ok){
+            localStorage.clear()
+            localStorage.clear()
+            window.location.href = 'login'
+        } else {
+            alert('Erro ao realizar logout')
+        }
+    }).catch(error => {
+        console.error('Erro ao realizar logout:', error)
+    })
 }
 
 // carregar dados em selects
@@ -191,6 +207,20 @@ function converterDataHoraParaBR(dataISO) {
     return `${dataFormatada} ${horaFormatada}`
 }
 
+function desativarBotao(elementoId) {
+    const botao = document.getElementById(elementoId)
+    if (botao) {
+        botao.disabled = true
+    }
+}
+
+function ativarBotao(elementoId) {
+    const botao = document.getElementById(elementoId)
+    if (botao) {
+        botao.disabled = false
+    }
+}
 
 
-export {ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+
+export {desativarBotao, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

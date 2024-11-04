@@ -1,11 +1,12 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarFiltros } from '../../utils.js'
-import { mostrarLojas, ordenarLoja, salvarLoja, exportarLojas } from './lojas.js'
+import { mostrarLojas, ordenarLoja, exportarLojas } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
-import { filtrarUsuarioNome, mostrarPerfilUsuario, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
+import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
+import { salvarEditarUsuario, mostrarPerfilUsuario } from './perfilUsuario.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso
@@ -102,12 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('formSalvarLoja').addEventListener('submit', (e) => {
         e.preventDefault()
-        salvarLoja()
+        salvarEditarUsuario()
     })   
 
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
+    //perfil de usuario
+    document.getElementById('formEditUsuario').addEventListener('submit', (e) => {
+        e.preventDefault()
+        salvarEditarUsuario()
+    })
 
     // Mostrar menu e filtros para mobile
     window.mostrarMenu = mostrarMenu

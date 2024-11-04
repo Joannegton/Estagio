@@ -1,4 +1,4 @@
-import { converterDataHoraParaBR, converterDataParaBR, filtrarArray, mostrarElemento, ordenarArray } from "../../utils.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, mostrarElemento, ordenarArray } from "../../utils.js"
 
 let envioTaloes = []
 
@@ -143,6 +143,7 @@ function editarEnvioTalao(numero_remessa) {
 }
 
 async function salvarEdicaoTalao(numero_remessa) {
+    desativarBotao(`salvarEdicaoTalao${numero_remessa}`)
     var statusManutencao = document.getElementById(`select-statusManutencao${numero_remessa}`)
     var dataEntrega = document.getElementById(`input-DataEntregaManutencao${numero_remessa}`)
 
@@ -178,6 +179,8 @@ async function salvarEdicaoTalao(numero_remessa) {
     } catch (error) {
         console.error('Erro ao atualizar manutenção:', error)
         alert('Erro ao atualizar os dados. Por favor, tente novamente mais tarde.')
+    } finally {
+        ativarBotao(`salvarEdicaoTalao${numero_remessa}`)
     }
 }
 
@@ -196,6 +199,7 @@ function cancelarEdicao(numero_remessa) {
 
 async function excluirEnvioTalao(numero_remessa) {
     const confirmacao = confirm('Deseja realmente excluir esta Remessa?')
+    desativarBotao(`excluirEnvioTalao${numero_remessa}`)
 
     if (confirmacao) {
         try {
@@ -216,8 +220,10 @@ async function excluirEnvioTalao(numero_remessa) {
         } catch (error) {
             console.error('Erro ao deletar remessa:', error)
             alert('Erro ao deletar remessa. Por favor, tente novamente mais tarde.')
+        } finally {
+            ativarBotao(`excluirEnvioTalao${numero_remessa}`)
         }
-    }
+    } 
 }
 
 //filtros e ordenações

@@ -1,4 +1,4 @@
-import { alternador3, esconderElementos, mostrarElemento } from "../../utils.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento } from "../../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 
 let perfis = []
@@ -96,6 +96,7 @@ async function fetchPerfis() {
 
 // salvar, editar, deletar e exportar perfis
 async function salvarPerfil(){
+    desativarBotao('submitButtonPerfil')
     const formulario = document.getElementById('perfilCadastroForm')
     const formData = new FormData(formulario)
 
@@ -129,6 +130,8 @@ async function salvarPerfil(){
     } catch (error) {
         console.error('Erro ao salvar perfil:', error)
         alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
+    } finally {
+        ativarBotao('submitButtonPerfil')
     }
 }
 
@@ -159,6 +162,7 @@ function editarPerfil(idPerfilAcesso){
 }
 
 async function salvarEditarPerfil(idPerfilAcesso) {
+    desativarBotao('submitButtonPerfilPermissoes')
     const formulario = document.getElementById('formSalvarEditarPermissoes')
     const formData = new FormData(formulario)
 
@@ -187,10 +191,13 @@ async function salvarEditarPerfil(idPerfilAcesso) {
         console.error('Erro ao salvar perfil:', error)
         alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
         
+    } finally {
+        ativarBotao('submitButtonPerfilPermissoes')
     }
 }
 
 async function deletarPerfil(idPerfilAcesso){
+    desativarBotao(`deletarPerfis${idPerfilAcesso}`)
     const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
     if (confirmacao) {
         try {
@@ -211,8 +218,10 @@ async function deletarPerfil(idPerfilAcesso){
         } catch (error) {
             console.error('Erro ao deletar perfil: ', error)
             alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.');
+        } finally {
+            ativarBotao(`deletarPerfis${idPerfilAcesso}`)
         }
-    }
+    }  
 }
 
 // vizualição de permissões
