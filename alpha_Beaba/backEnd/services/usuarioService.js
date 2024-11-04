@@ -56,28 +56,28 @@ class UsuarioService {
                 const updateResult = await client.query(
                     'UPDATE loja SET gerente_id = $1 WHERE cod_loja = $2',
                     [matricula, loja]
-                );
+                )
         
                 if (updateResult.rowCount > 0) {
-                    await client.query('COMMIT');
-                    return true;
+                    await client.query('COMMIT')
+                    return true
                 } else {
-                    await client.query('ROLLBACK');
-                    return false;
+                    await client.query('ROLLBACK')
+                    return false
                 }
             } else if (result.rowCount > 0) {
-                await client.query('COMMIT');
-                return true;
+                await client.query('COMMIT')
+                return true
             } else {
-                await client.query('ROLLBACK');
-                return false;
+                await client.query('ROLLBACK')
+                return false
             }
         } catch (error) {
-            await client.query('ROLLBACK');
-            console.error('Erro ao criar usuário e atualizar loja: ', error);
-            return false;
+            await client.query('ROLLBACK')
+            console.error('Erro ao criar usuário e atualizar loja: ', error)
+            return false
         } finally {
-            client.release();
+            client.release()
         }
     }
 
@@ -101,6 +101,43 @@ class UsuarioService {
             const result = await client.query(query, values)
             return result.rowCount > 0
         } catch (error) {
+            console.error('Erro ao executar a query:', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
+
+    async updatePassword(matricula, senhaAtual, novaSenha) {
+        const client = await conectarDb()
+        try {
+            await client.query('BEGIN')
+            const result = await client.query(
+                'SELECT senha FROM usuario WHERE matricula = $1',
+                [matricula]
+            )
+            if (result.rows.length === 0) {
+                return false
+            }
+            const senha = result.rows[0].senha
+            const match = await bcrypt.compare(senhaAtual, senha)
+            if (!match) {
+                return false
+            }
+            const novaSenhaHash = await bcrypt.hash(novaSenha, 10)
+            const updateResult = await client.query(
+                'UPDATE usuario SET senha = $1 WHERE matricula = $2',
+                [novaSenhaHash, matricula]
+            )
+            if (updateResult.rowCount > 0) {
+                await client.query('COMMIT')
+                return true
+            } else {
+                await client.query('ROLLBACK')
+                return false
+            }
+        } catch (error) {
+            await client.query('ROLLBACK')
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {

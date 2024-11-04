@@ -17,7 +17,7 @@ function mostrarLogin() {
     esconderElementos(['recuperarSenha', 'primeiroAcesso'])
 }
 
-//arrumar
+//arrumar para fomulario
 async function login() {
     const matricula = document.getElementById('matricula').value
     const senha = document.getElementById('senha').value

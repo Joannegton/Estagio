@@ -6,7 +6,7 @@ import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, fi
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
 import { filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios, createUser } from './usuarios.js'
-import { salvarEditarUsuario, mostrarPerfilUsuario } from './perfilUsuario.js'
+import { salvarEditarUsuario, mostrarPerfilUsuario, modalEditarSenha } from './perfilUsuario.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso
@@ -114,6 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         salvarEditarUsuario()
     })
+
+    document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
+    
+    
+
+
 
     // Mostrar menu e filtros para mobile
     window.mostrarMenu = mostrarMenu

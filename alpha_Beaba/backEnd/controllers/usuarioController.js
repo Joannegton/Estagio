@@ -38,20 +38,38 @@ class UsuarioController {
     }
 
     async updateUser(req, res) {
-    const { matricula } = req.params
-    const updates = req.body
+        const { matricula } = req.params
+        const updates = req.body
 
-    if(!matricula || !updates) {
-        return res.status(400).send('Dados incompletos para atualizar o usuário')
+        if(!matricula || !updates) {
+            return res.status(400).send('Dados incompletos para atualizar o usuário')
+        }
+        try {
+            const result = await usuarioService.updateUser(matricula, updates)
+            result ? res.status(200).send('Usuário atualizado com sucesso') : res.status(404).send('Usuário não encontrado')
+        } catch (error) {
+            console.error('Erro ao atualizar usuario:', error.stack)
+            res.status(500).send('Erro ao atualizar usuario')
+        }
     }
-    try {
-        const result = await usuarioService.updateUser(matricula, updates)
-        result ? res.status(200).send('Usuário atualizado com sucesso') : res.status(404).send('Usuário não encontrado')
-    } catch (error) {
-        console.error('Erro ao atualizar usuario:', error.stack)
-        res.status(500).send('Erro ao atualizar usuario')
+
+    async updatePassword(req, res) {
+        const { matricula } = req.params
+        const { senhaAtual, novaSenha } = req.body
+
+        if (!matricula || !senhaAtual || !novaSenha) {
+            return res.status(400).send('Dados incompletos para atualizar a senha')
+        }
+        try {
+            const result = await usuarioService.updatePassword(matricula, senhaAtual, novaSenha)
+            result ? res.status(200).send('Senha atualizada com sucesso') : res.status(404).send('Usuário não encontrado')
+        } catch (error) {
+            console.error('Erro ao atualizar senha:', error.stack)
+            res.status(500).send('Erro ao atualizar senha')
+        } 
+
     }
-}
+
 
     async deleteUser(req, res) {
         const { matricula } = req.params

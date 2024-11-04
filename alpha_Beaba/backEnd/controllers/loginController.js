@@ -11,7 +11,9 @@ class LoginController {
                 user: {
                     matricula: user.matricula,
                     nome: user.nome_usuario,
-                    tipoUsuario: user.id_perfil_acesso
+                    tipoUsuario: user.id_perfil_acesso,
+                    email: user.email,
+                    workplace: user.workplace
                 }
             });
         } catch (err) {

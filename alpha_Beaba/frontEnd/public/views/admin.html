@@ -615,7 +615,6 @@
 
             <section id="perfilUsuario" style="display: none;">
                 <h2 id="nome_usuario"></h2>
-                <p id="perfil_usuario"></p>
                 <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
@@ -631,11 +630,10 @@
                     </div>
                     <div class="container-labe">
                         <label for="workplace">Workplace:</label>
-                        <input type="workplace" name="email" id="workplace" >
+                        <input type="text" name="workplace" id="workplace" >
                     </div>
                     <div class="container-labe">
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" value="**********" disabled>
+                        <button type="button" id="botaoEditarSenha">Mudar senha</button>
                     </div>
                     <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>

@@ -486,6 +486,10 @@ canvas {
   overflow-y: auto;
 }
 
+.modalContent h2 {
+  text-align: center;
+}
+
 .fechar{
   display: flex;
   justify-content: end;

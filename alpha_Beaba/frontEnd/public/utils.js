@@ -31,6 +31,7 @@ function mostrarModalCarregamento() {
 }
 
 
+
 function esconderModalCarregamento() {
     const modal = document.getElementById('modalCarregamento')
     if (modal) {
