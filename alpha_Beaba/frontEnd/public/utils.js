@@ -158,25 +158,27 @@ function isTokenExpirado(token) {
 }
 
 async function logout() {
-    const matricula = localStorage.getItem('matricula')
-    await fetch('http://localhost:3000/api/logout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ matricula })
-    }).then(response =>{
-        if(response.ok){
-            localStorage.clear()
-            localStorage.clear()
-            window.location.href = 'login'
+    const matricula = localStorage.getItem('matricula');
+    try {
+        const response = await fetch('http://localhost:3000/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ matricula })
+        });
+
+        if (response.ok) {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = 'login';
         } else {
-            alert('Erro ao realizar logout')
+            alert('Erro ao realizar logout');
         }
-    }).catch(error => {
-        console.error('Erro ao realizar logout:', error)
-    })
+    } catch (error) {
+        console.error('Erro ao realizar logout:', error);
+    }
 }
 
 // carregar dados em selects

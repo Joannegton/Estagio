@@ -37,16 +37,16 @@ async function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
     tabelaEstoqueBaixo.innerHTML = ''
     
-    return fetch('http://localhost:3000/api/estoque')
-        .then(response => response.json())
-        .then(data => {
-            data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)
+    try {
+        const response = await fetch('http://localhost:3000/api/estoque')
+        const data = await response.json()
+        data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)
 
-            const top5EstoqueBaixo = data.slice(0, 5)
+        const top5EstoqueBaixo = data.slice(0, 5)
 
-            top5EstoqueBaixo.forEach(estoque => {
-                const tr = document.createElement('tr')
-                tr.innerHTML = `
+        top5EstoqueBaixo.forEach(estoque => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
                     <td data-label="Loja" id="${estoque.cod_loja}">${estoque.nome_loja}</td>
                     <td data-label="Quantidade" class="quantidade" id="${estoque.cod_loja}">${estoque.quantidade_disponivel}</td>
                     <td data-label="Quantidade Mínima" class="quantidadeMinima" id="${estoque.cod_loja}">${estoque.estoque_minimo}</td>
@@ -54,17 +54,16 @@ async function renderizartabelaEstoqueBaixo(){
                         <a href="#" class="botaoAcao" id="arrumarEstoqueLoja${estoque.cod_loja}" title="Enviar"><i class="fas fa-edit"></i></a>
                     </td>
                 `
-                tabelaEstoqueBaixo.appendChild(tr)
+            tabelaEstoqueBaixo.appendChild(tr)
 
-                document.getElementById(`arrumarEstoqueLoja${estoque.cod_loja}`).addEventListener('click', () => {
-                    mostrarEnvioTaloes()
-                })
+            document.getElementById(`arrumarEstoqueLoja${estoque.cod_loja}`).addEventListener('click', () => {
+                mostrarEnvioTaloes()
             })
-            iconeEstoqueBaixo()
         })
-        .catch(error => {
-            console.error('Erro:', error)
-        })
+        iconeEstoqueBaixo()
+    } catch (error) {
+        console.error('Erro:', error)
+    }
     
 }
 
@@ -72,15 +71,15 @@ async function renderizartabelaEstoqueBaixo(){
 
 let enviosChart
 
-function renderizarGrafico() {
+async function renderizarGrafico() {
+    try {
+        const response = await fetch('http://localhost:3000/api/taloes')
+        const data = await response.json()
 
-    fetch('http://localhost:3000/api/taloes')
-    .then(response => response.json())
-    .then(data => {
         if (enviosChart) {
             enviosChart.destroy()
         }
-    
+
         const ctx = document.getElementById('enviosChart').getContext('2d')
         const meses = {}
         data.forEach(talao => {
@@ -126,10 +125,9 @@ function renderizarGrafico() {
                 }
             }
         })
-    })  
-    .catch(error => {
-        console.error('Erro:', error)
-    })  
+    } catch (error) {
+        console.error('Erro ao renderizar gráfico:', error)
+    }
 }
 
 function exportarRelatorios(){
@@ -155,17 +153,15 @@ function iconeEstoqueBaixo(){
     })
 }
 
-async function carregarDadosElemento(url, elementoId){
+async function carregarDadosElemento(url, elementoId) {
     const elemento = document.getElementById(elementoId)
-
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            elemento.textContent = data.length
-        })
-        .catch(error => {
-            console.error('Erro:', error)
-        })
+    try {
+        const response = await fetch(url)
+        const data = await response.json()
+        elemento.textContent = data.length
+    } catch (error) {
+        console.error('Erro ao carregar dados do elemento:', error)
+    }
 }
 
 export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo }
