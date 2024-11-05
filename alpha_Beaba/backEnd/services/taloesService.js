@@ -69,6 +69,57 @@ class TaloesService {
         }
     }
 
+    async acceptRemessa(numeroRemessa) {
+        const client = await conectarDb()
+        try {
+            await client.query('BEGIN')
+    
+            // Atualiza o status da remessa e retorna a quantidade e o código da loja
+            const result = await client.query(`
+                UPDATE envio_taloes 
+                SET status = 'Recebido' 
+                WHERE numero_remessa = $1 
+                RETURNING quantidade, cod_loja
+            `, [numeroRemessa])
+    
+            if (result.rowCount > 0) {
+                const { quantidade, cod_loja } = result.rows[0]
+    
+                // Obtém a quantidade atual do estoque
+                const estoqueResult = await client.query(`
+                    SELECT quantidade_disponivel 
+                    FROM estoque_taloes 
+                    WHERE cod_loja = $1
+                `, [cod_loja])
+    
+                if (estoqueResult.rowCount > 0) {
+                    const quantidadeAtual = estoqueResult.rows[0].quantidade_disponivel
+                    const novaQuantidade = quantidadeAtual + quantidade
+    
+                    // Atualiza a quantidade disponível no estoque
+                    const acceptUpdate = await client.query(`
+                        UPDATE estoque_taloes 
+                        SET quantidade_disponivel = $1 
+                        WHERE cod_loja = $2
+                    `, [novaQuantidade, cod_loja])
+    
+                    if (acceptUpdate.rowCount > 0) {
+                        await client.query('COMMIT') // Mudança: COMMIT movido para dentro do bloco if
+                        return true
+                    }
+                }
+            }
+            await client.query('ROLLBACK') 
+            return false
+        } catch (error) {
+            await client.query('ROLLBACK') 
+            console.error('Erro ao executar query', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
+
     async deleteTaloes( numeroRemessa ) {
         const client = await conectarDb()
 

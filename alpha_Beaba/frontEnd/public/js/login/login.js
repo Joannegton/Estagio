@@ -38,10 +38,10 @@ async function login() {
     
             sessionStorage.setItem('token', token)
             localStorage.setItem('matricula', matricula)
-            localStorage.setItem('nome', nome || '')
-            localStorage.setItem('email', email || '')
-            localStorage.setItem('workplace', workplace || '')
-            localStorage.setItem('cod_loja', cod_loja || '')
+            localStorage.setItem('nome', nome)
+            localStorage.setItem('email', email)
+            localStorage.setItem('workplace', workplace)
+            localStorage.setItem('cod_loja', cod_loja)
 
             let nomePerfil = ''
             switch (tipoUsuario) {

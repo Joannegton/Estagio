@@ -68,7 +68,9 @@ class LojasService {
                     usuario.nome_usuario AS "gerente", 
                     loja.gerente_id,
                     loja.estoque_minimo,
-                    loja.caixas_fisicos
+                    loja.caixas_fisicos,
+                    loja.endereco_loja,
+                    loja.telefone
                 FROM loja
                 LEFT JOIN usuario ON loja.gerente_id = usuario.matricula
                 WHERE loja.cod_loja = $1
@@ -92,6 +94,13 @@ class LojasService {
             campos.push(`${key} = $${index}`)
             values.push(value)
             index++
+
+            if (key === 'caixas_fisicos') {
+                const qntCaixas = updates.caixas_fisicos * 50
+                campos.push(`estoque_minimo = $${index}`)
+                values.push(qntCaixas)
+                index++
+            }
         }
 
         //UPDATE loja SET nome_loja = $1, endereco_loja = $2, telefone = $3 WHERE cod_loja = $4`, [nomeLoja, endereco, telefoneLoja, codLoja])

@@ -44,6 +44,18 @@ class TaloesController {
         }
     }
 
+    async acceptTaloes(req, res){
+        const {numeroRemessa} = req.params
+
+        try {
+            const result = await taloesService.acceptRemessa(numeroRemessa)
+            result ? res.status(200).json({message: 'Estoque atualizado'}) : res.status(404).json({message: "Erro ao aceitar remessa"})
+        } catch (error) {
+            console.error('Erro ao atualizar o estoque: ', error.stack)
+            res.status(500).json({message: 'Erro ao atualizar o estoque'})
+        }
+    }
+
     async deleteTaloes(req, res){
         const { numeroRemessa } = req.params
 

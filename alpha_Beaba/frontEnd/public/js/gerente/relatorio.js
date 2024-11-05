@@ -36,7 +36,8 @@ async function carregarEstoqueLoja() {
         document.getElementById('quantidadeEstoque').innerHTML = estoque.quantidade_disponivel
 
     } catch (error) {
-        
+        console.error('Erro ao carregar estoque: ', error)
+        alert('Erro ao carregar dados do estoque')
     }
 }
 async function fetchRemessa() {
@@ -89,6 +90,7 @@ function renderizarEntradas(listaRemessas){
             const status = document.getElementById(`statusRemessa${item.numero_remessa}`)
             if(status.innerText === 'Enviado'){
                 status.style.backgroundColor = '#ffcf0f91'
+                
             } else {
                 status.style.backgroundColor = '#29ff3054'
             }
@@ -102,7 +104,13 @@ function renderizarEntradas(listaRemessas){
                 dataEntregaElemento.style.backgroundColor = '#fc48488e'
             }
 
-            document.getElementById(`alterarStatus${item.numero_remessa}`).addEventListener('click', () =>{receberRemessa(item.numero_remessa)})
+            document.getElementById(`alterarStatus${item.numero_remessa}`).addEventListener('click', () =>{
+                if (item.status === 'Recebido') {
+                    alert(`Remessa ${item.numero_remessa} ja foi acceita.`)
+                    return
+                }
+                receberRemessa(item.numero_remessa)
+            })
         })
     }
 
@@ -130,12 +138,11 @@ function renderizarEntradas(listaRemessas){
 
 async function receberRemessa(remessa){
     try {
-        const response = await fetch(`http://localhost:3000/api/taloes/${remessa}`, {
+        const response = await fetch(`http://localhost:3000/api/taloes/${remessa}/accept`, {
             method: 'PUT',
             headers:{
                 "Content-Type": 'application/json'
-            },
-            body: JSON.stringify({status: 'Recebido'})
+            }
         })
         if(!response.ok){
             const errorData = await response.json()

@@ -43,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ações relacionadas a Loja
 
-    document.getElementById('salvarLoja').addEventListener('click', salvarLoja)
+    document.getElementById('formEditarLoja').addEventListener('submit', (e) => {
+        e.preventDefault()
+        salvarLoja()
+    })
 
     // Ações relacionadas a relatorios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)

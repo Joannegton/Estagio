@@ -38,7 +38,7 @@ class EstoqueService {
                 JOIN estoque_taloes et ON l.cod_loja = et.cod_loja
                 WHERE l.cod_loja = $1
             `, [codLoja])
-            return result.rows
+            return result.rows[0]
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
             throw error

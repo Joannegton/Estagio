@@ -11,7 +11,13 @@ const pool = new Pool({
 
 
 async function conectarDb() {
-    return await pool.connect()
+    try {
+        const client = await pool.connect();
+        return client;
+    } catch (error) {
+        console.error('Erro ao conectar ao banco de dados:', error.stack);
+        throw error;
+    }
 }
 
 module.exports = { conectarDb }
