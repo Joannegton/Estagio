@@ -1,8 +1,9 @@
-import { mostrarPerfilAcesso, buscarNome, exportarPerfis, cadastroMassa, cadastrarPerfil, mostrarInput, salvarEdicaoCaixa, deletarPerfil, mostrarPerfilUsuario } from './perfil.js';
-import { mostrarRelatorios, exportarRelatorios, alterarStatus, alternadorRelatorios } from './relatorio.js';
-import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js';
-import { mostrarEditarLoja, salvarLoja } from './loja.js';
-import { logout, mostrarMenu } from "../../utils.js";
+import { mostrarPerfilAcesso, buscarNome, exportarPerfis, cadastroMassa, cadastrarPerfil, mostrarInput, salvarEdicaoCaixa, deletarPerfil } from './perfil.js'
+import { mostrarRelatorios, exportarRelatorios, alternadorRelatorios } from './relatorio.js'
+import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js'
+import { mostrarEditarLoja, salvarLoja } from './loja.js'
+import { carregarCardUsuario, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../../utils.js"
+import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from '../adm/perfilUsuario.js'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Menu navegação
-    document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes);
+    document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes)
     document.getElementById('mostrarGestaoPerfil').addEventListener('click', mostrarPerfilAcesso)
     document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
     document.getElementById('mostrarGestaoRelatorio').addEventListener('click', mostrarRelatorios)
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Estoque
     document.getElementById('reporEstoque').addEventListener('click', reporEstoque)
-    document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque);
+    document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
     
     // Perfis
     document.getElementById('filtroUsuario').addEventListener('input', buscarNome)
@@ -45,27 +46,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('salvarLoja').addEventListener('click', salvarLoja)
 
     // Ações relacionadas a relatorios
-    alternadorRelatorios()
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
 
-    document.getElementById('alterarStatus').addEventListener('click', alterarStatus)
 
-    const status = document.querySelectorAll('#statusRemessa')
-    for (let i = 0; i < status.length; i++) {
-        if(status[i].innerText === 'Enviado'){
-            status[i].style.backgroundColor = '#ffcf0f91'
-        } else {
-            status[i].style.backgroundColor = '#29ff3054'
-            //document.getElementById('alterarStatus').style.display = 'none'
-        }
 
-    }
+    // perfil de usuario
+    document.getElementById('formEditUsuario').addEventListener('submit', (e) =>{
+        e.preventDefault()
+        salvarEditarUsuario()
+    })
+    document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
 
     // Menu
     window.mostrarMenu = () => {
         mostrarMenu()
     }
 
-});
+    window.onload = async () => {
+        mostrarModalCarregamento()
+        try {
+            carregarCardUsuario()
+            await alternadorRelatorios()
+        } catch (error) {
+            alert("Erro ao carregar dados")
+        } finally{
+            esconderModalCarregamento()
+        }
+    }
+
+})
 
 

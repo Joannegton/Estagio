@@ -25,13 +25,13 @@
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
                     <div id="usuario-info">
-                        <p id="usuario-nome">Juliana Moreira</p>
-                        <p id="usuario-nome">234578</p>
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
                     </div>
                     <div id="sair-usuario">
                         <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
                         <p class="usuario-sair">Sair</p>
-                    </div>  
+                    </div> 
                 </div>
             </nav>
             <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
@@ -39,7 +39,7 @@
         </header>
 
         <main>
-            <section id="estoqueTaloes" style="display: none;">
+            <section id="estoque" style="display: none;">
                     <h2>Gestão de Estoque</h2>
                     <div class="filtro filtro-container">
                         <label for="filtroEstoque">Caixa:</label>
@@ -376,10 +376,10 @@
                 </div>
                 
                 <article id="entradas">
-                        <div class="dashboard-item dashboard-item-estoque dashboard-item-mob">
-                            <h3>Estoque de Talões</h3>
-                            <p>87</p>
-                        </div>
+                    <div class="dashboard-item dashboard-item-estoque dashboard-item-mob">
+                        <h3>Estoque de Talões</h3>
+                        <p id="quantidadeEstoque"></p>
+                    </div>
 
                     <div class="tabela-container">
                         <table>
@@ -393,64 +393,14 @@
                                     <th>Recebido</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Enviado</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="entradas-tbody">
                             </tbody>
                         </table>
                     </div>
                     <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                        <button id="pagAntEntradas" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoEntradas"></span>
+                        <button id="proxPagEntradas">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
 
@@ -474,37 +424,36 @@
                         </table>
                     </div>
                     <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                        <button id="pagAntSaidas" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoSaidas"></span>
+                        <button id="proxPagSaidas">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
             </section>
 
             <section id="perfilUsuario" style="display: none;">
-                <h2>Perfil do Usuário</h2>
-                <form >
+                <h2 id="nome_usuario"></h2>
+                <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
-                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                        <input type="text" name="matricula" id="matricula" disabled>
                     </div>
                     <div class="container-labe">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                        <input type="text" name="nome" id="nome" >
                     </div>
                     <div class="container-labe">
                         <label for="email">E-mail:</label>
                         <input type="email" name="email" id="email">
                     </div>
                     <div class="container-labe">
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" name="workplace" id="workplace" >
                     </div>
                     <div class="container-labe">
-                        <label for="Repetirsenha">Repetir Senha:</label>
-                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                        <button type="button" id="botaoEditarSenha">Mudar senha</button>
                     </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>
             </section>
         </main>

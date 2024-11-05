@@ -1,7 +1,7 @@
 import { mostrarElemento } from "../../utils.js"
 
 function mostrarPedidoTaloes() {
-    mostrarElemento('estoqueTaloes', 'mostrarGestaoEstoque', () => {
+    mostrarElemento('estoque', 'mostrarGestaoEstoque', () => {
         
     })
 }

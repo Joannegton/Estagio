@@ -2,7 +2,7 @@ import { ativarBotao, desativarBotao, esconderElementos, mostrarMenu } from "../
 
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
+    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil', 'editarLoja'])
     mostrarMenu()
     carregarUsuario()
 }

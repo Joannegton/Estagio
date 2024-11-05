@@ -34,13 +34,14 @@ async function login() {
         if (response.ok) {
             const data = await response.json()
             const { token, user } = data
-            const { nome, tipoUsuario, workplace, email } = user
+            const { nome, tipoUsuario, workplace, email, cod_loja } = user
     
             sessionStorage.setItem('token', token)
             localStorage.setItem('matricula', matricula)
             localStorage.setItem('nome', nome || '')
             localStorage.setItem('email', email || '')
             localStorage.setItem('workplace', workplace || '')
+            localStorage.setItem('cod_loja', cod_loja || '')
 
             let nomePerfil = ''
             switch (tipoUsuario) {

@@ -13,7 +13,8 @@ class LoginController {
                     nome: user.nome_usuario,
                     tipoUsuario: user.id_perfil_acesso,
                     email: user.email,
-                    workplace: user.workplace
+                    workplace: user.workplace,
+                    cod_loja: user.cod_loja
                 }
             })
         } catch (err) {

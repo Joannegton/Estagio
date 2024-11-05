@@ -11,7 +11,7 @@ async function fetchEnvioTaloes() {
     try {
         const response = await fetch('http://localhost:3000/api/taloes')
         if(!response.ok){
-            throw new Error('Erro ao buscar talões')
+            throw new Error('Erro ao buscar remessas')
         }
 
         envioTaloes = await response.json()

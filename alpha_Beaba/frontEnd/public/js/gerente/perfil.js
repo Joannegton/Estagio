@@ -6,11 +6,7 @@ function mostrarPerfilAcesso(){
     })
 }
 
-function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['estoqueTaloes', 'relatorios', 'editarLoja', 'perfilAcesso'])
-    mostrarMenu()
-}
+
 
 function alternadorPerfilAcesso() {
     const perfil = document.getElementById('mostrarPerfis')
@@ -98,7 +94,6 @@ function deletarPerfil(){
 export { 
     alternadorPerfilAcesso, 
     mostrarPerfilAcesso, 
-    mostrarPerfilUsuario,
     buscarNome,
     exportarPerfis, 
     cadastroMassa,

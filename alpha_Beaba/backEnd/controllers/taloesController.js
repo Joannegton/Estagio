@@ -61,14 +61,14 @@ class TaloesController {
     }
 
     async getTaloesPorLoja(req, res) {
-        const { lojaDestino } = req.body
+        const { cod_loja } = req.params
 
-        if (!lojaDestino) {
+        if (!cod_loja) {
             return res.status(400).json({message: 'Loja não informada'})
         }
 
         try {
-            const taloes = await taloesService.getTaloesPorLoja(lojaDestino)
+            const taloes = await taloesService.getTaloesPorLoja(cod_loja)
             res.status(200).json(taloes)
         } catch (error) {
             console.error("Talões não encontrados para essa loja")
