@@ -105,12 +105,12 @@ function renderizarEntradas(listaRemessas){
                 dataEntregaElemento.style.backgroundColor = '#fc48488e'
             }
 
-            document.getElementById(`alterarStatus${item.numero_remessa}`).addEventListener('click', () =>{
+            document.getElementById(`alterarStatus${item.numero_remessa}`).addEventListener('click', async () =>{
                 if (item.status === 'Recebido') {
                     alert(`Remessa ${item.numero_remessa} ja foi acceita.`)
                     return
                 }
-                receberRemessa(item.numero_remessa)
+                await receberRemessa(item.numero_remessa)
             })
         })
     }

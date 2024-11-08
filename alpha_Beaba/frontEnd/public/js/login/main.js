@@ -1,4 +1,4 @@
-import { esconderElementos } from "../../utils.js"
+import { esconderElementos, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
 import { login, mostrarLogin, mostrarPrimeiroAcesso, mostrarRecuperarSenha, recuperarSenha, visualizarSenha } from "./login.js"
 
 document.addEventListener('DOMContentLoaded',() => {
@@ -10,9 +10,14 @@ document.addEventListener('DOMContentLoaded',() => {
     document.getElementById('fecharRecuperarSenha').addEventListener('click', mostrarLogin)
     document.getElementById('fecharMostrarLogin').addEventListener('click', mostrarLogin)
 
-    document.getElementById('loginForm').addEventListener('submit', (event) => {
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
         event.preventDefault()
-        login()
+        mostrarModalCarregamento()
+        try{
+            await login()
+        } finally{
+            esconderModalCarregamento()
+        }
     })
 
     document.getElementById('visualizarSenha').addEventListener('click', visualizarSenha)

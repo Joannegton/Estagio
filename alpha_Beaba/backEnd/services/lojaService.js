@@ -89,12 +89,12 @@ class LojasService {
         const campos = []
         const values = []
         let index = 1
-
+    
         for (const [key, value] of Object.entries(updates)) {
             campos.push(`${key} = $${index}`)
             values.push(value)
             index++
-
+    
             if (key === 'caixas_fisicos') {
                 const qntCaixas = updates.caixas_fisicos * 50
                 campos.push(`estoque_minimo = $${index}`)
@@ -102,21 +102,54 @@ class LojasService {
                 index++
             }
         }
-
-        //UPDATE loja SET nome_loja = $1, endereco_loja = $2, telefone = $3 WHERE cod_loja = $4`, [nomeLoja, endereco, telefoneLoja, codLoja])
-        const query = `UPDATE loja SET ${campos.join(', ')} WHERE cod_loja = $${index}`
+    
+        const queryLoja = `UPDATE loja SET ${campos.join(', ')} WHERE cod_loja = $${index}`
         values.push(codLoja)
-
+    
         try {
-            const result = await client.query(query, values)
-            return result.rowCount > 0
+            await client.query('BEGIN') 
+    
+            if (updates.gerente_id) {  // Verificar gerente atual
+                const { rows: currentGerente } = await client.query(
+                    `SELECT gerente_id FROM loja WHERE cod_loja = $1`,
+                    [codLoja]
+                )
+    
+                const currentGerenteId = currentGerente[0]?.gerente_id
+    
+                if (currentGerenteId !== updates.gerente_id) {
+                    await client.query(
+                        `UPDATE usuario SET id_perfil_acesso = NULL WHERE matricula = $1`,
+                        [currentGerenteId]
+                    ) // Remove o cargo de gerente do usuário atual
+    
+                    
+                    await client.query(
+                        `UPDATE usuario SET id_perfil_acesso = (SELECT id_perfil_acesso FROM perfil_acesso WHERE descricao = 'Gerente') WHERE matricula = $1`,
+                        [updates.gerente_id]
+                    ) // Atualiza novo gerente na tabela usuario
+    
+                    await client.query(
+                        `UPDATE loja SET gerente_id = $1 WHERE cod_loja = $2`,
+                        [updates.gerente_id, codLoja]
+                    ) // Atualiza gerente_id na loja
+
+                }
+            }
+    
+            const resultLoja = await client.query(queryLoja, values)
+    
+            await client.query('COMMIT')
+            return resultLoja.rowCount > 0
         } catch (error) {
+            await client.query('ROLLBACK')
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
             client.release()
         }
     }
+    
 
     async deleteLoja(codLoja) {
         const client = await conectarDb()

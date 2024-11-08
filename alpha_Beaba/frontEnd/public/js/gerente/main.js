@@ -14,7 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Menu navegação
-    document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes)
+    document.getElementById('mostrarGestaoEstoque').addEventListener('click', async () =>{
+        try{
+            await mostrarPedidoTaloes()
+        } finally{
+            esconderModalCarregamento()
+        }
+    })
+
     document.getElementById('mostrarGestaoPerfil').addEventListener('click', mostrarPerfilAcesso)
     document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
     document.getElementById('mostrarGestaoRelatorio').addEventListener('click', mostrarRelatorios)
