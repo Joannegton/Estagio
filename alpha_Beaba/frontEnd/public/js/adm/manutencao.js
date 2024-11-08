@@ -137,9 +137,9 @@ function editarEnvioTalao(numero_remessa) {
     let dataAtual = dataEntrega.innerText
     dataEntrega.setAttribute('data-original-value', dataAtual)
     // Converte a data para o formato yyyy-mm-dd
-    let partesData = dataAtual.split('/');
-    let dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
-    dataEntrega.innerHTML = `<input type="date" id="input-DataEntregaManutencao${numero_remessa}" value="${dataFormatada}">`;
+    let partesData = dataAtual.split('/')
+    let dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`
+    dataEntrega.innerHTML = `<input type="date" id="input-DataEntregaManutencao${numero_remessa}" value="${dataFormatada}">`
 }
 
 async function salvarEdicaoTalao(numero_remessa) {

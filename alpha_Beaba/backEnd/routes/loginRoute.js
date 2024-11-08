@@ -1,15 +1,15 @@
-const { Router } = require('express');
-const loginController = require('../controllers/loginController');
+const { Router } = require('express')
+const loginController = require('../controllers/loginController')
 
-const loginRouter = Router();
+const loginRouter = Router()
 
-loginRouter.post('/login', loginController.login);
+loginRouter.post('/login', loginController.login)
 
-loginRouter.post('/recuperarSenha', loginController.recoverPassword);
+loginRouter.post('/recuperarSenha', loginController.recoverPassword)
 
-loginRouter.post('/logout', loginController.logout);
+loginRouter.post('/logout', loginController.logout)
 
-loginRouter.post('/alterarSenha', loginController.changePassword);
+loginRouter.post('/alterarSenha', loginController.changePassword)
 
 
-module.exports = loginRouter;
+module.exports = loginRouter

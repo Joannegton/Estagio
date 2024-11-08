@@ -46,7 +46,7 @@ async function fetchRemessa() {
         const codLoja = localStorage.getItem('cod_loja')
         const response = await fetch(`http://localhost:3000/api/taloes/${codLoja}`)
         if(!response.ok){
-            const errorData = await response.json();
+            const errorData = await response.json()
             throw new Error(errorData.message)
         }
         remessas = await response.json()

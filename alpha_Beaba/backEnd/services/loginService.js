@@ -8,12 +8,12 @@ const SECRET_KEY = process.env.SECRET_KEY_JWT //assinar o token JWT
 
 class LoginService {
     async login(matricula, senha) {
-        const client = await conectarDb();
+        const client = await conectarDb()
         try {
-            const result = await client.query('SELECT * FROM usuario WHERE matricula = $1', [matricula]);
+            const result = await client.query('SELECT * FROM usuario WHERE matricula = $1', [matricula])
             if (result.rows.length > 0) {
-                const user = result.rows[0];
-                const isPasswordValid = await bcrypt.compare(senha, user.senha);
+                const user = result.rows[0]
+                const isPasswordValid = await bcrypt.compare(senha, user.senha)
                 if (isPasswordValid) {
                     // Verificar se há um token válido
                     const tokenResult = await client.query('SELECT token FROM usuario WHERE matricula = $1 AND token IS NOT NULL', [matricula])    
@@ -21,32 +21,32 @@ class LoginService {
                         const token = tokenResult.rows[0].token
                         try {
                             jwt.verify(token, SECRET_KEY)
-                            throw new Error('Número máximo de sessões atingido');
+                            throw new Error('Número máximo de sessões atingido')
                         } catch (error) {
                             if (error.name === 'TokenExpiredError') {
                                 // remove token expirado
-                                await client.query('UPDATE usuario SET token = NULL WHERE matricula = $1', [matricula]);
+                                await client.query('UPDATE usuario SET token = NULL WHERE matricula = $1', [matricula])
                             } else {
-                                throw error;
+                                throw error
                             }
                         }
                     }
     
-                    const sessionId = uuidv4(); // Gerar um identificador único para a sessão
-                    const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '1h' });
-                    await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula]);
-                    return { token: newToken, user };
+                    const sessionId = uuidv4() // Gerar um identificador único para a sessão
+                    const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '1h' })
+                    await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula])
+                    return { token: newToken, user }
                 } else {
-                    throw new Error('Senha inválida');
+                    throw new Error('Senha inválida')
                 }
             } else {
-                throw new Error('Matricula ou senha inválidos');
+                throw new Error('Matricula ou senha inválidos')
             }
         } catch (err) {
-            console.error('Erro ao realizar login:', err.stack);
-            throw err;
+            console.error('Erro ao realizar login:', err.stack)
+            throw err
         } finally {
-            client.release();
+            client.release()
         }
     }
 

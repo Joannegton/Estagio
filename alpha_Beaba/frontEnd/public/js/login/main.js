@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded',() => {
     document.getElementById('fecharMostrarLogin').addEventListener('click', mostrarLogin)
 
     document.getElementById('loginForm').addEventListener('submit', (event) => {
-        event.preventDefault();
+        event.preventDefault()
         login()
     })
 

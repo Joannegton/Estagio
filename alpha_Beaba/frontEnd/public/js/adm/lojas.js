@@ -233,12 +233,12 @@ async function salvarEditarLoja(cod_loja){
 }
 
 function cancelarEdicao(codLoja) {
-    const nomeLoja = document.getElementById(`nomeLoja${codLoja}`);
-    const nomeGerente = document.getElementById(`nomeGerente${codLoja}`);
+    const nomeLoja = document.getElementById(`nomeLoja${codLoja}`)
+    const nomeGerente = document.getElementById(`nomeGerente${codLoja}`)
 
     // Restaura os valores originais
-    nomeLoja.innerText = nomeLoja.getAttribute('data-original-value');
-    nomeGerente.innerText = nomeGerente.getAttribute('data-original-value');
+    nomeLoja.innerText = nomeLoja.getAttribute('data-original-value')
+    nomeGerente.innerText = nomeGerente.getAttribute('data-original-value')
 
     esconderElementos([`containerEditarBotaoAcaoLoja${codLoja}`])
     document.getElementById(`containerBotaoAcaoLoja${codLoja}`).style.display = 'block'

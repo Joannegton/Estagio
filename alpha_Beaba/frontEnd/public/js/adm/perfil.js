@@ -148,7 +148,7 @@ function editarPerfil(idPerfilAcesso){
         return
     }
 
-    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil;
+    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil
 
 
     document.getElementById('nomePerfilTituloEdit').innerHTML = perfil_descricao
@@ -157,7 +157,7 @@ function editarPerfil(idPerfilAcesso){
     const checkboxes = document.querySelectorAll('#formSalvarEditarPermissoes input[type="checkbox"]')
     checkboxes.forEach(checkbox => {
         const [tipo, modulo] = checkbox.value.split('_')
-        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo);
+        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo)
     })
 
     // Armazenar o idPerfilAcesso no formulário
@@ -223,7 +223,7 @@ async function deletarPerfil(idPerfilAcesso){
             }
         } catch (error) {
             console.error('Erro ao deletar perfil: ', error)
-            alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.');
+            alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.')
         } finally {
             ativarBotao(`deletarPerfis${idPerfilAcesso}`)
         }

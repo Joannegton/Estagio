@@ -12,11 +12,11 @@ function carregarCardUsuario(){
 
 //se não carregar os dados, mostra o modal de carregamento
 function mostrarModalCarregamento() {
-    let modal = document.getElementById('modalCarregamento');
+    let modal = document.getElementById('modalCarregamento')
     if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'modalCarregamento';
-        modal.classList.add('modal');
+        modal = document.createElement('div')
+        modal.id = 'modalCarregamento'
+        modal.classList.add('modal')
         modal.innerHTML = `
             <div class="modalContent">
                 <div class="carregar-pontos">
@@ -24,10 +24,10 @@ function mostrarModalCarregamento() {
                     <div class="ponto"></div>
                     <div class="ponto"></div>
                 </div>
-            </div>`;
-        document.body.appendChild(modal);
+            </div>`
+        document.body.appendChild(modal)
     }
-    modal.style.display = 'flex';
+    modal.style.display = 'flex'
 }
 
 
@@ -158,7 +158,7 @@ function isTokenExpirado(token) {
 }
 
 async function logout() {
-    const matricula = localStorage.getItem('matricula');
+    const matricula = localStorage.getItem('matricula')
     try {
         const response = await fetch('http://localhost:3000/api/logout', {
             method: 'POST',
@@ -167,17 +167,17 @@ async function logout() {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify({ matricula })
-        });
+        })
 
         if (response.ok) {
-            localStorage.clear();
-            sessionStorage.clear();
-            window.location.href = 'login';
+            localStorage.clear()
+            sessionStorage.clear()
+            window.location.href = 'login'
         } else {
-            alert('Erro ao realizar logout');
+            alert('Erro ao realizar logout')
         }
     } catch (error) {
-        console.error('Erro ao realizar logout:', error);
+        console.error('Erro ao realizar logout:', error)
     }
 }
 

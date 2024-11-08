@@ -6,7 +6,7 @@ const lojasRouter = require('./routes/lojasRoutes')
 const perfisRouter  = require('./routes/perfisRoutes')
 const estoqueRouter = require('./routes/estoqueRoutes')
 const taloesRouter = require('./routes/taloesRoutes')
-const configureMiddlewares = require('./config/middlewares');
+const configureMiddlewares = require('./config/middlewares')
 
 const app = express()
 

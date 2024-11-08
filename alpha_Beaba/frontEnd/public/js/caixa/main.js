@@ -1,4 +1,4 @@
-import { esconderElementos, logout } from "../../utils.js";
+import { esconderElementos, logout } from "../../utils.js"
 import { mostrarEnvioTaloes, mostrarPerfilUsuario, saidaTalao } from "./caixa.js"
 
 document.addEventListener('DOMContentLoaded',() => {

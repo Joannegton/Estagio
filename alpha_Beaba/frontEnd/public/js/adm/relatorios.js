@@ -178,8 +178,6 @@ async function carregarDadosElemento(url, elementoId) {
         throw new Error(`Erro ao carregar os dados.`)
     }
     const data = await response.json()
-    console.log(data.length)
-
     document.getElementById(elementoId).textContent = data.length
 }
 

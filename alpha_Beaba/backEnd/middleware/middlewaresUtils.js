@@ -1,26 +1,26 @@
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator')
 
 const validateUser = [
     check('matricula').notEmpty().withMessage('Matrícula é obrigatória'),
     check('tipoUsuario').notEmpty().withMessage('Tipo de usuário é obrigatório'),
     (req, res, next) => {
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() })
         }
-        next();
+        next()
     }
-];
+]
 
 const validateUserId = [
     check('matricula').isInt().withMessage('Matrícula deve ser um número inteiro'),
     (req, res, next) => {
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() })
         }
-        next();
+        next()
     }
-];
+]
 
-module.exports = { validateUser, validateUserId };
+module.exports = { validateUser, validateUserId }

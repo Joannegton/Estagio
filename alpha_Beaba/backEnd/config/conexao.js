@@ -12,11 +12,11 @@ const pool = new Pool({
 
 async function conectarDb() {
     try {
-        const client = await pool.connect();
-        return client;
+        const client = await pool.connect()
+        return client
     } catch (error) {
-        console.error('Erro ao conectar ao banco de dados:', error.stack);
-        throw error;
+        console.error('Erro ao conectar ao banco de dados:', error.stack)
+        throw error
     }
 }
 
