@@ -1,7 +1,7 @@
 import { esconderElementos, alternador, mostrarMenu, mostrarElemento } from "../../utils.js"
 
-function mostrarPerfilAcesso(){
-    mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', () =>{
+async function mostrarPerfilAcesso(){
+    await mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', () =>{
         alternadorPerfilAcesso()
     })
 }

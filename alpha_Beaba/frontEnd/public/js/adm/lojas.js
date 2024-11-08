@@ -3,18 +3,18 @@ import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderE
 let lojas = [] 
 
 // funções de exibição
-function mostrarLojas(){
-    mostrarElemento('lojas', 'mostrarLojas', alternadorLojas)
+async function mostrarLojas(){
+    await mostrarElemento('lojas', 'mostrarLojas', alternadorLojas)
 }
 
-function alternadorLojas(){
+async function alternadorLojas(){
     const lojas = document.getElementById('todasLojas')
     const cadastroLoja = document.getElementById('cadastroLoja')
 
-    fetchLojas()
-    lojas.addEventListener('click', () => {
+    await fetchLojas()
+    lojas.addEventListener('click', async () => {
         alternador(lojas, lojas, cadastroLoja, 'seletorLojas', 'seletorCadastroLoja', 'indicadorLojas')
-        fetchLojas()
+        await fetchLojas()
     })
     cadastroLoja.addEventListener('click', () => {
         alternador(lojas, cadastroLoja, lojas, 'seletorCadastroLoja', 'seletorLojas', 'indicadorLojas')
@@ -73,8 +73,8 @@ function renderizarTabelaLojas(listalojas){
             tbody.appendChild(tr)
 
             //Eventos de click
-            document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', () => {
-                editarLoja(item.cod_loja)
+            document.getElementById(`editarLoja${item.cod_loja}`).addEventListener('click', async () => {
+                await editarLoja(item.cod_loja)
             })
 
             document.getElementById(`salvarEditarLoja${item.cod_loja}`).addEventListener('click', () =>{
@@ -155,7 +155,7 @@ async function salvarLoja(){
     }
 }
 
-function editarLoja(cod_loja){
+async function editarLoja(cod_loja) {
     esconderElementos([`containerBotaoAcaoLoja${cod_loja}`])
     document.getElementById(`containerEditarBotaoAcaoLoja${cod_loja}`).style.display = 'block'
 
@@ -171,9 +171,10 @@ function editarLoja(cod_loja){
         <select id="select-gerente${cod_loja}">
             <option>${gerente}</option>
         </select>
-        `
-    
-    carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario').then(() => {
+    `
+
+    try {
+        await carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario')
         const selectGerente = document.getElementById(`select-gerente${cod_loja}`)
         for (let i = 0; i < selectGerente.options.length; i++) {
             if (selectGerente.options[i].text === gerente) {
@@ -181,7 +182,10 @@ function editarLoja(cod_loja){
                 break
             }
         }
-    })
+    } catch (error) {
+        console.error('Erro ao carregar os dados do select:', error)
+        alert('Erro ao carregar os dados do select. Por favor, tente novamente mais tarde.')
+    }
 }
 
 async function salvarEditarLoja(cod_loja){

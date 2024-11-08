@@ -2,8 +2,8 @@ import { alternador, mostrarElemento } from "../../utils.js"
 import { mostrarEnvioTaloes } from "./envioTaloes.js"
 
 
-function mostrarRelatorios() {
-    mostrarElemento('relatorios', 'mostrarRelatorio', () =>{
+async function mostrarRelatorios() {
+    await mostrarElemento('relatorios', 'mostrarRelatorio', () =>{
         iconeEstoqueBaixo()
         alternadorRelatorios()
     })
@@ -25,13 +25,26 @@ async function alternadorRelatorios() {
     })
 }
 
-function carregarDadosRelatorios() {
-    return Promise.all([
-        carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais'),
-        carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais'),
-        carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
-    ])
+async function carregarDadosRelatorios() {
+    try {
+        await carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais')
+    } catch (error) {
+        console.error('Erro ao carregar dados de usuários:', error)
+    }
+
+    try {
+        await carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais')
+    } catch (error) {
+        console.error('Erro ao carregar dados de lojas:', error)
+    }
+
+    try {
+        await carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
+    } catch (error) {
+        console.error('Erro ao carregar dados de talões:', error)
+    }
 }
+
 
 async function renderizartabelaEstoqueBaixo(){
     const tabelaEstoqueBaixo = document.getElementById('corpoTabelaEstoqueBaixo')
@@ -39,6 +52,9 @@ async function renderizartabelaEstoqueBaixo(){
     
     try {
         const response = await fetch('http://localhost:3000/api/estoque')
+        if(!response.ok){
+            throw new Error('Erro ao buscar dados')
+        }
         const data = await response.json()
         data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)
 
@@ -74,6 +90,9 @@ let enviosChart
 async function renderizarGrafico() {
     try {
         const response = await fetch('http://localhost:3000/api/taloes')
+        if(!response.ok){
+            throw new Error('Erro ao buscar dados')
+        }
         const data = await response.json()
 
         if (enviosChart) {
@@ -154,14 +173,14 @@ function iconeEstoqueBaixo(){
 }
 
 async function carregarDadosElemento(url, elementoId) {
-    const elemento = document.getElementById(elementoId)
-    try {
-        const response = await fetch(url)
-        const data = await response.json()
-        elemento.textContent = data.length
-    } catch (error) {
-        console.error('Erro ao carregar dados do elemento:', error)
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw new Error(`Erro ao carregar os dados.`)
     }
+    const data = await response.json()
+    console.log(data.length)
+
+    document.getElementById(elementoId).textContent = data.length
 }
 
 export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo }

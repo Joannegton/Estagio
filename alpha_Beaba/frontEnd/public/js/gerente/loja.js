@@ -3,8 +3,8 @@ import { mostrarRelatorios } from "./relatorio.js"
 
 let loja = {}
 
-function mostrarEditarLoja(){
-    mostrarElemento('editarLoja', 'mostrarGestaoLoja', fetchLoja)
+async function mostrarEditarLoja(){
+    await mostrarElemento('editarLoja', 'mostrarGestaoLoja', fetchLoja)
 }
 
 async function fetchLoja(){

@@ -3,8 +3,8 @@ import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray 
 let estoque = []
 
 // Funções de exibição
-function mostrarEstoque() {
-    mostrarElemento('estoque', 'mostrarEstoque', fetchEstoque)
+async function mostrarEstoque() {
+    await mostrarElemento('estoque', 'mostrarEstoque', fetchEstoque)
 }
     
 function renderizarTabela(estoqueRenderizar) {

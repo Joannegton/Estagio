@@ -40,7 +40,7 @@ function esconderModalCarregamento() {
 }
 
 // função para mostrar sessão e inicializar
-function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) {
+async function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional) {
     const links = document.querySelectorAll('#menu ul li a')
     links.forEach(link => link.classList.remove('ativo'))
     if (linkAtivarId) {
@@ -49,7 +49,7 @@ function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional = () => {}) 
     esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario', 'estoque', 'estoqueTaloes', 'perfilAcesso', 'editarLoja', 'perfilUsuario'])
     document.getElementById(elementoId).style.display = 'block'
     mostrarMenu()
-    funcoesAdicional()
+    await funcoesAdicional()
 }
 
 // Função para alternar entre elementos
@@ -186,24 +186,21 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     const select = document.getElementById(idSelect)
     select.innerHTML = ''
 
-    try {
-        const response = await fetch(url)
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
-        }
-
-        const data = await response.json()
-        
-        data.forEach(item => {
-            const option = document.createElement('option')
-            option.value = item[value]
-            option.textContent = item[textContent]
-            select.appendChild(option)
-        })
-    } catch (error) {
-        console.error('Falha ao carregar os Dados:', error)
+    const response = await fetch(url)
+    
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
     }
+
+    const data = await response.json()
+    
+    data.forEach(item => {
+        const option = document.createElement('option')
+        option.value = item[value]
+        option.textContent = item[textContent]
+        select.appendChild(option)
+    })
+
 }
 
 //função para identificar estoque baixo e alertar

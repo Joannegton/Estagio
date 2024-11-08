@@ -14,7 +14,7 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
         const inicio = (paginaAtual - 1) * itensPorPagina
         const fim = inicio + itensPorPagina
         const dadosLimitados = usuariosParaRenderizar.slice(inicio, fim)
-        tbody.innerHTML = '' // Limpa a tabela antes de renderizar a nova página
+        tbody.innerHTML = '' 
 
         dadosLimitados.forEach(usuario => {
             const tr = document.createElement('tr')
@@ -29,7 +29,7 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
                         <a href="#" class="botaoAcao" id="editarUsuarioPerfis${usuario.matricula}" title="Editar"><i class="fas fa-edit"></i></a>
                         <a href="#" class="botaoAcao" id="deletarUsuarioPerfis${usuario.matricula}" title="Excluir"><i class="fas fa-trash-alt"></i></a>
                     </div>
-                    <div id="containerEditarBotaoAcaoUsuario${usuario.matricula}" style="display: none;">
+                    <div id="containerEditarBotaoAcaoUsuario${usuario.matricula}" style="display: none">
                         <a href="#" class="botaoAcao" id="salvarEditarUsuario${usuario.matricula}" title="Salvar"><i class="fas fa-save"></i></a>
                         <a href="#" class="botaoAcao" id="cancelarEditarUsuario${usuario.matricula}" title="Cancelar"><i class="fas fa-times"></i></a>
                     </div>
@@ -38,16 +38,16 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
             tbody.appendChild(tr)
 
             // eventos de click
-            document.getElementById(`editarUsuarioPerfis${usuario.matricula}`).addEventListener('click', () => {
-                editarUsuario(usuario.matricula)
+            document.getElementById(`editarUsuarioPerfis${usuario.matricula}`).addEventListener('click', async () => {
+                await editarUsuario(usuario.matricula)
             })
-            document.getElementById(`salvarEditarUsuario${usuario.matricula}`).addEventListener('click', () => {
-                salvarEdicaoUsuario(usuario.matricula)
+            document.getElementById(`salvarEditarUsuario${usuario.matricula}`).addEventListener('click', async () => {
+                await salvarEdicaoUsuario(usuario.matricula)
             })
             document.getElementById(`cancelarEditarUsuario${usuario.matricula}`).addEventListener('click', () => {
                 cancelarEditar(usuario.matricula)
             })
-            document.getElementById(`deletarUsuarioPerfis${usuario.matricula}`).addEventListener('click', () => {
+            document.getElementById(`deletarUsuarioPerfis${usuario.matricula}`).addEventListener('click', async () => {
                 deletarUsuario(usuario.matricula)
             })
         })
@@ -113,12 +113,17 @@ async function createUser() {
     }
 
     if (data.tipoUsuario == 2) {
-        const gerenteExistente = await verificarGerenteExistente(data.loja)
-        if (gerenteExistente) {
-            alert('Já existe um gerente cadastrado para esta loja')
+        try {
+            const gerenteExistente = await verificarGerenteExistente(data.loja)
+            if (gerenteExistente) {
+                alert('Já existe um gerente cadastrado para esta loja')
+                return
+            }
+        } catch (error) {
+            console.error('Erro ao verificar gerente existente:', error)
+            alert('Ocorreu um erro ao verificar o gerente existente')
             return
         }
-        return 
     }
 
     try {
@@ -145,7 +150,7 @@ async function createUser() {
     }
 }
 
-function editarUsuario(matricula) {
+async function editarUsuario(matricula) {
     document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'none'
     document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'block'   
 
@@ -163,8 +168,8 @@ function editarUsuario(matricula) {
         </select>
     `
 
-    carregarDadosSelect(`select-tipoUsuario${matricula}`, 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
-    .then(() => {
+    try {
+        await carregarDadosSelect(`select-tipoUsuario${matricula}`, 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
         const select = document.getElementById(`select-tipoUsuario${matricula}`)
         const options = select.options
         for (let i = 0; i < options.length; i++) {
@@ -173,8 +178,10 @@ function editarUsuario(matricula) {
                 break
             }
         }
-    })
-
+    } catch (error) {
+        console.error('Erro ao carregar os dados do select:', error)
+        alert('Erro ao carregar os dados do select. Por favor, tente novamente mais tarde.')
+    }
 }
 
 async function salvarEdicaoUsuario(matricula) {
@@ -207,8 +214,8 @@ async function salvarEdicaoUsuario(matricula) {
             alert(`${newNome} atualizado com sucesso`)
             inputNome.remove()
             selectTipoUsuario.remove()
-                document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
-                document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
+            document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
+            document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
         } else {
             const errorData = await response.json()
             alert(`Erro ao atualizar usuário: ${errorData.message || response.statusText}`)
@@ -234,8 +241,8 @@ function cancelarEditar(matricula) {
 }
 
 async function deletarUsuario(matricula) {
-    const confirmacao = confirm('Deseja realmente excluir este usuário?')
     desativarBotao(`deletarUsuarioPerfis${matricula}`)
+    const confirmacao = confirm('Deseja realmente excluir este usuário?')
     if (confirmacao) {
         try {
             const response = await fetch(`http://localhost:3000/api/usuarios/${matricula}`, {
@@ -258,23 +265,31 @@ async function deletarUsuario(matricula) {
         } finally{
             ativarBotao(`deletarUsuarioPerfis${matricula}`)
         }
+    } else{
+        ativarBotao(`deletarUsuarioPerfis${matricula}`)
     }
 }
 
 // carregar selects
-function carregarSelectsCadastroUsuario(){
-    const lojaSelect = document.getElementById('lojaUsuario');
-    const tipoUsuarioSelect = document.getElementById('tipoUsuario');
+async function carregarSelectsCadastroUsuario(){
+    const lojaSelect = document.getElementById('lojaUsuario')
+    const tipoUsuarioSelect = document.getElementById('tipoUsuario')
+    
+    try {
+        if (!lojaSelect.dataset.loaded) { // Evita recarregar os dados do select caso já tenha sido carregado
+            await carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
+            lojaSelect.dataset.loaded = true
+        }
 
-    if (!lojaSelect.dataset.loaded) { // Evita recarregar os dados do select caso já tenha sido carregado
-        carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja');
-        lojaSelect.dataset.loaded = true;
+        if (!tipoUsuarioSelect.dataset.loaded) {
+            await carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
+            tipoUsuarioSelect.dataset.loaded = true
+        }
+    } catch (error) {
+        console.error('Erro ao carregar os selects:', error)
+        alert('Erro ao carregar os dados dos selects. Por favor, tente novamente mais tarde.')
     }
-
-    if (!tipoUsuarioSelect.dataset.loaded) {
-        carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao');
-        tipoUsuarioSelect.dataset.loaded = true;
-    }}
+}
 
 //ordenação e filtros
 function ordenarUsuarios(event) {

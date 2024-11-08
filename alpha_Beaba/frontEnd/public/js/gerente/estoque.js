@@ -1,7 +1,7 @@
 import { mostrarElemento } from "../../utils.js"
 
-function mostrarPedidoTaloes() {
-    mostrarElemento('estoque', 'mostrarGestaoEstoque', () => {
+async function mostrarPedidoTaloes() {
+    await mostrarElemento('estoque', 'mostrarGestaoEstoque', () => {
         
     })
 }

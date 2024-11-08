@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportarManutencao').addEventListener('click', exportarManutencao)
     
     // Usuario
-    document.getElementById('formCadUsuario').addEventListener('submit', event => {
+    document.getElementById('formCadUsuario').addEventListener('submit', async event => {
         event.preventDefault()
-        createUser()
+        await createUser()
     })
 
     document.getElementById('filtroUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)

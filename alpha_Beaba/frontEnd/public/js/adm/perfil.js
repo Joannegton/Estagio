@@ -4,8 +4,8 @@ import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 let perfis = []
 
 // Visualização de sessões
-function mostrarPerfil(){
-    mostrarElemento('perfil', 'mostrarPerfil', alternadorPerfil)
+async function mostrarPerfil(){
+    await mostrarElemento('perfil', 'mostrarPerfil', alternadorPerfil)
 }
 
 function mostrarModalCadastroPerfil(){
@@ -55,26 +55,32 @@ function renderizarTabelaPerfis(perfisRenderizar){
 
 // alternador de sessões (Usuários, Cadastro de Usuários e Perfis)
 async function alternadorPerfil() {
-    await fetchUsuarios()
-    const usuarios = document.getElementById('usuarios')
-    const cadastroUsuario = document.getElementById('cadastroUsuario')
-    const perfisElemento = document.getElementById('perfis')
-    carregarSelectsCadastroUsuario()
-
-    usuarios.addEventListener('click', async () => {
-        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
+    try {
         await fetchUsuarios()
-    })
-    
-    cadastroUsuario.addEventListener('click', () => {
-        alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
-        carregarSelectsCadastroUsuario()
-    })
-    
-    perfisElemento.addEventListener('click', async () => {
-        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
-        await fetchPerfis()
-    })
+        const usuarios = document.getElementById('usuarios')
+        const cadastroUsuario = document.getElementById('cadastroUsuario')
+        const perfisElemento = document.getElementById('perfis')
+        
+        await carregarSelectsCadastroUsuario()
+
+        usuarios.addEventListener('click', async () => {
+            alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
+            await fetchUsuarios()
+        })
+        
+        cadastroUsuario.addEventListener('click', async () => {
+            alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
+            await carregarSelectsCadastroUsuario()
+        })
+        
+        perfisElemento.addEventListener('click', async () => {
+            alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
+            await fetchPerfis()
+        })
+    } catch (error) {
+        console.error('Erro ao carregar dados', error)
+        alert('Erro ao carregar dados')
+    }
 }
 
 // buscar informações de perfis

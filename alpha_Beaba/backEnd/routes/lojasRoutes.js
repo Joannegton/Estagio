@@ -12,4 +12,5 @@ lojasRouter.put('/loja/:codLoja', lojaController.updateLoja)
 
 
 
+
 module.exports = lojasRouter

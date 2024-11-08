@@ -1,7 +1,7 @@
 import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../../utils.js"
 
-function mostrarEnvioTaloes(){
-    mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {
+async function mostrarEnvioTaloes(){
+    await mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {
         carregarSelects()
     })
 }
@@ -43,17 +43,30 @@ async function enviarTalao() {
 }
 
 
-function carregarSelects() {
-    carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
+async function carregarSelects() {
+    try {
+        await carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
+    } catch (error) {
+        console.error('Erro ao carregar os dados do select de loja:', error)
+        alert('Erro ao carregar os dados do select de loja. Por favor, tente novamente mais tarde.')
+        return
+    }
 
     const lojaSelect = document.getElementById('lojaDestinataria')
     if (!lojaSelect.dataset.eventAdded) {
         lojaSelect.addEventListener('change', async (event) => {
             const codLoja = event.target.value
-            const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`)
-            const data = await response.json()
-
-            carregarGerente(data.gerente_id)
+            try {
+                const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`)
+                }
+                const data = await response.json()
+                await carregarGerente(data.gerente_id)
+            } catch (error) {
+                console.error('Erro ao carregar os dados da loja:', error)
+                alert('Erro ao carregar os dados da loja. Por favor, tente novamente mais tarde.')
+            }
         })
         lojaSelect.dataset.eventAdded = true
     }

@@ -3,8 +3,8 @@ import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBot
 let envioTaloes = []
 
 //funções de exibição
-function mostrarManutencao(){
-    mostrarElemento('manutencao', 'mostrarManutencao', fetchEnvioTaloes)
+async function mostrarManutencao(){
+    await mostrarElemento('manutencao', 'mostrarManutencao', fetchEnvioTaloes)
 }
 
 async function fetchEnvioTaloes() {

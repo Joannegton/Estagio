@@ -1,8 +1,9 @@
 import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
 
 let remessas = []
-function mostrarRelatorios() {
-    mostrarElemento('relatorios', 'mostrarGestaoRelatorio',  () =>{
+
+async function mostrarRelatorios() {
+    await mostrarElemento('relatorios', 'mostrarGestaoRelatorio',  () =>{
         alternadorRelatorios()
     })
 }
