@@ -1,9 +1,7 @@
 import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../../utils.js"
 
 async function mostrarEnvioTaloes(){
-    await mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', () => {
-        carregarSelects()
-    })
+    await mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', carregarSelects)
 }
 
 async function enviarTalao() {

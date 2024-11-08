@@ -20,21 +20,80 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('menu').style.display = 'block'
     }
 
-    document.getElementById('mostrarEnvioTaloes').addEventListener('click', mostrarEnvioTaloes)
-    document.getElementById('mostrarEstoque').addEventListener('click', mostrarEstoque)
-    document.getElementById('mostrarManutencao').addEventListener('click', mostrarManutencao)
-    document.getElementById('mostrarPerfil').addEventListener('click', mostrarPerfil)
-    document.getElementById('mostrarLojas').addEventListener('click', mostrarLojas)
-    document.getElementById('mostrarRelatorio').addEventListener('click', mostrarRelatorios)
+    document.getElementById('mostrarEnvioTaloes').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarEnvioTaloes()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
+    
+    document.getElementById('mostrarEstoque').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarEstoque()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
+    
+    document.getElementById('mostrarManutencao').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarManutencao()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
+    
+    document.getElementById('mostrarPerfil').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarPerfil()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
+    
+    document.getElementById('mostrarLojas').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarLojas()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
+    
+    document.getElementById('mostrarRelatorio').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try {
+            await mostrarRelatorios()
+        } finally {
+            esconderModalCarregamento()
+        }
+    })
 
     // Card Usuario
     document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
     document.getElementById('sair-usuario').addEventListener('click', logout)
+        
+    // Mostrar menu e filtros para mobile
+    document.getElementById('menuButton').addEventListener('click', mostrarMenu)
+    document.getElementById('fechar').addEventListener('click', mostrarMenu)
+
+    window.mostrarFiltros = mostrarFiltros //função usada no html
 
     // Envio de talões
-    document.getElementById('formEnvioTalao').addEventListener('submit', (e) =>{
+    document.getElementById('formEnvioTalao').addEventListener('submit', async (e) =>{
         e.preventDefault()
-        enviarTalao()
+        mostrarModalCarregamento()
+        try {
+            await enviarTalao()
+        } finally{
+            esconderModalCarregamento()
+        }
+        
     })
 
     // Estoque
@@ -58,7 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Usuario
     document.getElementById('formCadUsuario').addEventListener('submit', async event => {
         event.preventDefault()
-        await createUser()
+        mostrarModalCarregamento()
+        try{
+            await createUser()
+        }finally{
+            esconderModalCarregamento()
+        }
+        
     })
 
     document.getElementById('filtroUsuarioPerfis').addEventListener('input', filtrarUsuarioNome)
@@ -73,9 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Perfil
     document.getElementById('mostrarCadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
     
-    document.getElementById('perfilCadastroForm').addEventListener('submit', (e) => {
+    document.getElementById('perfilCadastroForm').addEventListener('submit', async (e) => {
         e.preventDefault()
-        salvarPerfil()
+        mostrarModalCadastroPerfil()
+        try{
+            await salvarPerfil()
+        } finally{
+            esconderElementos()
+        }
     })  
     
     document.getElementById('fecharMostrarAddPerfil').addEventListener('click', ()=> {
@@ -86,44 +156,53 @@ document.addEventListener('DOMContentLoaded', () => {
         esconderElementos(['modalVisualizarPermissoes'])
     })
 
-    document.getElementById('formSalvarEditarPermissoes').addEventListener('submit', e => {
-        e.preventDefault();
-        const idPerfilAcesso = e.target.dataset.idPerfilAcesso
-        salvarEditarPerfil(idPerfilAcesso)
+    document.getElementById('formSalvarEditarPermissoes').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        mostrarModalCarregamento()
+        try{
+            const idPerfilAcesso = e.target.dataset.idPerfilAcesso
+            await salvarEditarPerfil(idPerfilAcesso)
+        } finally{
+            esconderModalCarregamento()
+        }
+        
     })
+
     document.getElementById('fecharModalEditPermissoes').addEventListener('click', () => {
         esconderElementos(['modalEditPerfil'])
     })
-
 
     // Lojas
     document.getElementById('filtroLojaLojas').addEventListener('change', ordenarLoja)
 
     document.getElementById('exportarLojas').addEventListener('click', exportarLojas)
 
-    document.getElementById('formSalvarLoja').addEventListener('submit', (e) => {
+    document.getElementById('formSalvarLoja').addEventListener('submit', async (e) => {
         e.preventDefault()
-        salvarLoja()
+        mostrarModalCarregamento()
+        try{
+            await salvarLoja()
+        } finally{
+            esconderModalCarregamento()
+        }
     })   
 
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
     //perfil de usuario
-    document.getElementById('formEditUsuario').addEventListener('submit', (e) => {
+    document.getElementById('formEditUsuario').addEventListener('submit', async (e) => {
         e.preventDefault()
-        salvarEditarUsuario()
+        mostrarModalCarregamento()
+        try{
+            await salvarEditarUsuario()
+        } finally{
+            esconderModalCarregamento()
+        }
     })
 
     document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
     
-    
-
-
-
-    // Mostrar menu e filtros para mobile
-    window.mostrarMenu = mostrarMenu
-    window.mostrarFiltros = mostrarFiltros
 
     // Carrega funcionalidades de relatórios pois é a página inicial
     window.onload = async () =>{
