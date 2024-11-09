@@ -67,7 +67,8 @@ create table saida_taloes (
     id_saida_talao serial primary key,
     codigo_talao varchar(10),
     data_saida date default current_date,
-    matricula varchar(7) references usuario(matricula) on delete cascade
+    matricula varchar(7) references usuario(matricula) on delete cascade,
+    cod_loja integer references loja(cod_loja) on delete cascade
 );
 
 create table estoque_caixa (

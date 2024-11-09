@@ -56,7 +56,7 @@ async function salvarLoja(){
             throw new Error('Erro ao atualizar loja.')
         }
         alert("Loja atualizada")
-        mostrarRelatorios()
+        await mostrarRelatorios()
     } catch (error) {
         console.error('Erro ao atualizar Loja: ', error.stack)
         alert('Erro ao enviar dados, tente novamente mais tarde.')

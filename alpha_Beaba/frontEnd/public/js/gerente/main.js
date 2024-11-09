@@ -32,8 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
-    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', mostrarRelatorios)
+    document.getElementById('mostrarGestaoLoja').addEventListener('click', async ()=> {
+        mostrarModalCarregamento()
+        try{
+            await mostrarEditarLoja()
+        }finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try{
+            await mostrarRelatorios()
+        }finally{
+            esconderModalCarregamento()
+        }
+    })
 
     document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
     document.getElementById('sair-usuario').addEventListener('click', async () => {

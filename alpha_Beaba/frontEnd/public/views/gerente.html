@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../style/geral.css">
     <link rel="stylesheet" href="../style/gerente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="module" src="../js/gerente/main.js"></script></head>
+    <script type="module" src="../js/gerente/main.js"></script>
+</head>
 <body>
     <div class="main">
         <header>
@@ -39,124 +40,6 @@
         </header>
 
         <main>
-            <!--
-            <section id="estoque" style="display: none;">
-                    <h2>Gestão de Estoque</h2>
-                    <div class="filtro filtro-container">
-                        <label for="filtroEstoque">Caixa:</label>
-                        <input type="text" name="filtroEstoque" id="filtroEstoque">
-                        <button id="exportarEstoque" class="exportarCSV" >Exportar</button>
-                    </div>
-                    <div class="tabela-container">
-                        <table>
-                            <thead class="headTabela">
-                                <tr>
-                                    <th>N° Caixa</th>
-                                    <th>Quantidade</th>
-                                    <th>Repor estoque</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 01</td>
-                                    <td data-label="Quantidade">8</td>
-                                    <td data-label="Repor estoque" class="acoes">
-                                        <a href="#" class="botaoAcao" id="reporEstoque">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 02</td>
-                                    <td data-label="Quantidade">5</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 02')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 03</td>
-                                    <td data-label="Quantidade">3</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 03')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 04</td>
-                                    <td data-label="Quantidade">10</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 04')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
-                    </div>
-            </section> -->
-
             <section id="perfilAcesso" style="display: none;">
                 <div class="alternador">
                     <div class="seletor">
@@ -200,8 +83,8 @@
                     </div>
                     <form id="formCadUsuario">
                         <div id="cadastroSimples">
-                            <label for="matricula">Matricula do Usuario:</label>
-                            <input type="text" id="matricula" name="matricula" required>
+                            <label for="matriculaUsuario">Matricula do Usuario:</label>
+                            <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
                             <label for="nomeUsuario">Nome:</label>
                             <input type="text" name="nomeUsuario" id="nomeUsuario" required>
                         </div>
@@ -272,16 +155,10 @@
                             <thead class="headTabela">
                                 <tr>
                                     <th>Data Saída</th>
-                                    <th>Cliente</th>
                                     <th>Colaborador</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Data">28/08/2021</td>
-                                    <td data-label="Cliente">Wellington Tavares</td>
-                                    <td data-label="Colaborador">Wellington Tavares</td>
-                                </tr>
+                            <tbody id="saidas-tbody">
                             </tbody>
                         </table>
                     </div>

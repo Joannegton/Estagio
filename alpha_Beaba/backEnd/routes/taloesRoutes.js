@@ -5,6 +5,7 @@ const taloesRouter = Router()
 
 taloesRouter.get('/taloes', taloesController.getTaloes)
 taloesRouter.get('/taloes/:cod_loja', taloesController.getTaloesPorLoja)
+taloesRouter.get('/taloes/saida/:cod_loja', taloesController.getSaidasPorLoja)
 
 taloesRouter.post('/taloes', taloesController.createTaloes)
 taloesRouter.post('/taloes/saida', taloesController.createTalao)

@@ -2,10 +2,10 @@ import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemen
 
 let remessas = []
 
+let saidaTaloes = []
+
 async function mostrarRelatorios() {
-    await mostrarElemento('relatorios', 'mostrarGestaoRelatorio',  () =>{
-        alternadorRelatorios()
-    })
+    await mostrarElemento('relatorios', 'mostrarGestaoRelatorio', alternadorRelatorios)
 }
 
 async function alternadorRelatorios() {
@@ -13,8 +13,9 @@ async function alternadorRelatorios() {
     const entradas = document.getElementById('mostrarEntradas')
     await fetchRemessa()
     await carregarEstoqueLoja()
-    saidas.addEventListener('click', () => {
+    saidas.addEventListener('click', async () => {
         alternador(saidas, entradas, saidas, 'saidas', 'entradas', 'indicadorRelatorio')
+        await fetchSaidas()
     })
 
     entradas.addEventListener('click', () => {
@@ -41,6 +42,7 @@ async function carregarEstoqueLoja() {
         alert('Erro ao carregar dados do estoque')
     }
 }
+
 async function fetchRemessa() {
     try {
         const codLoja = localStorage.getItem('cod_loja')
@@ -51,6 +53,23 @@ async function fetchRemessa() {
         }
         remessas = await response.json()
         renderizarEntradas(remessas)
+    } catch (error) {
+        console.error('Erro ao buscar remessas:', error.stack) 
+        //modificar
+        alert('Erro ao buscar remessas, consulte o Administrador do sistema')
+    }
+}
+
+async function fetchSaidas() {
+    try {
+        const codLoja = localStorage.getItem('cod_loja')
+        const response = await fetch(`http://localhost:3000/api/taloes/saida/${codLoja}`)
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
+        }
+        saidaTaloes = await response.json()
+        renderizarSaidas(saidaTaloes)
     } catch (error) {
         console.error('Erro ao buscar remessas:', error.stack) 
         //modificar
@@ -154,6 +173,40 @@ async function receberRemessa(remessa){
         console.error('Erro ao receber remessa: ', error.stack)
         alert('Erro ao aceitar remessa, tente novamente mais tarde.')
     }
+}
+
+function renderizarSaidas(listaTaloes){
+    const tbody = document.getElementById('saidas-tbody')
+
+    let paginaAtual = 1
+    const itensPorPagina = 8
+
+    const inicio = (paginaAtual - 1) * itensPorPagina
+    const fim = inicio + itensPorPagina
+    const dadosLimitados = listaTaloes.slice(inicio, fim)
+    
+    function renderizarTabelaSaida(){        
+        tbody.innerHTML = ''
+        dadosLimitados.forEach(item => {
+            const dataSaida = converterDataParaBR(item.data_saida)
+
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td data-label="Data">${dataSaida}</td>
+                <td data-label="Colaborador">${item.nome_usuario}</td>
+            `    
+            tbody.append(tr)
+
+        })
+    }
+
+    // botões de paginação
+    document.getElementById('pagInfoSaidas').textContent = `Página ${paginaAtual} de ${Math.ceil(listaTaloes.length / itensPorPagina)}`
+    document.getElementById('pagAntSaidas').disabled = paginaAtual === 1
+    document.getElementById('proxPagSaidas').disabled =  fim >= listaTaloes.length
+
+
+    renderizarTabelaSaida()
 }
 
 function exportarRelatorios(){

@@ -1,6 +1,22 @@
 const taloesService = require("../services/taloesService")
 
 class TaloesController {
+    async getTaloesPorLoja(req, res) {
+        const { cod_loja } = req.params
+
+        if (!cod_loja) {
+            return res.status(400).json({message: 'Loja não informada'})
+        }
+
+        try {
+            const taloes = await taloesService.getTaloesPorLoja(cod_loja)
+            res.status(200).json(taloes)
+        } catch (error) {
+            console.error("Talões não encontrados para essa loja")
+            res.status(500).json({message: "Talões não encontrados para essa loja"})
+        }
+    }
+
     async getTaloes(req, res) {
         try {
             const taloes = await taloesService.getTaloes()
@@ -8,6 +24,22 @@ class TaloesController {
         } catch (error) {
             console.error('Erro ao buscar remessas')
             res.status(500).json({message: "Erro ao busca remessas"})
+        }
+    }
+
+    async getSaidasPorLoja(req, res) {
+        const { cod_loja } = req.params
+
+        if (!cod_loja) {
+            return res.status(400).json({message: 'Loja não informada'})
+        }
+
+        try {
+            const result = await taloesService.getSaidasPorLoja(cod_loja)
+            res.status(200).json(result)
+        } catch (error) {
+            console.error("Saídas não encontradas para essa loja")
+            res.status(500).json({message: "Saídas não encontrados para essa loja"})
         }
     }
 
@@ -87,23 +119,6 @@ class TaloesController {
             res.status(500).json({message: 'Erro ao deletar remessa'})
         }
     }
-
-    async getTaloesPorLoja(req, res) {
-        const { cod_loja } = req.params
-
-        if (!cod_loja) {
-            return res.status(400).json({message: 'Loja não informada'})
-        }
-
-        try {
-            const taloes = await taloesService.getTaloesPorLoja(cod_loja)
-            res.status(200).json(taloes)
-        } catch (error) {
-            console.error("Talões não encontrados para essa loja")
-            res.status(500).json({message: "Talões não encontrados para essa loja"})
-        }
-    }
-
     
 }
 

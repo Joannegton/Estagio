@@ -27,6 +27,59 @@ class TaloesService {
         }
     }
 
+    async getTaloesPorLoja( codLoja ) {
+        const client = await conectarDb()
+
+        try {
+            const result = await client.query(`
+                SELECT 
+                    et.numero_remessa,
+                    et.data_envio,
+                    l.nome_loja,
+                    et.quantidade,
+                    u.nome_usuario,
+                    et.data_recebimento_previsto,
+                    et.status
+                FROM envio_taloes et
+                LEFT JOIN loja l ON et.cod_loja = l.cod_loja
+                LEFT JOIN usuario u ON et.id_funcionario_recebimento = u.matricula
+                WHERE et.cod_loja = $1
+            `, [codLoja])
+
+            return result.rows
+        } catch (error) {
+            console.error('Erro ao executar a query:', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
+
+    async getSaidasPorLoja( codLoja ) {
+        const client = await conectarDb()
+
+        try {
+            const result = await client.query(`
+                SELECT id_saida_talao, 
+                        codigo_talao, 
+                        data_saida,
+                        s.matricula,
+                        u.nome_usuario
+                FROM saida_taloes s
+                JOIN usuario u ON u.matricula = s.matricula
+                WHERE s.cod_loja = $1
+                ORDER BY data_saida DESC
+            `, [codLoja])
+
+            return result.rows
+        } catch (error) {
+            console.error('Erro ao executar a query:', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
+
     async createTalao(numeroTalao, matricula){
         const client = await conectarDb()
         try {
@@ -144,34 +197,6 @@ class TaloesService {
             `, [numeroRemessa])
 
             return result.rowCount > 0
-        } catch (error) {
-            console.error('Erro ao executar a query:', error.stack)
-            throw error
-        } finally {
-            client.release()
-        }
-    }
-
-    async getTaloesPorLoja( codLoja ) {
-        const client = await conectarDb()
-
-        try {
-            const result = await client.query(`
-                SELECT 
-                    et.numero_remessa,
-                    et.data_envio,
-                    l.nome_loja,
-                    et.quantidade,
-                    u.nome_usuario,
-                    et.data_recebimento_previsto,
-                    et.status
-                FROM envio_taloes et
-                LEFT JOIN loja l ON et.cod_loja = l.cod_loja
-                LEFT JOIN usuario u ON et.id_funcionario_recebimento = u.matricula
-                WHERE et.cod_loja = $1
-            `, [codLoja])
-
-            return result.rows
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
             throw error

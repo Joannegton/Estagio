@@ -99,7 +99,7 @@ async function cadastrarPerfil(){
     const formData = new FormData(formulario)
 
     const dados = {
-        matricula: formData.get('matricula'),
+        matricula: formData.get('matriculaUsuario'),
         nome: formData.get('nomeUsuario'),
         loja: localStorage.getItem('cod_loja')
     }
