@@ -26,7 +26,6 @@ function carregarDadosLoja(loja) {
     document.getElementById('nomeLoja').value = loja.nome_loja
     document.getElementById('enderecoLoja').value = loja.endereco_loja
     document.getElementById('telefone').value = loja.telefone
-    document.getElementById('qntCaixas').value = loja.caixas_fisicos
 }
 
 async function salvarLoja(){
@@ -37,10 +36,9 @@ async function salvarLoja(){
         nome_loja: formData.get('nomeLoja'),
         endereco_loja: formData.get('enderecoLoja'),
         telefone: formData.get('telefone'),
-        caixas_fisicos: formData.get('qntCaixas')
     }
 
-    if (!data.nome_loja || !data.endereco_loja || !data.telefone || !data.caixas_fisicos) {
+    if (!data.nome_loja || !data.endereco_loja || !data.telefone ) {
         alert('Por favor, complete os dados da Loja')
     }
 

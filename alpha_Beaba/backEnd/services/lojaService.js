@@ -42,8 +42,7 @@ class LojasService {
                     loja.cod_loja, 
                     loja.nome_loja, 
                     usuario.nome_usuario AS "gerente", 
-                    loja.estoque_minimo,
-                    loja.caixas_fisicos
+                    loja.estoque_minimo
                 FROM loja
                 LEFT JOIN usuario ON loja.gerente_id = usuario.matricula
                 LEFT JOIN estoque_taloes ON loja.cod_loja = estoque_taloes.cod_loja
@@ -68,7 +67,6 @@ class LojasService {
                     usuario.nome_usuario AS "gerente", 
                     loja.gerente_id,
                     loja.estoque_minimo,
-                    loja.caixas_fisicos,
                     loja.endereco_loja,
                     loja.telefone
                 FROM loja
@@ -94,13 +92,6 @@ class LojasService {
             campos.push(`${key} = $${index}`)
             values.push(value)
             index++
-    
-            if (key === 'caixas_fisicos') {
-                const qntCaixas = updates.caixas_fisicos * 50
-                campos.push(`estoque_minimo = $${index}`)
-                values.push(qntCaixas)
-                index++
-            }
         }
     
         const queryLoja = `UPDATE loja SET ${campos.join(', ')} WHERE cod_loja = $${index}`

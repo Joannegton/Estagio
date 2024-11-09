@@ -14,14 +14,13 @@ create table perfil_acesso_permissoes (
     id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete cascade,
     id_permissao integer references permissoes(id_permissao) on delete cascade,
     primary key (id_perfil_acesso, id_permissao)
-);
+); 
 
 create table loja (
     cod_loja serial primary key,
     nome_loja varchar(120) not null,
     endereco_loja varchar(255),
     telefone varchar(20),
-    caixas_fisicos integer,
     estoque_minimo integer
 );
 
