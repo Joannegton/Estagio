@@ -41,6 +41,19 @@ class UsuarioService {
             client.release()
         }
     }
+
+    async getUsersByCod_loja(cod_loja){
+        const client = await conectarDb()
+        try {
+            const result = await client.query('SELECT matricula, nome_usuario FROM usuario WHERE cod_loja = $1', [cod_loja])
+            return result.rows
+        } catch (error) {
+            console.error('Erro ao executar a query:', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
     
     async createUser(matricula, nome, tipoUsuario, loja) {
         const client = await conectarDb()

@@ -46,6 +46,18 @@ class UsuarioController {
         }
     }
 
+    async getUsersByCod_loja(req, res){
+        const {cod_loja} = req.params
+
+        try {
+            const result = await usuarioService.getUsersByCod_loja(cod_loja)
+            result ? res.status(200).json(result) : res.status(404).json({message: 'Usuários não encontrado'})
+        } catch (error) {
+            console.error('Erro ao buscar os usuários:', error.stack)
+            res.status(500).json({message: 'Erro ao buscar os usuários'})
+        }
+    }
+
     async updateUser(req, res) {
         const { matricula } = req.params
         const updates = req.body

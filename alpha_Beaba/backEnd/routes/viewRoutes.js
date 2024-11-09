@@ -14,4 +14,8 @@ viewRouter.get('/gerente', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente.html'))
 })
 
+viewRouter.get('/caixa', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/caixa.html'))
+})
+
 module.exports = viewRouter

@@ -5,6 +5,17 @@ function mostrarMenu() {
     }
 }
 
+// usuario logado
+function carregarUsuario(){
+    document.getElementById('nome_usuario').textContent = localStorage.getItem('nome')
+    
+    document.getElementById('matricula').value = localStorage.getItem('matricula')
+    document.getElementById('nome').value = localStorage.getItem('nome')
+    document.getElementById('email').value = localStorage.getItem('email')
+    document.getElementById('workplace').value = localStorage.getItem('workplace')
+
+}
+
 function carregarCardUsuario(){
     document.getElementById('usuario-nome').textContent = localStorage.getItem('nome')
     document.getElementById('usuario-matricula').textContent = localStorage.getItem('tipoUsuario') + ' - ' + localStorage.getItem('matricula')  
@@ -274,4 +285,4 @@ function ativarBotao(elementoId) {
 
 
 
-export {mostrarModalCarregamento, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

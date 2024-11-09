@@ -65,11 +65,11 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
             document.getElementById(`editarEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
                 editarEnvioTalao(item.numero_remessa)
             })
-            document.getElementById(`excluirEnvioTalao${item.numero_remessa}`).addEventListener('click', () => {
-                excluirEnvioTalao(item.numero_remessa)
+            document.getElementById(`excluirEnvioTalao${item.numero_remessa}`).addEventListener('click', async() => {
+                await excluirEnvioTalao(item.numero_remessa)
             })
-            document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', () => {
-                salvarEdicaoTalao(item.numero_remessa)
+            document.getElementById(`salvarEdicaoTalao${item.numero_remessa}`).addEventListener('click', async () => {
+                await salvarEdicaoTalao(item.numero_remessa)
             })
             document.getElementById(`cancelarEditarTalao${item.numero_remessa}`).addEventListener('click', () => {
                 cancelarEdicao(item.numero_remessa)

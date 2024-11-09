@@ -5,6 +5,7 @@ const usuarioRouter = Router()
 
 usuarioRouter.get('/usuarios', usuarioController.getUsers)
 usuarioRouter.get('/usuarios/:matricula', usuarioController.getUserById)
+usuarioRouter.get('/usuarios/loja/:cod_loja', usuarioController.getUsersByCod_loja)
 
 usuarioRouter.post('/usuarios', usuarioController.createUser)
 

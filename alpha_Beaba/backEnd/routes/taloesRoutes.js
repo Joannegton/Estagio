@@ -7,6 +7,7 @@ taloesRouter.get('/taloes', taloesController.getTaloes)
 taloesRouter.get('/taloes/:cod_loja', taloesController.getTaloesPorLoja)
 
 taloesRouter.post('/taloes', taloesController.createTaloes)
+taloesRouter.post('/taloes/saida', taloesController.createTalao)
 
 taloesRouter.delete('/taloes/:numeroRemessa', taloesController.deleteTaloes)
 

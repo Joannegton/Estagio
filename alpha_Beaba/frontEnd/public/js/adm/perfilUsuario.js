@@ -1,4 +1,4 @@
-import { ativarBotao, desativarBotao, esconderElementos, mostrarMenu } from "../../utils.js"
+import { ativarBotao, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../../utils.js"
 
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
@@ -7,15 +7,6 @@ function mostrarPerfilUsuario(){
     carregarUsuario()
 }
 
-function carregarUsuario(){
-    document.getElementById('nome_usuario').textContent = localStorage.getItem('nome')
-    
-    document.getElementById('matricula').value = localStorage.getItem('matricula')
-    document.getElementById('nome').value = localStorage.getItem('nome')
-    document.getElementById('email').value = localStorage.getItem('email')
-    document.getElementById('workplace').value = localStorage.getItem('workplace')
-
-}
 async function salvarEditarUsuario(){
     desativarBotao('submitButtonPerfilUsuario')
     const formulario = document.getElementById('formEditUsuario')
@@ -80,9 +71,9 @@ function modalEditarSenha(){
         esconderElementos(['modalEditarSenha'])
     })
 
-    document.getElementById('formEditarSenha').addEventListener('submit', e => {
+    document.getElementById('formEditarSenha').addEventListener('submit', async (e) => {
         e.preventDefault()
-        salvarEditarSenha()
+        await salvarEditarSenha()
     })
 
 }
@@ -120,4 +111,4 @@ async function salvarEditarSenha(){
 }
 
 
-export { salvarEditarUsuario, carregarUsuario, mostrarPerfilUsuario, modalEditarSenha }
+export { salvarEditarUsuario, mostrarPerfilUsuario, modalEditarSenha }

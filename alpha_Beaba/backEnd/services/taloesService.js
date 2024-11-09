@@ -27,14 +27,28 @@ class TaloesService {
         }
     }
 
+    async createTalao(numeroTalao, matricula){
+        const client = await conectarDb()
+        try {
+            const result = await client.query(`INSERT INTO saida_taloes (codigo_talao, matricula) VALUES ($1, $2)`, [numeroTalao, matricula])
+            return result.rowCount > 0
+        } catch (error) {
+            console.error('Erro ao executar a query:', error.stack)
+            throw error
+        } finally {
+            client.release()
+        }
+    }
+
     async createTaloes( lojaDestino, dataEnvio, quantidade, recebedor, dataRecebimentoPrevisto ) {
         const client = await conectarDb()
 
         try {
-            client.query(`
+            const result = await client.query(`
                 INSERT INTO envio_taloes (cod_loja, data_envio, quantidade, id_funcionario_recebimento, data_recebimento_previsto, status)
                 VALUES ($1, $2, $3, $4, $5, $6)
             `, [lojaDestino, dataEnvio, quantidade, recebedor, dataRecebimentoPrevisto, 'Enviado'])
+            return result.rowCount > 0
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
             throw error

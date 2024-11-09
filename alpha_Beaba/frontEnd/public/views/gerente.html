@@ -13,11 +13,11 @@
     <div class="main">
         <header>
             <nav id="menu">
-                <span id="fechar" onclick="mostrarMenu()">&times;</span>
+                <span id="fechar">&times;</span>
                 <img src="../img/logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" id="mostrarGestaoEstoque"><i class="fas fa-boxes"></i> Gestão de Estoque</a></li>
+                    <!--<li><a href="#" id="mostrarGestaoEstoque"><i class="fas fa-boxes"></i> Gestão de Estoque</a></li>-->
                     <li><a href="#" id="mostrarGestaoPerfil"><i class="fas fa-user-cog"></i> Perfil de Acesso</a></li>
                     <li><a href="#" id="mostrarGestaoLoja"><i class="fas fa-store"></i> Loja</a></li> 
                     <li><a href="#" id="mostrarGestaoRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
@@ -34,11 +34,12 @@
                     </div> 
                 </div>
             </nav>
-            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <button id="menuButton">&#9776;</button>
             <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
 
         <main>
+            <!--
             <section id="estoque" style="display: none;">
                     <h2>Gestão de Estoque</h2>
                     <div class="filtro filtro-container">
@@ -154,7 +155,7 @@
                         <span id="pagInfoEstoque"></span>
                         <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
-            </section>
+            </section> -->
 
             <section id="perfilAcesso" style="display: none;">
                 <div class="alternador">
@@ -178,119 +179,10 @@
                                 <tr>
                                     <th>Matricula</th>
                                     <th>Nome</th>
-                                    <th>Tipo usuário</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody id="perfis-tbody">
-                                <tr id="perfil-linha">
-                                    <td data-label="Matricula" id="perfil-matricula">254875</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
-                                    <td data-label="Nº do Caixa" id="numero-caixa">Caixa 07</td>
-                                    <td data-label="Ações" class="acoes" id="acoesPerfil">
-                                        <div id="BotaoAcaoPerfil">
-                                            <a href="#" class="botaoAcao" id="editarCaixa"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="deletarPerfil"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvarEdicaoCaixa" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 04</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 09</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 08</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 06</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 03</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 07</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 05</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 02</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

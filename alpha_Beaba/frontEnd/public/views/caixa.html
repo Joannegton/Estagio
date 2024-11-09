@@ -11,14 +11,10 @@
     <script src="../js/caixa/main.js" type="module"></script>
 </head>
 <body>
-
-    <!-- O caixa vai receber um sinal verde significando que o score do cliente é bom para receber um talao
-     ai caso o cliente queira, o caixa solicita um talão pelo codigo do talão e ja inclui o cliente dono do
-     talão, da baixa no sistema e entrega o talão -->
     <div class="main">
         <header>
             <nav id="menu">
-                <span id="fechar" onclick="mostrarMenu()">&times;</span>
+                <span id="fechar">&times;</span>
                 <img src="../img/logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
@@ -27,8 +23,8 @@
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
                     <div id="usuario-info">
-                        <p id="usuario-nome">Anderson Malaquias</p>
-                        <p id="usuario-nome">234578</p>
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
                     </div>
                     <div id="sair-usuario">
                         <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
@@ -36,7 +32,7 @@
                     </div>
                 </div>
             </nav>
-            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <button id="menuButton">&#9776;</button>
             <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
 
@@ -44,40 +40,37 @@
             <section id="saidaTaloes">
                 <h2>Saída de Talão</h2>
                 <form id="formSaidaTalao">
-                    <div class=" " style="justify-content: center;">
                         <div class="container-label talao">
                             <label for="numeroTalao">Número do Talão:</label>
                             <input type="number" name="numeroTalao" id="numeroTalao">
                         </div>
-                    </div>
                     <button type="submit">Cadastrar</button>
                 </form>
             </section>
 
             <section id="perfilUsuario" style="display: none;">
-                <h2>Perfil do Usuário</h2>
-                <form >
+                <h2 id="nome_usuario"></h2>
+                <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
-                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                        <input type="text" name="matricula" id="matricula" disabled>
                     </div>
                     <div class="container-labe">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                        <input type="text" name="nome" id="nome" >
                     </div>
                     <div class="container-labe">
                         <label for="email">E-mail:</label>
                         <input type="email" name="email" id="email">
                     </div>
                     <div class="container-labe">
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" name="workplace" id="workplace" >
                     </div>
                     <div class="container-labe">
-                        <label for="Repetirsenha">Repetir Senha:</label>
-                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                        <button type="button" id="botaoEditarSenha">Mudar senha</button>
                     </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>
             </section>
         </main>
