@@ -12,15 +12,24 @@ class UsuarioController {
     }
 
     async createUser(req, res) {
-        const { matricula, nome, tipoUsuario, loja } = req.body
+        const { matricula, nome, loja } = req.body
+        let { tipoUsuario } = req.body
 
-        if (!matricula || !tipoUsuario) {
-            return res.status(400).json({message: 'Matrícula e tipo de usuário são obrigatórios'})
+        if (!matricula) {
+            return res.status(400).json({message: 'Matrícula é obrigatória'})
         }
+        if(!tipoUsuario){
+            tipoUsuario = 3
+        }
+        
         try {
             const result = await usuarioService.createUser(matricula, nome, tipoUsuario, loja)
+            console.log(result)
             result ? res.status(201).json({message: 'Usuário cadastrado com sucesso'}) : res.status(400).json({message: 'Erro ao cadastrar usuário'})
         } catch (error) {
+            if (error.code === '23505') { // Código de erro para violação de chave única no PostgreSQL
+                return res.status(409).json({ message: 'Usuário com essa matrícula já existe' })
+            }
             console.error('Erro ao criar usuario:', error.stack)
             res.status(500).json({message: 'Erro ao criar usuario'})
         }

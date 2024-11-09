@@ -1,4 +1,4 @@
-import { esconderElementos, alternador, mostrarMenu, mostrarElemento } from "../../utils.js"
+import { esconderElementos, alternador, mostrarMenu, mostrarElemento, desativarBotao, ativarBotao } from "../../utils.js"
 
 async function mostrarPerfilAcesso(){
     await mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', () =>{
@@ -58,8 +58,42 @@ function cadastroMassa() {
     }
 }
 
-function cadastrarPerfil(){
-    alert('Cadastrar Perfil')
+async function cadastrarPerfil(){
+    desativarBotao("CadastrarPerfil")
+    const formulario = document.getElementById('formCadUsuario')
+    const formData = new FormData(formulario)
+
+    const dados = {
+        matricula: formData.get('matricula'),
+        nome: formData.get('nomeUsuario'),
+        loja: localStorage.getItem('cod_loja')
+    }
+    console.log(localStorage.getItem('cod_loja'))
+
+    try {
+        const response = await fetch('http://localhost:3000/api/usuarios', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+
+
+        if(!response.ok){
+            const errorData = await response.json()
+            alert(errorData.message || 'Erro ao cadastrar usuário')
+            return
+        }
+
+        alert('Usuário cadastrado com sucesso.')
+        formulario.reset()
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error)
+        alert('Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.')
+    } finally{
+        ativarBotao('CadastrarPerfil')
+    }
 }
 
 function mostrarInput(){

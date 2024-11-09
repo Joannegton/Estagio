@@ -307,41 +307,11 @@
                         <button id="cadastrarMassa" class="exportarCSV" onclick="cadastroMassa()">Cadastro em Massa</button>
                     </div>
                     <form id="formCadUsuario">
-                        <div id="cadastroMassa" style="display: none;">
-                            <input type="file" name="cadastroEmMassa" id="cadastroEmMassa" accept=".xls,.xlsx,.csv">
-                            <div class="tabela-container">
-                                <table style="background-color: white;">
-                                    <thead >
-                                        <tr>
-                                            <th  colspan="3">Exemplo de planilha</th> <!--usa 3 colunas-->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td data-label="Matricula">654321</td>
-                                            <td data-label="Nome">Wellington tavares</td>
-                                            <td data-label="Numero_caixa">Caixa</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                         <div id="cadastroSimples">
-                            <label for="matriculaUsuario">Matricula do Usuario:</label>
-                            <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
+                            <label for="matricula">Matricula do Usuario:</label>
+                            <input type="text" id="matricula" name="matricula" required>
                             <label for="nomeUsuario">Nome:</label>
                             <input type="text" name="nomeUsuario" id="nomeUsuario" required>
-                            <label for="numeroCaixa">Número do Caixa:</label>
-                            <select id="tipoUsuarioGerente" name="tipoUsuario">
-                                <option value="caixa1">Caixa 01</option>
-                                <option value="caixa2">Caixa 02</option>
-                                <option value="caixa3">Caixa 03</option>
-                                <option value="caixa4">Caixa 04</option>
-                                <option value="caixa5">Caixa 05</option>
-                                <option value="caixa6">Caixa 06</option>
-                                <option value="caixa7">Caixa 07</option>
-                            </select>
                         </div>
                         <button type="submit" id="CadastrarPerfil">Cadastrar Perfil</button>
                     </form>

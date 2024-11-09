@@ -40,7 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('cadastrarMassa').addEventListener('click', cadastroMassa)
     
-    document.getElementById('CadastrarPerfil').addEventListener('click', cadastrarPerfil)
+    document.getElementById('formCadUsuario').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        mostrarModalCarregamento()
+        try{
+            await cadastrarPerfil()
+        } finally{
+            esconderModalCarregamento()
+        }
+    })
     
     document.getElementById('editarCaixa').addEventListener('click', mostrarInput)
     

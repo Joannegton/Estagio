@@ -75,7 +75,7 @@ class UsuarioService {
         } catch (error) {
             await client.query('ROLLBACK')
             console.error('Erro ao executar a query: ', error)
-            return false
+            throw error
         } finally {
             client.release()
         }

@@ -140,7 +140,8 @@ async function createUser() {
             formulario.reset()
         } else {
             const errorData = await response.json()
-            alert(`Erro ao cadastrar usuário: ${errorData.message || response.statusText}`)
+            alert(errorData.message || 'Erro ao cadastrar usuário')
+            return
         }
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error)
