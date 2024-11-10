@@ -1,4 +1,5 @@
 import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 async function mostrarEnvioTaloes(){
     await mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', carregarSelects)
@@ -18,7 +19,7 @@ async function enviarTalao() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/taloes', {
+        const response = await fetch(`${API_URL}/taloes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +44,7 @@ async function enviarTalao() {
 
 async function carregarSelects() {
     try {
-        await carregarDadosSelect('lojaDestinataria', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
+        await carregarDadosSelect('lojaDestinataria', `${API_URL}/loja`, 'cod_loja', 'nome_loja')
     } catch (error) {
         console.error('Erro ao carregar os dados do select de loja:', error)
         alert('Erro ao carregar os dados do select de loja. Por favor, tente novamente mais tarde.')
@@ -55,7 +56,7 @@ async function carregarSelects() {
         lojaSelect.addEventListener('change', async (event) => {
             const codLoja = event.target.value
             try {
-                const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`)
+                const response = await fetch(`${API_URL}/loja/${codLoja}`)
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`)
                 }
@@ -83,7 +84,7 @@ async function carregarGerente(gerenteId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/usuarios/${gerenteId}`)
+        const response = await fetch(`${API_URL}/usuarios/${gerenteId}`)
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)

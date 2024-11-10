@@ -1,4 +1,5 @@
 import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let remessas = []
 
@@ -27,7 +28,7 @@ async function carregarEstoqueLoja() {
     document.getElementById('quantidadeEstoque').innerHTML = ''
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`http://localhost:3000/api/estoque/${codLoja}`)
+        const response = await fetch(`${API_URL}/estoque/${codLoja}`)
         if (!response.ok) {
             const errorData = await response.json()
             throw new Error(errorData.message)
@@ -46,7 +47,7 @@ async function carregarEstoqueLoja() {
 async function fetchRemessa() {
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`http://localhost:3000/api/taloes/${codLoja}`)
+        const response = await fetch(`${API_URL}/taloes/${codLoja}`)
         if(!response.ok){
             const errorData = await response.json()
             throw new Error(errorData.message)
@@ -63,7 +64,7 @@ async function fetchRemessa() {
 async function fetchSaidas() {
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`http://localhost:3000/api/taloes/saida/${codLoja}`)
+        const response = await fetch(`${API_URL}/taloes/saida/${codLoja}`)
         if(!response.ok){
             const errorData = await response.json()
             throw new Error(errorData.message)
@@ -158,7 +159,7 @@ function renderizarEntradas(listaRemessas){
 
 async function receberRemessa(remessa){
     try {
-        const response = await fetch(`http://localhost:3000/api/taloes/${remessa}/accept`, {
+        const response = await fetch(`${API_URL}/taloes/${remessa}/accept`, {
             method: 'PUT',
             headers:{
                 "Content-Type": 'application/json'

@@ -1,3 +1,5 @@
+import { API_URL } from "./js/config/config.js"
+
 function mostrarMenu() {
     const nav = document.getElementById('menu')
     if (window.innerWidth <= 1000) {
@@ -171,7 +173,7 @@ function isTokenExpirado(token) {
 async function logout() {
     const matricula = localStorage.getItem('matricula')
     try {
-        const response = await fetch('http://localhost:3000/api/logout', {
+        const response = await fetch(`${API_URL}/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +197,7 @@ async function logout() {
 // carregar dados em selects
 async function carregarDadosSelect(idSelect, url, value, textContent) {
     const select = document.getElementById(idSelect)
-    select.innerHTML = ''
+    select.innerHTML = ' '
 
     const response = await fetch(url)
     

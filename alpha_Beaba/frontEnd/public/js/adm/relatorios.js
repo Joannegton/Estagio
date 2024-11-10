@@ -1,5 +1,6 @@
 import { alternador, mostrarElemento } from "../../utils.js"
 import { mostrarEnvioTaloes } from "./envioTaloes.js"
+import { API_URL } from "../config/config.js"
 
 
 async function mostrarRelatorios() {
@@ -27,19 +28,19 @@ async function alternadorRelatorios() {
 
 async function carregarDadosRelatorios() {
     try {
-        await carregarDadosElemento('http://localhost:3000/api/usuarios', 'usuariosTotais')
+        await carregarDadosElemento(`${API_URL}/usuarios`, 'usuariosTotais')
     } catch (error) {
         console.error('Erro ao carregar dados de usuários:', error)
     }
 
     try {
-        await carregarDadosElemento('http://localhost:3000/api/loja', 'lojasTotais')
+        await carregarDadosElemento(`${API_URL}/loja`, 'lojasTotais')
     } catch (error) {
         console.error('Erro ao carregar dados de lojas:', error)
     }
 
     try {
-        await carregarDadosElemento('http://localhost:3000/api/taloes', 'enviadosTotais')
+        await carregarDadosElemento(`${API_URL}/taloes`, 'enviadosTotais')
     } catch (error) {
         console.error('Erro ao carregar dados de talões:', error)
     }
@@ -51,7 +52,7 @@ async function renderizartabelaEstoqueBaixo(){
     tabelaEstoqueBaixo.innerHTML = ''
     
     try {
-        const response = await fetch('http://localhost:3000/api/estoque')
+        const response = await fetch(`${API_URL}/estoque`)
         if(!response.ok){
             throw new Error('Erro ao buscar dados')
         }
@@ -89,7 +90,7 @@ let enviosChart
 
 async function renderizarGrafico() {
     try {
-        const response = await fetch('http://localhost:3000/api/taloes')
+        const response = await fetch(`${API_URL}/taloes`)
         if(!response.ok){
             throw new Error('Erro ao buscar dados')
         }

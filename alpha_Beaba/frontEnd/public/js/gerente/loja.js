@@ -1,4 +1,5 @@
 import { mostrarElemento } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 import { mostrarRelatorios } from "./relatorio.js"
 
 let loja = {}
@@ -10,7 +11,7 @@ async function mostrarEditarLoja(){
 async function fetchLoja(){
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`)
+        const response = await fetch(`${API_URL}/loja/${codLoja}`)
         if (!response.ok) {
             throw new Error('Erro ao buscar dados da loja')
         }
@@ -44,7 +45,7 @@ async function salvarLoja(){
 
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`http://localhost:3000/api/loja/${codLoja}`, {
+        const response = await fetch(`${API_URL}/loja/${codLoja}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

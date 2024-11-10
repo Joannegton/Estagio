@@ -60,14 +60,14 @@ class TaloesController {
     }
 
     async createTalao(req, res){
-        const {numeroTalao, matricula} = req.body
+        const {numeroTalao, matricula, cod_loja} = req.body
 
         if(!numeroTalao){
             return res.status(400).json({message: 'Preencha todos os campos'})
         }
 
         try {
-            const result = await taloesService.createTalao(numeroTalao, matricula)
+            const result = await taloesService.createTalao(numeroTalao, matricula, cod_loja)
             result ? res.status(200).json({message: 'Talão enviado com sucesso'}): res.status(404).json({message: 'Erro ao enviar talão'})
         } catch (error) {
             console.error('Erro ao enviar talão:', error)

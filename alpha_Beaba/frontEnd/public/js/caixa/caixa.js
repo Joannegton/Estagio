@@ -1,4 +1,5 @@
 import { carregarUsuario, esconderElementos } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
@@ -18,7 +19,8 @@ async function saidaTalao(){
 
     const data = {
         numeroTalao: formData.get('numeroTalao'),
-        matricula: localStorage.getItem('matricula')
+        matricula: localStorage.getItem('matricula'),
+        cod_loja: localStorage.getItem('cod_loja')
     }
     
     if(!numeroTalao){
@@ -27,7 +29,7 @@ async function saidaTalao(){
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/taloes/saida', {
+        const response = await fetch(`${API_URL}/taloes/saida`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

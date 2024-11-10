@@ -1,4 +1,5 @@
 import { ativarBotao, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
@@ -19,7 +20,7 @@ async function salvarEditarUsuario(){
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/usuarios/${localStorage.getItem('matricula')}`, {
+        const response = await fetch(`${API_URL}/usuarios/${localStorage.getItem('matricula')}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ async function salvarEditarSenha(){
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/usuarios/${localStorage.getItem('matricula')}/senha`, {
+        const response = await fetch(`${API_URL}/usuarios/${localStorage.getItem('matricula')}/senha`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

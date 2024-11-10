@@ -1,4 +1,5 @@
 import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, mostrarElemento, ordenarArray } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let envioTaloes = []
 
@@ -9,7 +10,7 @@ async function mostrarManutencao(){
 
 async function fetchEnvioTaloes() {
     try {
-        const response = await fetch('http://localhost:3000/api/taloes')
+        const response = await fetch(`${API_URL}/taloes`)
         if(!response.ok){
             throw new Error('Erro ao buscar remessas')
         }
@@ -156,7 +157,7 @@ async function salvarEdicaoTalao(numero_remessa) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/taloes/${numero_remessa}`, {
+        const response = await fetch(`${API_URL}/taloes/${numero_remessa}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -203,7 +204,7 @@ async function excluirEnvioTalao(numero_remessa) {
 
     if (confirmacao) {
         try {
-            const response = await fetch(`http://localhost:3000/api/taloes/${numero_remessa}`, {
+            const response = await fetch(`${API_URL}/taloes/${numero_remessa}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

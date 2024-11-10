@@ -1,4 +1,5 @@
 import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, mostrarElemento, ordenarArray } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let lojas = [] 
 
@@ -24,7 +25,7 @@ async function alternadorLojas(){
 
 async function fetchLojas(){
     try {
-        const response = await fetch('http://localhost:3000/api/loja')
+        const response = await fetch(`${API_URL}/loja`)
     
         if (!response.ok) {
             throw new Error('Erro ao buscar lojas')
@@ -131,7 +132,7 @@ async function salvarLoja(){
         return
     }
     try {
-        const response = await fetch('http://localhost:3000/api/loja', {
+        const response = await fetch(`${API_URL}/loja`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -174,7 +175,7 @@ async function editarLoja(cod_loja) {
     `
 
     try {
-        await carregarDadosSelect(`select-gerente${cod_loja}`, 'http://localhost:3000/api/usuarios', 'matricula', 'nome_usuario')
+        await carregarDadosSelect(`select-gerente${cod_loja}`, `${API_URL}/usuarios`, 'matricula', 'nome_usuario')
         const selectGerente = document.getElementById(`select-gerente${cod_loja}`)
         for (let i = 0; i < selectGerente.options.length; i++) {
             if (selectGerente.options[i].text === gerente) {
@@ -206,7 +207,7 @@ async function salvarEditarLoja(cod_loja){
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/loja/${cod_loja}`,{
+        const response = await fetch(`${API_URL}/loja/${cod_loja}`,{
             method: 'PUT',
             headers:{
                 'Content-Type': 'application/json'
@@ -249,7 +250,7 @@ async function excluirLoja(cod_loja){
     desativarBotao(`excluirLoja${cod_loja}`)
     if (confirmacao) {
         try {
-            const response = await fetch(`http://localhost:3000/api/loja/${cod_loja}`, {
+            const response = await fetch(`${API_URL}/loja/${cod_loja}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

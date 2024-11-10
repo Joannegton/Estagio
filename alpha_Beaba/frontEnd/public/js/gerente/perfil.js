@@ -1,4 +1,5 @@
-import { esconderElementos, alternador, mostrarMenu, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome } from "../../utils.js"
+import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let usuarios = []
 
@@ -25,7 +26,7 @@ async function alternadorPerfilAcesso() {
 async function fetchUsuarios(){
     const cod_loja = localStorage.getItem('cod_loja')
     try {
-        const response = await fetch(`http://localhost:3000/api/usuarios/loja/${cod_loja}`)
+        const response = await fetch(`${API_URL}/usuarios/loja/${cod_loja}`)
 
         if(!response.ok){
             const errorData = await response.json()
@@ -105,7 +106,7 @@ async function cadastrarPerfil(){
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios', {
+        const response = await fetch(`${API_URL}/usuarios`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -134,7 +135,7 @@ async function excluirUsuario(matricula){
     const confirmacao = confirm(`Tem certeza que deseja excluir ${matricula}?`)
     if(confirmacao){
         try {
-            const response = await fetch(`http://localhost:3000/api/usuarios/${matricula}`, {
+            const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

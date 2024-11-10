@@ -1,4 +1,5 @@
 import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let estoque = []
 
@@ -56,7 +57,7 @@ function renderizarTabela(estoqueRenderizar) {
 
 async function fetchEstoque() {
     try {
-        const response = await fetch('http://localhost:3000/api/estoque')
+        const response = await fetch(`${API_URL}/estoque`)
         if (!response.ok) {
             throw new Error('Erro ao buscar estoque')
         }

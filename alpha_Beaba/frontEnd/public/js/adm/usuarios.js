@@ -1,4 +1,5 @@
 import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, ordenarArray } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 let usuarios = []
 
@@ -80,7 +81,7 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
 //buscar informações de usuarios
 async function fetchUsuarios() {
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios')
+        const response = await fetch(`${API_URL}/usuarios`)
         if (!response.ok) {
             throw new Error('Erro ao buscar usuários')
         }
@@ -127,7 +128,7 @@ async function createUser() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios', {
+        const response = await fetch(`${API_URL}/usuarios`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -170,7 +171,7 @@ async function editarUsuario(matricula) {
     `
 
     try {
-        await carregarDadosSelect(`select-tipoUsuario${matricula}`, 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
+        await carregarDadosSelect(`select-tipoUsuario${matricula}`, `${API_URL}/perfis`, 'id_perfil_acesso', 'perfil_descricao')
         const select = document.getElementById(`select-tipoUsuario${matricula}`)
         const options = select.options
         for (let i = 0; i < options.length; i++) {
@@ -203,7 +204,7 @@ async function salvarEdicaoUsuario(matricula) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/usuarios/${matricula}`, {
+        const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -246,7 +247,7 @@ async function deletarUsuario(matricula) {
     const confirmacao = confirm('Deseja realmente excluir este usuário?')
     if (confirmacao) {
         try {
-            const response = await fetch(`http://localhost:3000/api/usuarios/${matricula}`, {
+            const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -272,23 +273,12 @@ async function deletarUsuario(matricula) {
 }
 
 // carregar selects
-async function carregarSelectsCadastroUsuario(){
-    const lojaSelect = document.getElementById('lojaUsuario')
-    const tipoUsuarioSelect = document.getElementById('tipoUsuario')
-    
+async function carregarSelectsCadastroUsuario() {
     try {
-        if (!lojaSelect.dataset.loaded) { // Evita recarregar os dados do select caso já tenha sido carregado
-            await carregarDadosSelect('lojaUsuario', 'http://localhost:3000/api/loja', 'cod_loja', 'nome_loja')
-            lojaSelect.dataset.loaded = true
-        }
-
-        if (!tipoUsuarioSelect.dataset.loaded) {
-            await carregarDadosSelect('tipoUsuario', 'http://localhost:3000/api/perfis', 'id_perfil_acesso', 'perfil_descricao')
-            tipoUsuarioSelect.dataset.loaded = true
-        }
+        await carregarDadosSelect('lojaUsuario', `${API_URL}/loja`, 'cod_loja', 'nome_loja');
+        await carregarDadosSelect('tipoUsuario', `${API_URL}/perfis`, 'id_perfil_acesso', 'perfil_descricao');
     } catch (error) {
-        console.error('Erro ao carregar os selects:', error)
-        alert('Erro ao carregar os dados dos selects. Por favor, tente novamente mais tarde.')
+        console.error('Erro ao carregar selects de cadastro de usuário:', error);
     }
 }
 
@@ -313,7 +303,7 @@ function filtrarUsuarioNome(event) {
 
 async function verificarGerenteExistente(loja) {
     try {
-        const response = await fetch(`http://localhost:3000/api/loja/${loja}`)
+        const response = await fetch(`${API_URL}/loja/${loja}`)
         if (!response.ok) {
             throw new Error('Erro ao verificar gerente existente')
         }

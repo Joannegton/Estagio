@@ -1,4 +1,5 @@
 import { esconderElementos } from "../../utils.js"
+import { API_URL } from "../config/config.js"
 
 function mostrarRecuperarSenha() {
     document.getElementById('recuperarSenha').style.display = 'flex'
@@ -23,7 +24,7 @@ async function login() {
     const senha = document.getElementById('senha').value
 
     try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

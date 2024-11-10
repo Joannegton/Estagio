@@ -80,10 +80,10 @@ class TaloesService {
         }
     }
 
-    async createTalao(numeroTalao, matricula){
+    async createTalao(numeroTalao, matricula, cod_loja){
         const client = await conectarDb()
         try {
-            const result = await client.query(`INSERT INTO saida_taloes (codigo_talao, matricula) VALUES ($1, $2)`, [numeroTalao, matricula])
+            const result = await client.query(`INSERT INTO saida_taloes (codigo_talao, matricula, cod_loja) VALUES ($1, $2, $3)`, [numeroTalao, matricula, cod_loja])
             return result.rowCount > 0
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)

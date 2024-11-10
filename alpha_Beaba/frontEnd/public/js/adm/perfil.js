@@ -1,5 +1,6 @@
 import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento } from "../../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
+import { API_URL } from "../config/config.js"
 
 let perfis = []
 
@@ -86,7 +87,7 @@ async function alternadorPerfil() {
 // buscar informações de perfis
 async function fetchPerfis() {
     try {
-        const response = await fetch('http://localhost:3000/api/perfis')
+        const response = await fetch(`${API_URL}/perfis`)
         if (!response.ok) {
             throw new Error('Erro ao buscar perfis')
         }
@@ -116,7 +117,7 @@ async function salvarPerfil(){
     }
 
     try {
-        const result = await fetch('http://localhost:3000/api/perfis', {
+        const result = await fetch(`${API_URL}/perfis`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -177,7 +178,7 @@ async function salvarEditarPerfil(idPerfilAcesso) {
     }
 
     try {
-        const result = await fetch(`http://localhost:3000/api/perfis/${idPerfilAcesso}`, {
+        const result = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -207,7 +208,7 @@ async function deletarPerfil(idPerfilAcesso){
     const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
     if (confirmacao) {
         try {
-            const response = await fetch(`http://localhost:3000/api/perfis/${idPerfilAcesso}`,{
+            const response = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`,{
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
