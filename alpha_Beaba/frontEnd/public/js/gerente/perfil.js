@@ -1,4 +1,4 @@
-import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome } from "../../utils.js"
+import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []

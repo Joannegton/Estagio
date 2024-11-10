@@ -1,4 +1,4 @@
-import { mostrarElemento } from "../../utils.js"
+import { mostrarElemento } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { mostrarRelatorios } from "./relatorio.js"
 

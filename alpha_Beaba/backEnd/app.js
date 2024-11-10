@@ -16,6 +16,7 @@ configureMiddlewares(app)
 // Rotas para as páginas HTML
 app.use(viewRouter)
 
+
 app.use('/api', loginRouter)
 app.use('/api', estoqueRouter)
 app.use('/api', lojasRouter)

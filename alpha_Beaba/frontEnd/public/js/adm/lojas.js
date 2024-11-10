@@ -1,4 +1,4 @@
-import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, mostrarElemento, ordenarArray } from "../../utils.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let lojas = [] 

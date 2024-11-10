@@ -1,4 +1,4 @@
-import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, mostrarElemento, ordenarArray } from "../../utils.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let envioTaloes = []

@@ -1,4 +1,4 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, ordenarArray } from "../../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []

@@ -1,4 +1,4 @@
-import { esconderElementos } from "../../utils.js"
+import { esconderElementos } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 function mostrarRecuperarSenha() {

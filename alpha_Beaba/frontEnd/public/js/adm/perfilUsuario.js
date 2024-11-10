@@ -1,4 +1,4 @@
-import { ativarBotao, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../../utils.js"
+import { ativarBotao, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){

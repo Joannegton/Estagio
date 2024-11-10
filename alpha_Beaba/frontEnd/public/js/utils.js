@@ -1,4 +1,4 @@
-import { API_URL } from "./js/config/config.js"
+import { API_URL } from "./config/config.js"
 
 function mostrarMenu() {
     const nav = document.getElementById('menu')

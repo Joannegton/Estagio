@@ -1,4 +1,4 @@
-import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento } from "../../utils.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento } from "../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 import { API_URL } from "../config/config.js"
 

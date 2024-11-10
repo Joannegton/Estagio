@@ -1,4 +1,4 @@
-import { esconderElementos, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { esconderElementos, esconderModalCarregamento, mostrarModalCarregamento } from "../utils.js"
 import { login, mostrarLogin, mostrarPrimeiroAcesso, mostrarRecuperarSenha, recuperarSenha, visualizarSenha } from "./login.js"
 
 document.addEventListener('DOMContentLoaded',() => {

@@ -1,4 +1,4 @@
-import { alternador, mostrarElemento } from "../../utils.js"
+import { alternador, mostrarElemento } from "../utils.js"
 import { mostrarEnvioTaloes } from "./envioTaloes.js"
 import { API_URL } from "../config/config.js"
 

@@ -1,4 +1,4 @@
-import { mostrarElemento } from "../../utils.js"
+import { mostrarElemento } from "../utils.js"
 
 async function mostrarPedidoTaloes() {
     await mostrarElemento('estoque', 'mostrarGestaoEstoque', () => {

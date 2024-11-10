@@ -1,4 +1,4 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 async function mostrarEnvioTaloes(){

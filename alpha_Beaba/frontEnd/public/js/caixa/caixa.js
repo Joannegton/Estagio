@@ -1,4 +1,4 @@
-import { carregarUsuario, esconderElementos } from "../../utils.js"
+import { carregarUsuario, esconderElementos } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){

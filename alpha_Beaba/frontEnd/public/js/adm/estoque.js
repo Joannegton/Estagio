@@ -1,4 +1,4 @@
-import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../../utils.js"
+import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let estoque = []

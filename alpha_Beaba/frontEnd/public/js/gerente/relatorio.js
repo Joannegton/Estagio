@@ -1,4 +1,4 @@
-import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../../utils.js"
+import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let remessas = []
