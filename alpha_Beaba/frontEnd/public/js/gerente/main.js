@@ -2,7 +2,7 @@ import { mostrarPerfilAcesso, exportarPerfis, cadastrarPerfil, filtrarUsuarioNom
 import { mostrarRelatorios, exportarRelatorios, alternadorRelatorios } from './relatorio.js'
 import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js'
 import { mostrarEditarLoja, salvarLoja } from './loja.js'
-import { carregarCardUsuario, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { carregarCardUsuario, completeInformationsPerfil, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
 import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from '../adm/perfilUsuario.js'
 
 
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             carregarCardUsuario()
             await alternadorRelatorios()
+            completeInformationsPerfil()
         } catch (error) {
             alert("Erro ao carregar dados")
         } finally{

@@ -43,14 +43,60 @@ function mostrarModalCarregamento() {
     modal.style.display = 'flex'
 }
 
-
-
 function esconderModalCarregamento() {
     const modal = document.getElementById('modalCarregamento')
     if (modal) {
         modal.style.display = 'none'
     }
 }
+
+// completar informações
+function completeInformationsPerfil() {
+    // Cria o card
+    const floatingCard = document.createElement('div');
+    floatingCard.id = 'floating-card';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Complete as informações';
+    floatingCard.appendChild(title);
+
+    // Lista de tarefas incompletas
+    const taskList = document.createElement('ul');
+    floatingCard.appendChild(taskList);
+
+    // Verifica as condições e adiciona as tarefas
+    const incompleteTasks = [];
+
+    const nome = localStorage.getItem('nome')
+    const email = localStorage.getItem('email')
+    const workplace = localStorage.getItem('workplace')
+    const nome_loja = localStorage.getItem('nome_loja')
+    const endereco_loja = localStorage.getItem('endereco_loja')
+    const telefone = localStorage.getItem('telefone')
+    
+
+    if(!email || email == 'null' || !nome || nome == 'null' || !workplace || workplace == 'null'){
+        incompleteTasks.push(`Complete seu perfil`);
+    }
+
+    if(!nome_loja || nome_loja == 'null' || !endereco_loja || endereco_loja == 'null' || !telefone || telefone == 'null'){
+        incompleteTasks.push(`Complete as informações da Loja`);
+    }
+
+    if (incompleteTasks.length > 0) {
+        incompleteTasks.forEach(task => {
+            const listItem = document.createElement('li');
+            listItem.textContent = task;
+            taskList.appendChild(listItem);
+        });
+
+        floatingCard.style.display = 'block';
+    }
+
+    // Adiciona o card ao body
+    document.body.appendChild(floatingCard);
+}
+
 
 // função para mostrar sessão e inicializar
 async function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional) {
@@ -287,4 +333,4 @@ function ativarBotao(elementoId) {
 
 
 
-export {mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {completeInformationsPerfil, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

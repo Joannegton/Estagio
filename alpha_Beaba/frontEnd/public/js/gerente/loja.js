@@ -24,6 +24,10 @@ async function fetchLoja(){
 }
 
 function carregarDadosLoja(loja) {
+    localStorage.setItem('nome_loja', loja.nome_loja)
+    localStorage.setItem('endereco_loja', loja.endereco_loja)
+    localStorage.setItem('telefone', loja.telefone)
+
     document.getElementById('nomeLoja').value = loja.nome_loja
     document.getElementById('enderecoLoja').value = loja.endereco_loja
     document.getElementById('telefone').value = loja.telefone

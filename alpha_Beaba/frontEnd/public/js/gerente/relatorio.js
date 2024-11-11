@@ -131,6 +131,7 @@ function renderizarEntradas(listaRemessas){
                     return
                 }
                 await receberRemessa(item.numero_remessa)
+                await carregarEstoqueLoja()
             })
         })
     }

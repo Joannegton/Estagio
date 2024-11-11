@@ -10,7 +10,10 @@ class LoginService {
     async login(matricula, senha) {
         const client = await conectarDb()
         try {
-            const result = await client.query('SELECT * FROM usuario WHERE matricula = $1', [matricula])
+            const result = await client.query(`
+                SELECT * FROM usuario
+                JOIN usuario_loja ON usuario.matricula = usuario_loja.usuario_matricula 
+                WHERE matricula = $1`, [matricula])
             if (result.rows.length > 0) {
                 const user = result.rows[0]
                 const isPasswordValid = await bcrypt.compare(senha, user.senha)

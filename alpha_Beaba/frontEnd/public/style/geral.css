@@ -34,6 +34,28 @@ header, footer {
   flex-shrink: 0;
 }
 
+/* styles.css */
+#floating-card {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 300px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: none; /* Inicialmente escondido */
+}
+
+#floating-card h3 {
+  margin-top: 0;
+}
+
+#floating-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 /* -Menu- */
 nav {
   background-color: var(--cor-primaria);
