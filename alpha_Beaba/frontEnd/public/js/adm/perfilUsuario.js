@@ -1,4 +1,4 @@
-import { ativarBotao, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../utils.js"
+import { ativarBotao, carregarCardUsuario, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){
@@ -32,6 +32,7 @@ async function salvarEditarUsuario(){
             localStorage.setItem('nome', data.nome_usuario)
             localStorage.setItem('email', data.email)
             localStorage.setItem('workplace', data.workplace)
+            carregarCardUsuario()
         } else {
             alert('Erro ao editar usuário')
         }

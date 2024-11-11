@@ -24,7 +24,6 @@ class UsuarioController {
         
         try {
             const result = await usuarioService.createUser(matricula, nome, tipoUsuario, loja)
-            console.log(result)
             result ? res.status(201).json({message: 'Usuário cadastrado com sucesso'}) : res.status(400).json({message: 'Erro ao cadastrar usuário'})
         } catch (error) {
             if (error.code === '23505') { // Código de erro para violação de chave única no PostgreSQL

@@ -31,14 +31,15 @@ create table usuario (
     email varchar(120),
     token varchar(255),
     workplace varchar(255),
-    cod_loja integer references loja(cod_loja) on delete set null,
     id_perfil_acesso integer references perfil_acesso(id_perfil_acesso) on delete set null
 );
 
--- se tentar criar a tabela com gerente_id da erro
-alter table loja
-add column gerente_id varchar(7) references usuario(matricula) on delete set null; 
-
+create table usuario_loja (
+    id serial primary key,
+    usuario_matricula varchar(7) not null references usuario(matricula) on delete cascade,
+    cod_loja integer not null references loja(cod_loja) on delete cascade,
+    is_gerente boolean default false
+);
 
 create table envio_taloes (
     numero_remessa serial primary key,
@@ -51,16 +52,10 @@ create table envio_taloes (
 );
 
 create table estoque_taloes (
+    id_estoque serial primary key,
     cod_loja integer references loja(cod_loja) on delete set null,
     quantidade_disponivel integer,
     quantidade_recomendada integer
-);
-
-create table caixa (
-    id_caixa serial primary key,
-    cod_loja integer references loja(cod_loja) on delete set null,
-    matricula varchar(7) references usuario(matricula) on delete cascade,
-    estoque integer
 );
 
 create table saida_taloes (
@@ -71,11 +66,6 @@ create table saida_taloes (
     cod_loja integer references loja(cod_loja) on delete cascade
 );
 
-create table estoque_caixa (
-    id_estoque_caixa serial primary key,
-    id_caixa integer references caixa(id_caixa) on delete cascade,
-    quantidade_estoque_caixa integer
-);
 
 -- Inserindo permissões de leitura e escrita para todas as funcionalidades
 
@@ -109,16 +99,6 @@ INSERT INTO permissoes (modulo, tipo_permissao) VALUES
 ('Estoque', 'leitura'),
 ('Estoque', 'escrita');
 
--- Permissões para 'Caixas'
-INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
-('Caixas', 'leitura'),
-('Caixas', 'escrita');
-
--- Permissões para 'Estoque Caixa'
-INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
-('Estoque Caixa', 'leitura'),
-('Estoque Caixa', 'escrita');
-
 -- Permissões para 'Envio Talões'
 INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
 ('Envio Talões', 'leitura'),
@@ -129,6 +109,29 @@ INSERT INTO permissoes (modulo, tipo_permissao) VALUES
 ('Saída Talões', 'leitura'),
 ('Saída Talões', 'escrita');
 
+-- Perfis de caesso
+INSERT INTO perfil_acesso (descricao) VALUES 
+('Administrador');
+
+INSERT INTO perfil_acesso (descricao) VALUES 
+('Gerente');
+
+INSERT INTO perfil_acesso (descricao) VALUES 
+('Caixa');
 
 
+-- Criar a loja matriz
+INSERT INTO loja (nome_loja, endereco_loja, telefone, estoque_minimo) VALUES 
+('Matriz', 'Rua Principal, 123', '(11) 1234-5678', 100);
 
+-- Inserir o usuário Wellington Tavares
+INSERT INTO usuario (matricula, nome_usuario, senha, email, token, workplace, id_perfil_acesso) VALUES 
+('Quero@2024#', 'Wellington Tavares', 'Quero@2024#', 'wellington.tavares@verdecard.com', 'token123', 'Matriz', 1);
+
+-- Associar o usuário Wellington Tavares à loja matriz e definir como gerente
+INSERT INTO usuario_loja (usuario_matricula, cod_loja, is_gerente) VALUES 
+('1234567', (SELECT cod_loja FROM loja WHERE nome_loja = 'Matriz'), true);
+
+-- Conceder todas as permissões ao perfil de acesso do usuário Wellington Tavares
+INSERT INTO perfil_acesso_permissoes (id_perfil_acesso, id_permissao)
+SELECT 1, id_permissao FROM permissoes;

@@ -44,9 +44,10 @@ class LojasService {
                     usuario.nome_usuario AS "gerente", 
                     loja.estoque_minimo
                 FROM loja
-                LEFT JOIN usuario ON loja.gerente_id = usuario.matricula
+                LEFT JOIN usuario_loja ON loja.cod_loja = usuario_loja.cod_loja AND usuario_loja.is_gerente = true
+                LEFT JOIN usuario ON usuario_loja.usuario_matricula = usuario.matricula
                 LEFT JOIN estoque_taloes ON loja.cod_loja = estoque_taloes.cod_loja
-                ORDER BY loja.cod_loja
+                ORDER BY loja.cod_loja;
             `)
             return result.rows
         } catch (error) {
@@ -65,12 +66,13 @@ class LojasService {
                     loja.cod_loja, 
                     loja.nome_loja, 
                     usuario.nome_usuario AS "gerente", 
-                    loja.gerente_id,
+                    usuario_loja.usuario_matricula AS "gerente_id",
                     loja.estoque_minimo,
                     loja.endereco_loja,
                     loja.telefone
                 FROM loja
-                LEFT JOIN usuario ON loja.gerente_id = usuario.matricula
+                LEFT JOIN usuario_loja ON loja.cod_loja = usuario_loja.cod_loja AND usuario_loja.is_gerente = true
+                LEFT JOIN usuario ON usuario_loja.usuario_matricula = usuario.matricula
                 WHERE loja.cod_loja = $1
             `, [codLoja])
             return result.rows[0]
@@ -98,33 +100,41 @@ class LojasService {
         values.push(codLoja)
     
         try {
-            await client.query('BEGIN') 
+            await client.query('BEGIN')
     
             if (updates.gerente_id) {  // Verificar gerente atual
                 const { rows: currentGerente } = await client.query(
-                    `SELECT gerente_id FROM loja WHERE cod_loja = $1`,
+                    `SELECT usuario_matricula FROM usuario_loja WHERE cod_loja = $1 AND is_gerente = true`,
                     [codLoja]
                 )
     
-                const currentGerenteId = currentGerente[0]?.gerente_id
+                const currentGerenteId = currentGerente[0]?.usuario_matricula
     
                 if (currentGerenteId !== updates.gerente_id) {
-                    await client.query(
-                        `UPDATE usuario SET id_perfil_acesso = NULL WHERE matricula = $1`,
-                        [currentGerenteId]
-                    ) // Remove o cargo de gerente do usuário atual
-    
-                    
-                    await client.query(
-                        `UPDATE usuario SET id_perfil_acesso = (SELECT id_perfil_acesso FROM perfil_acesso WHERE descricao = 'Gerente') WHERE matricula = $1`,
-                        [updates.gerente_id]
-                    ) // Atualiza novo gerente na tabela usuario
+                    if (currentGerenteId) {
+                        await client.query(
+                            `UPDATE usuario_loja SET is_gerente = false WHERE usuario_matricula = $1 AND cod_loja = $2`,
+                            [currentGerenteId, codLoja]
+                        ) // Remove o cargo de gerente do usuário atual
+                    }
     
                     await client.query(
-                        `UPDATE loja SET gerente_id = $1 WHERE cod_loja = $2`,
+                        `UPDATE usuario_loja SET is_gerente = true WHERE usuario_matricula = $1 AND cod_loja = $2`,
                         [updates.gerente_id, codLoja]
-                    ) // Atualiza gerente_id na loja
-
+                    ) // Define o novo gerente na tabela usuario_loja
+    
+                    // Se o novo gerente não estiver na tabela usuario_loja, insere um novo registro
+                    const { rowCount } = await client.query(
+                        `UPDATE usuario_loja SET is_gerente = true WHERE usuario_matricula = $1 AND cod_loja = $2`,
+                        [updates.gerente_id, codLoja]
+                    )
+    
+                    if (rowCount === 0) {
+                        await client.query(
+                            `INSERT INTO usuario_loja (usuario_matricula, cod_loja, is_gerente) VALUES ($1, $2, true)`,
+                            [updates.gerente_id, codLoja]
+                        )
+                    }
                 }
             }
     

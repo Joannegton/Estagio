@@ -13,7 +13,8 @@ class UsuarioService {
                     l.nome_loja 
                 FROM usuario
                 JOIN perfil_acesso p ON usuario.id_perfil_acesso = p.id_perfil_acesso
-                LEFT JOIN loja l ON usuario.cod_loja = l.cod_loja
+                LEFT JOIN usuario_loja ul ON usuario.matricula = ul.usuario_matricula AND ul.is_gerente = true
+                LEFT JOIN loja l ON ul.cod_loja = l.cod_loja
                 ORDER BY usuario.nome_usuario ASC
             `)
             return result.rows
@@ -45,7 +46,12 @@ class UsuarioService {
     async getUsersByCod_loja(cod_loja){
         const client = await conectarDb()
         try {
-            const result = await client.query('SELECT matricula, nome_usuario FROM usuario WHERE cod_loja = $1', [cod_loja])
+            const result = await client.query(`
+                SELECT usuario.matricula, usuario.nome_usuario 
+                FROM usuario
+                JOIN usuario_loja ul ON usuario.matricula = ul.usuario_matricula
+                WHERE ul.cod_loja = $1
+            `, [cod_loja])
             return result.rows
         } catch (error) {
             console.error('Erro ao executar a query:', error.stack)
@@ -60,27 +66,30 @@ class UsuarioService {
         const senha = await bcrypt.hash('Quero@2024#', 10)
         try {
             await client.query('BEGIN')
-
+    
             const result = await client.query(
-                'INSERT INTO usuario (matricula, nome_usuario, senha, cod_loja, id_perfil_acesso) VALUES ($1, $2, $3, $4, $5)',
-                [matricula, nome, senha, loja, tipoUsuario]
+                'INSERT INTO usuario (matricula, nome_usuario, senha, id_perfil_acesso) VALUES ($1, $2, $3, $4)',
+                [matricula, nome, senha, tipoUsuario]
             )
-            if (result.rowCount > 0 && loja) {
-                const updateResult = await client.query(
-                    'UPDATE loja SET gerente_id = $1 WHERE cod_loja = $2',
-                    [matricula, loja]
+    
+            if (result.rowCount > 0) {
+                let isGerente = false
+                if (tipoUsuario == 2) { // Verifica se o perfil de acesso é 2 (Gerente)
+                    isGerente = true
+                }
+    
+                const { rowCount } = await client.query(
+                    'INSERT INTO usuario_loja (usuario_matricula, cod_loja, is_gerente) VALUES ($1, $2, $3)',
+                    [matricula, loja, isGerente]
                 )
-        
-                if (updateResult.rowCount > 0) {
+    
+                if (rowCount > 0) {
                     await client.query('COMMIT')
                     return true
                 } else {
                     await client.query('ROLLBACK')
                     return false
                 }
-            } else if (result.rowCount > 0) {
-                await client.query('COMMIT')
-                return true
             } else {
                 await client.query('ROLLBACK')
                 return false
@@ -173,10 +182,6 @@ class UsuarioService {
             client.release()
         }
     }
-
-    
-
-
 }
 
 module.exports = new UsuarioService()
