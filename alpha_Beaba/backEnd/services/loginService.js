@@ -40,7 +40,7 @@ class LoginService {
                     await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula])
                     return { token: newToken, user }
                 } else {
-                    throw new Error('Senha inválida')
+                    throw new Error('Matricula ou senha inválidos')
                 }
             } else {
                 throw new Error('Matricula ou senha inválidos')

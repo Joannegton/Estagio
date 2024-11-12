@@ -19,9 +19,20 @@ function mostrarLogin() {
 }
 
 //arrumar para fomulario
+const MAX_ATTEMPTS = 3
+const LOCKOUT_TIME = 30 * 60 * 1000
+
 async function login() {
     const matricula = document.getElementById('matricula').value
     const senha = document.getElementById('senha').value
+
+    const attempts = parseInt(localStorage.getItem('loginAttempts')) || 0
+    const lastAttemptTime = parseInt(localStorage.getItem('lastAttemptTime')) || 0
+    const currentTime = Date.now()
+    if (attempts >= MAX_ATTEMPTS && (currentTime - lastAttemptTime) < LOCKOUT_TIME) {
+        alert('Muitas tentativas de login. Por favor, tente novamente em 30 minutos.');
+        return;
+    }
 
     try {
         const response = await fetch(`${API_URL}/login`, {
@@ -43,6 +54,10 @@ async function login() {
             localStorage.setItem('email', email)
             localStorage.setItem('workplace', workplace)
             localStorage.setItem('cod_loja', cod_loja)
+
+            // Reset login 
+            localStorage.setItem('loginAttempts', 0)
+            localStorage.setItem('lastAttemptTime', 0)
 
             let nomePerfil = ''
             switch (tipoUsuario) {
@@ -89,7 +104,10 @@ async function login() {
     
             window.location.href = pagina
         } else {
-            alert('Erro ao fazer login')
+            const errorData = await response.json()
+            alert(errorData.message)
+            localStorage.setItem('loginAttempts', attempts + 1)
+            localStorage.setItem('lastAttemptTime', currentTime)
         }
     } catch (error) {
         console.error('Erro ao fazer login:', error)
