@@ -68,4 +68,52 @@ async function salvarLoja(){
     }
 }
 
-export { mostrarEditarLoja, salvarLoja }
+// completar informações
+async function completeInformations() {
+    await fetchLoja()
+    console.log('chamouu')
+
+    // Cria o card
+    const floatingCard = document.createElement('div');
+    floatingCard.id = 'floating-card';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Complete as informações';
+    floatingCard.appendChild(title);
+
+    // Lista de tarefas incompletas
+    const taskList = document.createElement('ul');
+    floatingCard.appendChild(taskList);
+
+    // Verifica as condições e adiciona as tarefas
+    const incompleteTasks = [];
+
+    const userProfileFields = ['nome', 'email', 'workplace'];
+    const storeProfileFields = ['nome_loja', 'endereco_loja', 'telefone'];
+    
+    const isFieldIncomplete = (field) => !field || field === 'null';
+
+    const userProfileIncomplete = userProfileFields.some(field => isFieldIncomplete(localStorage.getItem(field)));
+    const storeProfileIncomplete = storeProfileFields.some(field => isFieldIncomplete(localStorage.getItem(field)));
+
+    if (userProfileIncomplete) {
+        incompleteTasks.push('Complete seu perfil');
+    }
+
+    if (storeProfileIncomplete) {
+        incompleteTasks.push('Complete as informações da Loja');
+    }
+
+    if (incompleteTasks.length > 0) {
+        incompleteTasks.forEach(task => {
+            const listItem = document.createElement('li');
+            listItem.textContent = task;
+            taskList.appendChild(listItem);
+        });
+
+        floatingCard.style.display = 'block';
+        document.body.appendChild(floatingCard);
+    }
+}
+
+export { completeInformations, mostrarEditarLoja, salvarLoja, fetchLoja }

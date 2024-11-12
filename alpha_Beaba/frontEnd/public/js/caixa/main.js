@@ -58,6 +58,5 @@ document.addEventListener('DOMContentLoaded',() => {
 
     window.onload = () => {
         carregarCardUsuario()
-        completeInformationsPerfil()
     }
 })

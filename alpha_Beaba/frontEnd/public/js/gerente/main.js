@@ -1,8 +1,7 @@
 import { mostrarPerfilAcesso, exportarPerfis, cadastrarPerfil, filtrarUsuarioNome } from './perfil.js'
 import { mostrarRelatorios, exportarRelatorios, alternadorRelatorios } from './relatorio.js'
-import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js'
-import { mostrarEditarLoja, salvarLoja } from './loja.js'
-import { carregarCardUsuario, completeInformationsPerfil, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { completeInformations, mostrarEditarLoja, salvarLoja } from './loja.js'
+import { carregarCardUsuario, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
 import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from '../adm/perfilUsuario.js'
 
 
@@ -12,16 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarPerfilUsuario()
         sessionStorage.removeItem('mostrarPerfilUsuario')
     }
-
-    // Menu navegação
-   /* document.getElementById('mostrarGestaoEstoque').addEventListener('click', async () =>{
-        mostrarModalCarregamento()
-        try{
-            await mostrarPedidoTaloes()
-        } finally{
-            esconderModalCarregamento()
-        }
-    })*/
 
     document.getElementById('mostrarGestaoPerfil').addEventListener('click', async () => {
         mostrarModalCarregamento()
@@ -63,11 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('menuButton').addEventListener('click', mostrarMenu)
     document.getElementById('fechar').addEventListener('click', mostrarMenu)
 
-
-    // Estoque
-    //document.getElementById('reporEstoque').addEventListener('click', reporEstoque)
-    //document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque)
-    
     // Perfis
     document.getElementById('filtroUsuario').addEventListener('input', filtrarUsuarioNome)
     
@@ -105,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             carregarCardUsuario()
             await alternadorRelatorios()
-            completeInformationsPerfil()
+            await completeInformations()
         } catch (error) {
             alert("Erro ao carregar dados")
         } finally{
