@@ -176,7 +176,7 @@ async function logout() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify({ matricula })
         })

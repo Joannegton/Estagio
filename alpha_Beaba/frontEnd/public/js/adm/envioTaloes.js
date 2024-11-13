@@ -22,7 +22,8 @@ async function enviarTalao() {
         const response = await fetch(`${API_URL}/taloes`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })

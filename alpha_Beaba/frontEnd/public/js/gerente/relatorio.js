@@ -163,7 +163,8 @@ async function receberRemessa(remessa){
         const response = await fetch(`${API_URL}/taloes/${remessa}/accept`, {
             method: 'PUT',
             headers:{
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             }
         })
         if(!response.ok){

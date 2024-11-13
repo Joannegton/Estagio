@@ -52,7 +52,8 @@ async function salvarLoja(){
         const response = await fetch(`${API_URL}/loja/${codLoja}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })

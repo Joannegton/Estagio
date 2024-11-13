@@ -131,7 +131,8 @@ async function createUser() {
         const response = await fetch(`${API_URL}/usuarios`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -207,7 +208,8 @@ async function salvarEdicaoUsuario(matricula) {
         const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -250,7 +252,8 @@ async function deletarUsuario(matricula) {
             const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
             })
 

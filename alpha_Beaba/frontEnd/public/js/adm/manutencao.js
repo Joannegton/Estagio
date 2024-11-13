@@ -160,7 +160,8 @@ async function salvarEdicaoTalao(numero_remessa) {
         const response = await fetch(`${API_URL}/taloes/${numero_remessa}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -207,7 +208,8 @@ async function excluirEnvioTalao(numero_remessa) {
             const response = await fetch(`${API_URL}/taloes/${numero_remessa}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
             })
 

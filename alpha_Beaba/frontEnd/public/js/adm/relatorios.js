@@ -52,7 +52,13 @@ async function renderizartabelaEstoqueBaixo(){
     tabelaEstoqueBaixo.innerHTML = ''
     
     try {
-        const response = await fetch(`${API_URL}/estoque`)
+        const response = await fetch(`${API_URL}/estoque`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
         if(!response.ok){
             throw new Error('Erro ao buscar dados')
         }
@@ -90,7 +96,13 @@ let enviosChart
 
 async function renderizarGrafico() {
     try {
-        const response = await fetch(`${API_URL}/taloes`)
+        const response = await fetch(`${API_URL}/taloes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
         if(!response.ok){
             throw new Error('Erro ao buscar dados')
         }
@@ -174,7 +186,13 @@ function iconeEstoqueBaixo(){
 }
 
 async function carregarDadosElemento(url, elementoId) {
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${sessionStorage.getItem('token')}`
+        }
+    })
     if (!response.ok) {
         throw new Error(`Erro ao carregar os dados.`)
     }

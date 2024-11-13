@@ -1,6 +1,6 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
-import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento, completeInformationsPerfil } from '../utils.js'
+import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento } from '../utils.js'
 import { mostrarLojas, ordenarLoja, exportarLojas, salvarLoja } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
@@ -212,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
             carregarCardUsuario()
             await alternadorRelatorios()
             iconeEstoqueBaixo()
-            completeInformationsPerfil()
         } catch (error) {
             console.error('Erro ao carregar página', error)
             alert('Erro ao carregar página, tente novamente mais tarde')

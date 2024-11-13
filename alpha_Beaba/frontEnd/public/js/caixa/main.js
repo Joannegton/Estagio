@@ -1,4 +1,4 @@
-import { carregarCardUsuario, completeInformationsPerfil, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
 import { modalEditarSenha, salvarEditarUsuario } from "../adm/perfilUsuario.js"
 import { mostrarEnvioTaloes, mostrarPerfilUsuario, saidaTalao } from "./caixa.js"
 

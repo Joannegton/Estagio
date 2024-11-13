@@ -32,7 +32,8 @@ async function saidaTalao(){
         const response = await fetch(`${API_URL}/taloes/saida`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })

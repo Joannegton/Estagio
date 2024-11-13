@@ -135,7 +135,8 @@ async function salvarLoja(){
         const response = await fetch(`${API_URL}/loja`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -210,7 +211,8 @@ async function salvarEditarLoja(cod_loja){
         const response = await fetch(`${API_URL}/loja/${cod_loja}`,{
             method: 'PUT',
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -253,7 +255,8 @@ async function excluirLoja(cod_loja){
             const response = await fetch(`${API_URL}/loja/${cod_loja}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
             })
 

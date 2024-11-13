@@ -24,6 +24,7 @@ async function salvarEditarUsuario(){
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
@@ -96,6 +97,7 @@ async function salvarEditarSenha(){
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         })
