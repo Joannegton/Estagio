@@ -57,7 +57,14 @@ async function carregarSelects() {
         lojaSelect.addEventListener('change', async (event) => {
             const codLoja = event.target.value
             try {
-                const response = await fetch(`${API_URL}/loja/${codLoja}`)
+                const response = await fetch(`${API_URL}/loja/${codLoja}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    }
+                })
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`)
                 }
@@ -85,7 +92,13 @@ async function carregarGerente(gerenteId) {
     }
 
     try {
-        const response = await fetch(`${API_URL}/usuarios/${gerenteId}`)
+        const response = await fetch(`${API_URL}/usuarios/${gerenteId}` , {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)

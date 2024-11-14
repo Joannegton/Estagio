@@ -62,8 +62,6 @@ async function alternadorPerfil() {
         const cadastroUsuario = document.getElementById('cadastroUsuario')
         const perfisElemento = document.getElementById('perfis')
         
-        await carregarSelectsCadastroUsuario()
-
         usuarios.addEventListener('click', async () => {
             alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
             await fetchUsuarios()
@@ -87,7 +85,14 @@ async function alternadorPerfil() {
 // buscar informações de perfis
 async function fetchPerfis() {
     try {
-        const response = await fetch(`${API_URL}/perfis`)
+        const response = await fetch(`${API_URL}/perfis`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+            
         if (!response.ok) {
             throw new Error('Erro ao buscar perfis')
         }

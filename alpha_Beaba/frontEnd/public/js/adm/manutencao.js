@@ -10,7 +10,14 @@ async function mostrarManutencao(){
 
 async function fetchEnvioTaloes() {
     try {
-        const response = await fetch(`${API_URL}/taloes`)
+        const response = await fetch(`${API_URL}/taloes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        
         if(!response.ok){
             throw new Error('Erro ao buscar remessas')
         }

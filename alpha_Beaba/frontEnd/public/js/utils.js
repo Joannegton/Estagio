@@ -198,7 +198,13 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     const select = document.getElementById(idSelect)
     select.innerHTML = ' '
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${sessionStorage.getItem('token')}`
+        }
+    })
     
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

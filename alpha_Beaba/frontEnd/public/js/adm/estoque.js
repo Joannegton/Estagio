@@ -57,7 +57,14 @@ function renderizarTabela(estoqueRenderizar) {
 
 async function fetchEstoque() {
     try {
-        const response = await fetch(`${API_URL}/estoque`)
+        const response = await fetch(`${API_URL}/estoque`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        
         if (!response.ok) {
             throw new Error('Erro ao buscar estoque')
         }

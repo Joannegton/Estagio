@@ -81,7 +81,13 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
 //buscar informações de usuarios
 async function fetchUsuarios() {
     try {
-        const response = await fetch(`${API_URL}/usuarios`)
+        const response = await fetch(`${API_URL}/usuarios`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
         if (!response.ok) {
             throw new Error('Erro ao buscar usuários')
         }
@@ -278,8 +284,8 @@ async function deletarUsuario(matricula) {
 // carregar selects
 async function carregarSelectsCadastroUsuario() {
     try {
-        await carregarDadosSelect('lojaUsuario', `${API_URL}/loja`, 'cod_loja', 'nome_loja');
         await carregarDadosSelect('tipoUsuario', `${API_URL}/perfis`, 'id_perfil_acesso', 'perfil_descricao');
+        await carregarDadosSelect('lojaUsuario', `${API_URL}/loja`, 'cod_loja', 'nome_loja');
     } catch (error) {
         console.error('Erro ao carregar selects de cadastro de usuário:', error);
     }
