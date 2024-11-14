@@ -19,8 +19,8 @@ function autenticadorToken(req, res, next) {
             return res.status(403).json({ error: 'Token inválido ou expirado' })
         }
 
+        const client = await conectarDb()
         try {
-            const client = await conectarDb()
             const result = await client.query('SELECT token, id_perfil_acesso FROM usuario WHERE matricula = $1', [user.matricula])
             if (result.rows.length > 0 && result.rows[0].token === token) {
                 req.user = user
@@ -48,6 +48,8 @@ function autenticadorToken(req, res, next) {
             }
         } catch (dbError) {
             res.status(500).json({ error: 'Erro ao conectar ao banco de dados' })
+        } finally {
+            client.release()
         }
     })
 }
