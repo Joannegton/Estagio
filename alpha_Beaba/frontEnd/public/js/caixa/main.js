@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
 
     window.onload = () => {
-        checkSession()
+        checkSession(3)
         carregarCardUsuario()
     }
 })

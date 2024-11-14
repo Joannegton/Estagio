@@ -1,5 +1,4 @@
 import { API_URL } from "./config/config.js"
-import { fetchLoja } from "./gerente/loja.js"
 
 function mostrarMenu() {
     const nav = document.getElementById('menu')
@@ -152,13 +151,30 @@ function filtrarPorNome(array, propriedade, filtro) {
 }
 
 // Controle de sessão e logout
-function checkSession() {
+function checkSession(id_perfil_acesso) {
     const token = sessionStorage.getItem('token')
-    if (!token || isTokenExpirado(token)) {
-        window.location.href = 'login'
-        sessionStorage.clear()
-        localStorage.clear()
+    const { expirado, tipoUsuario } = isTokenExpirado(token)
+            
+    if (!token ||expirado) {
+        alert('Sessão expirada. Faça login novamente.')
+        handleSessionInvalid()
+        return
     }
+        
+        
+    if (tipoUsuario !== id_perfil_acesso) {
+        alert('Você não tem acesso a esta página.')
+        handleSessionInvalid()
+        return
+    }
+    
+}
+
+//lidar com sessão invalida
+function handleSessionInvalid() {
+    sessionStorage.clear()
+    localStorage.clear()
+    window.location.href = '/'
 }
 
 function isTokenExpirado(token) {
@@ -166,7 +182,10 @@ function isTokenExpirado(token) {
     const payload = JSON.parse(atob(token.split('.')[1])) //atob - Decodifica a string Base64
     const expiry = payload.exp //exp é o tempo de expiração do token
     const now = Math.floor(Date.now() / 1000) //Math.floor(...): Arredonda o valor para baixo para obter um número inteiro.
-    return now > expiry
+    const tipoUsuario = payload.tipoUsuario
+    const expirado = now > expiry
+
+    return { expirado, tipoUsuario }
 }
 
 async function logout() {
@@ -184,7 +203,7 @@ async function logout() {
         if (response.ok) {
             localStorage.clear()
             sessionStorage.clear()
-            window.location.href = 'login'
+            window.location.href = ''
         } else {
             alert('Erro ao realizar logout')
         }

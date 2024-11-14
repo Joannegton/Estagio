@@ -24,13 +24,14 @@ class LoginService {
                         const token = tokenResult.rows[0].token
                         try {
                             jwt.verify(token, SECRET_KEY)
-                            throw new Error('Número máximo de sessões atingido')
-                        } catch (error) {
-                            if (error.name === 'TokenExpiredError') {
-                                // remove token expirado
-                                await client.query('UPDATE usuario SET token = NULL WHERE matricula = $1', [matricula])
+                            const error = new Error('Número máximo de sessões atingido')
+                            error.code = 'MAX_SESSIONS'
+                            throw error
+                        } catch (err) {
+                            if (err.code === 'MAX_SESSIONS') {
+                                throw err
                             } else {
-                                throw error
+                                await client.query('UPDATE usuario SET token = NULL WHERE matricula = $1', [matricula])
                             }
                         }
                     }

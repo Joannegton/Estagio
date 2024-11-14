@@ -18,6 +18,10 @@ class LoginController {
                 }
             })
         } catch (err) {
+            if(err.code){
+                res.status(401).json({ message: err.message, code: err.code })
+                return
+            }
             res.status(401).json({ message: err.message })
         }
     }

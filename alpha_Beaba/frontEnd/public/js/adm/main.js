@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onload = async () =>{
         mostrarModalCarregamento()
         try {
-            checkSession()
+            checkSession(1)
             carregarCardUsuario()
             await alternadorRelatorios()
         } catch (error) {
