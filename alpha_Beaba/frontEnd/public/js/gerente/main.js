@@ -1,7 +1,7 @@
 import { mostrarPerfilAcesso, exportarPerfis, cadastrarPerfil, filtrarUsuarioNome } from './perfil.js'
 import { mostrarRelatorios, exportarRelatorios, alternadorRelatorios } from './relatorio.js'
 import { completeInformations, mostrarEditarLoja, salvarLoja } from './loja.js'
-import { carregarCardUsuario, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { carregarCardUsuario, checkSession, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
 import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from '../adm/perfilUsuario.js'
 
 
@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if(sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
         mostrarPerfilUsuario()
         sessionStorage.removeItem('mostrarPerfilUsuario')
+    }
+
+    // Menu
+    if(window.innerWidth > 768){
+        document.getElementById('menu').style.display = 'block'
     }
 
     document.getElementById('mostrarGestaoPerfil').addEventListener('click', async () => {
@@ -87,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onload = async () => {
         mostrarModalCarregamento()
         try {
+            checkSession()
             carregarCardUsuario()
             await alternadorRelatorios()
             await completeInformations()

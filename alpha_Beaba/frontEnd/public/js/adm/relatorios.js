@@ -5,7 +5,6 @@ import { API_URL } from "../config/config.js"
 
 async function mostrarRelatorios() {
     await mostrarElemento('relatorios', 'mostrarRelatorio', () =>{
-        iconeEstoqueBaixo()
         alternadorRelatorios()
     })
 }

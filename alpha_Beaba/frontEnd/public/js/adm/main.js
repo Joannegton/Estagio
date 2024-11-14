@@ -211,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
             checkSession()
             carregarCardUsuario()
             await alternadorRelatorios()
-            iconeEstoqueBaixo()
         } catch (error) {
             console.error('Erro ao carregar página', error)
             alert('Erro ao carregar página, tente novamente mais tarde')
