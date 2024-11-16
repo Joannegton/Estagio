@@ -83,9 +83,23 @@ class TaloesService {
     async createTalao(numeroTalao, matricula, cod_loja){
         const client = await conectarDb()
         try {
+            await client.query('BEGIN')
+            // Inserir a saída de talão
             const result = await client.query(`INSERT INTO saida_taloes (codigo_talao, matricula, cod_loja) VALUES ($1, $2, $3)`, [numeroTalao, matricula, cod_loja])
-            return result.rowCount > 0
+            if(result.rowCount > 0){
+                // Atualizar o estoque
+                const result2 = await client.query(`UPDATE estoque_taloes SET quantidade_disponivel = quantidade_disponivel - 1 WHERE cod_loja = $1`, [cod_loja])
+                if(result2.rowCount > 0){
+                    await client.query('COMMIT')
+                    return true
+                } else {
+                    throw new Error('Erro ao atualizar o estoque')
+                }
+            } else {
+                throw new Error('Erro ao inserir a saída de talão')
+            }
         } catch (error) {
+            await client.query('ROLLBACK')
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {

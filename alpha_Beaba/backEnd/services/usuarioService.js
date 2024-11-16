@@ -13,7 +13,7 @@ class UsuarioService {
                     l.nome_loja 
                 FROM usuario
                 JOIN perfil_acesso p ON usuario.id_perfil_acesso = p.id_perfil_acesso
-                LEFT JOIN usuario_loja ul ON usuario.matricula = ul.usuario_matricula AND ul.is_gerente = true
+                LEFT JOIN usuario_loja ul ON usuario.matricula = ul.usuario_matricula
                 LEFT JOIN loja l ON ul.cod_loja = l.cod_loja
                 ORDER BY usuario.nome_usuario ASC
             `)
