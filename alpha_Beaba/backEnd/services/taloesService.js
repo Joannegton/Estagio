@@ -12,6 +12,7 @@ class TaloesService {
                     l.nome_loja,
                     et.quantidade,
                     u.nome_usuario,
+                    u.matricula,
                     et.data_recebimento_previsto,
                     et.status
                 FROM envio_taloes et
@@ -38,6 +39,7 @@ class TaloesService {
                     l.nome_loja,
                     et.quantidade,
                     u.nome_usuario,
+                    u.matricula,
                     et.data_recebimento_previsto,
                     et.status
                 FROM envio_taloes et

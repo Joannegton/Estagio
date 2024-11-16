@@ -150,6 +150,12 @@ function filtrarPorNome(array, propriedade, filtro) {
     })
 }
 
+// pegar link workplace
+function getWorkplaceLink(matricula, listaUsuarios) {
+    const usuario = listaUsuarios.find(user => user.matricula === matricula)
+    return usuario ? usuario.workplace : '#'
+}
+
 // Controle de sessão e logout
 function checkSession(id_perfil_acesso) {
     const token = sessionStorage.getItem('token')
@@ -308,4 +314,4 @@ function ativarBotao(elementoId) {
 
 
 
-export { mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

@@ -1,6 +1,7 @@
 import { alternador, mostrarElemento } from "../utils.js"
 import { mostrarEnvioTaloes } from "./envioTaloes.js"
 import { API_URL } from "../config/config.js"
+import { usuarios } from "./usuarios.js"
 
 
 async function mostrarRelatorios() {
@@ -195,7 +196,15 @@ async function carregarDadosElemento(url, elementoId) {
     if (!response.ok) {
         throw new Error(`Erro ao carregar os dados.`)
     }
+
     const data = await response.json()
+
+    if (url.includes('usuarios')){
+        usuarios.push(...data) // ... é o spread operator que serve para concatenar arrays 
+    }
+    
+
+
     document.getElementById(elementoId).textContent = data.length
 }
 

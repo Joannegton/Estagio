@@ -10,7 +10,8 @@ class UsuarioService {
                     usuario.matricula, 
                     usuario.nome_usuario, 
                     p.descricao AS tipo_usuario, 
-                    l.nome_loja 
+                    l.nome_loja,
+                    usuario.workplace
                 FROM usuario
                 JOIN perfil_acesso p ON usuario.id_perfil_acesso = p.id_perfil_acesso
                 LEFT JOIN usuario_loja ul ON usuario.matricula = ul.usuario_matricula

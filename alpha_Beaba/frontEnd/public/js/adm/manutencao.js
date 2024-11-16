@@ -1,5 +1,6 @@
-import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, mostrarElemento, ordenarArray } from "../utils.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, getWorkplaceLink, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
+import { usuarios } from "./usuarios.js"
 
 let envioTaloes = []
 
@@ -53,7 +54,14 @@ function renderizarTabelaManutencao(listaTaloesEnviados) {
                 <td data-label="Data do Envio">${dataEnvio}</td>
                 <td data-label="Loja Destino">${item.nome_loja}</td>
                 <td data-label="Quantidade">${item.quantidade}</td>
-                <td data-label="Recebimento">${item.nome_usuario}</td>
+                <td data-label="Recebimento" class="tooltip">
+                    ${item.nome_usuario}
+                    <span class="tooltiptext">
+                        <a href="${getWorkplaceLink(item.matricula, usuarios)}" target="_blank" class="botaoAcao">
+                            <i class="fas fa-comments"></i>
+                        </a>
+                    </span>
+                </td>
                 <td data-label="Data de Entrega" id="DataEntregaManutencao${item.numero_remessa}">${dataRecebimentoPrevisto}</td>
                 <td data-label="Status" id="statusManutencao${item.numero_remessa}">${item.status}</td>
                 <td data-label="Ações" class="acoes">

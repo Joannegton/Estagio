@@ -1,4 +1,4 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, ordenarArray } from "../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, getWorkplaceLink, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []
@@ -22,7 +22,14 @@ function renderizarTabelaUsuarios(usuariosParaRenderizar) {
 
             tr.innerHTML = `
                 <td data-label="Matricula" id="perfil-matricula${usuario.matricula}">${usuario.matricula}</td>
-                <td data-label="Nome do Perfil" id="perfil-nome${usuario.matricula}">${usuario.nome_usuario}</td>
+                <td data-label="Nome do Perfil" id="perfil-nome${usuario.matricula}" class="tooltip">
+                    ${usuario.nome_usuario}
+                    <span class="tooltiptext">
+                        <a href="${getWorkplaceLink(usuario.matricula, usuarios)}" target="_blank" class="botaoAcao">
+                            <i class="fas fa-comments"></i>
+                        </a>
+                    </span>
+                </td>
                 <td data-label="Tipo de Usuário" id="perfil-tipoUsuario${usuario.matricula}">${usuario.tipo_usuario}</td>
                 <td data-label="Loja" id="perfil-loja${usuario.matricula}">${usuario.nome_loja}</td>
                 <td data-label="Ações" class="acoes" id="acoes">
@@ -332,4 +339,4 @@ async function verificarGerenteExistente(loja) {
     }
 }
 
-export { carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }
+export {usuarios, carregarSelectsCadastroUsuario, ordenarUsuarios, ordenarLojaUsuarios, fetchUsuarios, createUser, filtrarUsuarioNome }

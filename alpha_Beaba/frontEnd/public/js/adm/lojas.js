@@ -1,5 +1,6 @@
-import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, mostrarElemento, ordenarArray } from "../utils.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, getWorkplaceLink, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
+import { usuarios } from "./usuarios.js"
 
 let lojas = [] 
 
@@ -57,12 +58,21 @@ function renderizarTabelaLojas(listalojas){
         const dadosLimitados = listalojas.slice(inicio, fim)
         tbody.innerHTML = ''
 
+        console.log(usuarios)
+
         dadosLimitados.forEach(item => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
                 <td data-label="Cód" id="idLoja${item.cod_loja}">${item.cod_loja}</td>
                 <td data-label="Loja" id="nomeLoja${item.cod_loja}">${item.nome_loja}</td>
-                <td data-label="Gerente" id="nomeGerente${item.cod_loja}">${item.gerente}</td>
+                <td data-label="Gerente" id="nomeGerente${item.cod_loja}" class="tooltip">
+                    ${item.gerente}
+                    <span class="tooltiptext">
+                        <a href="${getWorkplaceLink(item.matricula, usuarios)}" target="_blank" class="botaoAcao">
+                            <i class="fas fa-comments"></i>
+                        </a>
+                    </span>
+                </td>   
                     <td data-label="Quantidade Recomendada">${item.estoque_minimo + 50}</td>
                     <td data-label="Quantidade Mínima">${item.estoque_minimo}</td>
                     <td data-label="Editar" class="acoes">

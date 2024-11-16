@@ -42,6 +42,7 @@ class LojasService {
                     loja.cod_loja, 
                     loja.nome_loja, 
                     usuario.nome_usuario AS "gerente", 
+                    usuario.matricula,
                     loja.estoque_minimo
                 FROM loja
                 LEFT JOIN usuario_loja ON loja.cod_loja = usuario_loja.cod_loja AND usuario_loja.is_gerente = true
