@@ -28,7 +28,14 @@ async function carregarEstoqueLoja() {
     document.getElementById('quantidadeEstoque').innerHTML = ''
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`${API_URL}/estoque/${codLoja}`)
+        const response = await fetch(`${API_URL}/estoque/${codLoja}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        
         if (!response.ok) {
             const errorData = await response.json()
             throw new Error(errorData.message)
@@ -47,7 +54,14 @@ async function carregarEstoqueLoja() {
 async function fetchRemessa() {
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`${API_URL}/taloes/${codLoja}`)
+        const response = await fetch(`${API_URL}/taloes/${codLoja}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+
         if(!response.ok){
             const errorData = await response.json()
             throw new Error(errorData.message)

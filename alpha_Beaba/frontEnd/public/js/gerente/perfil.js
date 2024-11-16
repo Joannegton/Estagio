@@ -26,7 +26,13 @@ async function alternadorPerfilAcesso() {
 async function fetchUsuarios(){
     const cod_loja = localStorage.getItem('cod_loja')
     try {
-        const response = await fetch(`${API_URL}/usuarios/loja/${cod_loja}`)
+        const response = await fetch(`${API_URL}/usuarios/loja/${cod_loja}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
 
         if(!response.ok){
             const errorData = await response.json()

@@ -11,7 +11,13 @@ async function mostrarEditarLoja(){
 async function fetchLoja(){
     try {
         const codLoja = localStorage.getItem('cod_loja')
-        const response = await fetch(`${API_URL}/loja/${codLoja}`)
+        const response = await fetch(`${API_URL}/loja/${codLoja}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
         if (!response.ok) {
             throw new Error('Erro ao buscar dados da loja')
         }
@@ -72,7 +78,6 @@ async function salvarLoja(){
 // completar informações
 async function completeInformations() {
     await fetchLoja()
-    console.log('chamouu')
 
     // Cria o card
     const floatingCard = document.createElement('div');

@@ -194,16 +194,13 @@ async function logout() {
         const response = await fetch(`${API_URL}/logout`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ matricula })
         })
 
         if (response.ok) {
-            localStorage.clear()
-            sessionStorage.clear()
-            window.location.href = ''
+            handleSessionInvalid()
         } else {
             alert('Erro ao realizar logout')
         }
