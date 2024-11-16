@@ -584,18 +584,18 @@ td[data-label="Loja"]{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 50px;
-  background-color: #f5eeee;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
   position: absolute;
+  font-size: 1.3em;
+  width: fit-content;
+  background-color: rgb(226, 224, 224);
+  padding: 5px;
   z-index: 1;
   bottom: 70%;
   left: 0%;
-  opacity: 0;
-  transition: opacity 0.3s;
+}
+
+.tooltiptext a{
+  margin: 0;
 }
 
 .tooltip:hover .tooltiptext {
