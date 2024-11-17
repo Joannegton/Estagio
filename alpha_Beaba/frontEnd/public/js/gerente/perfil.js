@@ -36,7 +36,7 @@ async function fetchUsuarios(){
 
         if(!response.ok){
             const errorData = await response.json()
-            alert(errorData.message)
+            throw new Error(errorData.message)
         }
 
         usuarios = await response.json()
@@ -123,8 +123,7 @@ async function cadastrarPerfil(){
 
         if(!response.ok){
             const errorData = await response.json()
-            alert(errorData.message || 'Erro ao cadastrar usuário')
-            return
+            throw new Error(errorData.message)
         }
 
         mostrarModalFinalizado()
@@ -152,7 +151,7 @@ async function excluirUsuario(matricula){
 
             if(!response.ok){
                 const errorData = await response.json()
-                alert(errorData.message)
+                throw new Error(errorData.message)
             }
 
             mostrarModalFinalizado()

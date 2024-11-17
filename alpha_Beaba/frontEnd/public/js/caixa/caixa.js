@@ -40,8 +40,7 @@ async function saidaTalao(){
 
         if(!response.ok){
             const errorData = await response.json()
-            alert(errorData.message || 'Erro ao solicitar talão')
-            return
+            throw new Error(errorData.message)
         }
 
         formulario.reset()

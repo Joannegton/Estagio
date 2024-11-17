@@ -35,7 +35,8 @@ async function fetchLojas(){
         })
     
         if (!response.ok) {
-            throw new Error('Erro ao buscar lojas')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         
         lojas = await response.json()
@@ -163,13 +164,13 @@ async function salvarLoja(){
             body: JSON.stringify(data)
         })
     
-        if (response.status === 201) {
-            mostrarModalFinalizado()
-            formulario.reset()
-        }else {
+        if (!response.ok) {
             const errorData = await response.json()
             alert(`Erro ao cadastrar loja. ${errorData.message || response.statusText}`)
         }
+
+        mostrarModalFinalizado()
+        formulario.reset()
     } catch (error) {
         console.error('Erro ao cadastrar loja: ', error)
         alert('Erro ao cadastrar loja. Por favor, tente novamente mais tarde.')

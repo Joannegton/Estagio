@@ -20,7 +20,8 @@ async function fetchEnvioTaloes() {
         })
         
         if(!response.ok){
-            throw new Error('Erro ao buscar remessas')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
 
         envioTaloes = await response.json()

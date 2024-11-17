@@ -94,7 +94,8 @@ async function fetchPerfis() {
         })
             
         if (!response.ok) {
-            throw new Error('Erro ao buscar perfis')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
 
         perfis = await response.json()

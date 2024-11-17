@@ -96,7 +96,8 @@ async function fetchUsuarios() {
             }
         })
         if (!response.ok) {
-            throw new Error('Erro ao buscar usuários')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
 
         usuarios = await response.json()
@@ -328,7 +329,8 @@ async function verificarGerenteExistente(loja) {
         })
         
         if (!response.ok) {
-            throw new Error('Erro ao verificar gerente existente')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         const data = await response.json()
         return data.gerente_id != null

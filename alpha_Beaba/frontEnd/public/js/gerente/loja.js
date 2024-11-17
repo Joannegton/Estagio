@@ -19,7 +19,8 @@ async function fetchLoja(){
             }
         })
         if (!response.ok) {
-            throw new Error('Erro ao buscar dados da loja')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         loja = await response.json()
         carregarDadosLoja(loja)
@@ -74,7 +75,8 @@ async function salvarLoja(){
         })
 
         if (!response.ok) {
-            throw new Error('Erro ao atualizar loja.')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         
         mostrarModalFinalizado()

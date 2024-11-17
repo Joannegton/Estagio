@@ -66,8 +66,10 @@ async function carregarSelects() {
                 })
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`)
+                    const errorData = await response.json()
+                    throw new Error(errorData.message)
                 }
+
                 const data = await response.json()
                 await carregarGerente(data.gerente_id)
             } catch (error) {
@@ -101,7 +103,8 @@ async function carregarGerente(gerenteId) {
         })
         
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
 
         const data = await response.json()

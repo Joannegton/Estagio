@@ -226,11 +226,12 @@ async function logout() {
             body: JSON.stringify({ matricula })
         })
 
-        if (response.ok) {
-            handleSessionInvalid()
-        } else {
-            alert('Erro ao realizar logout')
+        if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
+        handleSessionInvalid()
+
     } catch (error) {
         console.error('Erro ao realizar logout:', error)
     }
@@ -250,7 +251,8 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     })
     
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        const errorData = await response.json()
+        throw new Error(errorData.message)
     }
 
     const data = await response.json()

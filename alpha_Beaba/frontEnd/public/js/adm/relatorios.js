@@ -60,7 +60,8 @@ async function renderizartabelaEstoqueBaixo(){
             }
         })
         if(!response.ok){
-            throw new Error('Erro ao buscar dados')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         const data = await response.json()
         data.sort((a, b) => a.quantidade_disponivel - b.quantidade_disponivel)
@@ -104,7 +105,8 @@ async function renderizarGrafico() {
             }
         })
         if(!response.ok){
-            throw new Error('Erro ao buscar dados')
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
         const data = await response.json()
 
@@ -194,7 +196,8 @@ async function carregarDadosElemento(url, elementoId) {
         }
     })
     if (!response.ok) {
-        throw new Error(`Erro ao carregar os dados.`)
+        const errorData = await response.json()
+        throw new Error(errorData.message)
     }
 
     const data = await response.json()
