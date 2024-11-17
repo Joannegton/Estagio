@@ -1,7 +1,7 @@
 import {  exportarManutencao, filtarLojaManutencao, filtarStatusManutencao, mostrarManutencao, filtrarNomeLojaManutencao} from './manutencao.js'
 import { alternadorRelatorios, exportarRelatorios, iconeEstoqueBaixo, mostrarRelatorios } from './relatorios.js'
 import { mostrarMenu, logout, esconderElementos, mostrarFiltros, carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento } from '../utils.js'
-import { mostrarLojas, ordenarLoja, exportarLojas, salvarLoja } from './lojas.js'
+import { mostrarLojas, ordenarLoja, exportarLojas, salvarLoja, fetchCidadesEstados, showSuggestions } from './lojas.js'
 import { mostrarEstoque, ordenarEstoque, ordenarLojaEstoque, exportarEstoque, filtrarNomeLoja } from './estoque.js'
 import { enviarTalao, mostrarEnvioTaloes } from './envioTaloes.js'
 import { mostrarModalCadastroPerfil, mostrarPerfil, salvarEditarPerfil, salvarPerfil } from './perfil.js'
@@ -187,6 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })   
 
+    document.getElementById('cidadeEstadoLoja').addEventListener('input', showSuggestions)
+
     // Relatórios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
     
@@ -211,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             checkSession(1)
             carregarCardUsuario()
             await alternadorRelatorios()
+            await fetchCidadesEstados()
         } catch (error) {
             console.error('Erro ao carregar página', error)
             alert('Erro ao carregar página, tente novamente mais tarde')

@@ -484,6 +484,14 @@ canvas {
   padding: 0;
 }
 
+
+
+/* loja */
+.grid-container-label{
+  display: flex;
+  justify-content: space-between;
+}
+
 /* -Modal- */
 .modal {
   display: none; 
@@ -601,6 +609,24 @@ td[data-label="Loja"]{
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.suggestions {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  z-index: 1000;
+}
+
+.suggestions div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions div:hover {
+  background-color: #f0f0f0;
 }
 
 /* -Footer- */
@@ -844,5 +870,10 @@ footer p {
 .container-selects{
   width: 100%;
   text-align: center;
+}
+
+.grid-container-label{
+  flex-direction: column;
+  align-items: center;
 }
 }

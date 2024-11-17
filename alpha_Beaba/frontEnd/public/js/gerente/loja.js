@@ -31,22 +31,31 @@ async function fetchLoja(){
 
 function carregarDadosLoja(loja) {
     localStorage.setItem('nome_loja', loja.nome_loja)
-    localStorage.setItem('endereco_loja', loja.endereco_loja)
-    localStorage.setItem('telefone', loja.telefone)
+    const endereco = loja.endereco_loja.split('- ')
 
     document.getElementById('nomeLoja').value = loja.nome_loja
-    document.getElementById('enderecoLoja').value = loja.endereco_loja
+    document.getElementById('enderecoLoja').value = endereco[0]
     document.getElementById('telefone').value = loja.telefone
+    document.getElementById('quantidadeMinimaTaloes').value = loja.estoque_minimo
+    document.getElementById('cepLoja').value = endereco[1]
+    document.getElementById('cidadeEstadoLoja').value = endereco[2]
 }
 
 async function salvarLoja(){
     const formulario = document.getElementById('formEditarLoja')
     const formData = new FormData(formulario)
 
+    const endereco = formData.get('enderecoLoja')
+    const  cep = formData.get('cepLoja')
+    const cidadeEstado = formData.get('cidadeEstadoLoja')
+
+    const enderecoCompleto = `${endereco}- ${cep}- ${cidadeEstado}`
+
     const data = {
         nome_loja: formData.get('nomeLoja'),
-        endereco_loja: formData.get('enderecoLoja'),
+        endereco_loja: enderecoCompleto,
         telefone: formData.get('telefone'),
+        estoque_minimo: formData.get('estoqueMinimo')
     }
 
     if (!data.nome_loja || !data.endereco_loja || !data.telefone ) {
@@ -95,12 +104,12 @@ async function completeInformations() {
     const incompleteTasks = [];
 
     const userProfileFields = ['nome', 'email', 'workplace'];
-    const storeProfileFields = ['nome_loja', 'endereco_loja', 'telefone'];
+    const storeProfileFields = ['nome_loja', 'endereco_loja', 'telefone', 'estoque_minimo'];
     
     const isFieldIncomplete = (field) => !field || field === 'null';
 
     const userProfileIncomplete = userProfileFields.some(field => isFieldIncomplete(localStorage.getItem(field)));
-    const storeProfileIncomplete = storeProfileFields.some(field => isFieldIncomplete(localStorage.getItem(field)));
+    const storeProfileIncomplete = storeProfileFields.some(field => isFieldIncomplete(loja[field]));
 
     if (userProfileIncomplete) {
         incompleteTasks.push('Complete seu perfil');

@@ -533,7 +533,7 @@
                                 </tr>
                             </thead>
                             <tbody id="lojas-tbody">
-                              </tbody>
+                            </tbody>
                         </table>
                     </div>
                     <div class="paginacao">
@@ -547,11 +547,25 @@
                     <h2>Cadastro de Loja</h2>
                     <form id="formSalvarLoja">
                         <label for="novaLoja">Nome da Loja:</label>
-                        <input type="text" id="novaLoja" name="novaLoja">
-                        <label for="enderecoLoja">Endereço:</label>
-                        <input type="text" id="enderecoLoja" name="enderecoLoja">
+                        <input type="text" id="novaLoja" name="novaLoja" placeholder="Loja 01" required>
+
                         <label for="telefoneLoja">Telefone:</label>
-                        <input type="tel" id="telefoneLoja" name="telefoneLoja">
+                        <input type="tel" id="telefoneLoja" name="telefoneLoja" placeholder="31 975485987">
+
+                        <label for="enderecoLoja">Endereço:</label>
+                        <input type="text" id="enderecoLoja" name="enderecoLoja" placeholder="Rua dores de campos, 456">
+
+                        <div class="grid-container-label">
+                            <div>
+                                <label for="cepLoja">Cep:</label>
+                                <input type="text" id="cepLoja" name="cepLoja" pattern="\d*" title="Apenas números são permitidos" oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="1234567">                            </div>
+                            <div>
+                                <label for="cidadeEstadoLoja">Cidade/UF:</label>
+                                <input type="text" id="cidadeEstadoLoja" name="cidadeEstadoLoja" placeholder="Ourinhos/SP">
+                                <div id="suggestions" class="suggestions"></div>
+                            </div>
+                        </div>
+
                         <button type="submit" id="submitButtonLoja">Salvar Loja</button>
                     </form>
                 </article>

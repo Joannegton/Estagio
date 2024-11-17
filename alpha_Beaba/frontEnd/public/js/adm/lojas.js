@@ -137,9 +137,15 @@ async function salvarLoja(){
     const formulario = document.getElementById('formSalvarLoja')
     const formData = new FormData(formulario)
 
+    const rua = formData.get('enderecoLoja')
+    const cep = formData.get('cepLoja')
+    const cidade = formData.get('cidadeEstadoLoja')
+
+    const endereco = `${rua}- ${cep}- ${cidade}`
+
     const data = {
         nomeLoja: formData.get('novaLoja'),
-        endereco: formData.get('enderecoLoja'),
+        endereco: endereco,
         telefoneLoja: formData.get('telefoneLoja')
     }
 
@@ -300,9 +306,41 @@ function ordenarLoja(event){
     renderizarTabelaLojas(lojas)
 }
 
+// carregar cidade/uf
+let cidadesEstados = []
+
+async function fetchCidadesEstados() {
+    const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/municipios')
+    const data = await response.json()
+    cidadesEstados = data.map(municipio => ({
+      cidade: municipio.nome,
+      estado: municipio.microrregiao.mesorregiao.UF.sigla
+    }))
+}
+
+function showSuggestions(event) {
+    const value = event.target.value
+    const suggestions = document.getElementById('suggestions');
+    suggestions.innerHTML = '';
+    if (value.length === 0) {
+      return;
+    }
+  
+    const filtered = cidadesEstados.filter(ce => ce.cidade.toLowerCase().startsWith(value.toLowerCase()));
+    filtered.forEach(ce => {
+      const div = document.createElement('div');
+      div.textContent = `${ce.cidade}/${ce.estado}`;
+      div.onclick = () => {
+        document.getElementById('cidadeEstadoLoja').value = `${ce.cidade}/${ce.estado}`;
+        suggestions.innerHTML = '';
+      };
+      suggestions.appendChild(div);
+    });
+}
+
 function exportarLojas(){
     alert('Exportar lojas')
 }
 
 
-export {  mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+export { fetchCidadesEstados, showSuggestions, mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
