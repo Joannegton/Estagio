@@ -1,4 +1,4 @@
-import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome } from "../utils.js"
+import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []
@@ -127,7 +127,7 @@ async function cadastrarPerfil(){
             return
         }
 
-        alert('Usuário cadastrado com sucesso.')
+        mostrarModalFinalizado()
         formulario.reset()
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error)
@@ -155,7 +155,7 @@ async function excluirUsuario(matricula){
                 alert(errorData.message)
             }
 
-            alert('Usuario deletado com sucesso')
+            mostrarModalFinalizado()
             await fetchUsuarios()
         } catch (error) {
             console.error('Erro ao deletar usuario: ', error)

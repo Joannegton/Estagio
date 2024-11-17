@@ -1,4 +1,4 @@
-import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento } from "../utils.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 import { API_URL } from "../config/config.js"
 
@@ -132,7 +132,7 @@ async function salvarPerfil(){
         })
     
         if (result.ok) {
-            alert('Perfil cadastrado com sucesso')
+            mostrarModalFinalizado()
             esconderElementos(['addPerfil'])
             formulario.reset()
             await fetchPerfis()
@@ -194,7 +194,7 @@ async function salvarEditarPerfil(idPerfilAcesso) {
         })
     
         if (result.ok) {
-            alert('Perfil editado com sucesso')
+            mostrarModalFinalizado()
             document.getElementById('modalEditPerfil').style.display = 'none'
             await fetchPerfis()
         } else {
@@ -224,7 +224,7 @@ async function deletarPerfil(idPerfilAcesso){
             })
 
             if (response.ok){
-                alert('Perfil deletado com sucesso')
+                mostrarModalFinalizado()
                 await fetchPerfis()
             } else{
                 const errorData = await response.json()

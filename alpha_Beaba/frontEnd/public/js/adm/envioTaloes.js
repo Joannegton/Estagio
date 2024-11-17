@@ -1,4 +1,4 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento } from "../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 async function mostrarEnvioTaloes(){
@@ -29,7 +29,7 @@ async function enviarTalao() {
         })
     
         if (response.ok) {
-            alert('Talão enviado com sucesso!')
+            mostrarModalFinalizado()
             formulario.reset()
         } else {
             alert('Erro ao enviar talão!')

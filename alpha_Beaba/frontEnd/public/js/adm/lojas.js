@@ -1,4 +1,4 @@
-import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, getWorkplaceLink, mostrarElemento, ordenarArray } from "../utils.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { usuarios } from "./usuarios.js"
 
@@ -164,7 +164,7 @@ async function salvarLoja(){
         })
     
         if (response.status === 201) {
-            alert('Loja cadastrada com sucesso.')
+            mostrarModalFinalizado()
             formulario.reset()
         }else {
             const errorData = await response.json()
@@ -240,7 +240,7 @@ async function salvarEditarLoja(cod_loja){
         })
 
         if(response.ok){
-            alert(`${newNome} atualizado com sucesso.`)
+            mostrarModalFinalizado()
             inputNome.remove()
             selectGerente.remove()
             esconderElementos([`containerEditarBotaoAcaoLoja${cod_loja}`])
@@ -283,7 +283,7 @@ async function excluirLoja(cod_loja){
             })
 
             if (response.ok) {
-                alert('Loja deletada com sucesso.')
+                mostrarModalFinalizado()
                 await fetchLojas()
             } else {
                 const errorData = await response.json()

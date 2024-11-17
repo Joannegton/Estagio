@@ -1,4 +1,4 @@
-import { mostrarElemento } from "../utils.js"
+import { mostrarElemento, mostrarModalFinalizado } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { mostrarRelatorios } from "./relatorio.js"
 
@@ -55,7 +55,7 @@ async function salvarLoja(){
         nome_loja: formData.get('nomeLoja'),
         endereco_loja: enderecoCompleto,
         telefone: formData.get('telefone'),
-        estoque_minimo: formData.get('estoqueMinimo')
+        estoque_minimo: formData.get('quantidadeMinimaTaloes')
     }
 
     if (!data.nome_loja || !data.endereco_loja || !data.telefone ) {
@@ -76,8 +76,12 @@ async function salvarLoja(){
         if (!response.ok) {
             throw new Error('Erro ao atualizar loja.')
         }
-        alert("Loja atualizada")
-        await mostrarRelatorios()
+        
+        mostrarModalFinalizado()
+        await completeInformations()
+        setTimeout(async () => {
+            await mostrarRelatorios()
+        }, 1000)
     } catch (error) {
         console.error('Erro ao atualizar Loja: ', error.stack)
         alert('Erro ao enviar dados, tente novamente mais tarde.')

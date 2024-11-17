@@ -1,4 +1,4 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, getWorkplaceLink, ordenarArray } from "../utils.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, getWorkplaceLink, mostrarModalFinalizado, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []
@@ -151,7 +151,7 @@ async function createUser() {
         })
 
         if (response.ok) {
-            alert('Usuário cadastrado com sucesso.')
+            mostrarModalFinalizado()
             formulario.reset()
         } else {
             const errorData = await response.json()
@@ -228,7 +228,7 @@ async function salvarEdicaoUsuario(matricula) {
         })
 
         if (response.ok) {
-            alert(`${newNome} atualizado com sucesso`)
+            mostrarModalFinalizado()
             inputNome.remove()
             selectTipoUsuario.remove()
             document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
@@ -271,7 +271,7 @@ async function deletarUsuario(matricula) {
             })
 
             if (response.ok) {
-                alert('Usuário deletado com sucesso')
+                mostrarModalFinalizado()
                 await fetchUsuarios()
             } else {
                 const errorData = await response.json()

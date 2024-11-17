@@ -1,4 +1,4 @@
-import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, getWorkplaceLink, mostrarElemento, ordenarArray } from "../utils.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { usuarios } from "./usuarios.js"
 
@@ -182,7 +182,7 @@ async function salvarEdicaoTalao(numero_remessa) {
         })
 
         if (response.ok) {
-            alert(`Dados atualizado com sucesso`)
+            mostrarModalFinalizado()
             statusManutencao.remove()
             dataEntrega.remove()
             await fetchEnvioTaloes()
@@ -229,7 +229,7 @@ async function excluirEnvioTalao(numero_remessa) {
             })
 
             if (response.ok) {
-                alert('Remessa deletada com sucesso')
+                mostrarModalFinalizado()
                 await fetchEnvioTaloes()
             } else {
                 const errorData = await response.json()

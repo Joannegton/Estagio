@@ -50,6 +50,27 @@ function esconderModalCarregamento() {
     }
 }
 
+// mostra o modal de finalização
+function mostrarModalFinalizado() {
+    let modal = document.getElementById('modalFinalizado')
+    if (!modal) {
+        modal = document.createElement('div')
+        modal.id = 'modalFinalizado'
+        modal.classList.add('modal')
+        modal.innerHTML = `<i class="fas fa-check-circle botaoAcao check-simbolo"></i>`
+        document.body.appendChild(modal)
+    }
+    modal.style.display = 'flex'
+    setTimeout(esconderModalFinalizado, 1000) 
+}
+
+function esconderModalFinalizado() {
+    const modal = document.getElementById('modalFinalizado')
+    if (modal) {
+        modal.style.display = 'none'
+    }
+}
+
 // função para mostrar sessão e inicializar
 async function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional) {
     const links = document.querySelectorAll('#menu ul li a')
@@ -314,4 +335,4 @@ function ativarBotao(elementoId) {
 
 
 
-export {getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}

@@ -443,7 +443,7 @@ button:hover,
   background-color: var(--cor-primaria-hover);
 }
 
-a.botaoAcao {
+.botaoAcao {
   margin-right: 10px;
   color: var(--cor-primaria);
   text-decoration: none;
@@ -536,6 +536,12 @@ canvas {
 
 .fechar i:hover {
   color: #303f9f;
+}
+
+.check-simbolo{
+  font-size: 4em;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .container-labe input{

@@ -1,4 +1,4 @@
-import { ativarBotao, carregarCardUsuario, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu } from "../utils.js"
+import { ativarBotao, carregarCardUsuario, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu, mostrarModalFinalizado } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){
@@ -29,7 +29,7 @@ async function salvarEditarUsuario(){
             body: JSON.stringify(data)
         })
         if(response.ok){
-            alert('Usuário editado com sucesso')
+            mostrarModalFinalizado()
             localStorage.setItem('nome', data.nome_usuario)
             localStorage.setItem('email', data.email)
             localStorage.setItem('workplace', data.workplace)
@@ -102,7 +102,7 @@ async function salvarEditarSenha(){
             body: JSON.stringify(data)
         })
         if(response.ok){
-            alert('Senha editada com sucesso')
+            mostrarModalFinalizado()
         } else {
             alert('Erro ao editar senha')
         }
