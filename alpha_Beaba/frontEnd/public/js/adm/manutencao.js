@@ -1,4 +1,4 @@
-import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, filtrarArray, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, exportCsv, filtrarArray, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { usuarios } from "./usuarios.js"
 
@@ -264,7 +264,7 @@ function filtrarNomeLojaManutencao(event){
 }
 
 function exportarManutencao() {
-    alert('Exportando manutenção')
+    exportCsv(envioTaloes, 'manutencao')
 }
 
 export { renderizarTabelaManutencao, filtrarNomeLojaManutencao, mostrarManutencao, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }

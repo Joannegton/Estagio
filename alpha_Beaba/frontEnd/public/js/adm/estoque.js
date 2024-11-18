@@ -1,4 +1,4 @@
-import { filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../utils.js"
+import { exportCsv, filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let estoque = []
@@ -97,7 +97,7 @@ function ordenarEstoque(event) {
 }
 
 function exportarEstoque() {
-    alert('exportando estoque')
+    exportCsv(estoque, 'estoque')
 }
 
 export { renderizarTabela, ordenarEstoque, filtrarNomeLoja, mostrarEstoque, ordenarLojaEstoque, exportarEstoque }

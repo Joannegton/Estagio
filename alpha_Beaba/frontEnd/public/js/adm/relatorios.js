@@ -1,4 +1,4 @@
-import { alternador, mostrarElemento } from "../utils.js"
+import { alternador, exportCsv, mostrarElemento } from "../utils.js"
 import { mostrarEnvioTaloes } from "./envioTaloes.js"
 import { API_URL } from "../config/config.js"
 import { usuarios } from "./usuarios.js"
@@ -165,7 +165,7 @@ async function renderizarGrafico() {
 }
 
 function exportarRelatorios(){
-    alert('Relatório exportado com sucesso!')
+    exportCsv(usuarios, 'usuario')
 }
 
 function iconeEstoqueBaixo(){

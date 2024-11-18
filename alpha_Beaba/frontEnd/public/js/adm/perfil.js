@@ -1,4 +1,4 @@
-import { alternador3, ativarBotao, desativarBotao, esconderElementos, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, exportCsv, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
 import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
 import { API_URL } from "../config/config.js"
 
@@ -287,7 +287,7 @@ function visualizarPermissoes(idPerfilAcesso) {
 
 
 function exportarPerfis(){
-    alert('exportarPerfis')
+    exportCsv(perfis, 'perfil')
 }
 
 export { mostrarPerfil, mostrarPermissoesMouseOver, mostrarModalCadastroPerfil, salvarPerfil,  salvarEditarPerfil, deletarPerfil, exportarPerfis }

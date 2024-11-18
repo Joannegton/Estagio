@@ -1,4 +1,4 @@
-import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado } from "../utils.js"
+import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado, exportCsv } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let usuarios = []
@@ -174,7 +174,7 @@ function filtrarUsuarioNome(event) {
 }
 
 function exportarPerfis(){
-    alert('Exportar Perfis')
+    exportCsv(usuarios, 'usuarios')
 }
 
 

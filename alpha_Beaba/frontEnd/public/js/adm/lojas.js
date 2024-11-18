@@ -1,4 +1,4 @@
-import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, exportCsv, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { usuarios } from "./usuarios.js"
 
@@ -338,7 +338,7 @@ function showSuggestions(event) {
 }
 
 function exportarLojas(){
-    alert('Exportar lojas')
+    exportCsv(lojas, 'lojas')
 }
 
 

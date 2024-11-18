@@ -336,5 +336,32 @@ function ativarBotao(elementoId) {
 }
 
 
+function exportCsv(dados, nomeArquivo) {
+    if (dados.length === 0) {
+        console.error('Nenhum dado para exportar')
+        return
+    }
 
-export {mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+    const headers = Object.keys(dados[0])
+    const csvRows = [headers.join(';')]
+
+    dados.forEach(row => {
+        const values = headers.map(header => {
+            const escape = ('' + row[header]).replace(/"/g, '\\"')
+            return `"${escape}"`
+        })
+        csvRows.push(values.join(';'))
+    })
+
+    const csvString = csvRows.join('\n')
+    const blob = new Blob([csvString], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${nomeArquivo}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+}
+
+
+export {exportCsv, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
