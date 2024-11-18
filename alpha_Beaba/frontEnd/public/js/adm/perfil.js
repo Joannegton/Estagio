@@ -78,7 +78,7 @@ async function alternadorPerfil() {
         })
     } catch (error) {
         console.error('Erro ao carregar dados', error)
-        alert('Erro ao carregar dados')
+        alert('Erro ao carregar dados, tente novamente mais tarde')
     }
 }
 
@@ -102,8 +102,7 @@ async function fetchPerfis() {
         renderizarTabelaPerfis(perfis)
     } catch (error) {
         console.error('Erro ao buscar perfis:', error)
-        //modificar
-        alert('Sem conexão com o banco')
+        alert('Erro ao carregar perfis, tente novamente mais tarde')
     }
 }
 
@@ -132,15 +131,14 @@ async function salvarPerfil(){
             body: JSON.stringify(data)
         })
     
-        if (result.ok) {
-            mostrarModalFinalizado()
-            esconderElementos(['addPerfil'])
-            formulario.reset()
-            await fetchPerfis()
-        } else {
-            const errorText = result.text()
-            alert('Erro ao cadastrar perfil: ', errorText)
-        }
+        if (!result.ok) {
+            const errorData = await result.json()
+            console.error(errorData.message)
+        } 
+        mostrarModalFinalizado()
+        esconderElementos(['addPerfil'])
+        formulario.reset()
+        await fetchPerfis()
     } catch (error) {
         console.error('Erro ao salvar perfil:', error)
         alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
@@ -194,14 +192,14 @@ async function salvarEditarPerfil(idPerfilAcesso) {
             body: JSON.stringify(data)
         })
     
-        if (result.ok) {
-            mostrarModalFinalizado()
-            document.getElementById('modalEditPerfil').style.display = 'none'
-            await fetchPerfis()
-        } else {
+        if (!result.ok) {
             const errorMessage = await result.text()
-            alert(`Erro ao editar perfil: ${errorMessage}`)
+            console.error(errorMessage)
         }
+
+        mostrarModalFinalizado()
+        document.getElementById('modalEditPerfil').style.display = 'none'
+        await fetchPerfis()
     } catch (error) {
         console.error('Erro ao salvar perfil:', error)
         alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
@@ -224,13 +222,13 @@ async function deletarPerfil(idPerfilAcesso){
                 }
             })
 
-            if (response.ok){
-                mostrarModalFinalizado()
-                await fetchPerfis()
-            } else{
+            if (!response.ok){
                 const errorData = await response.json()
-                alert(`Erro ao deletar Perfil: ${errorData.message || response.statusText}`)
+                throw new Error(errorData.message)
             }
+
+            mostrarModalFinalizado()
+            await fetchPerfis()
         } catch (error) {
             console.error('Erro ao deletar perfil: ', error)
             alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.')

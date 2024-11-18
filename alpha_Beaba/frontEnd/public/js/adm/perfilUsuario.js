@@ -28,15 +28,16 @@ async function salvarEditarUsuario(){
             },
             body: JSON.stringify(data)
         })
-        if(response.ok){
-            mostrarModalFinalizado()
-            localStorage.setItem('nome', data.nome_usuario)
-            localStorage.setItem('email', data.email)
-            localStorage.setItem('workplace', data.workplace)
-            carregarCardUsuario()
-        } else {
-            alert('Erro ao editar usuário')
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
+        
+        mostrarModalFinalizado()
+        localStorage.setItem('nome', data.nome_usuario)
+        localStorage.setItem('email', data.email)
+        localStorage.setItem('workplace', data.workplace)
+        carregarCardUsuario()
     } catch (error) {
         console.error('Erro ao editar usuário', error)
         alert('Erro ao editar usuário, tente novamente mais tarde')
@@ -101,11 +102,12 @@ async function salvarEditarSenha(){
             },
             body: JSON.stringify(data)
         })
-        if(response.ok){
-            mostrarModalFinalizado()
-        } else {
-            alert('Erro ao editar senha')
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
     } catch (error) {
         console.error('Erro ao editar senha', error)
         alert('Erro ao editar senha, tente novamente mais tarde')

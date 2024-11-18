@@ -26,7 +26,7 @@ async function fetchLoja(){
         carregarDadosLoja(loja)
     } catch (error) {
         console.error("Erro ao buscar loja: ", error.stack)
-        alert('Erro ao buscar dadosss')
+        alert('Erro ao buscar dados')
     }
 }
 

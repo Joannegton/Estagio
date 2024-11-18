@@ -43,8 +43,7 @@ async function fetchLojas(){
         renderizarTabelaLojas(lojas)
     } catch (error) {
         console.error('Erro ao buscar lojas:', error)
-        //modificar
-        alert('Sem conexão com a internet')
+        alert('Erro ao buscar os dados das lojas, tente novamente mais tarde.')
     }
 }
 
@@ -166,7 +165,7 @@ async function salvarLoja(){
     
         if (!response.ok) {
             const errorData = await response.json()
-            alert(`Erro ao cadastrar loja. ${errorData.message || response.statusText}`)
+            throw new Error(errorData.message)
         }
 
         mostrarModalFinalizado()
@@ -240,16 +239,16 @@ async function salvarEditarLoja(cod_loja){
             body: JSON.stringify(data)
         })
 
-        if(response.ok){
-            mostrarModalFinalizado()
-            inputNome.remove()
-            selectGerente.remove()
-            esconderElementos([`containerEditarBotaoAcaoLoja${cod_loja}`])
-            document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
-        } else{
+        if(!response.ok){
             const errorData = await response.json()
-            alert(`Erro ao atualizar ${newNome}: ${errorData}`,)
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
+        inputNome.remove()
+        selectGerente.remove()
+        esconderElementos([`containerEditarBotaoAcaoLoja${cod_loja}`])
+        document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
     } catch (error) {
         console.error('Erro ao atualizar loja: ', error)
         alert('Erro ao atualizar loja. Por favor, tente novamente mais tarde.')
@@ -283,13 +282,12 @@ async function excluirLoja(cod_loja){
                 }
             })
 
-            if (response.ok) {
-                mostrarModalFinalizado()
-                await fetchLojas()
-            } else {
+            if (!response.ok) {
                 const errorData = await response.json()
-                alert(`Erro ao deletar loja: ${errorData.message || response.statusText}`)
+                throw new Error(errorData.message)
             }
+            mostrarModalFinalizado()
+            await fetchLojas()
         } catch (error) {
             console.error('Erro ao deletar loja:', error)
             alert('Erro ao deletar loja. Por favor, tente novamente mais tarde.')

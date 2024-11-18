@@ -214,11 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
             carregarCardUsuario()
             await alternadorRelatorios()
             await fetchCidadesEstados()
+            esconderModalCarregamento()
         } catch (error) {
             console.error('Erro ao carregar página', error)
             alert('Erro ao carregar página, tente novamente mais tarde')
-        } finally{
-            esconderModalCarregamento()
-        }
+        } 
     }
 })

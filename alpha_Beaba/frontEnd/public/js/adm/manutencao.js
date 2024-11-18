@@ -28,8 +28,7 @@ async function fetchEnvioTaloes() {
         renderizarTabelaManutencao(envioTaloes)
     } catch (error) {
         console.error('Erro ao buscar talões:', error) 
-        //modificar
-        alert('Erro ao buscar taloes, consulte o Administrador do sistema')
+        alert('Erro ao buscar taloes. Por favor, tente novamente mais tarde')
     }
 }
 
@@ -182,17 +181,17 @@ async function salvarEdicaoTalao(numero_remessa) {
             body: JSON.stringify(data)
         })
 
-        if (response.ok) {
-            mostrarModalFinalizado()
-            statusManutencao.remove()
-            dataEntrega.remove()
-            await fetchEnvioTaloes()
-            document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
-            document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
-        } else{
+        if (!response.ok) {
             const errorData = await response.json()
-            alert(`Erro ao atualizar: ${errorData.message || response.statusText}`)
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
+        statusManutencao.remove()
+        dataEntrega.remove()
+        await fetchEnvioTaloes()
+        document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
+        document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
     
     } catch (error) {
         console.error('Erro ao atualizar manutenção:', error)
@@ -229,13 +228,13 @@ async function excluirEnvioTalao(numero_remessa) {
                 }
             })
 
-            if (response.ok) {
-                mostrarModalFinalizado()
-                await fetchEnvioTaloes()
-            } else {
+            if (!response.ok) {
                 const errorData = await response.json()
-                alert(`Erro ao deletar Remessa: ${errorData.message || response.statusText}`)
+                throw new Error(errorData.message)
             }
+            
+            mostrarModalFinalizado()
+            await fetchEnvioTaloes()
         } catch (error) {
             console.error('Erro ao deletar remessa:', error)
             alert('Erro ao deletar remessa. Por favor, tente novamente mais tarde.')

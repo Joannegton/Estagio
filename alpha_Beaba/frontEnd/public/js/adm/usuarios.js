@@ -104,7 +104,6 @@ async function fetchUsuarios() {
         renderizarTabelaUsuarios(usuarios)
     } catch (error) {
         console.error('Erro ao buscar usuários:', error)
-        //modificar
         alert('Erro ao buscar usuários, consulte o Administrador do sistema')
     }
 }
@@ -151,14 +150,13 @@ async function createUser() {
             body: JSON.stringify(data)
         })
 
-        if (response.ok) {
-            mostrarModalFinalizado()
-            formulario.reset()
-        } else {
+        if (!response.ok) {
             const errorData = await response.json()
-            alert(errorData.message || 'Erro ao cadastrar usuário')
-            return
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
+        formulario.reset()
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error)
         alert('Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.')
@@ -228,16 +226,17 @@ async function salvarEdicaoUsuario(matricula) {
             body: JSON.stringify(data)
         })
 
-        if (response.ok) {
-            mostrarModalFinalizado()
-            inputNome.remove()
-            selectTipoUsuario.remove()
-            document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
-            document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
-        } else {
+        if (!response.ok) {
             const errorData = await response.json()
-            alert(`Erro ao atualizar usuário: ${errorData.message || response.statusText}`)
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
+        inputNome.remove()
+        selectTipoUsuario.remove()
+        document.getElementById(`containerEditarBotaoAcaoUsuario${matricula}`).style.display = 'none'
+        document.getElementById(`containerBotaoAcao${matricula}`).style.display = 'block'
+    
     } catch (error) {
         console.error('Erro ao atualizar usuário:', error)
         alert('Erro ao atualizar usuário. Por favor, tente novamente mais tarde.')
@@ -271,13 +270,13 @@ async function deletarUsuario(matricula) {
                 }
             })
 
-            if (response.ok) {
-                mostrarModalFinalizado()
-                await fetchUsuarios()
-            } else {
+            if (!response.ok) {
                 const errorData = await response.json()
-                alert(`Erro ao deletar usuário: ${errorData.message || response.statusText}`)
+                throw new Error(errorData.message)
             }
+
+            mostrarModalFinalizado()
+            await fetchUsuarios()
         } catch (error) {
             console.error('Erro ao deletar usuário:', error)
             alert('Erro ao deletar usuário. Por favor, tente novamente mais tarde.')
@@ -332,6 +331,7 @@ async function verificarGerenteExistente(loja) {
             const errorData = await response.json()
             throw new Error(errorData.message)
         }
+        
         const data = await response.json()
         return data.gerente_id != null
     } catch (error) {

@@ -28,12 +28,13 @@ async function enviarTalao() {
             body: JSON.stringify(data)
         })
     
-        if (response.ok) {
-            mostrarModalFinalizado()
-            formulario.reset()
-        } else {
-            alert('Erro ao enviar talão!')
+        if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
+
+        mostrarModalFinalizado()
+        formulario.reset()
     } catch (error) {
         console.error('Erro ao enviar talão:', error)
         alert('Erro ao enviar talão, tente novamente mais tarde')

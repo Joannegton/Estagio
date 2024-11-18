@@ -37,7 +37,7 @@ class LoginService {
                     }
     
                     const sessionId = uuidv4() // Gerar um identificador único para a sessão
-                    const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '1h' })
+                    const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '9h' })
                     await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula])
                     return { token: newToken, user }
                 } else {
