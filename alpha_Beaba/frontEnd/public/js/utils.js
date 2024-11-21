@@ -50,7 +50,8 @@ function esconderModalCarregamento() {
     }
 }
 
-// mostra o modal de finalização
+
+// mostra/esconde o modal de finalização
 function mostrarModalFinalizado() {
     let modal = document.getElementById('modalFinalizado')
     if (!modal) {
@@ -282,7 +283,7 @@ function identificarBaixoEstoque() {
     })
 }
 
-// mostrar no mobile
+// mostrar filtro no mobile
 function mostrarFiltros(mostrarFiltroId, containerFiltroId) {
     const filtroOptions = document.getElementById(mostrarFiltroId)
     const toggleButton = document.getElementById(containerFiltroId).querySelector('i')
@@ -321,6 +322,7 @@ function converterDataHoraParaBR(dataISO) {
     return `${dataFormatada} ${horaFormatada}`
 }
 
+// desativar/ativra botão
 function desativarBotao(elementoId) {
     const botao = document.getElementById(elementoId)
     if (botao) {
@@ -335,7 +337,7 @@ function ativarBotao(elementoId) {
     }
 }
 
-
+// exportar csv
 function exportCsv(dados, nomeArquivo) {
     if (dados.length === 0) {
         console.error('Nenhum dado para exportar')
@@ -362,6 +364,7 @@ function exportCsv(dados, nomeArquivo) {
     a.click()
     URL.revokeObjectURL(url)
 }
+
 
 
 export {exportCsv, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
