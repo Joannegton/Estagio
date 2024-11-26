@@ -1,42 +1,16 @@
-import { alternador3, mostrarMenu, esconderElementos, mostrarElemento, enviarDados } from "../../utils.js"
-import { carregarSelectsCadastroUsuario, carregarSelectsTipoUsuario, fetchUsuarios } from "./usuarios.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, exportCsv, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
+import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
+import { API_URL } from "../config/config.js"
 
 let perfis = []
 
-function mostrarPerfil(){
-    mostrarElemento('perfil', 'mostrarPerfil', ()=> {
-        alternadorPerfil()
-    })
+// Visualização de sessões
+async function mostrarPerfil(){
+    await mostrarElemento('perfil', 'mostrarPerfil', alternadorPerfil)
 }
 
-function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil'])
-    mostrarMenu()
-}
-
-function alternadorPerfil() {
-    fetchUsuarios()
-    const usuarios = document.getElementById('usuarios')
-    const cadastroUsuario = document.getElementById('cadastroUsuario')
-    const perfisElemento = document.getElementById('perfis')
-
-    usuarios.addEventListener('click', () => {
-        alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
-        fetchUsuarios()
-    })
-    
-    cadastroUsuario.addEventListener('click', () => {
-        alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
-        carregarSelectsCadastroUsuario()
-        carregarSelectsTipoUsuario()
-    })
-    
-    perfisElemento.addEventListener('click', async () => {
-        alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
-        await fetchPerfis()
-        renderizarTabelaPerfis(perfis)
-    })
+function mostrarModalCadastroPerfil(){
+    document.getElementById('addPerfil').style.display = 'flex'
 }
 
 function renderizarTabelaPerfis(perfisRenderizar){
@@ -56,76 +30,222 @@ function renderizarTabelaPerfis(perfisRenderizar){
             </td>
             <td data-label="Ações" class="acoes" id="acoesPerfis${perfil.id_perfil_acesso}">
                 <div id="containerBotaoAcao">
-                    <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="botaoAcao" id="editarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-edit" title="Editar"></i></a>
+                    <a href="#" class="botaoAcao" id="deletarPerfis${perfil.id_perfil_acesso}"><i class="fas fa-trash-alt" title="Excluir"></i></a>
                 </div>
-                <a href="#" class="botaoAcao" id="salvarEditarPerfis${perfil.id_perfil_acesso}" style="display: none"><i class="fas fa-save"></i></a>
             </td>
         `
         tbody.appendChild(tr)
 
         // eventos de click
-        document.getElementById(`editarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            editarPerfil()
-        })
-        document.getElementById(`deletarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            deletarPerfil()
-        })
-        document.getElementById(`visualizarPermissoes${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            modalVisualizarPermissoes()
-        })
-        document.getElementById(`salvarEditarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => {
-            salvarEditarPerfil()
-        })
+        document.getElementById(`editarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => editarPerfil(perfil.id_perfil_acesso))
+        document.getElementById(`deletarPerfis${perfil.id_perfil_acesso}`).addEventListener('click', () => deletarPerfil(perfil.id_perfil_acesso))
+        document.getElementById(`visualizarPermissoes${perfil.id_perfil_acesso}`).addEventListener('click', () => visualizarPermissoes(perfil.id_perfil_acesso))
+       
 
         // evento de mouseenter para mostrar permissões
         document.querySelectorAll(`#perfil-permissoes${perfil.id_perfil_acesso} .visualizar`).forEach(element => {
             element.addEventListener('mouseenter', function() {
                 const tipo = this.getAttribute('data-tipo')
                 const id = this.getAttribute('data-id')
-                mostrarPermissoes(id, tipo)
+                mostrarPermissoesMouseOver(id, tipo)
             })
-        })
-
-
+        }) 
     })
 }
 
-async function fetchPerfis() {
+// alternador de sessões (Usuários, Cadastro de Usuários e Perfis)
+async function alternadorPerfil() {
     try {
-        const response = await fetch('http://localhost:3000/perfis')
-        if (!response.ok) {
-            throw new Error('Erro ao buscar perfis')
-        }
-
-        perfis = await response.json()
+        await fetchUsuarios()
+        const usuarios = document.getElementById('usuarios')
+        const cadastroUsuario = document.getElementById('cadastroUsuario')
+        const perfisElemento = document.getElementById('perfis')
+        
+        usuarios.addEventListener('click', async () => {
+            alternador3(usuarios, [cadastroUsuario, perfisElemento], 'seletorUsuarios', ['seletorCadastro', 'seletorPerfis'], 'indicadorPerfis', 0)
+            await fetchUsuarios()
+        })
+        
+        cadastroUsuario.addEventListener('click', async () => {
+            alternador3(cadastroUsuario, [usuarios, perfisElemento], 'seletorCadastro', ['seletorUsuarios', 'seletorPerfis'], 'indicadorPerfis', 1)
+            await carregarSelectsCadastroUsuario()
+        })
+        
+        perfisElemento.addEventListener('click', async () => {
+            alternador3(perfisElemento, [usuarios, cadastroUsuario], 'seletorPerfis', ['seletorUsuarios', 'seletorCadastro'], 'indicadorPerfis', 2)
+            await fetchPerfis()
+        })
     } catch (error) {
-        console.error('Erro ao buscar perfis:', error)
+        console.error('Erro ao carregar dados', error)
+        alert('Erro ao carregar dados, tente novamente mais tarde')
     }
 }
 
-// Perfil
+// buscar informações de perfis
+async function fetchPerfis() {
+    try {
+        const response = await fetch(`${API_URL}/perfis`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+            
+        if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.message)
+        }
+
+        perfis = await response.json()
+        renderizarTabelaPerfis(perfis)
+    } catch (error) {
+        console.error('Erro ao buscar perfis:', error)
+        alert('Erro ao carregar perfis, tente novamente mais tarde')
+    }
+}
+
+// salvar, editar, deletar e exportar perfis
 async function salvarPerfil(){
+    desativarBotao('submitButtonPerfil')
     const formulario = document.getElementById('perfilCadastroForm')
     const formData = new FormData(formulario)
 
+    if (!formData.get('nomePerfil') || formData.getAll('permissoes').length === 0) {
+        alert('Nome do perfil e Permissões são obrigatórios')
+        return
+    }
     const data = {
         nomePerfil: formData.get('nomePerfil'),
         permissoes: formData.getAll('permissoes')
     }
 
-    const result = await enviarDados('http://localhost:3000/cadastrarPerfil', data)
+    try {
+        const result = await fetch(`${API_URL}/perfis`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify(data)
+        })
     
-    if(result.success){
-        alert('Perfil cadastrado com sucesso!')
+        if (!result.ok) {
+            const errorData = await result.json()
+            console.error(errorData.message)
+        } 
+        mostrarModalFinalizado()
+        esconderElementos(['addPerfil'])
         formulario.reset()
-    } else {
-        alert('Erro ao cadastrar perfil.')
+        await fetchPerfis()
+    } catch (error) {
+        console.error('Erro ao salvar perfil:', error)
+        alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
+    } finally {
+        ativarBotao('submitButtonPerfil')
     }
 }
 
-function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
+function editarPerfil(idPerfilAcesso){
     const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+    if(!perfil){
+        alert('Perfil não encontrado')
+        return
+    }
+
+    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil
+
+
+    document.getElementById('nomePerfilTituloEdit').innerHTML = perfil_descricao
+
+    // Marcar os checkboxes de acordo com as permissões do perfil
+    const checkboxes = document.querySelectorAll('#formSalvarEditarPermissoes input[type="checkbox"]')
+    checkboxes.forEach(checkbox => {
+        const [tipo, modulo] = checkbox.value.split('_')
+        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo)
+    })
+
+    // Armazenar o idPerfilAcesso no formulário
+    document.getElementById('formSalvarEditarPermissoes').dataset.idPerfilAcesso = idPerfilAcesso
+
+    // Mostra o modal de edição
+    document.getElementById('modalEditPerfil').style.display = 'flex'
+}
+
+async function salvarEditarPerfil(idPerfilAcesso) {
+    desativarBotao('submitButtonPerfilPermissoes')
+    const formulario = document.getElementById('formSalvarEditarPermissoes')
+    const formData = new FormData(formulario)
+
+    const data = {
+        permissoes: formData.getAll('permissoes')
+    }
+
+    try {
+        const result = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify(data)
+        })
+    
+        if (!result.ok) {
+            const errorMessage = await result.text()
+            console.error(errorMessage)
+        }
+
+        mostrarModalFinalizado()
+        document.getElementById('modalEditPerfil').style.display = 'none'
+        await fetchPerfis()
+    } catch (error) {
+        console.error('Erro ao salvar perfil:', error)
+        alert('Erro ao salvar perfil. Por favor, tente novamente mais tarde.')     
+        
+    } finally {
+        ativarBotao('submitButtonPerfilPermissoes')
+    }
+}
+
+async function deletarPerfil(idPerfilAcesso){
+    desativarBotao(`deletarPerfis${idPerfilAcesso}`)
+    const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
+    if (confirmacao) {
+        try {
+            const response = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+
+            if (!response.ok){
+                const errorData = await response.json()
+                throw new Error(errorData.message)
+            }
+
+            mostrarModalFinalizado()
+            await fetchPerfis()
+        } catch (error) {
+            console.error('Erro ao deletar perfil: ', error)
+            alert('Erro ao deletar perfil. Por favor, tente novamente mais tarde.')
+        } finally {
+            ativarBotao(`deletarPerfis${idPerfilAcesso}`)
+        }
+    }  
+}
+
+// vizualição de permissões
+function mostrarPermissoesMouseOver(idPerfilAcesso, tipoPermissao){
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+
+    if (!perfil){
+        console.error('Perfil não encontrado:', idPerfilAcesso)
+        return
+    }
 
     const permissoes = {
         leitura: perfil.permissoes_leitura,
@@ -141,36 +261,33 @@ function mostrarPermissoes(idPerfilAcesso, tipoPermissao){
     }
 }
 
-function modalVisualizarPermissoes(){
+function visualizarPermissoes(idPerfilAcesso) {
+    const perfil = perfis.find(p => p.id_perfil_acesso == idPerfilAcesso)
+    if (!perfil) {
+        alert('Perfil não encontrado')
+        return
+    }
+
+    const { permissoes_escrita, permissoes_leitura, perfil_descricao } = perfil
+
+
+    document.getElementById('nomePerfilTitulo').innerHTML = perfil_descricao
+
+    // Marcar os checkboxes de acordo com as permissões do perfil e desabilitá-los
+    const checkboxes = document.querySelectorAll('#corpoTabelaPermissoes input[type="checkbox"]')
+    checkboxes.forEach(checkbox => {
+        const [tipo, modulo] = checkbox.value.split('_')
+        checkbox.checked = tipo === 'leitura' ? permissoes_leitura.includes(modulo) : permissoes_escrita.includes(modulo)
+        checkbox.disabled = true // Desabilitar os checkboxes
+    })
+
+    // Mostrar o modal de visualização
     document.getElementById('modalVisualizarPermissoes').style.display = 'flex'
 }
 
-function mostrarModalCadastroPerfil(){
-    document.getElementById('addPerfil').style.display = 'flex'
-    esconderElementos('tabelaPerfis')
-}
-
-function mostrarModalEditPerfil(){
-    document.getElementById('modalEditPerfil').style.display = 'flex'
-}
-
-function editarPerfil(){
-    mostrarModalEditPerfil()
-}
-
-function salvarEditarPerfil(){
-    alert('Perfil Editado')
-}
-
-function deletarPerfil(){
-    const confirmacao = confirm('Tem certeza que deseja deletar o perfil?')
-    if (confirmacao) {
-        alert('Perfil deletado com sucesso.')
-    }
-}
 
 function exportarPerfis(){
-    alert('exportarPerfis')
+    exportCsv(perfis, 'perfil')
 }
 
-export { mostrarPerfil, mostrarPerfilUsuario, mostrarPermissoes, mostrarModalCadastroPerfil, salvarPerfil, mostrarModalEditPerfil, modalVisualizarPermissoes, editarPerfil, salvarEditarPerfil, deletarPerfil, exportarPerfis }
+export { mostrarPerfil, mostrarPermissoesMouseOver, mostrarModalCadastroPerfil, salvarPerfil,  salvarEditarPerfil, deletarPerfil, exportarPerfis }

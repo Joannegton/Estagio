@@ -1,23 +1,21 @@
-import { esconderElementos, alternador, mostrarMenu, mostrarElemento } from "../../utils.js"
+import { alternador, mostrarElemento, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado, exportCsv } from "../utils.js"
+import { API_URL } from "../config/config.js"
 
-function mostrarPerfilAcesso(){
-    mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', () =>{
-        alternadorPerfilAcesso()
-    })
+let usuarios = []
+
+async function mostrarPerfilAcesso(){
+    mostrarElemento('perfilAcesso', 'mostrarGestaoPerfil', alternadorPerfilAcesso)
 }
 
-function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['estoqueTaloes', 'relatorios', 'editarLoja', 'perfilAcesso'])
-    mostrarMenu()
-}
-
-function alternadorPerfilAcesso() {
+async function alternadorPerfilAcesso() {
     const perfil = document.getElementById('mostrarPerfis')
     const cadastroPerfil = document.getElementById('mostrarCadastro')
 
-    perfil.addEventListener('click', () => {
+    await fetchUsuarios()
+
+    perfil.addEventListener('click', async () => {
         alternador(perfil, perfil, cadastroPerfil, 'seletorPerfis', 'seletorCadastro', 'indicadorPerfil')
+        await fetchUsuarios()
     })
 
     cadastroPerfil.addEventListener('click', () => {
@@ -25,85 +23,164 @@ function alternadorPerfilAcesso() {
     })
 }
 
-function buscarNome() {
-    /*
-    const input = document.getElementById('filtroUsuario')
-    const filtro = input.value.toLowerCase()
-    const lista = document.getElementById('listaUsuarios')
-    const usuarios = lista.getElementsByTagName('li')
+async function fetchUsuarios(){
+    const cod_loja = localStorage.getItem('cod_loja')
+    try {
+        const response = await fetch(`${API_URL}/usuarios/loja/${cod_loja}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
 
-    // Percorre a lista de usuários e oculta aqueles que não correspondem ao filtro
-    for (let i = 0; i < usuarios.length; i++) {
-        let usuario = usuarios[i].textContent || usuarios[i].innerText
-
-        if (usuario.toLowerCase().indexOf(filtro) > -1) {
-            usuarios[i].style.display = "" // Mostra o usuário
-        } else {
-            usuarios[i].style.display = "none" // Oculta o usuário
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
         }
-    }*/
-    alert('Buscar nome')
-}
 
-function exportarPerfis(){
-    alert('Exportar Perfis')
-}
-
-function cadastroMassa() {
-    const botao = document.getElementById('cadastrarMassa')
-    if (botao.innerHTML === 'Cadastro em Massa') {
-        document.getElementById('cadastroSimples').style.display = 'none'
-        document.getElementById('cadastroMassa').style.display = 'flex'
-        botao.innerHTML = 'Cadastro unitário'
-    } else {
-        document.getElementById('cadastroSimples').style.display = 'block'
-        document.getElementById('cadastroMassa').style.display = 'none'
-        botao.innerHTML = 'Cadastro em Massa'
+        usuarios = await response.json()
+        renderizarTabelaUsuarios(usuarios)
+    } catch (error) {
+        console.error('Erro ao buscar dados', error)
+        alert('Erro ao buscar usuarios, teste sua conexão')
     }
 }
 
-function cadastrarPerfil(){
-    alert('Cadastrar Perfil')
+function renderizarTabelaUsuarios(listaUsuario){
+    const tbody = document.getElementById('perfis-tbody')
+
+    let paginaAtual = 1
+    const itensPorPagina = 10
+
+    function renderizarTabela(){
+        const inicio = (paginaAtual - 1) * itensPorPagina
+        const fim = inicio + itensPorPagina
+        const dadosLimitados = listaUsuario.slice(inicio, fim)
+        tbody.innerHTML = ''
+
+        dadosLimitados.forEach(usuario => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td data-label="Matricula" id="perfil-matricula${usuario.matricula}">${usuario.matricula}</td>
+                <td data-label="Nome do Perfil" id="perfil-nome${usuario.matricula}">${usuario.nome_usuario}</td>
+                <td data-label="Ações" class="acoes">
+                    <a href="#" class="botaoAcao" id="deletarPerfil${usuario.matricula}"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            `
+            tbody.appendChild(tr)
+
+            // Evento de clique
+            document.getElementById(`deletarPerfil${usuario.matricula}`).addEventListener('click', async () => {
+                await excluirUsuario(usuario.matricula)
+            })
+        })
+
+        // botões de paginação
+        document.getElementById('pagInfoUsuarios').textContent = `Página ${paginaAtual} de ${Math.ceil(listaUsuario.length / itensPorPagina)}`
+        document.getElementById('pagAntUsuarios').disabled = paginaAtual === 1
+        document.getElementById('proxPagUsuarios').disabled =  fim >= listaUsuario.length
+    }
+
+    // Evento de clique para paginação
+    document.getElementById('proxPagUsuarios').addEventListener('click', () => {
+        if ((paginaAtual * itensPorPagina) < listaTaloesEnviados.length) {
+            paginaAtual++
+            renderizarTabela()
+        }
+    })
+    document.getElementById('pagAntUsuarios').addEventListener('click', () => {
+        if (paginaAtual > 1) {
+            paginaAtual--
+            renderizarTabela()
+        }
+    })
+
+    renderizarTabela()
 }
 
-function mostrarInput(){
-    document.getElementById('salvarEdicaoCaixa').style.display = 'block'
-    esconderElementos(['BotaoAcaoPerfil'])
 
-    let numeroCaixa = document.getElementById('numero-caixa')
-    numeroCaixa.innerHTML = `
-        <select id="select-numero-caixa">
-            <option value="caixa 01">Caixa 01</option>
-            <option value="caixa 02">Caixa 02</option>
-            <option value="caixa 03">Caixa 03</option>
-        </select>
-    `
+async function cadastrarPerfil(){
+    desativarBotao("CadastrarPerfil")
+    const formulario = document.getElementById('formCadUsuario')
+    const formData = new FormData(formulario)
+
+    const dados = {
+        matricula: formData.get('matriculaUsuario'),
+        nome: formData.get('nomeUsuario'),
+        loja: localStorage.getItem('cod_loja')
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify(dados)
+        })
+
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
+        }
+
+        mostrarModalFinalizado()
+        formulario.reset()
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error)
+        alert('Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.')
+    } finally{
+        ativarBotao('CadastrarPerfil')
+    }
 }
 
-function salvarEdicaoCaixa(){
-    let selectNumeroCaixa = document.getElementById('select-numero-caixa')
-    let novoNumeroCaixa = selectNumeroCaixa.value
+async function excluirUsuario(matricula){
+    desativarBotao(`deletarPerfil${matricula}`)
+    const confirmacao = confirm(`Tem certeza que deseja excluir ${matricula}?`)
+    if(confirmacao){
+        try {
+            const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
 
-    document.getElementById('numero-caixa').innerText = novoNumeroCaixa
+            if(!response.ok){
+                const errorData = await response.json()
+                throw new Error(errorData.message)
+            }
 
-    document.getElementById('salvarEdicaoCaixa').style.display = 'none'
-    document.getElementById('BotaoAcaoPerfil').style.display = 'block'
-    selectNumeroCaixa.remove()
+            mostrarModalFinalizado()
+            await fetchUsuarios()
+        } catch (error) {
+            console.error('Erro ao deletar usuario: ', error)
+            alert('Erro ao deletar usuario. Por favor, tente novamente mais tarde.')
+        } finally{
+            ativarBotao(`deletarPerfil${matricula}`)
+        }
+
+    }
 }
 
-function deletarPerfil(){
-    alert('Deletar Perfil')
+
+function filtrarUsuarioNome(event) {
+    const filtro = event.target.value
+    const usuariosFiltrados = filtrarPorNome(usuarios, 'nome_usuario', filtro)
+    renderizarTabelaUsuarios(usuariosFiltrados)
 }
+
+function exportarPerfis(){
+    exportCsv(usuarios, 'usuarios')
+}
+
 
 export { 
-    alternadorPerfilAcesso, 
     mostrarPerfilAcesso, 
-    mostrarPerfilUsuario,
-    buscarNome,
+    filtrarUsuarioNome,
     exportarPerfis, 
-    cadastroMassa,
-    cadastrarPerfil,
-    mostrarInput,
-    salvarEdicaoCaixa,
-    deletarPerfil
+    cadastrarPerfil
 }

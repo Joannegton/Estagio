@@ -11,73 +11,68 @@
     <script src="../js/caixa/main.js" type="module"></script>
 </head>
 <body>
-
-    <!-- O caixa vai receber um sinal verde significando que o score do cliente é bom para receber um talao
-     ai caso o cliente queira, o caixa solicita um talão pelo codigo do talão e ja inclui o cliente dono do
-     talão, da baixa no sistema e entrega o talão -->
     <div class="main">
-        <header>
-            <nav id="menu">
-                <span id="fechar" onclick="mostrarMenu()">&times;</span>
-                <img src="../img/logo.png" alt="logo">
-                <h1>Oferte e Ganhe</h1>
-                <ul>
-                    <li><a href="#" id="mostrarEnvioTaloes" class="ativo">Saída de Talão</a></li>
+        <header class="flex flex-col w-full md:w-1/4">
+            <nav id="menu" class="bg-primary text-white text-center flex flex-col h-full w-full">
+                <span id="fechar" class="self-end text-2xl cursor-pointer">&times;</span>
+                <img src="../img/logo.png" alt="logo" class="w-4/5 mx-auto mt-2">
+                <h1 class="mb-4">Oferte e Ganhe</h1>
+                <ul class="list-none p-0 m-0">
+                    <li class="mb-2">
+                        <a href="#" id="mostrarEnvioTaloes" class="block p-2 border border-tertiary rounded hover:bg-primary-hover transition-colors ativo">Saída de Talão</a>
+                    </li>
                 </ul>
-                <div class="usuario">
-                    <i class="fas fa-user usuario-icon" ></i> 
+                <div class="usuario flex justify-between items-center w-4/5 max-w-fit-content p-2 mt-10 mx-auto bg-yellow-200 bg-opacity-20 rounded shadow">
+                    <i class="fas fa-user usuario-icon"></i>
                     <div id="usuario-info">
-                        <p class="usuario-nome">Anderson Malaquias</p>
-                        <p class="usuario-nome">234578</p>
+                        <p id="usuario-nome" class="m-0 mb-1"></p>
+                        <p id="usuario-matricula" class="m-0"></p>
                     </div>
-                    <div id="sair-usuario">
-                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
-                        <p class="usuario-sair">Sair</p>
+                    <div id="sair-usuario" class="flex items-center">
+                        <i class="fas fa-sign-out-alt sair-icon cursor-pointer"></i>
+                        <p class="usuario-sair ml-2">Sair</p>
                     </div>
                 </div>
             </nav>
-            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
-            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+            <button id="menuButton" class="md:hidden text-2xl">&#9776;</button>
+            <h1 class="tituloMobile md:hidden">Oferte e Ganhe</h1>
         </header>
 
         <main>
             <section id="saidaTaloes">
                 <h2>Saída de Talão</h2>
                 <form id="formSaidaTalao">
-                    <div class=" " style="justify-content: center;">
                         <div class="container-label talao">
                             <label for="numeroTalao">Número do Talão:</label>
                             <input type="number" name="numeroTalao" id="numeroTalao">
                         </div>
-                    </div>
                     <button type="submit">Cadastrar</button>
                 </form>
             </section>
 
             <section id="perfilUsuario" style="display: none;">
-                <h2>Perfil do Usuário</h2>
-                <form >
+                <h2 id="nome_usuario"></h2>
+                <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
-                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                        <input type="text" name="matricula" id="matricula" disabled>
                     </div>
                     <div class="container-labe">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                        <input type="text" name="nome" id="nome" >
                     </div>
                     <div class="container-labe">
                         <label for="email">E-mail:</label>
                         <input type="email" name="email" id="email">
                     </div>
                     <div class="container-labe">
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" name="workplace" id="workplace" >
                     </div>
                     <div class="container-labe">
-                        <label for="Repetirsenha">Repetir Senha:</label>
-                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                        <button type="button" id="botaoEditarSenha">Mudar senha</button>
                     </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>
             </section>
         </main>

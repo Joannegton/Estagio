@@ -1,21 +1,54 @@
-import { esconderElementos } from "../../utils.js"
+import { carregarUsuario, esconderElementos } from "../utils.js"
+import { API_URL } from "../config/config.js"
 
 function mostrarPerfilUsuario(){
     document.getElementById('perfilUsuario').style.display = 'block'
     esconderElementos(['saidaTaloes'])
-}
+    carregarUsuario()
 
+}
 
 function mostrarEnvioTaloes(){
     document.getElementById('saidaTaloes').style.display = 'block'
     esconderElementos(['perfilUsuario'])
 }
 
-function saidaTalao(e){
-    const data = new FormData(e.target)
-    const talao = data.get('numeroTalao')
-    console.log(talao)
-    alert('Talão enviado com sucesso!')
+async function saidaTalao(){
+    const formulario = document.getElementById('formSaidaTalao')
+    const formData = new FormData(formulario)
+
+    const data = {
+        numeroTalao: formData.get('numeroTalao'),
+        matricula: localStorage.getItem('matricula'),
+        cod_loja: localStorage.getItem('cod_loja')
+    }
+    
+    if(!numeroTalao){
+        alert('Código do talão é obrigatório')
+        return
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/taloes/saida`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify(data)
+        })
+
+        if(!response.ok){
+            const errorData = await response.json()
+            throw new Error(errorData.message)
+        }
+
+        formulario.reset()
+        alert('Entregue o talão ao cliente.')
+    } catch (error) {
+        console.error('Erro ao solicitar talão: ', error)
+        alert('Erro ao solicitar talão. Consulte o administrador')
+    }
 }
 
 export { mostrarPerfilUsuario, mostrarEnvioTaloes, saidaTalao }

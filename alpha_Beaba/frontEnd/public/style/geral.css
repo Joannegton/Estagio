@@ -2,7 +2,7 @@
   --cor-primaria: #4caf50;
   --cor-primaria-hover: #45a049;
   --cor-secundaria: #333;
-  --cor-terciaria: #fcd848be;
+  --cor-terciaria: #fcd8486e;
   --cor-branco: #fff;
   --cor-preta: #000000;
 }
@@ -34,6 +34,28 @@ header, footer {
   flex-shrink: 0;
 }
 
+/* styles.css */
+#floating-card {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 300px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: none; /* Inicialmente escondido */
+}
+
+#floating-card h3 {
+  margin-top: 0;
+}
+
+#floating-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 /* -Menu- */
 nav {
   background-color: var(--cor-primaria);
@@ -50,7 +72,7 @@ nav {
 }
 
 header{
-  width: 30%;
+  width: 25%;
 }
 
 header nav img {
@@ -110,14 +132,20 @@ nav ul li a.ativo {
   width: 85%;
   max-width: fit-content;
   padding: .5em;
-  margin: auto;
+  margin: 10% auto 0;
   background-color: rgba(252, 255, 60, 0.219);
   border-radius: 5px;
   box-shadow: #333 1px 1px 10px;
 }
 
-.usuario p.usuario-nome {
-  margin: 0 15px 0 0;
+.usuario p#usuario-nome {
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+.usuario p#usuario-matricula{
+  font-size: .7em;
+  margin: 0;
   padding: 0;
 }
 
@@ -338,13 +366,23 @@ th {
   text-align: center;
 }
 
-tr:hover {
-  background-color: #f5f5f5;
+table tr:nth-child(odd) {
+  background-color: #00000009; /* Cor para linhas ímpares */
+}
+
+table tr:nth-child(even) {
+  background-color: #ffffff; /* Cor para linhas pares */
+}
+
+table tr:hover {
+  background-color: #50f11f28;
 }
 
 .acoes {
   text-align: center;
 }
+
+
 
 .tabela-container {
   max-height: 63%;
@@ -405,7 +443,7 @@ button:hover,
   background-color: var(--cor-primaria-hover);
 }
 
-a.botaoAcao {
+.botaoAcao {
   margin-right: 10px;
   color: var(--cor-primaria);
   text-decoration: none;
@@ -446,6 +484,14 @@ canvas {
   padding: 0;
 }
 
+
+
+/* loja */
+.grid-container-label{
+  display: flex;
+  justify-content: space-between;
+}
+
 /* -Modal- */
 .modal {
   display: none; 
@@ -470,6 +516,10 @@ canvas {
   overflow-y: auto;
 }
 
+.modalContent h2 {
+  text-align: center;
+}
+
 .fechar{
   display: flex;
   justify-content: end;
@@ -488,6 +538,12 @@ canvas {
   color: #303f9f;
 }
 
+.check-simbolo{
+  font-size: 4em;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
 .container-labe input{
   width: 100%;
 }
@@ -498,6 +554,85 @@ td[data-label="Loja"]{
 
 .inputsEdicao{
   max-width: 90%;
+}
+
+/* Animação dos pontos modal carregamento */
+.carregar-pontos {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.ponto {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background-color: var(--cor-primaria);
+  border-radius: 50%;
+  animation: pontosAnimado 0.6s infinite alternate;
+}
+
+.ponto:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ponto:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pontosAnimado {
+  from {
+      transform: translateY(0);
+      opacity: 0.7;
+  }
+  to {
+      transform: translateY(-8px);
+      opacity: 1;
+  }
+}
+
+/* tooltip workchat */
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  font-size: 1.3em;
+  width: fit-content;
+  background-color: rgb(226, 224, 224);
+  padding: 5px;
+  z-index: 1;
+  bottom: 70%;
+  left: 0%;
+}
+
+.tooltiptext a{
+  margin: 0;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.suggestions {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  z-index: 1000;
+}
+
+.suggestions div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions div:hover {
+  background-color: #f0f0f0;
 }
 
 /* -Footer- */
@@ -615,6 +750,10 @@ footer p {
   header h1.tituloMobile {
     display: block;
   }
+
+  td[data-label="Loja"] {
+    max-width: none;
+  }
 }
 
 /* Responsividade Mobile*/
@@ -668,12 +807,12 @@ footer p {
     border-bottom: 1px solid var(--cor-secundaria);
     border-top: 1px solid var(--cor-secundaria);
   }
-  tr:hover {
-    background-color: #f5f5f500;
-  }
+  
   td:hover {
     background-color: #f5f5f5;
-}
+  }
+
+  
   .acoes {
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -737,5 +876,10 @@ footer p {
 .container-selects{
   width: 100%;
   text-align: center;
+}
+
+.grid-container-label{
+  flex-direction: column;
+  align-items: center;
 }
 }

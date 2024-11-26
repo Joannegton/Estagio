@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "nodejs": "file:",
     "nodemon": "^3.1.7",
     "pg": "^8.13.0"
   }

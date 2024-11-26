@@ -8,154 +8,37 @@
     <link rel="stylesheet" href="../style/geral.css">
     <link rel="stylesheet" href="../style/gerente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="module" src="../js/gerente/main.js"></script></head>
+    <script type="module" src="../js/gerente/main.js"></script>
+</head>
 <body>
     <div class="main">
         <header>
             <nav id="menu">
-                <span id="fechar" onclick="mostrarMenu()">&times;</span>
+                <span id="fechar">&times;</span>
                 <img src="../img/logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
-                    <li><a href="#" id="mostrarGestaoEstoque">Gestão de Estoque</a></li>
-                    <li><a href="#" id="mostrarGestaoPerfil">Perfil de Acesso</a></li>
-                    <li><a href="#" id="mostrarGestaoLoja">Loja</a></li> 
-                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo">Relatorios</a></li>
+                    <li><a href="#" id="mostrarGestaoPerfil"><i class="fas fa-user-cog"></i> Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarGestaoLoja"><i class="fas fa-store"></i> Loja</a></li> 
+                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
                 </ul>
                 <div class="usuario">
                     <i class="fas fa-user usuario-icon" ></i> 
                     <div id="usuario-info">
-                        <p class="usuario-nome">Anderson Malaquias</p>
-                        <p class="usuario-nome">234578</p>
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
                     </div>
                     <div id="sair-usuario">
                         <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
                         <p class="usuario-sair">Sair</p>
-                    </div>  
+                    </div> 
                 </div>
             </nav>
-            <button id="menuButton" onclick="mostrarMenu()">&#9776;</button>
+            <button id="menuButton">&#9776;</button>
             <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
 
         <main>
-            <section id="estoqueTaloes" style="display: none;">
-                    <h2>Gestão de Estoque</h2>
-                    <div class="filtro filtro-container">
-                        <label for="filtroEstoque">Caixa:</label>
-                        <input type="text" name="filtroEstoque" id="filtroEstoque">
-                        <button id="exportarEstoque" class="exportarCSV" >Exportar</button>
-                    </div>
-                    <div class="tabela-container">
-                        <table>
-                            <thead class="headTabela">
-                                <tr>
-                                    <th>N° Caixa</th>
-                                    <th>Quantidade</th>
-                                    <th>Repor estoque</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 01</td>
-                                    <td data-label="Quantidade">8</td>
-                                    <td data-label="Repor estoque" class="acoes">
-                                        <a href="#" class="botaoAcao" id="reporEstoque">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 02</td>
-                                    <td data-label="Quantidade">5</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 02')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 03</td>
-                                    <td data-label="Quantidade">3</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 03')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 04</td>
-                                    <td data-label="Quantidade">10</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 04')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="N° Caixa">Caixa 05</td>
-                                    <td data-label="Quantidade">7</td>
-                                    <td data-label="Realizar Pedido" class="acoes">
-                                        <a href="#" class="botaoAcao" onclick="abrirModalPedido('Caixa 05')">
-                                            <i class="fas fa-box"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
-                    </div>
-            </section>
-
             <section id="perfilAcesso" style="display: none;">
                 <div class="alternador">
                     <div class="seletor">
@@ -178,119 +61,10 @@
                                 <tr>
                                     <th>Matricula</th>
                                     <th>Nome</th>
-                                    <th>Tipo usuário</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody id="perfis-tbody">
-                                <tr id="perfil-linha">
-                                    <td data-label="Matricula" id="perfil-matricula">254875</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Wellington Tavares</td>
-                                    <td data-label="Nº do Caixa" id="numero-caixa">Caixa 07</td>
-                                    <td data-label="Ações" class="acoes" id="acoesPerfil">
-                                        <div id="BotaoAcaoPerfil">
-                                            <a href="#" class="botaoAcao" id="editarCaixa"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="deletarPerfil"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvarEdicaoCaixa" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 04</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 09</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 08</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 06</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 03</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 07</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 05</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Matricula" id="perfil-matricula">256584</td>
-                                    <td data-label="Nome do Perfil" id="perfil-nome">Marcedo Macedo</td>
-                                    <td data-label="Tipo de Usuário" id="perfil-tipoUsuario">Caixa 02</td>
-                                    <td data-label="Ações" class="acoes" id="acoes">
-                                        <div id="containerBotaoAcao">
-                                            <a href="#" class="botaoAcao" id="edit" onclick="editarPerfil()"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="botaoAcao" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                        <a href="#" class="botaoAcao" id="salvar" onclick="salvarPerfil()" style="display: none;"><i class="fas fa-save"></i></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -307,41 +81,11 @@
                         <button id="cadastrarMassa" class="exportarCSV" onclick="cadastroMassa()">Cadastro em Massa</button>
                     </div>
                     <form id="formCadUsuario">
-                        <div id="cadastroMassa" style="display: none;">
-                            <input type="file" name="cadastroEmMassa" id="cadastroEmMassa" accept=".xls,.xlsx,.csv">
-                            <div class="tabela-container">
-                                <table style="background-color: white;">
-                                    <thead >
-                                        <tr>
-                                            <th  colspan="3">Exemplo de planilha</th> <!--usa 3 colunas-->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td data-label="Matricula">654321</td>
-                                            <td data-label="Nome">Wellington tavares</td>
-                                            <td data-label="Numero_caixa">Caixa</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                         <div id="cadastroSimples">
                             <label for="matriculaUsuario">Matricula do Usuario:</label>
                             <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
                             <label for="nomeUsuario">Nome:</label>
                             <input type="text" name="nomeUsuario" id="nomeUsuario" required>
-                            <label for="numeroCaixa">Número do Caixa:</label>
-                            <select id="tipoUsuarioGerente" name="tipoUsuario">
-                                <option value="caixa1">Caixa 01</option>
-                                <option value="caixa2">Caixa 02</option>
-                                <option value="caixa3">Caixa 03</option>
-                                <option value="caixa4">Caixa 04</option>
-                                <option value="caixa5">Caixa 05</option>
-                                <option value="caixa6">Caixa 06</option>
-                                <option value="caixa7">Caixa 07</option>
-                            </select>
                         </div>
                         <button type="submit" id="CadastrarPerfil">Cadastrar Perfil</button>
                     </form>
@@ -351,13 +95,34 @@
             <section id="editarLoja" style="display: none;">
                 <form id="formEditarLoja">
                     <h2>Editar Loja</h2>
-                    <label for="novaLoja">Nome da Loja:</label>
-                    <input type="text" id="novaLoja" name="novaLoja">
+                    <label for="nomeLoja">Nome da Loja:</label>
+                    <input type="text" id="nomeLoja" name="nomeLoja">
+                    
                     <label for="enderecoLoja">Endereço:</label>
                     <input type="text" id="enderecoLoja" name="enderecoLoja">
-                    <label for="qntCaixas">Quantidade de Caixas(físicos):</label>
-                    <input type="number" id="qntCaixas" name="qntCaixas">
-                    <button type="submit" id="salvarLoja">Salvar Loja</button>
+
+                    <div class="grid-container-label">
+                        <div>
+                            <label for="cepLoja">Cep:</label>
+                            <input type="text" id="cepLoja" name="cepLoja" pattern="\d*" title="Apenas números são permitidos" oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="1234567"> 
+                        </div>
+                        <div>
+                            <label for="cidadeEstadoLoja">Cidade/UF:</label>
+                            <input type="text" id="cidadeEstadoLoja" name="cidadeEstadoLoja" placeholder="Ourinhos/SP">
+                            <div id="suggestions" class="suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="grid-container-label">
+                        <div>
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" id="telefone" name="telefone">
+                        </div>
+                        <div>
+                            <label for="quantidadeMinimaTaloes">Mínimo de Talões:</label>
+                            <input type="number" id="quantidadeMinimaTaloes" name="quantidadeMinimaTaloes">
+                        </div>
+                    </div>
+                    <button type="submit">Salvar Loja</button>
                 </form>
             </section>
 
@@ -376,10 +141,10 @@
                 </div>
                 
                 <article id="entradas">
-                        <div class="dashboard-item dashboard-item-estoque dashboard-item-mob">
-                            <h3>Estoque de Talões</h3>
-                            <p>87</p>
-                        </div>
+                    <div class="dashboard-item dashboard-item-estoque dashboard-item-mob">
+                        <h3>Estoque de Talões</h3>
+                        <p id="quantidadeEstoque"></p>
+                    </div>
 
                     <div class="tabela-container">
                         <table>
@@ -390,67 +155,17 @@
                                     <th>Quantidade</th>
                                     <th>Data Recebimento/Prevista</th>
                                     <th>Status</th>
-                                    <th>Marcar Recebido</th>
+                                    <th>Recebido</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Enviado</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Data Envio">10/10/2024 - 17:35</td>
-                                    <td data-label="Remessa">254587954</td>
-                                    <td data-label="Quantidade">150</td>
-                                    <td data-label="Data Recebimento/Prevista">12/10/2024</td>
-                                    <td data-label="Status" id="statusRemessa">Recebido</td>
-                                    <td data-label="Marcar Recebido">
-                                        <a href="#" class="botaoAcao" id="alterarStatus"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="entradas-tbody">
                             </tbody>
                         </table>
                     </div>
                     <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                        <button id="pagAntEntradas" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoEntradas"></span>
+                        <button id="proxPagEntradas">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
 
@@ -460,51 +175,44 @@
                             <thead class="headTabela">
                                 <tr>
                                     <th>Data Saída</th>
-                                    <th>Cliente</th>
                                     <th>Colaborador</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-label="Data">28/08/2021</td>
-                                    <td data-label="Cliente">Wellington Tavares</td>
-                                    <td data-label="Colaborador">Wellington Tavares</td>
-                                </tr>
+                            <tbody id="saidas-tbody">
                             </tbody>
                         </table>
                     </div>
                     <div class="paginacao">
-                        <button id="pagAntEstoque" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-                        <span id="pagInfoEstoque"></span>
-                        <button id="proxPagEstoque">Próxima <i class="fas fa-chevron-right"></i></button>
+                        <button id="pagAntSaidas" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoSaidas"></span>
+                        <button id="proxPagSaidas">Próxima <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </article>
             </section>
 
             <section id="perfilUsuario" style="display: none;">
-                <h2>Perfil do Usuário</h2>
-                <form >
+                <h2 id="nome_usuario"></h2>
+                <form id="formEditUsuario">
                     <div class="container-labe">
                         <label for="matricula">Matricula:</label>
-                        <input type="text" name="matricula" id="matricula" value="123456" disabled>
+                        <input type="text" name="matricula" id="matricula" disabled>
                     </div>
                     <div class="container-labe">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" value="Robervania" disabled>
+                        <input type="text" name="nome" id="nome" >
                     </div>
                     <div class="container-labe">
                         <label for="email">E-mail:</label>
                         <input type="email" name="email" id="email">
                     </div>
                     <div class="container-labe">
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha" value="123456" disabled>
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" name="workplace" id="workplace" >
                     </div>
                     <div class="container-labe">
-                        <label for="Repetirsenha">Repetir Senha:</label>
-                        <input type="password" name="Repetirsenha" id="Repetirsenha" value="123456" disabled>
+                        <button type="button" id="botaoEditarSenha">Mudar senha</button>
                     </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit" id="submitButtonPerfilUsuario">Salvar</button>
                 </form>
             </section>
         </main>

@@ -1,12 +1,10 @@
-nav{
-    
-}
+
 .talao {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
-    margin-bottom: 10px;
+    margin: 10px auto 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: 'Courier New', Courier, monospace;
     width: 300px;

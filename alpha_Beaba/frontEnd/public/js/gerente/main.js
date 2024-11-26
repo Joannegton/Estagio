@@ -1,8 +1,8 @@
-import { mostrarPerfilAcesso, buscarNome, exportarPerfis, cadastroMassa, cadastrarPerfil, mostrarInput, salvarEdicaoCaixa, deletarPerfil, mostrarPerfilUsuario } from './perfil.js';
-import { mostrarRelatorios, exportarRelatorios, alterarStatus, alternadorRelatorios } from './relatorio.js';
-import { mostrarPedidoTaloes, reporEstoque, exportarEstoque } from './estoque.js';
-import { mostrarEditarLoja, salvarLoja } from './loja.js';
-import { logout, mostrarMenu } from "../../utils.js";
+import { mostrarPerfilAcesso, exportarPerfis, cadastrarPerfil, filtrarUsuarioNome } from './perfil.js'
+import { mostrarRelatorios, exportarRelatorios, alternadorRelatorios } from './relatorio.js'
+import { completeInformations, mostrarEditarLoja, salvarLoja } from './loja.js'
+import { carregarCardUsuario, checkSession, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from '../adm/perfilUsuario.js'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,49 +12,97 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.removeItem('mostrarPerfilUsuario')
     }
 
-    // Menu navegação
-    document.getElementById('mostrarGestaoEstoque').addEventListener('click', mostrarPedidoTaloes);
-    document.getElementById('mostrarGestaoPerfil').addEventListener('click', mostrarPerfilAcesso)
-    document.getElementById('mostrarGestaoLoja').addEventListener('click', mostrarEditarLoja)
-    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', mostrarRelatorios)
-
-    document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
-    document.getElementById('sair-usuario').addEventListener('click', logout)
-
-    // Estoque
-    document.getElementById('reporEstoque').addEventListener('click', reporEstoque)
-    document.getElementById('exportarEstoque').addEventListener('click', exportarEstoque);
-    
-    // Perfis
-    document.getElementById('filtroUsuario').addEventListener('input', buscarNome)
-    
-    document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
-
-    document.getElementById('cadastrarMassa').addEventListener('click', cadastroMassa)
-    
-    document.getElementById('CadastrarPerfil').addEventListener('click', cadastrarPerfil)
-    
-    document.getElementById('editarCaixa').addEventListener('click', mostrarInput)
-    
-    document.getElementById('salvarEdicaoCaixa').addEventListener('click', salvarEdicaoCaixa)
-
-    document.getElementById('deletarPerfil').addEventListener('click', deletarPerfil)
-
-    // Ações relacionadas a Loja
-
-    document.getElementById('salvarLoja').addEventListener('click', salvarLoja)
-
-    // Ações relacionadas a relatorios
-    alternadorRelatorios()
-    document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
-
-    document.getElementById('alterarStatus').addEventListener('click', alterarStatus)
-
     // Menu
-    window.mostrarMenu = () => {
-        mostrarMenu()
+    if(window.innerWidth > 768){
+        document.getElementById('menu').style.display = 'block'
     }
 
-});
+    document.getElementById('mostrarGestaoPerfil').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try{
+            await mostrarPerfilAcesso()
+        } finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    document.getElementById('mostrarGestaoLoja').addEventListener('click', async ()=> {
+        mostrarModalCarregamento()
+        try{
+            await mostrarEditarLoja()
+        }finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    document.getElementById('mostrarGestaoRelatorio').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try{
+            await mostrarRelatorios()
+        }finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    document.getElementById('usuario-info').addEventListener('click', mostrarPerfilUsuario)
+    document.getElementById('sair-usuario').addEventListener('click', async () => {
+        mostrarModalCarregamento()
+        try{
+            await logout()
+        } finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    document.getElementById('menuButton').addEventListener('click', mostrarMenu)
+    document.getElementById('fechar').addEventListener('click', mostrarMenu)
+
+    // Perfis
+    document.getElementById('filtroUsuario').addEventListener('input', filtrarUsuarioNome)
+    
+    document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
+    
+    document.getElementById('formCadUsuario').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        mostrarModalCarregamento()
+        try{
+            await cadastrarPerfil()
+        } finally{
+            esconderModalCarregamento()
+        }
+    })
+
+    // Ações relacionadas a Loja
+    document.getElementById('formEditarLoja').addEventListener('submit', (e) => {
+        e.preventDefault()
+        salvarLoja()
+    })
+
+    // Ações relacionadas a relatorios
+    document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
+
+    // perfil de usuario
+    document.getElementById('formEditUsuario').addEventListener('submit', (e) =>{
+        e.preventDefault()
+        salvarEditarUsuario()
+    })
+    document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
+    
+    //carregamento da sessão inicial que é o Dashboard/relatorios
+    window.onload = async () => {
+        mostrarModalCarregamento()
+        try {
+            checkSession(2)
+            carregarCardUsuario()
+            await alternadorRelatorios()
+            await completeInformations()
+        } catch (error) {
+            alert("Erro ao carregar dados")
+        } finally{
+            esconderModalCarregamento()
+        }
+    }
+
+})
 
 
