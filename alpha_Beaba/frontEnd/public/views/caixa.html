@@ -12,28 +12,30 @@
 </head>
 <body>
     <div class="main">
-        <header>
-            <nav id="menu">
-                <span id="fechar">&times;</span>
-                <img src="../img/logo.png" alt="logo">
-                <h1>Oferte e Ganhe</h1>
-                <ul>
-                    <li><a href="#" id="mostrarEnvioTaloes" class="ativo">Saída de Talão</a></li>
+        <header class="flex flex-col w-full md:w-1/4">
+            <nav id="menu" class="bg-primary text-white text-center flex flex-col h-full w-full">
+                <span id="fechar" class="self-end text-2xl cursor-pointer">&times;</span>
+                <img src="../img/logo.png" alt="logo" class="w-4/5 mx-auto mt-2">
+                <h1 class="mb-4">Oferte e Ganhe</h1>
+                <ul class="list-none p-0 m-0">
+                    <li class="mb-2">
+                        <a href="#" id="mostrarEnvioTaloes" class="block p-2 border border-tertiary rounded hover:bg-primary-hover transition-colors ativo">Saída de Talão</a>
+                    </li>
                 </ul>
-                <div class="usuario">
-                    <i class="fas fa-user usuario-icon" ></i> 
+                <div class="usuario flex justify-between items-center w-4/5 max-w-fit-content p-2 mt-10 mx-auto bg-yellow-200 bg-opacity-20 rounded shadow">
+                    <i class="fas fa-user usuario-icon"></i>
                     <div id="usuario-info">
-                        <p id="usuario-nome"></p>
-                        <p id="usuario-matricula"></p>
+                        <p id="usuario-nome" class="m-0 mb-1"></p>
+                        <p id="usuario-matricula" class="m-0"></p>
                     </div>
-                    <div id="sair-usuario">
-                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
-                        <p class="usuario-sair">Sair</p>
+                    <div id="sair-usuario" class="flex items-center">
+                        <i class="fas fa-sign-out-alt sair-icon cursor-pointer"></i>
+                        <p class="usuario-sair ml-2">Sair</p>
                     </div>
                 </div>
             </nav>
-            <button id="menuButton">&#9776;</button>
-            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+            <button id="menuButton" class="md:hidden text-2xl">&#9776;</button>
+            <h1 class="tituloMobile md:hidden">Oferte e Ganhe</h1>
         </header>
 
         <main>

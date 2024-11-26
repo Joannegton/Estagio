@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --env-file backend/.env backend/server.js & open http://localhost:3000/login"
+    "start": "nodemon --env-file backend/.env backend/server.js"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +20,10 @@
     "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
     "oferte_e_ganhe": "file:",
-    "open": "^10.1.0",
     "pg": "^8.13.0",
     "uuid": "^11.0.2"
+  },
+  "devDependencies": {
+    "tailwinds": "^0.0.0"
   }
 }
