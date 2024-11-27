@@ -82,7 +82,7 @@ async function login() {
             }
             localStorage.setItem('tipoUsuario', nomePerfil)
 
-            const pagina = tipoUsuario === 1 ? 'admin' : tipoUsuario === 2 ? 'gerente' : 'caixa'
+            const pagina = tipoUsuario === 1 ? 'relatorios' : tipoUsuario === 2 ? 'relatoriosG' : 'caixa'
 
             if (senha === 'Quero@2024#') {
                 sessionStorage.setItem('mostrarPerfilUsuario', 'true')

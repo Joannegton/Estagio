@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="../../style/geral.css">
     <link rel="stylesheet" href="../../style/gerente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="module" src="../../js/gerente/perfilUsuarioMain.js"></script>
-</head>
+    <script type="module" src="../../js/gerente/script/perfilUsuario.js"></script>
+    <script type="module" src="../../js/gerente/menu.js"></script></head>
 <body>
     <div class="main">
         <header>
             <nav id="menu">
                 <span id="fechar">&times;</span>
-                <img src="../../img/logo.png" alt="logo">
+                <img src="../img/logo.png" alt="logo">
                 <h1>Oferte e Ganhe</h1>
                 <ul>
                     <li><a href="#" id="mostrarGestaoPerfil"><i class="fas fa-user-cog"></i> Perfil de Acesso</a></li>
                     <li><a href="#" id="mostrarGestaoLoja"><i class="fas fa-store"></i> Loja</a></li> 
-                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#" id="mostrarGestaoRelatorio" ><i class="fas fa-chart-line"></i> Dashboard</a></li>
                 </ul>
-                <div class="usuario">
+                <div class="usuario" class="ativo">
                     <i class="fas fa-user usuario-icon" ></i> 
                     <div id="usuario-info">
                         <p id="usuario-nome"></p>
@@ -37,6 +37,7 @@
             <button id="menuButton">&#9776;</button>
             <h1 class="tituloMobile">Oferte e Ganhe</h1>
         </header>
+
         <main>
             <section id="perfilUsuario">
                 <h2 id="nome_usuario"></h2>

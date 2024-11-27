@@ -1,5 +1,5 @@
-import { esconderModalCarregamento, mostrarModalCarregamento } from "../utils"
-import { cadastrarPerfil, exportarPerfis, filtrarUsuarioNome } from "./perfil"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { alternadorPerfilAcesso, cadastrarPerfil, exportarPerfis, filtrarUsuarioNome } from "../controller/perfilController.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroUsuario').addEventListener('input', filtrarUsuarioNome)
@@ -15,4 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
             esconderModalCarregamento()
         }
     })
+
+    window.onload = async () => {
+        carregarCardUsuario()
+        mostrarModalCarregamento()
+        try{
+            await alternadorPerfilAcesso()
+        } finally{
+            esconderModalCarregamento()
+        }
+    }
+
 })

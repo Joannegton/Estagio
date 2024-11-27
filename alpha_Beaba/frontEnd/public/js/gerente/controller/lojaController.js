@@ -1,11 +1,8 @@
-import { mostrarModalFinalizado } from "../utils.js"
-import { API_URL } from "../config/config.js"
-import { mostrarRelatorios } from "./relatorio.js"
+import { mostrarModalFinalizado } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
+import { alternadorRelatorios } from "./relatorioController.js"
 
 let loja = {}
-
-async function mostrarEditarLoja(){
-}
 
 async function fetchLoja(){
     try {
@@ -22,7 +19,6 @@ async function fetchLoja(){
             throw new Error(errorData.message)
         }
         loja = await response.json()
-        carregarDadosLoja(loja)
     } catch (error) {
         console.error("Erro ao buscar loja: ", error.stack)
         alert('Erro ao buscar dados')
@@ -81,7 +77,7 @@ async function salvarLoja(){
         mostrarModalFinalizado()
         await completeInformations()
         setTimeout(async () => {
-            await mostrarRelatorios()
+            await alternadorRelatorios()
         }, 1000)
     } catch (error) {
         console.error('Erro ao atualizar Loja: ', error.stack)
@@ -136,4 +132,4 @@ async function completeInformations() {
     }
 }
 
-export { completeInformations, mostrarEditarLoja, salvarLoja, fetchLoja }
+export { completeInformations, carregarDadosLoja, salvarLoja, fetchLoja, loja }

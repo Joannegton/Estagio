@@ -1,4 +1,4 @@
-import { modalEditarSenha, salvarEditarUsuario } from "../adm/perfilUsuario"
+import { modalEditarSenha, salvarEditarUsuario } from "../../adm/controller/perfilUsuarioController.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('formEditUsuario').addEventListener('submit', (e) =>{

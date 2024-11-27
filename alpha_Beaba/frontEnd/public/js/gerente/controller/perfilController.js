@@ -1,10 +1,8 @@
-import { alternador, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado, exportCsv } from "../utils.js"
-import { API_URL } from "../config/config.js"
+import { alternador, desativarBotao, ativarBotao, filtrarPorNome, mostrarModalFinalizado, exportCsv } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 let usuarios = []
 
-async function mostrarPerfilAcesso(){
-}
 
 async function alternadorPerfilAcesso() {
     const perfil = document.getElementById('mostrarPerfis')
@@ -178,7 +176,7 @@ function exportarPerfis(){
 
 
 export { 
-    mostrarPerfilAcesso, 
+    alternadorPerfilAcesso,
     filtrarUsuarioNome,
     exportarPerfis, 
     cadastrarPerfil

@@ -1,12 +1,9 @@
-import { alternador, converterDataHoraParaBR, converterDataParaBR } from "../utils.js"
-import { API_URL } from "../config/config.js"
+import { alternador, converterDataHoraParaBR, converterDataParaBR } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 let remessas = []
 
 let saidaTaloes = []
-
-async function mostrarRelatorios() {
-}
 
 async function alternadorRelatorios() {
     const saidas = document.getElementById('mostrarSaidas')
@@ -69,7 +66,6 @@ async function fetchRemessa() {
         renderizarEntradas(remessas)
     } catch (error) {
         console.error('Erro ao buscar remessas:', error.stack) 
-        //modificar
         alert('Erro ao buscar remessas, consulte o Administrador do sistema')
     }
 }
@@ -234,4 +230,4 @@ function exportarRelatorios(){
 
 
 
-export { mostrarRelatorios, alternadorRelatorios, exportarRelatorios, carregarEstoqueLoja }
+export { alternadorRelatorios, exportarRelatorios, carregarEstoqueLoja }

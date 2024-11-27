@@ -6,10 +6,7 @@ viewRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/login.html'))
 })
 
-viewRouter.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/admin/relatorios.html'))
-})
-
+// Administrador
 viewRouter.get('/envioTaloes', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/admin/envioTaloes.html'))
 })
@@ -24,7 +21,7 @@ viewRouter.get('/manutencao', (req, res) => {
 
 viewRouter.get('/estoque', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/admin/estoqueLojas.html'))
-})
+}) 
 
 viewRouter.get('/lojas', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/admin/lojas.html'))
@@ -38,14 +35,25 @@ viewRouter.get('/relatorios', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/admin/relatorios.html'))
 })
 
-
-
-
-
-viewRouter.get('/gerente', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente.html'))
+// Gerente
+viewRouter.get('/editarLoja', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente/editLoja.html'))
 })
 
+viewRouter.get('/perfilAcessoG', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente/perfilAcesso.html'))
+})
+
+viewRouter.get('/perfilUsuarioG', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente/perfilUsuario.html'))
+})
+
+viewRouter.get('/relatoriosG', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente/relatorios.html'))
+})
+
+
+// Caixa
 viewRouter.get('/caixa', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/caixa.html'))
 })
