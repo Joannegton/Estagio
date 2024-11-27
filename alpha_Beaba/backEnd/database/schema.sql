@@ -1,3 +1,5 @@
+-- Banco de dados: oferte_e_ganhe
+
 create table perfil_acesso (
     id_perfil_acesso serial primary key,
     descricao varchar(20) not null
