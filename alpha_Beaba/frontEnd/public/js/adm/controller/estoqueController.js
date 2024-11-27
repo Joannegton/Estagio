@@ -1,12 +1,8 @@
-import { exportCsv, filtrarPorNome, identificarBaixoEstoque, mostrarElemento, ordenarArray } from "../utils.js"
-import { API_URL } from "../config/config.js"
+import { exportCsv, filtrarPorNome, identificarBaixoEstoque,  ordenarArray } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 let estoque = []
 
-// Funções de exibição
-async function mostrarEstoque() {
-    await mostrarElemento('estoque', 'mostrarEstoque', fetchEstoque)
-}
     
 function renderizarTabela(estoqueRenderizar) {
     let paginaAtual = 1
@@ -100,4 +96,4 @@ function exportarEstoque() {
     exportCsv(estoque, 'estoque')
 }
 
-export { renderizarTabela, ordenarEstoque, filtrarNomeLoja, mostrarEstoque, ordenarLojaEstoque, exportarEstoque }
+export { renderizarTabela, fetchEstoque, ordenarEstoque, filtrarNomeLoja, ordenarLojaEstoque, exportarEstoque }

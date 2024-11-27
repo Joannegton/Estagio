@@ -1,10 +1,7 @@
-import { ativarBotao, carregarCardUsuario, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu, mostrarModalFinalizado } from "../utils.js"
-import { API_URL } from "../config/config.js"
+import { ativarBotao, carregarCardUsuario, carregarUsuario, desativarBotao, esconderElementos, mostrarMenu, mostrarModalFinalizado } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 function mostrarPerfilUsuario(){
-    document.getElementById('perfilUsuario').style.display = 'block'
-    esconderElementos(['envioTaloes', 'estoque', 'relatorios', 'manutencao', 'lojas', 'perfil', 'editarLoja'])
-    mostrarMenu()
     carregarUsuario()
 }
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatorios</title>
+    <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../style/geral.css">
+    <link rel="stylesheet" href="../../style/adm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../../js/adm/script/relatorios.js" type="module"></script>
+    <script src="../../js/adm/menu.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <span id="fechar">&times;</span>
+                <img src="../img/logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" id="mostrarEnvioTaloes"><i class="fas fa-shipping-fast"></i> Gestão de Envios</a></li>
+                    <li><a href="#" id="mostrarManutencao"><i class="fas fa-tools"></i> Manutenção de Envios</a></li>
+                    <li><a href="#" id="mostrarEstoque"><i class="fas fa-boxes"></i> Gestão de Estoque</a></li>
+                    <li><a href="#" id="mostrarLojas"><i class="fas fa-store"></i> Gestão de Lojas</a></li>
+                    <li><a href="#" id="mostrarPerfil"><i class="fas fa-user-cog"></i> Gestão de Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                </ul>
+                <div class="usuario">
+                    <i class="fas fa-user usuario-icon" ></i> 
+                    <div id="usuario-info">
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
+                    </div>
+                    <div id="sair-usuario">
+                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
+                        <p class="usuario-sair">Sair</p>
+                    </div> 
+                </div>
+            </nav>
+            <button id="menuButton" >&#9776;</button>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="relatorios">
+                <h2>Relatórios</h2>
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="mostrarTabelas" class="opcao ativo">Geral</div>
+                      <div id="mostrarGrafico" class="opcao inativo">Evolução</div>
+                      <div class="indicador" id="indicadorRelatorios"></div>
+                    </div>
+                </div>
+
+                <div class="filtro-container" style="margin-top: 1em;">
+                    <button id="exportarRelatorios" class="exportarCSV" onclick="exportarCsv()">Exportar</button>
+                </div>
+                
+                <div class="dashboard-grid" id="seletorTabela" >
+                    <div style="height: fit-content; margin: 0 5px;">
+                        <div class="coluna" style="display: flex; justify-content: space-around;">
+                            <div class="dashboard-item dashboard-item-mob">
+                                <h3>Total de Usuários</h3>
+                                <p id="usuariosTotais">0</p>
+                            </div>
+                            <div class="dashboard-item dashboard-item-mob">
+                                <h3>Total de Lojas</h3>
+                                <p id="lojasTotais"></p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-item dashboard-item-mob">
+                            <h3>Enviados Outubro</h3>
+                            <p id="enviadosTotais"></p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-item dashboard-item-mob-estoque">
+                        <h3>Estoque Baixo</h3>
+                        <table>
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Loja</th>
+                                    <th>Quant</th>
+                                    <th>Quant Min</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaEstoqueBaixo">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <canvas id="enviosChart" style="display: none;"></canvas>
+                
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>Quero-Quero 2024 | todos os direitos reservados</p>
+    </footer>
+</body>
+</html>

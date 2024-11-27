@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenção</title>
+    <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../style/geral.css">
+    <link rel="stylesheet" href="../../style/adm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../../js/adm/script/manutencao.js" type="module"></script>
+    <script src="../../js/adm/menu.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <span id="fechar">&times;</span>
+                <img src="../img/logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" id="mostrarEnvioTaloes"><i class="fas fa-shipping-fast"></i> Gestão de Envios</a></li>
+                    <li><a href="#" id="mostrarManutencao" class="ativo"><i class="fas fa-tools"></i> Manutenção de Envios</a></li>
+                    <li><a href="#" id="mostrarEstoque"><i class="fas fa-boxes"></i> Gestão de Estoque</a></li>
+                    <li><a href="#" id="mostrarLojas"><i class="fas fa-store"></i> Gestão de Lojas</a></li>
+                    <li><a href="#" id="mostrarPerfil"><i class="fas fa-user-cog"></i> Gestão de Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarRelatorio" ><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                </ul>
+                <div class="usuario">
+                    <i class="fas fa-user usuario-icon" ></i> 
+                    <div id="usuario-info">
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
+                    </div>
+                    <div id="sair-usuario">
+                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
+                        <p class="usuario-sair">Sair</p>
+                    </div> 
+                </div>
+            </nav>
+            <button id="menuButton" >&#9776;</button>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="manutencao">
+                <h2>Manutenção de Remessa</h2>
+                <div class="filtro-container">
+                    <div id="mostrarFiltroManutencao" class="mostrarFiltro">
+                        <Label>Filtros:</Label>
+                        <i class="fas fa-chevron-down iconeFiltro"  onclick="mostrarFiltros('opcoesFiltroManutencao', 'mostrarFiltroManutencao')"></i>
+                    </div>
+                    <div class="filtro" id="opcoesFiltroManutencao">
+                        <div class="container-nome">
+                            <label for="filtroManutencaoNomeLoja">Loja:</label>
+                            <input type="text" name="filtroManutencaoNomeLoja" id="filtroManutencaoNomeLoja">
+                        </div>
+
+                        <div class="container-selects">
+                            <label for="filtroLojaManutencao">Loja:</label>
+                            <select id="filtroLojaManutencao" name="filtroLojaManutencao">
+                                <option value="asc">A - Z</option>
+                                <option value="desc">Z - A</option>
+                            </select>
+                            <label for="filtroStatusManutencao" style="margin-left: .3em;">Status:</label>
+                            <select id="filtroStatusManutencao" name="filtroStatusManutencao">
+                                <option value="todas">Todas</option>
+                                <option value="enviado">Enviado</option>
+                                <option value="recebido">Recebido</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="exportarManutencao" class="exportarCSV">Exportar</button>
+                </div>
+
+                <div class="tabela-container">
+                    <table>
+                        <thead class="headTabela">
+                            <tr>
+                                <th>Remessa</th>
+                                <th>Data do Envio</th>
+                                <th>Loja Destino</th>
+                                <th>Quant</th>
+                                <th>Recebimento</th>
+                                <th>Data de Entrega</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manutencao-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginacao">
+                    <button id="pagAntManutencao" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                    <span id="pagInfoManutencao"></span>
+                    <button id="proxPagManutencao">Próxima <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <footer>
+        <p>Quero-Quero 2024 | todos os direitos reservados</p>
+    </footer>
+</body>
+</html>

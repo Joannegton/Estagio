@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Acesso</title>
+    <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../style/geral.css">
+    <link rel="stylesheet" href="../../style/gerente.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="module" src="../../js/gerente/main.js"></script>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <span id="fechar">&times;</span>
+                <img src="../../img/logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" id="mostrarGestaoPerfil"><i class="fas fa-user-cog"></i> Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarGestaoLoja"><i class="fas fa-store"></i> Loja</a></li> 
+                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                </ul>
+                <div class="usuario">
+                    <i class="fas fa-user usuario-icon" ></i> 
+                    <div id="usuario-info">
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
+                    </div>
+                    <div id="sair-usuario">
+                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
+                        <p class="usuario-sair">Sair</p>
+                    </div> 
+                </div>
+            </nav>
+            <button id="menuButton">&#9776;</button>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="perfilAcesso">
+                <div class="alternador">
+                    <div class="seletor">
+                      <div id="mostrarPerfis" class="opcao ativo">Perfis</div>
+                      <div id="mostrarCadastro" class="opcao inativo">Cadastro</div>
+                      <div class="indicador" id="indicadorPerfil"></div>
+                    </div>
+                </div>
+
+                <article id="seletorPerfis">
+                    <h2>Perfis de Usuario</h2>
+                    <div class="filtro filtro-container">
+                        <label for="filtroUsuario">Nome:</label>
+                        <input type="text" name="filtroUsuario" id="filtroUsuario">
+                        <button id="exportarPerfis" class="exportarCSV" >Exportar</button>
+                    </div>
+                    <div class="tabela-container">
+                        <table>
+                            <thead class="headTabela">
+                                <tr>
+                                    <th>Matricula</th>
+                                    <th>Nome</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="perfis-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="paginacao">
+                        <button id="pagAntUsuarios" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                        <span id="pagInfoUsuarios"></span>
+                        <button id="proxPagUsuarios">Próxima <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </article>
+
+                <article id="seletorCadastro" style="display: none;">
+                    <h2>Cadatro de Usuário</h2>
+                    <div class="filtro filtro-container" style="text-align: end;">
+                        <button id="cadastrarMassa" class="exportarCSV" onclick="cadastroMassa()">Cadastro em Massa</button>
+                    </div>
+                    <form id="formCadUsuario">
+                        <div id="cadastroSimples">
+                            <label for="matriculaUsuario">Matricula do Usuario:</label>
+                            <input type="text" id="matriculaUsuario" name="matriculaUsuario" required>
+                            <label for="nomeUsuario">Nome:</label>
+                            <input type="text" name="nomeUsuario" id="nomeUsuario" required>
+                        </div>
+                        <button type="submit" id="CadastrarPerfil">Cadastrar Perfil</button>
+                    </form>
+                </article>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>Quero-Quero 2024 | todos os direitos reservados</p>
+    </footer>
+</body>

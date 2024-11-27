@@ -9,7 +9,7 @@ function mostrarMenu() {
 
 // usuario logado
 function carregarUsuario(){
-    document.getElementById('nome_usuario').textContent = localStorage.getItem('nome')
+    document.getElementById('nome_usuario').innerHTML = localStorage.getItem('nome') || 'Usuário'
     
     document.getElementById('matricula').value = localStorage.getItem('matricula')
     document.getElementById('nome').value = localStorage.getItem('nome')
@@ -21,7 +21,7 @@ function carregarUsuario(){
 function carregarCardUsuario(){
     document.getElementById('usuario-nome').textContent = localStorage.getItem('nome')
     document.getElementById('usuario-matricula').textContent = localStorage.getItem('tipoUsuario') + ' - ' + localStorage.getItem('matricula')  
-}
+} 
 
 //se não carregar os dados, mostra o modal de carregamento
 function mostrarModalCarregamento() {
@@ -72,18 +72,7 @@ function esconderModalFinalizado() {
     }
 }
 
-// função para mostrar sessão e inicializar
-async function mostrarElemento(elementoId, linkAtivarId, funcoesAdicional) {
-    const links = document.querySelectorAll('#menu ul li a')
-    links.forEach(link => link.classList.remove('ativo'))
-    if (linkAtivarId) {
-        document.getElementById(linkAtivarId).classList.add('ativo')
-    }
-    esconderElementos(['relatorios', 'envioTaloes', 'perfil', 'manutencao', 'lojas', 'perfilUsuario', 'estoque', 'estoqueTaloes', 'perfilAcesso', 'editarLoja', 'perfilUsuario'])
-    document.getElementById(elementoId).style.display = 'block'
-    mostrarMenu()
-    await funcoesAdicional()
-}
+
 
 // Função para alternar entre elementos
 function alternador(elementoAtivo, elementoDesativar, elementoAtivar, ativar, desativar, indicador) {
@@ -367,4 +356,4 @@ function exportCsv(dados, nomeArquivo) {
 
 
 
-export {exportCsv, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarElemento, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {exportCsv, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarMenu, alternador, alternador3, esconderElementos, logout}

@@ -1,9 +1,5 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
-import { API_URL } from "../config/config.js"
-
-async function mostrarEnvioTaloes(){
-    await mostrarElemento('envioTaloes', 'mostrarEnvioTaloes', carregarSelects)
-}
+import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarModalFinalizado } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 async function enviarTalao() {
     desativarBotao('submitButtonTalao')
@@ -121,4 +117,4 @@ async function carregarGerente(gerenteId) {
 
 
 
-export { mostrarEnvioTaloes, enviarTalao }
+export { enviarTalao, carregarSelects }

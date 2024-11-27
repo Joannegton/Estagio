@@ -1,5 +1,5 @@
-import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, getWorkplaceLink, mostrarModalFinalizado, ordenarArray } from "../utils.js"
-import { API_URL } from "../config/config.js"
+import { ativarBotao, carregarDadosSelect, desativarBotao, filtrarPorNome, getWorkplaceLink, mostrarModalFinalizado, ordenarArray } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
 
 let usuarios = []
 

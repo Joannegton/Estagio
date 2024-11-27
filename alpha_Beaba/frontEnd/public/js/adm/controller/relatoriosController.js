@@ -1,13 +1,10 @@
-import { alternador, exportCsv, mostrarElemento } from "../utils.js"
-import { mostrarEnvioTaloes } from "./envioTaloes.js"
-import { API_URL } from "../config/config.js"
-import { usuarios } from "./usuarios.js"
+import { alternador, exportCsv } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
+import { usuarios } from "./usuariosController.js"
 
 
 async function mostrarRelatorios() {
-    await mostrarElemento('relatorios', 'mostrarRelatorio', () =>{
         alternadorRelatorios()
-    })
 }
 
 async function alternadorRelatorios() {
@@ -81,7 +78,7 @@ async function renderizartabelaEstoqueBaixo(){
             tabelaEstoqueBaixo.appendChild(tr)
 
             document.getElementById(`arrumarEstoqueLoja${estoque.cod_loja}`).addEventListener('click', () => {
-                mostrarEnvioTaloes()
+                window.location = '/envioTaloes'
             })
         })
         iconeEstoqueBaixo()

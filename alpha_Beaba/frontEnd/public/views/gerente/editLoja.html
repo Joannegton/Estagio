@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Loja</title>
+    <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../style/geral.css">
+    <link rel="stylesheet" href="../../style/gerente.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="module" src="../../js/gerente/main.js"></script>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav id="menu">
+                <span id="fechar">&times;</span>
+                <img src="../../img/logo.png" alt="logo">
+                <h1>Oferte e Ganhe</h1>
+                <ul>
+                    <li><a href="#" id="mostrarGestaoPerfil"><i class="fas fa-user-cog"></i> Perfil de Acesso</a></li>
+                    <li><a href="#" id="mostrarGestaoLoja"><i class="fas fa-store"></i> Loja</a></li> 
+                    <li><a href="#" id="mostrarGestaoRelatorio" class="ativo"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                </ul>
+                <div class="usuario">
+                    <i class="fas fa-user usuario-icon" ></i> 
+                    <div id="usuario-info">
+                        <p id="usuario-nome"></p>
+                        <p id="usuario-matricula"></p>
+                    </div>
+                    <div id="sair-usuario">
+                        <i class="fas fa-sign-out-alt sair-icon" id="sair"></i>
+                        <p class="usuario-sair">Sair</p>
+                    </div> 
+                </div>
+            </nav>
+            <button id="menuButton">&#9776;</button>
+            <h1 class="tituloMobile">Oferte e Ganhe</h1>
+        </header>
+
+        <main>
+            <section id="editarLoja">
+                <form id="formEditarLoja">
+                    <h2>Editar Loja</h2>
+                    <label for="nomeLoja">Nome da Loja:</label>
+                    <input type="text" id="nomeLoja" name="nomeLoja">
+                    
+                    <label for="enderecoLoja">Endereço:</label>
+                    <input type="text" id="enderecoLoja" name="enderecoLoja">
+
+                    <div class="grid-container-label">
+                        <div>
+                            <label for="cepLoja">Cep:</label>
+                            <input type="text" id="cepLoja" name="cepLoja" pattern="\d*" title="Apenas números são permitidos" oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="1234567"> 
+                        </div>
+                        <div>
+                            <label for="cidadeEstadoLoja">Cidade/UF:</label>
+                            <input type="text" id="cidadeEstadoLoja" name="cidadeEstadoLoja" placeholder="Ourinhos/SP">
+                            <div id="suggestions" class="suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="grid-container-label">
+                        <div>
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" id="telefone" name="telefone">
+                        </div>
+                        <div>
+                            <label for="quantidadeMinimaTaloes">Mínimo de Talões:</label>
+                            <input type="number" id="quantidadeMinimaTaloes" name="quantidadeMinimaTaloes">
+                        </div>
+                    </div>
+                    <button type="submit">Salvar Loja</button>
+                </form>
+            </section>
+
+        </main>
+    </div>
+    <footer>
+        <p>Quero-Quero 2024 | todos os direitos reservados</p>
+    </footer>
+</body>

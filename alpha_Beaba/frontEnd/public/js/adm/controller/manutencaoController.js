@@ -1,13 +1,8 @@
-import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, exportCsv, filtrarArray, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
-import { API_URL } from "../config/config.js"
-import { usuarios } from "./usuarios.js"
+import { ativarBotao, converterDataHoraParaBR, converterDataParaBR, desativarBotao, exportCsv, filtrarArray, getWorkplaceLink,  mostrarModalFinalizado, ordenarArray } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
+import { usuarios } from "./usuariosController.js"
 
 let envioTaloes = []
-
-//funções de exibição
-async function mostrarManutencao(){
-    await mostrarElemento('manutencao', 'mostrarManutencao', fetchEnvioTaloes)
-}
 
 async function fetchEnvioTaloes() {
     try {
@@ -267,4 +262,4 @@ function exportarManutencao() {
     exportCsv(envioTaloes, 'manutencao')
 }
 
-export { renderizarTabelaManutencao, filtrarNomeLojaManutencao, mostrarManutencao, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }
+export { renderizarTabelaManutencao, filtrarNomeLojaManutencao, fetchEnvioTaloes, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }

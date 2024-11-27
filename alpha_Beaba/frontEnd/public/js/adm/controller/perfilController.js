@@ -1,13 +1,9 @@
-import { alternador3, ativarBotao, desativarBotao, esconderElementos, exportCsv, mostrarElemento, mostrarModalFinalizado } from "../utils.js"
-import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuarios.js"
-import { API_URL } from "../config/config.js"
+import { alternador3, ativarBotao, desativarBotao, esconderElementos, exportCsv, mostrarModalFinalizado } from "../../utils.js"
+import { carregarSelectsCadastroUsuario, fetchUsuarios } from "./usuariosController.js"
+import { API_URL } from "../../config/config.js"
 
 let perfis = []
 
-// Visualização de sessões
-async function mostrarPerfil(){
-    await mostrarElemento('perfil', 'mostrarPerfil', alternadorPerfil)
-}
 
 function mostrarModalCadastroPerfil(){
     document.getElementById('addPerfil').style.display = 'flex'
@@ -290,4 +286,4 @@ function exportarPerfis(){
     exportCsv(perfis, 'perfil')
 }
 
-export { mostrarPerfil, mostrarPermissoesMouseOver, mostrarModalCadastroPerfil, salvarPerfil,  salvarEditarPerfil, deletarPerfil, exportarPerfis }
+export { alternadorPerfil, mostrarPermissoesMouseOver, mostrarModalCadastroPerfil, salvarPerfil,  salvarEditarPerfil, deletarPerfil, exportarPerfis }

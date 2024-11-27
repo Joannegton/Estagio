@@ -1,4 +1,4 @@
-import { alternador, converterDataHoraParaBR, converterDataParaBR, mostrarElemento } from "../utils.js"
+import { alternador, converterDataHoraParaBR, converterDataParaBR } from "../utils.js"
 import { API_URL } from "../config/config.js"
 
 let remessas = []
@@ -6,7 +6,6 @@ let remessas = []
 let saidaTaloes = []
 
 async function mostrarRelatorios() {
-    await mostrarElemento('relatorios', 'mostrarGestaoRelatorio', alternadorRelatorios)
 }
 
 async function alternadorRelatorios() {

@@ -1,11 +1,10 @@
-import { mostrarElemento, mostrarModalFinalizado } from "../utils.js"
+import { mostrarModalFinalizado } from "../utils.js"
 import { API_URL } from "../config/config.js"
 import { mostrarRelatorios } from "./relatorio.js"
 
 let loja = {}
 
 async function mostrarEditarLoja(){
-    await mostrarElemento('editarLoja', 'mostrarGestaoLoja', fetchLoja)
 }
 
 async function fetchLoja(){

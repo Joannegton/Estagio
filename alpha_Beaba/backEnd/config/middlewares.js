@@ -11,12 +11,12 @@ module.exports = (app) => {
     app.use(express.static(path.join(__dirname, '../../frontEnd/public')))
 
     // Middleware de autenticação, ignorando certas rotas
-    const rotasPublicas = ['/', '/admin', '/gerente', '/caixa', '/recuperar-senha', '/api/login', '/api/logout']
+   /* const rotasPublicas = ['/', '/admin', '/gerente', '/caixa', '/recuperar-senha', '/api/login', '/api/logout']
 
     app.use((req, res, next) => {
         if (rotasPublicas.includes(req.path)) {
             return next()
         }
         autenticadorToken(req, res, next)
-    })
+    })*/
 }

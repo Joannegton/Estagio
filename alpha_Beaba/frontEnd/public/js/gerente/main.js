@@ -56,37 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('menuButton').addEventListener('click', mostrarMenu)
     document.getElementById('fechar').addEventListener('click', mostrarMenu)
-
-    // Perfis
-    document.getElementById('filtroUsuario').addEventListener('input', filtrarUsuarioNome)
     
-    document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
-    
-    document.getElementById('formCadUsuario').addEventListener('submit', async (e) => {
-        e.preventDefault()
-        mostrarModalCarregamento()
-        try{
-            await cadastrarPerfil()
-        } finally{
-            esconderModalCarregamento()
-        }
-    })
-
-    // Ações relacionadas a Loja
-    document.getElementById('formEditarLoja').addEventListener('submit', (e) => {
-        e.preventDefault()
-        salvarLoja()
-    })
 
     // Ações relacionadas a relatorios
     document.getElementById('exportarRelatorios').addEventListener('click', exportarRelatorios)
 
-    // perfil de usuario
-    document.getElementById('formEditUsuario').addEventListener('submit', (e) =>{
-        e.preventDefault()
-        salvarEditarUsuario()
-    })
-    document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
     
     //carregamento da sessão inicial que é o Dashboard/relatorios
     window.onload = async () => {

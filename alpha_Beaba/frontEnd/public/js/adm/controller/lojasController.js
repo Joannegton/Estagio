@@ -1,13 +1,8 @@
-import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, exportCsv, getWorkplaceLink, mostrarElemento, mostrarModalFinalizado, ordenarArray } from "../utils.js"
-import { API_URL } from "../config/config.js"
-import { usuarios } from "./usuarios.js"
+import { alternador, ativarBotao, carregarDadosSelect, desativarBotao, esconderElementos, exportCsv, getWorkplaceLink,  mostrarModalFinalizado, ordenarArray } from "../../utils.js"
+import { API_URL } from "../../config/config.js"
+import { usuarios } from "./usuariosController.js"
 
 let lojas = [] 
-
-// funções de exibição
-async function mostrarLojas(){
-    await mostrarElemento('lojas', 'mostrarLojas', alternadorLojas)
-}
 
 async function alternadorLojas(){
     const lojas = document.getElementById('todasLojas')
@@ -342,4 +337,4 @@ function exportarLojas(){
 }
 
 
-export { fetchCidadesEstados, showSuggestions, mostrarLojas, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+export { fetchCidadesEstados, showSuggestions, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
