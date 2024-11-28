@@ -2,22 +2,15 @@ const jwt = require('jsonwebtoken')
 const { conectarDb } = require('../config/conexao')
 
    
-function autenticadorToken(req, res, next) {
-    //const authHeader = req.headers['authorization']
-
-    //if (!authHeader) {
-    //    return res.status(401).json({ error: 'Token não fornecido' })
-    //}
-
-    //const token = authHeader.split(' ')[1]
+function authToken(req, res, next) {
     const token = req.cookies.token
     if (!token) {
-        return res.status(401).json({ error: 'Formato de token inválido' })
+        return res.status(401).json({ message: 'Formato de token inválido' })
     }
 
     jwt.verify(token, process.env.SECRET_KEY_JWT, async (err, user) => {
         if (err) {
-            return res.status(403).json({ error: 'Token inválido ou expirado' })
+            return res.status(403).json({ message: 'Token inválido ou expirado' })
         } 
 
         const client = await conectarDb()
@@ -47,7 +40,7 @@ function autenticadorToken(req, res, next) {
             } else {
                 res.status(403).json({ error: 'Token não corresponde ao usuário' })
             }
-        } catch (dbError) {
+        } catch (error) {
             res.status(500).json({ error: 'Erro ao conectar ao banco de dados' })
         } finally {
             client.release()
@@ -56,4 +49,4 @@ function autenticadorToken(req, res, next) {
 }
     
 
-module.exports = autenticadorToken
+module.exports = authToken

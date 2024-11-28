@@ -1,6 +1,6 @@
 const { conectarDb } = require('../config/conexao')
 const bcrypt = require('bcrypt')
-
+ 
 class UsuarioService {
     async getUsers() {
         const client = await conectarDb()
@@ -65,6 +65,7 @@ class UsuarioService {
     async createUser(matricula, nome, tipoUsuario, loja) {
         const client = await conectarDb()
         const senha = await bcrypt.hash('Quero@2024#', 10)
+        
         try {
             await client.query('BEGIN')
     

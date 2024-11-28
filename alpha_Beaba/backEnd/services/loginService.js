@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const { v4: uuidv4 } = require('uuid') // gera identificadores únicos
-
+ 
 const SECRET_KEY = process.env.SECRET_KEY_JWT
 
 class LoginService {
@@ -17,13 +17,14 @@ class LoginService {
             if (result.rows.length > 0) {
                 const user = result.rows[0]
                 const isPasswordValid = await bcrypt.compare(senha, user.senha)
+
                 if (isPasswordValid) {
-                    // Verificar se há um token válido
+                    // Verificar se há um token
                     const tokenResult = await client.query('SELECT token FROM usuario WHERE matricula = $1 AND token IS NOT NULL', [matricula])    
                     if (tokenResult.rows.length > 0) {
                         const token = tokenResult.rows[0].token
                         try {
-                            jwt.verify(token, SECRET_KEY)
+                            jwt.verify(token, SECRET_KEY) // se o token é válido ja tem uma sessão ativa
                             const error = new Error('Número máximo de sessões atingido')
                             error.code = 'MAX_SESSIONS'
                             throw error
@@ -36,11 +37,13 @@ class LoginService {
                         }
                     }
 
+                    //se não houver sessão ativa, criar uma nova
                     const sessionId = uuidv4() // Gerar um identificador único para a sessão
                     const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '9h' })
                     await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula])
 
                     return { token: newToken, user }
+                    
                 } else {
                     throw new Error('Matricula ou senha inválidos')
                 }
