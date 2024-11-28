@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const { v4: uuidv4 } = require('uuid') // gera identificadores únicos
 
-const SECRET_KEY = process.env.SECRET_KEY_JWT //assinar o token JWT
+const SECRET_KEY = process.env.SECRET_KEY_JWT
 
 class LoginService {
     async login(matricula, senha) {
@@ -20,7 +20,7 @@ class LoginService {
                 if (isPasswordValid) {
                     // Verificar se há um token válido
                     const tokenResult = await client.query('SELECT token FROM usuario WHERE matricula = $1 AND token IS NOT NULL', [matricula])    
-                    if(tokenResult.rows.length > 0){
+                    if (tokenResult.rows.length > 0) {
                         const token = tokenResult.rows[0].token
                         try {
                             jwt.verify(token, SECRET_KEY)
@@ -35,10 +35,11 @@ class LoginService {
                             }
                         }
                     }
-    
+
                     const sessionId = uuidv4() // Gerar um identificador único para a sessão
                     const newToken = jwt.sign({ matricula: user.matricula, tipoUsuario: user.id_perfil_acesso, sessionId }, SECRET_KEY, { expiresIn: '9h' })
                     await client.query('UPDATE usuario SET token = $1 WHERE matricula = $2', [newToken, matricula])
+
                     return { token: newToken, user }
                 } else {
                     throw new Error('Matricula ou senha inválidos')
@@ -53,6 +54,7 @@ class LoginService {
             client.release()
         }
     }
+
 
     async recoverPassword(email) {
         // Gmail para teste - nodemailer (retirar do package.json)

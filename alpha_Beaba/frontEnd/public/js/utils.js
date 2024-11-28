@@ -200,6 +200,7 @@ function checkSession(id_perfil_acesso) {
 
 //lidar com sessão invalida
 function handleSessionInvalid() {
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
     sessionStorage.clear()
     localStorage.clear()
     window.location.href = '/'

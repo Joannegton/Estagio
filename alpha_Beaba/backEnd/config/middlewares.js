@@ -9,16 +9,9 @@ module.exports = (app) => {
     app.use(cookieParser())
 
     // Configurar CORS com suporte para credenciais
-    const allowedOrigins = ['http://localhost:3000']
     app.use(
         cors({
-            origin: (origin, callback) => {
-                if (!origin || allowedOrigins.includes(origin)) {
-                    callback(null, true)
-                } else {
-                    callback(new Error('Not allowed by CORS'))
-                }
-            },
+            origin: 'http://localhost:3000',
             credentials: true // Permite envio de cookies
         })
     )
