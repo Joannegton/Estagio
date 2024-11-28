@@ -18,8 +18,7 @@ async function enviarTalao() {
         const response = await fetch(`${API_URL}/taloes`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -94,8 +93,7 @@ async function carregarGerente(gerenteId) {
         const response = await fetch(`${API_URL}/usuarios/${gerenteId}` , {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         

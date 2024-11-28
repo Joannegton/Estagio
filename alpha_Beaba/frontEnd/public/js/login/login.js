@@ -62,7 +62,8 @@ async function login() {
             const { token, user } = await response.json()
             const { nome, tipoUsuario, workplace, email, cod_loja } = user
 
-            sessionStorage.setItem('token', token)
+            document.cookie = `token=${token}; path=/` // Armazenar token em cookie para autenticação
+
             localStorage.setItem('matricula', matricula)
             localStorage.setItem('nome', nome)
             localStorage.setItem('email', email)

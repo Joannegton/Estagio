@@ -52,9 +52,7 @@ async function renderizartabelaEstoqueBaixo(){
         const response = await fetch(`${API_URL}/estoque`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
+                'Content-Type': 'application/json'            }
         })
         if(!response.ok){
             const errorData = await response.json()
@@ -97,8 +95,7 @@ async function renderizarGrafico() {
         const response = await fetch(`${API_URL}/taloes`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         if(!response.ok){
@@ -188,8 +185,7 @@ async function carregarDadosElemento(url, elementoId) {
     const response = await fetch(url, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            'Content-Type': 'application/json'
         }
     })
     if (!response.ok) {

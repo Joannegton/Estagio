@@ -56,8 +56,7 @@ async function fetchEstoque() {
         const response = await fetch(`${API_URL}/estoque`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         

@@ -27,8 +27,7 @@ async function carregarEstoqueLoja() {
         const response = await fetch(`${API_URL}/estoque/${codLoja}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         
@@ -53,8 +52,7 @@ async function fetchRemessa() {
         const response = await fetch(`${API_URL}/taloes/${codLoja}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
 
@@ -172,8 +170,7 @@ async function receberRemessa(remessa){
         const response = await fetch(`${API_URL}/taloes/${remessa}/accept`, {
             method: 'PUT',
             headers:{
-                "Content-Type": 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                "Content-Type": 'application/json'
             }
         })
         if(!response.ok){

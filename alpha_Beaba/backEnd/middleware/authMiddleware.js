@@ -3,13 +3,14 @@ const { conectarDb } = require('../config/conexao')
 
    
 function autenticadorToken(req, res, next) {
-    const authHeader = req.headers['authorization']
+    //const authHeader = req.headers['authorization']
 
-    if (!authHeader) {
-        return res.status(401).json({ error: 'Token não fornecido' })
-    }
+    //if (!authHeader) {
+    //    return res.status(401).json({ error: 'Token não fornecido' })
+    //}
 
-    const token = authHeader.split(' ')[1]
+    //const token = authHeader.split(' ')[1]
+    const token = req.cookies.token
     if (!token) {
         return res.status(401).json({ error: 'Formato de token inválido' })
     }
@@ -17,7 +18,7 @@ function autenticadorToken(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY_JWT, async (err, user) => {
         if (err) {
             return res.status(403).json({ error: 'Token inválido ou expirado' })
-        }
+        } 
 
         const client = await conectarDb()
         try {

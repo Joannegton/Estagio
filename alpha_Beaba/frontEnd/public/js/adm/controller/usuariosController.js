@@ -91,8 +91,7 @@ async function fetchUsuarios() {
         const response = await fetch(`${API_URL}/usuarios`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         if (!response.ok) {
@@ -144,8 +143,7 @@ async function createUser() {
         const response = await fetch(`${API_URL}/usuarios`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -220,8 +218,7 @@ async function salvarEdicaoUsuario(matricula) {
         const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -265,8 +262,7 @@ async function deletarUsuario(matricula) {
             const response = await fetch(`${API_URL}/usuarios/${matricula}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    'Content-Type': 'application/json'
                 }
             })
 
@@ -322,8 +318,7 @@ async function verificarGerenteExistente(loja) {
         const response = await fetch(`${API_URL}/loja/${loja}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         

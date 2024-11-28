@@ -168,23 +168,34 @@ function getWorkplaceLink(matricula, listaUsuarios) {
 }
 
 // Controle de sessão e logout
+// Controle de sessão e logout
+function getCookie(name) {
+    const value = `; ${document.cookie}`
+    const parts = value.split(`; ${name}=`)
+    if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
 function checkSession(id_perfil_acesso) {
-    const token = sessionStorage.getItem('token')
-    const { expirado, tipoUsuario } = isTokenExpirado(token)
-            
-    if (!token ||expirado) {
+    const token = getCookie('token')
+    if (!token) {
         alert('Sessão expirada. Faça login novamente.')
         handleSessionInvalid()
         return
     }
-        
+
+    const { expirado, tipoUsuario } = isTokenExpirado(token)
+            
+    if (expirado) {
+        alert('Sessão expirada. Faça login novamente.')
+        handleSessionInvalid()
+        return
+    }
         
     if (tipoUsuario !== id_perfil_acesso) {
         alert('Você não tem acesso a esta página.')
         handleSessionInvalid()
         return
     }
-    
 }
 
 //lidar com sessão invalida

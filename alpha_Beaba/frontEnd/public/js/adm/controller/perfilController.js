@@ -84,8 +84,7 @@ async function fetchPerfis() {
         const response = await fetch(`${API_URL}/perfis`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
             
@@ -121,8 +120,7 @@ async function salvarPerfil(){
         const result = await fetch(`${API_URL}/perfis`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -182,8 +180,7 @@ async function salvarEditarPerfil(idPerfilAcesso) {
         const result = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -213,8 +210,7 @@ async function deletarPerfil(idPerfilAcesso){
             const response = await fetch(`${API_URL}/perfis/${idPerfilAcesso}`,{
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    'Content-Type': 'application/json'
                 }
             })
 

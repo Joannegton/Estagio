@@ -20,8 +20,7 @@ async function salvarEditarUsuario(){
         const response = await fetch(`${API_URL}/usuarios/${localStorage.getItem('matricula')}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -94,8 +93,7 @@ async function salvarEditarSenha(){
         const response = await fetch(`${API_URL}/usuarios/${localStorage.getItem('matricula')}/senha`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })

@@ -10,8 +10,7 @@ async function fetchLoja(){
         const response = await fetch(`${API_URL}/loja/${codLoja}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             }
         })
         if (!response.ok) {
@@ -63,8 +62,7 @@ async function salvarLoja(){
         const response = await fetch(`${API_URL}/loja/${codLoja}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${sessionStorage.getItem('token')}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
