@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.onload = async () => {
         mostrarModalCarregamento()
-        try{
+        try{ 
             carregarCardUsuario()
             await alternadorPerfil()
         }finally{

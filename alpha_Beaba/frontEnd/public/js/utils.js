@@ -168,15 +168,8 @@ function getWorkplaceLink(matricula, listaUsuarios) {
 }
 
 // Controle de sessão e logout
-// Controle de sessão e logout
-function getCookie(name) {
-    const value = `; ${document.cookie}`
-    const parts = value.split(`; ${name}=`)
-    if (parts.length === 2) return parts.pop().split(';').shift()
-}
-
 function checkSession(id_perfil_acesso) {
-    const token = getCookie('token')
+    const token = sessionStorage.getItem('token')
     if (!token) {
         alert('Sessão expirada. Faça login novamente.')
         handleSessionInvalid()
@@ -200,7 +193,6 @@ function checkSession(id_perfil_acesso) {
 
 //lidar com sessão invalida
 function handleSessionInvalid() {
-    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
     sessionStorage.clear()
     localStorage.clear()
     window.location.href = '/'
@@ -247,8 +239,7 @@ async function carregarDadosSelect(idSelect, url, value, textContent) {
     const response = await fetch(url, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'authorization': `Bearer ${sessionStorage.getItem('token')}`
+            'Content-Type': 'application/json'
         }
     })
     
