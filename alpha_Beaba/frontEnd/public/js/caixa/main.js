@@ -1,6 +1,8 @@
-import { carregarCardUsuario, checkSession, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
+import { carregarCardUsuario, checkSession, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento, verificarPermissao } from "../utils.js"
 import { modalEditarSenha, salvarEditarUsuario } from "../adm/perfilUsuario.js"
 import { mostrarEnvioTaloes, mostrarPerfilUsuario, saidaTalao } from "./caixa.js"
+
+verificarPermissao('Caixa')
 
 document.addEventListener('DOMContentLoaded',() => {
     // Verifica se é o 1º acesso

@@ -1,5 +1,7 @@
-import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { carregarSelects, enviarTalao } from "../controller/envioTaloesController.js"
+
+verificarPermissao('Todas')
 
 document.addEventListener('DOMContentLoaded',  () => {
         // Envio de talões

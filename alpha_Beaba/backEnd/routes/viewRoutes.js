@@ -52,6 +52,9 @@ viewRouter.get('/relatoriosG', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/gerente/relatorios.html'))
 })
 
+viewRouter.get('/acessoNegado', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontEnd/public/views/acessoNegado.html'))
+})
 
 // Caixa
 viewRouter.get('/caixa', (req, res) => {

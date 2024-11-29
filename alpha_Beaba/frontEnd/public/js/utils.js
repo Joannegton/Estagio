@@ -231,6 +231,16 @@ async function logout() {
     }
 }
 
+// Função para verificar permissões
+function verificarPermissao(pagina) {
+    const dados = localStorage.getItem('perfil_acesso_permissoes')
+    const perfil_acesso_permissoes = JSON.parse(dados)
+    console.log(perfil_acesso_permissoes)
+    if (!perfil_acesso_permissoes.permissoes_leitura.includes(pagina)) {
+        window.location.href = "/acessoNegado"; // Redireciona para uma página de acesso negado
+    }
+}
+
 // carregar dados em selects
 async function carregarDadosSelect(idSelect, url, value, textContent) {
     const select = document.getElementById(idSelect)
@@ -358,4 +368,4 @@ async function exportCsv(dados, nomeArquivo) {
 
 
 
-export {exportCsv, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarMenu, alternador, alternador3, esconderElementos, logout}
+export {exportCsv, verificarPermissao, mostrarModalFinalizado, getWorkplaceLink, mostrarModalCarregamento, carregarUsuario, esconderModalCarregamento, desativarBotao, checkSession, carregarCardUsuario, ativarBotao, ordenarArray, filtrarArray, filtrarPorNome, converterDataParaBR, converterDataHoraParaBR, carregarDadosSelect,identificarBaixoEstoque, mostrarFiltros, mostrarMenu, alternador, alternador3, esconderElementos, logout}

@@ -28,7 +28,7 @@ async function login() {
     }
 
     try {
-        const response = await fetch(`${API_URL}/login`, {
+        const responseLogin = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -36,8 +36,8 @@ async function login() {
             body: JSON.stringify({ matricula, senha })
         })
 
-        if (response.ok) {
-            const { token, user } = await response.json()
+        if (responseLogin.ok) {
+            const { token, user } = await responseLogin.json()
             const { nome, tipoUsuario, workplace, email, cod_loja } = user
 
             sessionStorage.setItem('token', token)
@@ -64,11 +64,19 @@ async function login() {
                 sessionStorage.setItem('mostrarPerfilUsuario', 'true')
             }
 
+            const responsePermissoes = await fetch(`${API_URL}/perfis/${tipoUsuario}`)
+            if(responsePermissoes.ok){
+                const perfil_acesso_permissoes = await responsePermissoes.json()
+                localStorage.setItem('perfil_acesso_permissoes', JSON.stringify(perfil_acesso_permissoes))
+            } else {
+                throw new Error('Erro ao buscar permissões')
+            }
+
             window.location.href = pagina
             resetarTentativasLogin()
 
         } else {
-                const errorData = await response.json()
+                const errorData = await responseLogin.json()
                 if(errorData.code === 'MAX_SESSIONS'){
                     confirm("Número máximo de sessões atingido. Deseja encerrar a sessão ativa?")
                     if(confirm){

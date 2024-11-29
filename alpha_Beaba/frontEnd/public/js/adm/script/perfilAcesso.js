@@ -1,6 +1,8 @@
-import { carregarCardUsuario, esconderElementos, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderElementos, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { alternadorPerfil, exportarPerfis, mostrarModalCadastroPerfil, salvarEditarPerfil, salvarPerfil } from "../controller/perfilController.js"
 import { createUser, filtrarUsuarioNome, ordenarLojaUsuarios, ordenarUsuarios } from "../controller/usuariosController.js"
+
+verificarPermissao('Todas')
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mostrarCadastrarPerfil').addEventListener('click', mostrarModalCadastroPerfil)
@@ -60,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportarPerfis').addEventListener('click', exportarPerfis)
 
     window.onload = async () => {
+        verificarPermissao('Todas')
         mostrarModalCarregamento()
         try{ 
             carregarCardUsuario()

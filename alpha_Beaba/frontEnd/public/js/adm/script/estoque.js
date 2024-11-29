@@ -1,5 +1,7 @@
-import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { exportarEstoque, fetchEstoque, filtrarNomeLoja, ordenarEstoque, ordenarLojaEstoque } from "../controller/estoqueController.js"
+
+verificarPermissao('Todas')
 
 document.addEventListener('DOMContentLoaded',  () => {
     

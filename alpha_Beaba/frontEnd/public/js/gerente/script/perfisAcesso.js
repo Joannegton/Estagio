@@ -1,5 +1,7 @@
-import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { alternadorPerfilAcesso, cadastrarPerfil, exportarPerfis, filtrarUsuarioNome } from "../controller/perfilController.js"
+
+verificarPermissao('Perfis')
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroUsuario').addEventListener('input', filtrarUsuarioNome)

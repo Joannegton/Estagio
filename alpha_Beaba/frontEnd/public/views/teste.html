@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Permissões</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="adminPanel" class="hidden">
+    <h1>Painel do Administrador</h1>
+    <p>Conteúdo exclusivo para administradores.</p>
+  </div>
+  <div id="userPanel" class="hidden">
+    <h1>Painel do Usuário</h1>
+    <p>Conteúdo para usuários comuns.</p>
+  </div>
+
+  <script>
+    // Simulação de dados de perfil de acesso
+    const perfilAcesso = {
+      id_perfil_acesso: 1,
+      perfil_descricao: "Administrador",
+      permissoes_leitura: ["Todas"],
+      permissoes_escrita: ["Todas"]
+    }
+
+    // Função para controlar a exibição das telas
+    function controlarTelas(perfil) {
+      if (perfil.permissoes_leitura.includes("Todas")) {
+        document.getElementById('adminPanel').classList.remove('hidden')
+      } else {
+        document.getElementById('userPanel').classList.remove('hidden')
+      }
+    }
+
+    // Chamar a função para controlar as telas com base no perfil de acesso
+    controlarTelas(perfilAcesso);
+  </script>
+</body>
+</html>

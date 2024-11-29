@@ -1,5 +1,7 @@
-import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { alternadorLojas, exportarLojas, ordenarLoja, salvarLoja, showSuggestions } from "../controller/lojasController.js"
+
+verificarPermissao('Todas')
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filtroLojaLojas').addEventListener('change', ordenarLoja)

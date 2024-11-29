@@ -1,5 +1,5 @@
 import { alternadorRelatorios, exportarRelatorios} from '../controller/relatoriosController.js'
-import { carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento } from '../../utils.js'
+import { carregarCardUsuario, checkSession, mostrarModalCarregamento, esconderModalCarregamento, verificarPermissao } from '../../utils.js'
 import { fetchCidadesEstados } from '../controller/lojasController.js'
 
 
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Carrega funcionalidades de relatórios pois é a página inicial
     window.onload = async () =>{
+        verificarPermissao('Todas')
         mostrarModalCarregamento() 
         try {
             checkSession(1)

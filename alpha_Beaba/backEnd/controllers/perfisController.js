@@ -28,7 +28,7 @@ class PerfisController {
     }
 
     async getPerfilById(req, res) {
-        const id = req.params.id
+        const {id} = req.params
 
         try {
             const perfil = await perfisService.getPerfilById(id)

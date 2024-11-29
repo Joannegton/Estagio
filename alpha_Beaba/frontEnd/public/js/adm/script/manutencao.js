@@ -1,5 +1,7 @@
-import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
+import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregamento, verificarPermissao } from "../../utils.js"
 import { exportarManutencao, fetchEnvioTaloes, filtarLojaManutencao, filtarStatusManutencao, filtrarNomeLojaManutencao } from "../controller/manutencaoController.js"
+
+verificarPermissao('Todas')
 
 document.addEventListener('DOMContentLoaded', () => {
         
