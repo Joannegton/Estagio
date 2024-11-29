@@ -330,31 +330,30 @@ function ativarBotao(elementoId) {
 }
 
 // exportar csv
-function exportCsv(dados, nomeArquivo) {
-    if (dados.length === 0) {
-        console.error('Nenhum dado para exportar')
-        return
+async function exportCsv(dados, nomeArquivo) {
+    try {
+        const response = await fetch(`${API_URL}/exportarExcel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ dados, nomeArquivo })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao exportar dados');
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${nomeArquivo}.xlsx`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Erro ao exportar dados:', error);
     }
-
-    const headers = Object.keys(dados[0])
-    const csvRows = [headers.join(';')]
-
-    dados.forEach(row => {
-        const values = headers.map(header => {
-            const escape = ('' + row[header]).replace(/"/g, '\\"')
-            return `"${escape}"`
-        })
-        csvRows.push(values.join(';'))
-    })
-
-    const csvString = csvRows.join('\n')
-    const blob = new Blob([csvString], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${nomeArquivo}.csv`
-    a.click()
-    URL.revokeObjectURL(url)
 }
 
 

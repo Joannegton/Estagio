@@ -6,6 +6,7 @@ const lojasRouter = require('./routes/lojasRoutes')
 const perfisRouter  = require('./routes/perfisRoutes')
 const estoqueRouter = require('./routes/estoqueRoutes')
 const taloesRouter = require('./routes/taloesRoutes')
+const exportCsvRouter = require('./routes/exportCsvRoutes')
 const configureMiddlewares = require('./config/middlewares')
 
 const app = express()
@@ -22,5 +23,6 @@ app.use('/api', lojasRouter)
 app.use('/api', usuarioRouter)
 app.use('/api', perfisRouter)
 app.use('/api', taloesRouter)
+app.use('/api', exportCsvRouter)
 
 module.exports = app
