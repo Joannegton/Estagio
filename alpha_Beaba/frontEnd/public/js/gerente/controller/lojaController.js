@@ -45,7 +45,7 @@ async function salvarLoja(){
     const cidadeEstado = formData.get('cidadeEstadoLoja')
 
     const enderecoCompleto = `${endereco}- ${cep}- ${cidadeEstado}`
-
+ 
     const data = {
         nome_loja: formData.get('nomeLoja'),
         endereco_loja: enderecoCompleto,
@@ -74,9 +74,7 @@ async function salvarLoja(){
         
         mostrarModalFinalizado()
         await completeInformations()
-        setTimeout(async () => {
-            await alternadorRelatorios()
-        }, 1000)
+        
     } catch (error) {
         console.error('Erro ao atualizar Loja: ', error.stack)
         alert('Erro ao enviar dados, tente novamente mais tarde.')

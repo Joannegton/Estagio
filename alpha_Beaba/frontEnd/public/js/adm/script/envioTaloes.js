@@ -2,7 +2,6 @@ import { carregarCardUsuario, esconderModalCarregamento, mostrarModalCarregament
 import { carregarSelects, enviarTalao } from "../controller/envioTaloesController.js"
 
 document.addEventListener('DOMContentLoaded',  () => {
-        // Envio de talões
     document.getElementById('formEnvioTalao').addEventListener('submit', async (e) =>{
         e.preventDefault()
         mostrarModalCarregamento()

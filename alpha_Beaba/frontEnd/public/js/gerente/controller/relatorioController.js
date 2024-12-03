@@ -22,7 +22,7 @@ async function alternadorRelatorios() {
 
 async function carregarEstoqueLoja() {
     document.getElementById('quantidadeEstoque').innerHTML = ''
-    try {
+    try { 
         const codLoja = localStorage.getItem('cod_loja')
         const response = await fetch(`${API_URL}/estoque/${codLoja}`, {
             method: 'GET',
@@ -77,6 +77,7 @@ async function fetchSaidas() {
             throw new Error(errorData.message)
         }
         saidaTaloes = await response.json()
+        console.log(codLoja)
         renderizarSaidas(saidaTaloes)
     } catch (error) {
         console.error('Erro ao buscar remessas:', error.stack) 
