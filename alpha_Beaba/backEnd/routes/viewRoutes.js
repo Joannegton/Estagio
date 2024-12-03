@@ -55,7 +55,7 @@ viewRouter.get('/relatoriosG', checkPermissions('Relatorios'), (req, res) => {
 })
 
 // Caixa
-viewRouter.get('/caixa', checkPermissions('caixa'), (req, res) => {
+viewRouter.get('/caixa', checkPermissions('Saída Talões'), (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontEnd/public/views/caixa.html'))
 })
 

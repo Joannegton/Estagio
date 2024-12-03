@@ -1,5 +1,5 @@
 import { carregarCardUsuario, checkSession, esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
-import { modalEditarSenha, salvarEditarUsuario } from "../adm/perfilUsuario.js"
+import { modalEditarSenha, salvarEditarUsuario } from "../adm/controller/perfilUsuarioController.js"
 import { mostrarEnvioTaloes, mostrarPerfilUsuario, saidaTalao } from "./caixa.js"
 
 document.addEventListener('DOMContentLoaded',() => {

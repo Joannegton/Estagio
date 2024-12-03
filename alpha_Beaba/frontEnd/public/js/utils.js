@@ -19,6 +19,7 @@ function carregarUsuario(){
 }
 
 function carregarCardUsuario(){
+    console.log('carregando card usuario')
     document.getElementById('usuario-nome').textContent = localStorage.getItem('nome')
     document.getElementById('usuario-matricula').textContent = localStorage.getItem('tipoUsuario') + ' - ' + localStorage.getItem('matricula')  
 } 

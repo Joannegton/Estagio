@@ -81,7 +81,6 @@ async function fetchSaidas() {
         renderizarSaidas(saidaTaloes)
     } catch (error) {
         console.error('Erro ao buscar remessas:', error.stack) 
-        //modificar
         alert('Erro ao buscar remessas, consulte o Administrador do sistema')
     }
 }
