@@ -1,4 +1,4 @@
-import { mostrarMenu } from "../utils.js"
+import { esconderModalCarregamento, logout, mostrarMenu, mostrarModalCarregamento } from "../utils.js"
 
 if(window.innerWidth > 768){
     document.getElementById('menu').style.display = 'block'

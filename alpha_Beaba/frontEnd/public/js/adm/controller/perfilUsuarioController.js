@@ -3,7 +3,7 @@ import { API_URL } from "../../config/config.js"
 
 function mostrarPerfilUsuario(){
     carregarUsuario()
-}
+} 
 
 async function salvarEditarUsuario(){
     desativarBotao('submitButtonPerfilUsuario')

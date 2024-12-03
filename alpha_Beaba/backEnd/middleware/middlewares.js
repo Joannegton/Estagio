@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
-const authToken = require('../middleware/authMiddleware')
+const authToken = require('./authMiddleware')
  
 module.exports = (app) => {
     app.use(express.json())
@@ -23,18 +23,5 @@ module.exports = (app) => {
         }
         authToken(req, res, next)
     })
-
-
-    // Middleware para tratar erros
-    app.use((err, req, res, next) => {
-        if (err.name === 'UnauthorizedError') {
-            res.status(401).json({ error: 'Não autorizado' })
-        } else if (err.message === 'Not allowed by CORS') {
-            res.status(403).json({ error: 'Origem não permitida pelo CORS' })
-        } else {
-            res.status(500).json({ error: 'Erro interno no servidor' })
-        }
-    })
-
 
 }

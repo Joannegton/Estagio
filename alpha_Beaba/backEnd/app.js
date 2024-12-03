@@ -7,7 +7,7 @@ const perfisRouter  = require('./routes/perfisRoutes')
 const estoqueRouter = require('./routes/estoqueRoutes')
 const taloesRouter = require('./routes/taloesRoutes')
 const exportCsvRouter = require('./routes/exportCsvRoutes')
-const configureMiddlewares = require('./config/middlewares')
+const configureMiddlewares = require('./middleware/middlewares')
 
 const app = express()
 

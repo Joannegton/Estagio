@@ -71,11 +71,6 @@ create table saida_taloes (
 
 -- Inserindo permissões de leitura e escrita para todas as funcionalidades
 
--- Permissões para 'Todas'
-INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
-('Todas', 'leitura'),
-('Todas', 'escrita');
-
 -- Permissões para 'Perfis'
 INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
 ('Perfis', 'leitura'),
@@ -110,6 +105,11 @@ INSERT INTO permissoes (modulo, tipo_permissao) VALUES
 INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
 ('Saída Talões', 'leitura'),
 ('Saída Talões', 'escrita');
+
+-- Permissões para 'Todas'
+INSERT INTO permissoes (modulo, tipo_permissao) VALUES 
+('Relatorios', 'leitura'),
+('Relatorios', 'escrita');
 
 -- Perfis de caesso
 INSERT INTO perfil_acesso (descricao) VALUES 

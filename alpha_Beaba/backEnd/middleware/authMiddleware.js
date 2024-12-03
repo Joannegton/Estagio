@@ -41,7 +41,7 @@ function authToken(req, res, next) {
                 res.status(403).json({ message: 'Token não corresponde ao usuário' })
             }
         } catch (error) {
-            res.status(500).json({ message: 'Erro ao conectar ao banco de dados' })
+            res.status(500).json({ error: 'Erro ao conectar ao banco de dados' })
         } finally {
             client.release()
         }

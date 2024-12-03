@@ -1,4 +1,5 @@
-import { modalEditarSenha, salvarEditarUsuario } from "../../adm/controller/perfilUsuarioController.js"
+import { modalEditarSenha, mostrarPerfilUsuario, salvarEditarUsuario } from "../../adm/controller/perfilUsuarioController.js"
+import { carregarCardUsuario } from "../../utils.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('formEditUsuario').addEventListener('submit', (e) =>{
@@ -6,4 +7,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         salvarEditarUsuario()
     })
     document.getElementById('botaoEditarSenha').addEventListener('click', modalEditarSenha)
+
+    window.onload = () => {
+        carregarCardUsuario()
+        mostrarPerfilUsuario()
+    }
 })
+
