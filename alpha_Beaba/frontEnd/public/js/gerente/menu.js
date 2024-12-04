@@ -17,7 +17,7 @@ document.getElementById('mostrarGestaoRelatorio').addEventListener('click',  () 
     window.location.href = '/relatoriosG'
 
 })
-
+ 
 document.getElementById('usuario-info').addEventListener('click', () =>{
     window.location.href = '/perfilUsuarioG'
 })

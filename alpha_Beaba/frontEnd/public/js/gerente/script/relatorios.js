@@ -1,13 +1,12 @@
 import {exportarRelatorios, alternadorRelatorios } from '../controller/relatorioController.js'
 import { completeInformations} from '../controller/lojaController.js'
 import { carregarCardUsuario, checkSession, esconderModalCarregamento, mostrarModalCarregamento } from "../../utils.js"
-import { mostrarPerfilUsuario} from '../../adm/controller/perfilUsuarioController.js'
 
 
 document.addEventListener('DOMContentLoaded', () => {
     // Identificar primeiro Acesso
     if(sessionStorage.getItem('mostrarPerfilUsuario') === 'true') {
-        mostrarPerfilUsuario()
+        window.location = '/perfilUsuarioG'
         sessionStorage.removeItem('mostrarPerfilUsuario')
     }
     
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarModalCarregamento()
         try {
             checkSession(2)
-            carregarCardUsuario()
+            carregarCardUsuario() 
             await alternadorRelatorios()
             await completeInformations()
         } catch (error) {
