@@ -91,7 +91,9 @@ class LojasService {
         const values = []
         let index = 1
     
-        for (const [key, value] of Object.entries(updates)) {
+        const { gerente_id, ...lojaUpdates } = updates
+
+        for (const [key, value] of Object.entries(lojaUpdates)) {
             campos.push(`${key} = $${index}`)
             values.push(value)
             index++
@@ -103,7 +105,7 @@ class LojasService {
         try {
             await client.query('BEGIN')
     
-            if (updates.gerente_id) {  // Verificar gerente atual
+            if (gerente_id) {  // Verificar gerente atual
                 const { rows: currentGerente } = await client.query(
                     `SELECT usuario_matricula FROM usuario_loja WHERE cod_loja = $1 AND is_gerente = true`,
                     [codLoja]
@@ -111,7 +113,7 @@ class LojasService {
     
                 const currentGerenteId = currentGerente[0]?.usuario_matricula
     
-                if (currentGerenteId !== updates.gerente_id) {
+                if (currentGerenteId !== gerente_id) {
                     if (currentGerenteId) {
                         await client.query(
                             `UPDATE usuario_loja SET is_gerente = false WHERE usuario_matricula = $1 AND cod_loja = $2`,
@@ -121,26 +123,26 @@ class LojasService {
     
                     await client.query(
                         `UPDATE usuario_loja SET is_gerente = true WHERE usuario_matricula = $1 AND cod_loja = $2`,
-                        [updates.gerente_id, codLoja]
+                        [gerente_id, codLoja]
                     ) // Define o novo gerente na tabela usuario_loja
     
                     // Se o novo gerente não estiver na tabela usuario_loja, insere um novo registro
                     const { rowCount } = await client.query(
                         `UPDATE usuario_loja SET is_gerente = true WHERE usuario_matricula = $1 AND cod_loja = $2`,
-                        [updates.gerente_id, codLoja]
+                        [gerente_id, codLoja]
                     )
     
                     if (rowCount === 0) {
                         await client.query(
                             `INSERT INTO usuario_loja (usuario_matricula, cod_loja, is_gerente) VALUES ($1, $2, true)`,
-                            [updates.gerente_id, codLoja]
+                            [gerente_id, codLoja]
                         )
                     }
                 }
             }
     
             const resultLoja = await client.query(queryLoja, values)
-    
+     
             await client.query('COMMIT')
             return resultLoja.rowCount > 0
         } catch (error) {

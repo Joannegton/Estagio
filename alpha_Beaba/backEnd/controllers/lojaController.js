@@ -42,6 +42,7 @@ class LojaController {
     async updateLoja(req, res) {
         const { codLoja } = req.params
         const updates = req.body
+        console.log(updates)
 
         try {
             const result = await lojaService.updateLoja(codLoja, updates)
