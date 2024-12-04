@@ -298,35 +298,37 @@ function ordenarLoja(event){
 }
 
 // carregar cidade/uf
-let cidadesEstados = []
-
 async function fetchCidadesEstados() {
     const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/municipios')
     const data = await response.json()
-    cidadesEstados = data.map(municipio => ({
+    const cidadesEstados = data.map(municipio => ({
       cidade: municipio.nome,
       estado: municipio.microrregiao.mesorregiao.UF.sigla
     }))
+    localStorage.setItem('cidadesEstados', JSON.stringify(cidadesEstados))
 }
 
 function showSuggestions(event) {
+    const cidadesEstados = JSON.parse(localStorage.getItem('cidadesEstados')) || []
+
     const value = event.target.value
-    const suggestions = document.getElementById('suggestions');
-    suggestions.innerHTML = '';
+    const suggestions = document.getElementById('suggestions')
+    suggestions.innerHTML = ''
     if (value.length === 0) {
-      return;
+      return
     }
-  
-    const filtered = cidadesEstados.filter(ce => ce.cidade.toLowerCase().startsWith(value.toLowerCase()));
+
+    const filtered = cidadesEstados.filter(ce => ce.cidade.toLowerCase().startsWith(value.toLowerCase()))
     filtered.forEach(ce => {
-      const div = document.createElement('div');
-      div.textContent = `${ce.cidade}/${ce.estado}`;
+      const div = document.createElement('div')
+      div.textContent = `${ce.cidade}/${ce.estado}`
       div.onclick = () => {
-        document.getElementById('cidadeEstadoLoja').value = `${ce.cidade}/${ce.estado}`;
-        suggestions.innerHTML = '';
-      };
-      suggestions.appendChild(div);
-    });
+        document.getElementById('cidadeEstadoLoja').value = `${ce.cidade}/${ce.estado}`
+        suggestions.innerHTML = ''
+      }
+      suggestions.appendChild(div)
+    })
+    console.log('cidadesEstados:', cidadesEstados)
 }
 
 function exportarLojas(){
