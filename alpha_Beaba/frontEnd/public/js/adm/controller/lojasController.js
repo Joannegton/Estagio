@@ -336,4 +336,4 @@ function exportarLojas(){
 }
 
 
-export { fetchCidadesEstados, showSuggestions, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }
+export {lojas, fetchCidadesEstados, showSuggestions, exportarLojas, alternadorLojas, salvarLoja, editarLoja, salvarEditarLoja, ordenarLoja }

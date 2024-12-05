@@ -1,7 +1,9 @@
 import { alternador, exportCsv } from "../../utils.js"
 import { API_URL } from "../../config/config.js"
-import { usuarios } from "./usuariosController.js"
 
+import { usuarios } from "./usuariosController.js"
+import { lojas } from "./lojasController.js"
+import { envioTaloes } from "./manutencaoController.js"
 
 async function mostrarRelatorios() {
         alternadorRelatorios()
@@ -159,7 +161,7 @@ async function renderizarGrafico() {
 }
 
 function exportarRelatorios(){
-    exportCsv(usuarios, 'usuario')
+    exportCsv([usuarios, lojas, envioTaloes], 'usuario')
 }
 
 function iconeEstoqueBaixo(){
@@ -197,8 +199,11 @@ async function carregarDadosElemento(url, elementoId) {
 
     if (url.includes('usuarios')){
         usuarios.push(...data) // ... é o spread operator que serve para concatenar arrays 
-    }
-    
+    } else if (url.includes('loja')){
+        lojas.push(...data)
+    } else if (url.includes('taloes')){
+        envioTaloes.push(...data)
+    }   
 
 
     document.getElementById(elementoId).textContent = data.length

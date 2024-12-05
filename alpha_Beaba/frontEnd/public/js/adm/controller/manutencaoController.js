@@ -259,4 +259,4 @@ function exportarManutencao() {
     exportCsv(envioTaloes, 'manutencao')
 }
 
-export { renderizarTabelaManutencao, filtrarNomeLojaManutencao, fetchEnvioTaloes, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }
+export { renderizarTabelaManutencao, envioTaloes, filtrarNomeLojaManutencao, fetchEnvioTaloes, editarEnvioTalao, salvarEdicaoTalao, filtarLojaManutencao, filtarStatusManutencao, exportarManutencao, excluirEnvioTalao }
