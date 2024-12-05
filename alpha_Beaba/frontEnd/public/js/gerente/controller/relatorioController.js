@@ -9,10 +9,10 @@ async function alternadorRelatorios() {
     const saidas = document.getElementById('mostrarSaidas')
     const entradas = document.getElementById('mostrarEntradas')
     await fetchRemessa()
+    await fetchSaidas()
     await carregarEstoqueLoja()
     saidas.addEventListener('click', async () => {
         alternador(saidas, entradas, saidas, 'saidas', 'entradas', 'indicadorRelatorio')
-        await fetchSaidas()
     })
 
     entradas.addEventListener('click', () => {
