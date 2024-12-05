@@ -1,4 +1,4 @@
-import { alternador, converterDataHoraParaBR, converterDataParaBR } from "../../utils.js"
+import { alternador, converterDataHoraParaBR, converterDataParaBR, exportCsv } from "../../utils.js"
 import { API_URL } from "../../config/config.js"
 
 let remessas = []
@@ -219,7 +219,7 @@ function renderizarSaidas(listaTaloes){
 }
 
 function exportarRelatorios(){
-    alert('Exportar relatorios')
+    exportCsv([remessas, saidaTaloes], 'Remessas')
 }
 
 
