@@ -168,7 +168,7 @@ function renderizarEntradas(listaRemessas){
 async function receberRemessa(remessa){
     try {
         const response = await fetch(`${API_URL}/taloes/${remessa}/accept`, {
-            method: 'PUT',
+            method: 'PUT', 
             headers:{
                 "Content-Type": 'application/json'
             }

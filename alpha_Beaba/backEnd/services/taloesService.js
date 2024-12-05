@@ -126,25 +126,74 @@ class TaloesService {
         }
     }
 
-    async updateTaloes( numeroRemessa, updates ) {
+    async updateTaloes(numeroRemessa, updates) {
         const client = await conectarDb()
         const campos = []
         const valores = []
         let indice = 1
-
+    
         for (const [key, value] of Object.entries(updates)) {
             campos.push(`${key} = $${indice}`)
             valores.push(value)
             indice++
         }
-
+    
         const query = `UPDATE envio_taloes SET ${campos.join(', ')} WHERE numero_remessa = $${indice}`
         valores.push(numeroRemessa)
-
+    
         try {
-            const result = await client.query(query, valores)
-            return result.rowCount > 0
+            await client.query('BEGIN')
+    
+            if (updates.status === 'Recebido') {
+                // Atualiza o status e a data_recebimento
+                const result = await client.query(`
+                    UPDATE envio_taloes 
+                    SET status = 'Recebido', data_recebimento_previsto = NOW() 
+                    WHERE numero_remessa = $1 
+                    RETURNING quantidade, cod_loja
+                `, [numeroRemessa])
+    
+                if (result.rowCount > 0) {
+                    const { quantidade, cod_loja } = result.rows[0]
+    
+                    // Obtém a quantidade atual do estoque
+                    const estoqueResult = await client.query(`
+                        SELECT quantidade_disponivel 
+                        FROM estoque_taloes 
+                        WHERE cod_loja = $1
+                    `, [cod_loja])
+    
+                    if (estoqueResult.rowCount > 0) {
+                        const quantidadeAtual = estoqueResult.rows[0].quantidade_disponivel
+                        const novaQuantidade = quantidadeAtual + quantidade
+    
+                        // Atualiza a quantidade disponível no estoque
+                        const acceptUpdate = await client.query(`
+                            UPDATE estoque_taloes 
+                            SET quantidade_disponivel = $1 
+                            WHERE cod_loja = $2
+                        `, [novaQuantidade, cod_loja])
+    
+                        if (acceptUpdate.rowCount > 0) {
+                            await client.query('COMMIT')
+                            return true
+                        } else {
+                            throw new Error('Falha ao atualizar a quantidade disponível no estoque')
+                        }
+                    } else {
+                        throw new Error('Estoque não encontrado para a loja especificada')
+                    }
+                } else {
+                    throw new Error('Falha ao atualizar o status e a data de recebimento')
+                }
+            } else {
+                // Atualização normal
+                const result = await client.query(query, valores)
+                await client.query('COMMIT')
+                return result.rowCount > 0
+            }
         } catch (error) {
+            await client.query('ROLLBACK')
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
@@ -157,10 +206,9 @@ class TaloesService {
         try {
             await client.query('BEGIN')
     
-            // Atualiza o status da remessa e retorna a quantidade e o código da loja
             const result = await client.query(`
                 UPDATE envio_taloes 
-                SET status = 'Recebido' 
+                SET status = 'Recebido', data_recebimento_previsto = NOW() 
                 WHERE numero_remessa = $1 
                 RETURNING quantidade, cod_loja
             `, [numeroRemessa])
