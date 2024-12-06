@@ -1,8 +1,8 @@
-from flask import Blueprint
+from fastapi import APIRouter, Request
 from controllers.exportCsvController import export_csv_controller
 
-export_csv_bp = Blueprint('export_csv_bp', __name__)
+router = APIRouter()
 
-@export_csv_bp.route('/exportarExcel', methods=['POST'])
-def exportar_excel():
-    return export_csv_controller.export_csv()
+@router.post('/exportarExcel')
+async def export_csv(request: Request):
+    return await export_csv_controller.export_csv(request)

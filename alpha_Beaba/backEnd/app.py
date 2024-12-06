@@ -1,8 +1,9 @@
-from flask import Flask
-from routes.exportCsvRoutes import export_csv_bp
+from fastapi import FastAPI
+from routes.exportCsvRoutes import router as export_csv_router
 
-app = Flask(__name__)
-app.register_blueprint(export_csv_bp, url_prefix='/')
+app = FastAPI()
+app.include_router(export_csv_router, prefix='')
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    import uvicorn
+    uvicorn.run(app, host='0.0.0.0', port=5000)

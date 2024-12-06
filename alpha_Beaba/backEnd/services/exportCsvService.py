@@ -1,5 +1,6 @@
 import pandas as pd
 import io
+import logging
 
 class ExportCsvService:
     def export_csv(self, dados):
@@ -13,6 +14,7 @@ class ExportCsvService:
                 sheet_name = f'Sheet{i+1}'
                 df.to_excel(writer, index=False, sheet_name=sheet_name)
         output.seek(0)
+        logging.info("Dados exportados para Excel com sucesso")
         return output
 
 export_csv_service = ExportCsvService()
