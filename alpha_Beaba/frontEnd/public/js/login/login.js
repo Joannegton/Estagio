@@ -95,9 +95,27 @@ function visualizarSenha() {
     }
 }
 
-function recuperarSenha() {
+async function recuperarSenha() {
     const email = document.getElementById('email').value
-    alert(`Instruções de recuperação de senha foram enviadas para ${email}`)
+    try {
+        const response = await fetch(`${API_URL}/recuperarSenha`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+        })
+
+        if (response.ok) {
+            alert('Senha recuperada com sucesso. Verifique seu e-mail.')
+            esconderElementos(['recuperarSenha'])
+        }
+
+    } catch (error) {
+        console.error('Erro ao recuperar senha:', error)
+        alert('Erro ao recuperar senha. Por favor, tente novamente mais tarde.')
+        
+    }
 }
 
 // Configuração de tentativas de login

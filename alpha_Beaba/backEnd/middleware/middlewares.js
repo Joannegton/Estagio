@@ -15,7 +15,7 @@ module.exports = (app) => {
     app.use(express.static(path.join(__dirname, '../../frontEnd/public')))
 
     // Middleware de autenticação, ignorando certas rotas
-    const rotasPublicas = ['/', '/recuperar-senha', '/api/login', '/api/logout']
+    const rotasPublicas = ['/', '/recuperar-senha', '/api/login', '/api/logout', '/api/recuperarSenha']
 
     app.use((req, res, next) => {
         if (rotasPublicas.includes(req.path)) {

@@ -2,6 +2,7 @@ const { conectarDb } = require('../config/conexao')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
+const crypto = require('crypto')
 const { v4: uuidv4 } = require('uuid') // gera identificadores únicos
  
 const SECRET_KEY = process.env.SECRET_KEY_JWT
@@ -60,31 +61,44 @@ class LoginService {
 
 
     async recoverPassword(email) {
-        // Gmail para teste - nodemailer (retirar do package.json)
-
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER, 
-                pass: process.env.GMAIL_PASS  
+        const newPassword = crypto.randomBytes(6).toString('base64').slice(0, 6)
+        const hashedPassword = await bcrypt.hash(newPassword, 10)
+        const client = await conectarDb()
+    
+        try {
+            await client.query('UPDATE usuario SET senha = $1 WHERE email = $2', [hashedPassword, email])
+    
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                auth: {
+                    user: process.env.GMAIL_USER,
+                    pass: process.env.GMAIL_PASS
+                }
+            })
+    
+            let mailOptions = {
+                from: process.env.GMAIL_USER,
+                to: email,
+                subject: 'Recuperação de acesso',
+                text: '',
+                html: `
+                    <p>Seu acesso foi redefinido e a nova senha é: <b>${newPassword}</b>
+                        <br>Realize o acesso e altere a senha.
+                    </p>
+                `
             }
-        })
-
-        let mailOptions = {
-            from: process.env.GMAIL_USER,
-            to: email, 
-            subject: 'Recuperação de acesso', 
-            text: '',
-            html: `
-                <p>Seu acesso foi redefinido e a nova senha é <b>Quero@2024#</b>
-                    <br>Realize o acesso e altere a senha.
-                </p>
-            `
+    
+            await transporter.sendMail(mailOptions)
+    
+            return `As instruções foram enviadas à ${email}`
+        } catch (err) {
+            console.error('Erro ao redefinir a senha:', err.stack)
+            throw err
+        } finally {
+            client.release()
         }
-
-        await transporter.sendMail(mailOptions)
-
-        return `Password recovery instructions have been sent to ${email}`
     }
 
     async logout(matricula) {
