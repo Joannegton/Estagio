@@ -20,7 +20,6 @@ function authToken(req, res, next) {
                 req.user = user
                 req.user.id_perfil_acesso = result.rows[0].id_perfil_acesso
 
-                // Obter permissões do banco de dados
                 const permissoesResult = await client.query(`
                     SELECT p.modulo, p.tipo_permissao
                     FROM perfil_acesso_permissoes pap

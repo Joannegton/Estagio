@@ -76,7 +76,7 @@ class UsuarioService {
     
             if (result.rowCount > 0) {
                 let isGerente = false
-                if (tipoUsuario == 2) { // Verifica se o perfil de acesso é 2 (Gerente)
+                if (tipoUsuario == 2) { // verifica se é gerente
                     isGerente = true
                 }
     

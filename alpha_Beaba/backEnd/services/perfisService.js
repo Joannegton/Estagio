@@ -4,7 +4,7 @@ class PerfisService {
     async createPerfil(nomePerfil, permissoes) {
         const client = await conectarDb()
         try {
-            await client.query('BEGIN') //Inicia uma transação no banco de dados
+            await client.query('BEGIN') //inicia a transação no banco de dados
             const result = await client.query('INSERT INTO perfil_acesso (descricao) VALUES ($1) RETURNING id_perfil_acesso', [nomePerfil]) //Retorna o id do perfil cadastrado
             const idPerfilAcesso = result.rows[0].id_perfil_acesso
 
@@ -18,10 +18,10 @@ class PerfisService {
                 await client.query('INSERT INTO perfil_acesso_permissoes (id_perfil_acesso, id_permissao) VALUES ($1, $2)', [idPerfilAcesso, idPermissao])
             }
 
-            await client.query('COMMIT') //Finaliza a transação no banco de dados
+            await client.query('COMMIT') //finaliza a transação 
             return 'Perfil cadastrado com sucesso!'
         } catch (error) {
-            await client.query('ROLLBACK') //Desfaz a transação no banco de dados
+            await client.query('ROLLBACK') 
             console.error('Erro ao executar a query:', error.stack)
             throw error
         } finally {
@@ -43,7 +43,7 @@ class PerfisService {
                 LEFT JOIN permissoes p_leitura ON pp_leitura.id_permissao = p_leitura.id_permissao AND p_leitura.tipo_permissao = 'leitura'
                 LEFT JOIN perfil_acesso_permissoes pp_escrita ON u.id_perfil_acesso = pp_escrita.id_perfil_acesso
                 LEFT JOIN permissoes p_escrita ON pp_escrita.id_permissao = p_escrita.id_permissao AND p_escrita.tipo_permissao = 'escrita'
-                GROUP BY u.id_perfil_acesso, u.descricao` //array_agg(p_leitura.descricao): Agrupa as permissões do tipo "leitura" em uma lista.
+                GROUP BY u.id_perfil_acesso, u.descricao` //array_agg(p_leitura.descricao): agrupa as permissões do tipo leitura em uma lista.
             )
             return result.rows
         } catch (error) {

@@ -11,7 +11,7 @@ module.exports = (app) => {
     // cors com suporte para cookies
     app.use(cors({origin: process.env.FRONTEND_URL, credentials: true })) // Permite envio de cookies
 
-    // Middleware para servir arquivos estáticos (HTML, CSS e JS)
+    //servir arquivos estáticos (HTML, CSS e JS)
     app.use(express.static(path.join(__dirname, '../../frontEnd/public')))
 
     // Middleware de autenticação, ignorando certas rotas

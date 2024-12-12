@@ -86,10 +86,10 @@ class TaloesService {
         const client = await conectarDb()
         try {
             await client.query('BEGIN')
-            // Inserir a saída de talão
+            
             const result = await client.query(`INSERT INTO saida_taloes (codigo_talao, matricula, cod_loja) VALUES ($1, $2, $3)`, [numeroTalao, matricula, cod_loja])
             if(result.rowCount > 0){
-                // Atualizar o estoque
+                // atualizar o estoque
                 const result2 = await client.query(`UPDATE estoque_taloes SET quantidade_disponivel = quantidade_disponivel - 1 WHERE cod_loja = $1`, [cod_loja])
                 if(result2.rowCount > 0){
                     await client.query('COMMIT')
@@ -216,7 +216,7 @@ class TaloesService {
             if (result.rowCount > 0) {
                 const { quantidade, cod_loja } = result.rows[0]
     
-                // Obtém a quantidade atual do estoque
+                // quantidade atual do estoque
                 const estoqueResult = await client.query(`
                     SELECT quantidade_disponivel 
                     FROM estoque_taloes 
@@ -227,7 +227,7 @@ class TaloesService {
                     const quantidadeAtual = estoqueResult.rows[0].quantidade_disponivel
                     const novaQuantidade = quantidadeAtual + quantidade
     
-                    // Atualiza a quantidade disponível no estoque
+                    // atualiza a quantidade no estoque
                     const acceptUpdate = await client.query(`
                         UPDATE estoque_taloes 
                         SET quantidade_disponivel = $1 
@@ -235,7 +235,7 @@ class TaloesService {
                     `, [novaQuantidade, cod_loja])
     
                     if (acceptUpdate.rowCount > 0) {
-                        await client.query('COMMIT') // Mudança: COMMIT movido para dentro do bloco if
+                        await client.query('COMMIT') 
                         return true
                     }
                 }

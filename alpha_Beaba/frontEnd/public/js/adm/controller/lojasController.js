@@ -52,8 +52,6 @@ function renderizarTabelaLojas(listalojas){
         const dadosLimitados = listalojas.slice(inicio, fim)
         tbody.innerHTML = ''
 
-        console.log(usuarios)
-
         dadosLimitados.forEach(item => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
@@ -114,6 +112,7 @@ function renderizarTabelaLojas(listalojas){
             paginarLojas()
         }
     })
+
     document.getElementById('pagAntLojas').addEventListener('click', () => {
         if(paginaAtual > 1) {
             paginaAtual--
@@ -178,12 +177,12 @@ async function editarLoja(cod_loja) {
 
     const nomeLoja = document.getElementById(`nomeLoja${cod_loja}`)
     let loja = nomeLoja.innerText
-    nomeLoja.setAttribute('data-original-value', loja)     // Armazena os valores originais
+    nomeLoja.setAttribute('data-original-value', loja)  
     nomeLoja.innerHTML = `<input type="text" id="input-nomeLoja${cod_loja}" value="${loja}" class="inputsEdicao">`
 
     const gerenteLoja = document.getElementById(`nomeGerente${cod_loja}`)
     let gerente = gerenteLoja.innerText
-    gerenteLoja.setAttribute('data-original-value', gerente)     // Armazena os valores originais
+    gerenteLoja.setAttribute('data-original-value', gerente)    
     gerenteLoja.innerHTML = `    
         <select id="select-gerente${cod_loja}">
             <option>${gerente}</option>
@@ -239,6 +238,7 @@ async function salvarEditarLoja(cod_loja){
         mostrarModalFinalizado()
         inputNome.remove()
         selectGerente.remove()
+        
         esconderElementos([`containerEditarBotaoAcaoLoja${cod_loja}`])
         document.getElementById(`containerBotaoAcaoLoja${cod_loja}`).style.display = 'block'
     } catch (error) {

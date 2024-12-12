@@ -11,10 +11,8 @@ const configureMiddlewares = require('./middleware/middlewares')
 
 const app = express()
 
-// confg middlewares
 configureMiddlewares(app)
 
-// Rotas para as páginas HTML
 app.use(viewRouter)
 
 app.use('/api', loginRouter)

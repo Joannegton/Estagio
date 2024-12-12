@@ -182,10 +182,12 @@ async function salvarEdicaoTalao(numero_remessa) {
         mostrarModalFinalizado()
         statusManutencao.remove()
         dataEntrega.remove()
-        await fetchEnvioTaloes()
+        
         document.getElementById(`containerEditarBotaoAcaoManutencao${numero_remessa}`).style.display = 'none'
         document.getElementById(`containerBotaoAcaoManutencao${numero_remessa}`).style.display = 'block'
-    
+        
+        await fetchEnvioTaloes()
+        
     } catch (error) {
         console.error('Erro ao atualizar manutenção:', error)
         alert('Erro ao atualizar os dados. Por favor, tente novamente mais tarde.')

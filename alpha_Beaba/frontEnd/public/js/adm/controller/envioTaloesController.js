@@ -1,6 +1,7 @@
 import { ativarBotao, carregarDadosSelect, desativarBotao, mostrarModalFinalizado } from "../../utils.js"
 import { API_URL } from "../../config/config.js"
 
+
 async function enviarTalao() {
     desativarBotao('submitButtonTalao')
     const formulario = document.getElementById('formEnvioTalao')
