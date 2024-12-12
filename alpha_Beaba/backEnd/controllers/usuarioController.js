@@ -1,5 +1,6 @@
 const usuarioService = require('../services/usuarioService')
 
+//modificar
 class UsuarioController {
     async getUsers(req, res) {
         try {

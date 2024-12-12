@@ -1,5 +1,6 @@
 const taloesService = require("../services/taloesService")
 
+//modificar
 class TaloesController {
     async getTaloesPorLoja(req, res) {
         const { cod_loja } = req.params

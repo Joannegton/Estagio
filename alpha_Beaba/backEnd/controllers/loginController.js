@@ -6,7 +6,6 @@ class LoginController {
         try {
             const { token, user } = await loginService.login(matricula, senha)
 
-             // Configurar o cookie com o token
             res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', maxAge: 9 * 60 * 60 * 1000 }) // 9 horas
 
             res.status(200).json({
